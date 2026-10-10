@@ -136,6 +136,10 @@ SETTINGS = {
                      "max": 60,             # a page numbers at most this many lines
                      "min_lines": 15,       # this many numbers on the page, rising one by one
                      "min_rises": 0.8,      # ...this share of steps +1 (or back to 1: a new page of transcript)
+                     "min_on_pitch": 0.9,   # ...and this share of +1 steps a whole number of line heights apart:
+                                            # a transcript's lines sit on one pitch (72 tables in the oldest
+                                            # 100, all >= 0.97); a table's numbered rows wrap to varying heights
+                                            # (4656998 p39 work plan 0.38, 4647200 p432 sampling stations 0.42)
                      "min_in_table": 8},    # a table holding at least this many of them was the transcript
     "table_owns_its_words": True,      # a word in a table and in a larger text item belongs to the table:
                                        # docling's "code" box over a whole page (90793) took a table's words
@@ -891,7 +895,8 @@ def text_lines(words: list[dict]) -> list[dict]:
 def line_numbers(words: list[dict], page_width: float) -> list[dict]:
     """A transcript's line numbers down the left margin, or [] if the page has none.
     Numbers on separate lines, nearly every step +1, or back to 1 where a new page of
-    the transcript starts (90793: four transcript pages printed on each PDF page)."""
+    the transcript starts (90793: four transcript pages printed on each PDF page), and
+    on one line pitch: a table's numbered rows are as tall as their wrapped cells."""
     s = SETTINGS["line_numbers"]
     nums = sorted((w for w in words if w["box"][2] < s["margin_frac"] * page_width
                    and w["text"].isdigit() and 1 <= int(w["text"]) <= s["max"]), key=lambda w: w["cy"])
@@ -899,7 +904,14 @@ def line_numbers(words: list[dict], page_width: float) -> list[dict]:
         return []
     vals = [int(w["text"]) for w in nums]
     rises = sum(1 for a, b in zip(vals, vals[1:]) if b == a + 1 or (b == 1 and a > 1))
-    return nums if rises >= s["min_rises"] * (len(vals) - 1) else []
+    if rises < s["min_rises"] * (len(vals) - 1):
+        return []
+    gaps = [b["cy"] - a["cy"] for a, b in zip(nums, nums[1:]) if int(b["text"]) == int(a["text"]) + 1]
+    pitch = min(gaps, default=0)
+    if pitch <= 0:
+        return []
+    on_pitch = sum(1 for d in gaps if abs(d / pitch - round(d / pitch)) <= 0.1)
+    return nums if on_pitch >= s["min_on_pitch"] * len(gaps) else []
 
 
 NUMBER = re.compile(r"^[(\-+−]?[$€£]?\d[\d,.:/\-]*%?\)?$")

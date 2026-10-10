@@ -161,6 +161,18 @@ class LineNumbers(unittest.TestCase):
     def test_numbers_out_of_order(self):
         self.assertEqual(c.line_numbers(self.margin([3, 17, 5, 22, 9, 1, 14, 30, 2, 8, 25, 11, 6, 19, 4, 28]), 612), [])
 
+    def test_numbered_rows_of_wrapped_cells_are_a_table(self):
+        # 4656998 p39: items 1-21 at the margin, each row as tall as its wrapped description
+        heights = [13, 25, 13, 20, 13, 31, 13, 13, 22, 13, 27, 13, 18, 13, 25, 13, 13, 22, 13, 29]
+        ys = [50 + sum(heights[:i]) for i in range(len(heights) + 1)]
+        self.assertEqual(c.line_numbers([word(str(i + 1), 40, y) for i, y in enumerate(ys)], 612), [])
+
+    def test_blank_transcript_lines_keep_the_pitch(self):
+        # a skipped line is two pitches down: still a transcript
+        ys = [50 + 12 * k for k in range(25) if k not in (6, 13)]
+        nums = [word(str(n), 60, y) for n, y in zip(range(1, 24), ys)]
+        self.assertEqual(len(c.line_numbers(nums, 612)), 23)
+
 
 if __name__ == "__main__":
     unittest.main()
