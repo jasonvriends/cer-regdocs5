@@ -6,5 +6,5 @@ source/
 scripts/scout/scout-state/
 *.log
 scripts/convert/.venv/
-scripts/convert/models/
+scripts/convert/models
 scripts/convert/runs/

@@ -28,6 +28,8 @@ Checks, each written to `issues.json` with the page and box:
 
   text_not_extracted      words under no extracted item (error)
   text_not_in_table_cell  words inside a table but in none of its cells (error)
+  table_was_line_numbers  a table over a transcript's line numbers, dropped and its
+                          words kept as one text item per line (info)
   table_text_lost         words inside a cell's box that no cell's text holds (error);
                           every table also gets a word score: placed, wrong cell,
                           no cell, lost
@@ -126,6 +128,18 @@ SETTINGS = {
              "pad_pt": 10.0},          # around the table: the model was trained on padded crops
     "tatr_keep_below": 0.5,            # Table Transformer's grid kept only below half the badly placed words
     "fit": "fit-2",                    # table_structure_score: fit-1 + rows merged
+    # A hearing transcript numbers its lines down the left margin (1-30 a page, often beside a
+    # rule). TableFormer reads such a page as a two-column table and groups the numbers into
+    # the wrong rows: 6,335 of the oldest 100 documents' 9,341 pages, half their errors. A
+    # table holding those numbers is dropped and its words kept as one text item per line.
+    "line_numbers": {"margin_frac": 0.15,   # the numbers end in the left 15% of the page
+                     "max": 60,             # a page numbers at most this many lines
+                     "min_lines": 15,       # this many numbers on the page, rising one by one
+                     "min_rises": 0.8,      # ...this share of steps +1 (or back to 1: a new page of transcript)
+                     "min_in_table": 8},    # a table holding at least this many of them was the transcript
+    "table_owns_its_words": True,      # a word in a table and in a larger text item belongs to the table:
+                                       # docling's "code" box over a whole page (90793) took a table's words
+                                       # and its cells all read as empty
     "table_cell_matching": True,
     "ocr": {"engine": "RapidOCR PP-OCRv6 small, torch, GPU", "renderer": "pypdfium2",
             # docling-parse rendered 4710294's scans as noise (black, coloured streaks) where MuPDF
@@ -872,6 +886,20 @@ def text_lines(words: list[dict]) -> list[dict]:
         else:
             lines.append({"cy": w["cy"], "h": h, "words": [w]})
     return lines
+
+
+def line_numbers(words: list[dict], page_width: float) -> list[dict]:
+    """A transcript's line numbers down the left margin, or [] if the page has none.
+    Numbers on separate lines, nearly every step +1, or back to 1 where a new page of
+    the transcript starts (90793: four transcript pages printed on each PDF page)."""
+    s = SETTINGS["line_numbers"]
+    nums = sorted((w for w in words if w["box"][2] < s["margin_frac"] * page_width
+                   and w["text"].isdigit() and 1 <= int(w["text"]) <= s["max"]), key=lambda w: w["cy"])
+    if len(nums) < s["min_lines"]:
+        return []
+    vals = [int(w["text"]) for w in nums]
+    rises = sum(1 for a, b in zip(vals, vals[1:]) if b == a + 1 or (b == 1 and a > 1))
+    return nums if rises >= s["min_rises"] * (len(vals) - 1) else []
 
 
 NUMBER = re.compile(r"^[(\-+−]?[$€£]?\d[\d,.:/\-]*%?\)?$")
@@ -1656,6 +1684,46 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     # ---- checks against MuPDF, page by page
     s = time.perf_counter()
     pad, thr, minc = SETTINGS["box_pad_pt"], SETTINGS["agreement_threshold"], SETTINGS["agreement_min_chars"]
+
+    # A table holding a transcript's line numbers was the transcript: its words become one
+    # text item per line, in its place. Done before the checks: deleting a table renumbers
+    # the tables after it, and the checks record references.
+    reader_of_item = {}
+    numbered, dropped = {}, []
+    for tb in list(doc.tables):
+        pno = tb.prov[0].page_no if tb.prov else None
+        if pno not in doc.pages or pno in ocr_full_pages or pno in fallback:
+            continue
+        if pno not in numbered:
+            numbered[pno] = Grid.of_words(line_numbers(visible_words(pno)[0], pdf[pno - 1].rect.width))
+        ph = doc.pages[pno].size.height
+        bx = tl_box(tb.prov[0].bbox, ph)
+        if len(numbered[pno].words_in(bx, pad)) < SETTINGS["line_numbers"]["min_in_table"]:
+            continue
+        area = (bx[2] - bx[0]) * (bx[3] - bx[1])
+        smaller = [b for b in (tl_box(pv.bbox, ph) for t in doc.texts for pv in (t.prov or []) if pv.page_no == pno)
+                   if (b[2] - b[0]) * (b[3] - b[1]) < area]
+        g_smaller = Grid.of_boxes(smaller, pad)
+        inside = [w for w in visible_words(pno)[0] if contains(bx, w["cx"], w["cy"], pad)
+                  and not g_smaller.any_contains(w["cx"], w["cy"], pad)]
+        prev = tb
+        for line in text_lines(inside):
+            ws = sorted(line["words"], key=lambda w: w["box"][0])
+            lb = union([w["box"] for w in ws])
+            txt = " ".join(w["text"] for w in ws)
+            bl = BoundingBox(l=lb[0], t=lb[1], r=lb[2], b=lb[3], coord_origin=CoordOrigin.TOPLEFT
+                             ).to_bottom_left_origin(page_height=ph)
+            prev = doc.insert_text(sibling=prev, label=DocItemLabel.TEXT, text=txt, after=True,
+                                   prov=ProvenanceItem(page_no=pno, bbox=bl, charspan=(0, len(txt))))
+            reader_of_item[id(prev)] = "text layer: a transcript line (docling's table over line numbers dropped)"
+        dropped.append(tb)
+        issue(pno, bx, "table_was_line_numbers", "info",
+              f"a {tb.data.num_rows}x{tb.data.num_cols} table held the page's line numbers: dropped, its "
+              f"{len(inside)} word(s) kept as one text item per line", "tables 3", words=len(inside))
+    if dropped:
+        doc.delete_items(node_items=dropped)
+    rec["tables_dropped_as_line_numbers"] = len(dropped)
+
     layers = {ContentLayer.BODY, ContentLayer.FURNITURE}
     items_rows = []
     by_page = collections.defaultdict(list)
@@ -1747,9 +1815,16 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
         g_text = Grid.of_boxes([bx for _, bx, _ in text_boxes], pad)
         g_table = Grid.of_boxes([bx for _, bx in tables], pad)
         g_pic = Grid.of_boxes([bx for _, bx in pictures], pad)
+        area = lambda b: (b[2] - b[0]) * (b[3] - b[1])  # noqa: E731
+        a_text = Grid.of_items([(bx, area(bx)) for _, bx, _ in text_boxes], pad)
+        a_table = Grid.of_items([(bx, area(bx)) for _, bx in tables], pad)
         for w in words:
             if g_text.any_contains(w["cx"], w["cy"], pad):
-                in_text.append(w)
+                in_tb = a_table.owners(w["cx"], w["cy"], pad) if SETTINGS["table_owns_its_words"] else []
+                if in_tb and min(in_tb) < min(a_text.owners(w["cx"], w["cy"], pad)):
+                    in_table.append(w)     # the table is the smaller box: the word is the table's
+                else:
+                    in_text.append(w)
             elif g_table.any_contains(w["cx"], w["cy"], pad):
                 in_table.append(w)
             elif g_pic.any_contains(w["cx"], w["cy"], pad):
@@ -1777,7 +1852,10 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                     cb = c.bbox if c.bbox.coord_origin == CoordOrigin.TOPLEFT else c.bbox.to_top_left_origin(page_height=ph)
                     cell_boxes.append((tb, c, (cb.l, cb.t, cb.r, cb.b)))
         g_cells = Grid.of_boxes([bx for _, _, bx in cell_boxes], pad)
-        not_in_cell = [w for w in in_table if not g_cells.any_contains(w["cx"], w["cy"], pad)]
+        # Punctuation alone is not text a grid can lose: a contents page's dot leaders
+        # (". . . . 12") run between its cells.
+        not_in_cell = [w for w in in_table if not g_cells.any_contains(w["cx"], w["cy"], pad)
+                       and tokens([w["text"]])]
         for g in cluster(not_in_cell, SETTINGS["cluster_gap_pt"]):
             # The grid is wrong (an error), but the text is kept, beside the table.
             _, gb, txt = add_text_item(pno, g, ph, "text layer: words in a table but in no cell")
@@ -1851,7 +1929,8 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
             theirs = tokens((tx or "").split())
             ag, d_only, m_only, numeric = compare(theirs, mine)
             items_rows.append({"ref": it.self_ref, "label": str(it.label.value), "page": pno,
-                               "bbox": [r(v, 1) for v in bx], "reader": "layout: docling; text: docling-parse",
+                               "bbox": [r(v, 1) for v in bx],
+                               "reader": reader_of_item.get(id(it), "layout: docling; text: docling-parse"),
                                "grade": "exact", "chars": len(tx or ""),
                                "text_sha256": sha256_bytes((tx or "").encode()),
                                "mupdf_words": n_words, "mupdf_agreement": r(ag, 3),

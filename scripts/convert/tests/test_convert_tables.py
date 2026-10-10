@@ -1,4 +1,4 @@
-"""Table grids in scripts/convert/convert.py: the merged-row check and Table Transformer's grid.
+"""Table grids in scripts/convert/convert.py: the merged-row check, Table Transformer's grid, transcript line numbers.
 
     scripts/convert/.venv/bin/python -m unittest discover -s scripts/convert/tests
 """
@@ -139,6 +139,27 @@ class TatrGrid(unittest.TestCase):
 
     def test_no_rows_found_is_no_grid(self):
         self.assertIsNone(self.grid([("table column", 0.9, [0, 0, 100, 50])], table([["Gas"]])))
+
+
+class LineNumbers(unittest.TestCase):
+    """A transcript's margin numbers, against a table's numbered rows."""
+
+    def margin(self, values, x=60):
+        return [word(str(v), x, 50 + 12 * i) for i, v in enumerate(values)]
+
+    def test_transcript_numbers_across_a_page_break(self):
+        nums = self.margin(list(range(15, 31)) + list(range(1, 31)) + list(range(1, 9)))
+        body = [word("Board", 125, 50 + 12 * i) for i in range(54)]
+        self.assertEqual(len(c.line_numbers(nums + body, 612)), 54)
+
+    def test_numbered_table_rows_away_from_the_margin_are_not_line_numbers(self):
+        self.assertEqual(c.line_numbers(self.margin(range(1, 21), x=150), 612), [])
+
+    def test_too_few_numbers(self):
+        self.assertEqual(c.line_numbers(self.margin(range(1, 10)), 612), [])
+
+    def test_numbers_out_of_order(self):
+        self.assertEqual(c.line_numbers(self.margin([3, 17, 5, 22, 9, 1, 14, 30, 2, 8, 25, 11, 6, 19, 4, 28]), 612), [])
 
 
 if __name__ == "__main__":
