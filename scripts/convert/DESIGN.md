@@ -36,7 +36,7 @@ sample everything below is measured on.
 
 ```
 tier0   file structure, no rendering                        built: 669 pages/s
-pages   what each page and region is: layout regions,       next (see Page kinds)
+pages   what each page and region is: layout regions,       built: pages.py, 7 pages/s
         page kind, rotation, scan or text layer
 tier1   thumbnail + classical vision, only where tier0 is unsure
 route   per region: which reader, from its label and the page's kind
