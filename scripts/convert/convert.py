@@ -28,6 +28,7 @@ Checks, each written to `issues.json` with the page and box:
 
   text_not_extracted      words under no extracted item (error)
   text_not_in_table_cell  words inside a table but in none of its cells (error)
+  table_text_unchecked    a table in an image, read by OCR, with no text layer to check it (info)
   table_was_line_numbers  a table over a transcript's line numbers, dropped and its
                           words kept as one text item per line (info)
   table_text_lost         words inside a cell's box that no cell's text holds (error);
@@ -102,11 +103,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (DEFAULT_OUTPUT, DEFAULT_RUNS, HERE, Stage, add_run_arguments,  # noqa: E402
                     base_environment, clip, describe_basic, load_index, r, read_json_gz, release_memory, rss_gb, run_stage,
                     runs_of, sha256_bytes, sha256_file, utcnow, write_bytes_atomic)
+from pagelib import (MODELS, ROUTES, TATR_DIR, TATR_REPO, _Capture, _gpu_name, gpu_free_mb,  # noqa: E402
+                     line_numbers, model_identity, over_budget, page_words, release_gpu_and_ram, route_for,
+                     text_lines, tier0_run)
+from pagelib import SETTINGS as PAGE_SETTINGS  # noqa: E402
 
 STAGE = "convert"
-MODELS = HERE / "models" / "docling"
-TATR_REPO = "microsoft/table-transformer-structure-recognition-v1.1-all"
-TATR_DIR = HERE / "models" / "tatr" / TATR_REPO.replace("/", "--")
 
 SETTINGS = {
     "schema": 1,
@@ -128,19 +130,9 @@ SETTINGS = {
              "pad_pt": 10.0},          # around the table: the model was trained on padded crops
     "tatr_keep_below": 0.5,            # Table Transformer's grid kept only below half the badly placed words
     "fit": "fit-2",                    # table_structure_score: fit-1 + rows merged
-    # A hearing transcript numbers its lines down the left margin (1-30 a page, often beside a
-    # rule). TableFormer reads such a page as a two-column table and groups the numbers into
-    # the wrong rows: 6,335 of the oldest 100 documents' 9,341 pages, half their errors. A
-    # table holding those numbers is dropped and its words kept as one text item per line.
-    "line_numbers": {"margin_frac": 0.15,   # the numbers end in the left 15% of the page
-                     "max": 60,             # a page numbers at most this many lines
-                     "min_lines": 15,       # this many numbers on the page, rising one by one
-                     "min_rises": 0.8,      # ...this share of steps +1 (or back to 1: a new page of transcript)
-                     "min_on_pitch": 0.9,   # ...and this share of +1 steps a whole number of line heights apart:
-                                            # a transcript's lines sit on one pitch (72 tables in the oldest
-                                            # 100, all >= 0.97); a table's numbered rows wrap to varying heights
-                                            # (4656998 p39 work plan 0.38, 4647200 p432 sampling stations 0.42)
-                     "min_in_table": 8},    # a table holding at least this many of them was the transcript
+    "line_numbers": PAGE_SETTINGS["line_numbers"],          # pagelib.py: transcript line numbers
+    "structure_budget": PAGE_SETTINGS["structure_budget"],  # pagelib.py: pages too heavy for docling
+    "min_free_gpu_mb": PAGE_SETTINGS["min_free_gpu_mb"],
     "read_as_lines": ["transcript", "contents"],  # page kinds (the pages stage) read from the text layer as
                                        # one text item per line, without docling: a transcript's numbered
                                        # lines and a contents page's entries are lines, not tables
@@ -174,14 +166,8 @@ SETTINGS = {
     "agreement_min_chars": 3,
     "cluster_gap_pt": 18.0,            # uncovered words closer than this form one issue
     "outline_match_ratio": 0.8,
-    "min_free_gpu_mb": 6000,
     "page_timeout_s": 300,             # docling's document_timeout, per page since each call is one page
     "review_pdf": "original bytes + incremental update",
-    # Step 3: pages tier 0 says are too heavy for docling skip it and take their text from
-    # the text layer. docling's time limit does not stop a page mid-step: page 11 of 4681376
-    # (30,642 paths) ran an hour. (4656998's 12 GB was not a page: see docling_source.) To be calibrated on the baseline; a page is heavy if it is oversized AND over
-    # either limit.
-    "structure_budget": {"long_side_pt": 1260, "max_paths": 10000, "max_words": 2500},
     # Steps 1 and 2: every text-layer word on a converted page is kept. A word no docling
     # item claims becomes a text item of its own (reader "text layer"), so text is never
     # lost to a missed region; the evidence file records who claimed each word.
@@ -190,29 +176,6 @@ SETTINGS = {
     "export_min_recall": 0.98,         # share of evidence words that must reach the Markdown export
 }
 
-ROUTES = {
-    # (tier 0 origin, text layer) -> route. First match wins; None = any.
-    "rules": [
-        (("digital", "sound"), "text_layer"),
-        (("digital", "suspect"), "ocr_untrusted_text_layer"),
-        (("digital", "hidden_ocr"), "ocr_with_hidden_vote"),
-        (("digital", "none"), "vector_only"),
-        (("scanned_ocr", None), "ocr_with_hidden_vote"),
-        (("scanned", None), "ocr"),
-        (("raster", None), "ocr"),
-        (("image_with_text", None), "text_layer_and_ocr"),
-        (("blank", None), "blank"),
-        ((None, None), "undecided"),
-    ],
-    "converted_now": {"text_layer", "ocr", "ocr_with_hidden_vote", "ocr_untrusted_text_layer", "vector_only",
-                      "text_layer_and_ocr"},
-    # Which converter reads each route. "ocr_full": the whole page is OCR'd and the text layer, if
-    # any, is not used for the text (at most as a second reader). "ocr_images": the text layer is
-    # read as on any digital page, and OCR reads only regions it does not cover (images).
-    "reader": {"text_layer": "text", "ocr": "ocr_full", "ocr_with_hidden_vote": "ocr_full",
-               "ocr_untrusted_text_layer": "ocr_full", "vector_only": "ocr_full",
-               "text_layer_and_ocr": "ocr_images"},
-}
 
 ROUTE_REASONS = {
     "ocr_untrusted_text_layer": "the text layer is suspect (unmapped or implausible characters); needs OCR",
@@ -235,46 +198,10 @@ SEVERITY_COLOURS = {  # review PDF: stroke colour per severity
 # --------------------------------------------------------------------------
 # identity: models and the tier 0 run
 
-def model_identity() -> dict:
-    """Per model directory: the Hugging Face revision and a hash over every file."""
-    out = {}
-    if not MODELS.exists() or not TATR_DIR.exists():
-        return {"error": f"{MODELS} or {TATR_DIR} missing: download the models first"}
-    for d in sorted([p for p in MODELS.iterdir() if p.is_dir()] + [TATR_DIR]):
-        files = sorted(p for p in d.rglob("*") if p.is_file() and ".cache" not in p.parts)
-        h = collections.OrderedDict((str(f.relative_to(d)), sha256_file(f)) for f in files)
-        revs = set()
-        for meta in (d / ".cache").rglob("*.metadata") if (d / ".cache").exists() else []:
-            first = meta.read_text().split("\n", 1)[0].strip()
-            if re.fullmatch(r"[0-9a-f]{40}", first):
-                revs.add(first)
-        out[d.name] = {"repo": d.name.replace("--", "/", 1), "revision": sorted(revs),
-                       "files": len(files), "bytes": sum(f.stat().st_size for f in files),
-                       "sha256": sha256_bytes(json.dumps(h).encode())}
-    return out
-
-
-def tier0_run(runs: Path, wanted: str | None) -> Path:
-    candidates = runs_of(runs, "tier0")
-    if wanted:
-        candidates = [d for d in candidates if d.name in (wanted, f"tier0-{wanted}")]
-    if not candidates:
-        raise SystemExit("no tier 0 run found: run scripts/convert/tier0.py first")
-    return candidates[-1]
-
-
-def gpu_free_mb() -> int | None:
-    try:
-        out = subprocess.run(["nvidia-smi", "--query-gpu=memory.free", "--format=csv,noheader,nounits"],
-                             capture_output=True, text=True, timeout=10).stdout
-        return int(out.split()[0])
-    except Exception:
-        return None
-
 
 class Convert(Stage):
     name = STAGE
-    code_files = [Path(__file__).resolve(), HERE / "common.py"]
+    code_files = [Path(__file__).resolve(), HERE / "pagelib.py", HERE / "common.py"]
     packages = ["docling", "pymupdf"]
     settings = SETTINGS
     worker_module = "convert"
@@ -372,31 +299,8 @@ class Convert(Stage):
         return "  ".join(bits)
 
 
-def _gpu_name():
-    try:
-        return subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"],
-                              capture_output=True, text=True, timeout=10).stdout.strip()
-    except Exception:
-        return None
-
-
 # --------------------------------------------------------------------------
 # the worker: models load once
-
-class _Capture(logging.Handler):
-    """Collects every warning and error logged while one page converts."""
-    DENY = ("docling.datamodel.stage_model_specs",)   # identical on every run: about this code, not the filing
-
-    def __init__(self):
-        super().__init__(logging.WARNING)
-        self.records = []
-
-    def emit(self, record):
-        if record.name.startswith(self.DENY):
-            return
-        if len(self.records) < 500:
-            self.records.append({"logger": record.name, "level": record.levelname,
-                                 "message": clip(record.getMessage(), 2000)})
 
 
 def init_worker(meta: dict):
@@ -446,24 +350,6 @@ def init_worker(meta: dict):
 
 # --------------------------------------------------------------------------
 # routing
-
-def over_budget(t0page: dict) -> str | None:
-    """Why a page is too heavy for docling, from tier 0's record of it; None if it is not."""
-    b = SETTINGS["structure_budget"]
-    w, h = t0page.get("width_pt") or 0, t0page.get("height_pt") or 0
-    if max(w, h) <= b["long_side_pt"]:
-        return None
-    paths = (t0page.get("drawings") or {}).get("paths") or 0
-    words = (t0page.get("text") or {}).get("words") or 0
-    over = []
-    if paths > b["max_paths"]:
-        over.append(f"{paths:,} vector paths")
-    if words > b["max_words"]:
-        over.append(f"{words:,} words")
-    if not over:
-        return None
-    return (f"oversized page ({w / 72:.0f} x {h / 72:.0f} in) with {' and '.join(over)}, "
-            f"over the structure budget")
 
 
 def signature_references(pdf) -> list[int]:
@@ -528,13 +414,6 @@ def docling_source(path: Path, pdf, work: Path, sha256: str) -> tuple[Path, dict
                   "prefix_is_original": prefix == sha256}
 
 
-def route_for(origin: str | None, layer: str | None) -> str:
-    for (o, l), route in ROUTES["rules"]:
-        if (o is None or o == origin) and (l is None or l == layer):
-            return route
-    return "undecided"
-
-
 def chunked(pages: list[int], size: int):
     """Routed pages in runs of consecutive pages, at most `size` per run."""
     run = []
@@ -569,16 +448,6 @@ def merge_chunks(chunks, name):
     out = DoclingDocument(name=name)
     out._update_from_index(idx)
     return out
-
-
-def release_gpu_and_ram():
-    try:
-        import torch
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-    except Exception:
-        pass
-    release_memory()
 
 
 # --------------------------------------------------------------------------
@@ -677,19 +546,6 @@ def tokens(words: list[str]) -> list[str]:
     return [t.rstrip("-") or t for t in out]
 
 
-def page_words(page) -> list[dict]:
-    """MuPDF's words, in displayed-page coordinates (rotation applied)."""
-    import pymupdf
-    m = page.rotation_matrix
-    out = []
-    for x0, y0, x1, y1, w, block, line, wno in page.get_text("words"):
-        rr = pymupdf.Rect(x0, y0, x1, y1) * m
-        out.append({"text": w, "box": (rr.x0, rr.y0, rr.x1, rr.y1),
-                    "cx": (rr.x0 + rr.x1) / 2, "cy": (rr.y0 + rr.y1) / 2,
-                    "block": block, "line": line, "wno": wno, "seq": len(out)})
-    return out
-
-
 def covered_words(page, words: list[dict], dpi: int = 100) -> set[int]:
     """Indexes of words that cannot be seen: under a dark opaque fill, with the middle of
     their box rendering flat and dark. A redaction drawn over text left in the file
@@ -781,6 +637,15 @@ def md_words(md: str) -> list[str]:
     md = re.sub(r"\\(.)", r"\1", md)
     md = re.sub(r"[*_`#|]+", " ", md)
     return md.split()
+
+
+def md_plain(words: list[str]) -> list[str]:
+    """Evidence words as md_words() leaves them: the Markdown's formatting characters and
+    tag-like text taken out the same way, so a word is not missing for being formatted.
+    "CIRSDRU_09_01", "Thiele*", "#VALUE!" and "<name@example.ca>" read as lost before (623885:
+    9% of its words; four of the sample's five documents under 98% were only this)."""
+    t = re.sub(r"<!--.*?-->|</?[A-Za-z][^<>]*>", " ", " ".join(words))
+    return re.sub(r"[*_`#|]+", " ", t).split()
 
 
 def reading_order(w: dict):
@@ -880,43 +745,6 @@ def table_structure_score(words: list[dict], boxes: list[tuple], pad: float) -> 
     out = {k: n[k] for k in ("straddles", "no_cell", "merged", "split", "rows_merged")}
     out["bad"] = sum(out.values())
     return out
-
-
-def text_lines(words: list[dict]) -> list[dict]:
-    """A cell's words as lines, top to bottom: centre, height and text of each."""
-    lines = []
-    for w in sorted(words, key=lambda w: (w["cy"], w["box"][0])):
-        h = w["box"][3] - w["box"][1]
-        if lines and abs(lines[-1]["cy"] - w["cy"]) < 0.5 * max(h, lines[-1]["h"]):
-            ln = lines[-1]
-            ln["words"].append(w)
-            ln["cy"] = sum(x["cy"] for x in ln["words"]) / len(ln["words"])
-            ln["h"] = max(ln["h"], h)
-        else:
-            lines.append({"cy": w["cy"], "h": h, "words": [w]})
-    return lines
-
-
-def line_numbers(words: list[dict], page_width: float) -> list[dict]:
-    """A transcript's line numbers down the left margin, or [] if the page has none.
-    Numbers on separate lines, nearly every step +1, or back to 1 where a new page of
-    the transcript starts (90793: four transcript pages printed on each PDF page), and
-    on one line pitch: a table's numbered rows are as tall as their wrapped cells."""
-    s = SETTINGS["line_numbers"]
-    nums = sorted((w for w in words if w["box"][2] < s["margin_frac"] * page_width
-                   and w["text"].isdigit() and 1 <= int(w["text"]) <= s["max"]), key=lambda w: w["cy"])
-    if len(nums) < s["min_lines"]:
-        return []
-    vals = [int(w["text"]) for w in nums]
-    rises = sum(1 for a, b in zip(vals, vals[1:]) if b == a + 1 or (b == 1 and a > 1))
-    if rises < s["min_rises"] * (len(vals) - 1):
-        return []
-    gaps = [b["cy"] - a["cy"] for a, b in zip(nums, nums[1:]) if int(b["text"]) == int(a["text"]) + 1]
-    pitch = min(gaps, default=0)
-    if pitch <= 0:
-        return []
-    on_pitch = sum(1 for d in gaps if abs(d / pitch - round(d / pitch)) <= 0.1)
-    return nums if on_pitch >= s["min_on_pitch"] * len(gaps) else []
 
 
 NUMBER = re.compile(r"^[(\-+−]?[$€£]?\d[\d,.:/\-]*%?\)?$")
@@ -2006,6 +1834,18 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
         for tb, tbx in ([] if ocr_page else tables):
             cells = tb.data.table_cells
             cell_dis = 0
+            if not w_table.words_in(tbx, pad) and any((c.text or "").strip() for c in cells):
+                # A table in an image on a page that has a text layer elsewhere: its text is
+                # docling's OCR of the image, and the text layer has nothing to check it against.
+                # Every cell read as disagreeing with an empty box (4158647 p3, a scanned
+                # pressure test turned sideways: 639 errors).
+                issue(pno, tbx, "table_text_unchecked", "info",
+                      f"no text-layer words in this table's box: its {len(cells)} cells are OCR of an image, "
+                      f"with no second reader", "tables 1", ref=tb.self_ref)
+                items_rows.append({"ref": tb.self_ref, "label": "table", "page": pno, "bbox": [r(v, 1) for v in tbx],
+                                   "reader": "docling TableFormer on OCR of an image", "grade": "ocr",
+                                   "rows": tb.data.num_rows, "cols": tb.data.num_cols, "cells": len(cells)})
+                continue
             for c in cells:
                 if c.bbox is None or not (c.text or "").strip():
                     continue
@@ -2199,7 +2039,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     # out 91% of one filing's words.
     md = export_markdown(doc)
     put(f"{doc_id}.md", md.encode())
-    ev = collections.Counter(tokens([e["w"] for e in evidence_rows]))
+    ev = collections.Counter(tokens(md_plain([e["w"] for e in evidence_rows])))
     got = collections.Counter(tokens(md_words(md)))
     total, found = sum(ev.values()), sum((ev & got).values())
     export_recall = found / total if total else None

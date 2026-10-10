@@ -39,7 +39,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (DEFAULT_OUTPUT, DEFAULT_RUNS, HERE, Stage, add_run_arguments, base_environment,  # noqa: E402
                     clip, describe_basic, load_index, r, read_json_gz, run_stage, runs_of, sha256_file, utcnow)
-import convert as cv  # noqa: E402
+import pagelib as pl  # noqa: E402
 
 STAGE = "pages"
 
@@ -63,13 +63,17 @@ SETTINGS = {
     "empty_max_words": 5,
     # A second opinion from a vision model (Ollama), only where the layout model is weak. On 120
     # random pages (2026-10-10) the two agreed on 90; of the earlier round's disagreements, read by
-    # eye, qwen3-vl was right on scans (skewed text the layout model calls a table), checkbox forms
-    # and pages with no regions, and wrong on drawings. So: asked about scanned pages, pages with no
-    # content regions, and pages with pictures (for the picture's type); its kind is taken only on
-    # scanned pages and pages without regions, and both readings are kept. Its confidence is not
-    # used (0.98 on every page, right or wrong).
+    # eye, qwen3-vl looked better on scans and checkbox forms. Taking its kind on every scanned page
+    # then changed 177 of the sample's 3,027 pages; of 24 read by eye about 8 were right, nearly all
+    # of them forms (comment logs, certificates, test sheets), and 13 wrong: scanned tables and
+    # engineering drawings called text or mixed (4462406, 2813525, 586443). So its kind is taken
+    # only when it says form; otherwise both readings are kept and the page is marked disputed.
+    # Asked about scanned pages, pages with no content regions, and pages a picture covers at least
+    # `picture_share` of (also for the picture's type). Its confidence is not used (0.98 on every
+    # page, right or wrong).
     "vlm": {"model": "qwen3-vl:8b-instruct", "url": "http://localhost:11434", "dpi": 72,
             "picture_share": 0.2,      # a picture this large is asked about; a letterhead's logo is not
+            "takes_kind": ["form"],    # the only kinds its reading replaces the layout model's with
             "timeout_s": 120, "kinds": ["text", "table", "form", "contents", "transcript", "picture",
                                         "mixed", "empty"],
             "picture_types": ["none", "map", "aerial_photo", "site_photo", "chart", "engineering_drawing",
@@ -87,7 +91,7 @@ DOTS = re.compile(r"(\.\s?){4,}|…{2,}|_{6,}")
 
 class Pages(Stage):
     name = STAGE
-    code_files = [Path(__file__).resolve(), HERE / "convert.py", HERE / "common.py"]
+    code_files = [Path(__file__).resolve(), HERE / "pagelib.py", HERE / "common.py"]
     packages = ["docling", "pymupdf"]
     settings = SETTINGS
     worker_module = "pages"
@@ -99,7 +103,7 @@ class Pages(Stage):
 
     def models(self):
         if self._models is None:
-            ident = cv.model_identity()
+            ident = pl.model_identity()
             self._models = {k: v for k, v in ident.items() if "layout" in k} if "error" not in ident else ident
         return self._models
 
@@ -113,7 +117,7 @@ class Pages(Stage):
         import importlib.metadata as m
         env = base_environment()
         env.update({"docling": m.version("docling"), "docling_core": m.version("docling-core"),
-                    "pymupdf": m.version("pymupdf"), "models": self.models(), "gpu": cv._gpu_name()})
+                    "pymupdf": m.version("pymupdf"), "models": self.models(), "gpu": pl._gpu_name()})
         return env
 
     def header_lines(self, env):
@@ -140,8 +144,8 @@ class Pages(Stage):
 
 
 def gpu_gate():
-    free = cv.gpu_free_mb()
-    need = cv.SETTINGS["min_free_gpu_mb"]
+    free = pl.gpu_free_mb()
+    need = pl.SETTINGS["min_free_gpu_mb"]
     return f"{free} MB GPU memory free, need {need}" if free is not None and free < need else None
 
 
@@ -155,13 +159,13 @@ def init_worker(meta: dict):
     from docling.datamodel.pipeline_options import PdfPipelineOptions
     from docling.document_converter import DocumentConverter, PdfFormatOption
 
-    opts = PdfPipelineOptions(artifacts_path=cv.MODELS, do_ocr=False, do_table_structure=False)
+    opts = PdfPipelineOptions(artifacts_path=pl.MODELS, do_ocr=False, do_table_structure=False)
     opts.layout_options.keep_empty_clusters = SETTINGS["keep_empty_clusters"]
     opts.accelerator_options = AcceleratorOptions(device=SETTINGS["device"])
     conv = DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(
         pipeline_options=opts, backend=PyPdfiumDocumentBackend)})
     conv.initialize_pipeline(InputFormat.PDF)
-    cap = cv._Capture()
+    cap = pl._Capture()
     logging.getLogger().addHandler(cap)
     return {"converter": conv, "capture": cap}
 
@@ -246,8 +250,8 @@ def needs_second_opinion(p: dict) -> str | None:
 
 
 def second_opinion(pdf, pages: list[dict]) -> int:
-    """Ask the vision model where the layout model is weak; take its kind only on scans and
-    pages without regions (SETTINGS["vlm"]). Returns how many pages were asked."""
+    """Ask the vision model where the layout model is weak; take its kind only where it is reliable
+    (SETTINGS["vlm"]), mark the other disagreements. Returns how many pages were asked."""
     asked = 0
     down = None
     for p in pages:
@@ -266,10 +270,12 @@ def second_opinion(pdf, pages: list[dict]) -> int:
             continue
         asked += 1
         p["vlm"] = {"asked_because": why, **ans, "seconds": r(time.perf_counter() - ts, 2)}
-        if why in ("scanned", "no regions") and ans.get("kind") in SETTINGS["vlm"]["kinds"] \
-                and ans["kind"] != p["kind"].split(":")[0]:
-            p["kind"] = ans["kind"]
-            p["kind_by"] = "vlm"
+        if ans.get("kind") in SETTINGS["vlm"]["kinds"] and ans["kind"] != p["kind"].split(":")[0]:
+            if ans["kind"] in SETTINGS["vlm"]["takes_kind"]:
+                p["kind"] = ans["kind"]
+                p["kind_by"] = "vlm"
+            else:
+                p["kind_disputed"] = True
     return asked
 
 
@@ -323,7 +329,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     t0pages = {p["index"] + 1: p for p in t0rec.get("pages") or []}
 
     # ---- layout regions, a run of pages per call; pages tier 0 calls too heavy are not read
-    heavy = {pno: why for pno, tp in t0pages.items() if (why := cv.over_budget(tp))}
+    heavy = {pno: why for pno, tp in t0pages.items() if (why := pl.over_budget(tp))}
     regions, calls = {}, []
     cap = ctx["capture"]
     for run in runs_of_pages([p for p in sorted(t0pages) if p not in heavy], SETTINGS["chunk_pages"]):
@@ -345,7 +351,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
         call["warnings"] = list(cap.records)
         call["seconds"] = r(time.perf_counter() - cs, 3)
         calls.append(call)
-        cv.release_gpu_and_ram()
+        pl.release_gpu_and_ram()
     rec["layout_calls"] = calls
 
     # ---- per page: signals from the text layer, then the kind
@@ -353,18 +359,18 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     pages = []
     for pno, tp in sorted(t0pages.items()):
         hints = tp.get("hints") or {}
-        route = cv.route_for(hints.get("origin"), hints.get("text_layer"))
-        reader = cv.ROUTES["reader"].get(route) if route in cv.ROUTES["converted_now"] else None
+        route = pl.route_for(hints.get("origin"), hints.get("text_layer"))
+        reader = pl.ROUTES["reader"].get(route) if route in pl.ROUTES["converted_now"] else None
         ocr = reader == "ocr_full"         # the text layer, if any, is not the page's text
         page = pdf[pno - 1]
-        words = [] if ocr else cv.page_words(page)
-        lines = cv.text_lines(words) if words else []
+        words = [] if ocr else pl.page_words(page)
+        lines = pl.text_lines(words) if words else []
         texts = [" ".join(w["text"] for w in sorted(ln["words"], key=lambda w: w["box"][0])) for ln in lines]
         regs = regions.get(pno, [])
         source = {"text": "text layer", "ocr_full": "ocr", "ocr_images": "text layer + ocr of images"}.get(reader, route)
         p = {"page": pno, "route": route, "source": source,
              "rotation": rotation(tp), "page_rotation": tp.get("rotation"), "words": len(words),
-             "line_numbers": len(cv.line_numbers(words, page.rect.width)) if words else 0,
+             "line_numbers": len(pl.line_numbers(words, page.rect.width)) if words else 0,
              "dot_lines": r(sum(1 for t in texts if DOTS.search(t)) / len(texts), 3) if texts else 0,
              "widgets": len((tp.get("annotations") or {}).get("widgets") or []),
              "regions": regs, "shares": {k: r(v, 3) for k, v in shares(regs).items()}}
@@ -402,7 +408,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
 # commands
 
 def cmd_run(args) -> int:
-    t0dir = cv.tier0_run(Path(args.runs), args.tier0)
+    t0dir = pl.tier0_run(Path(args.runs), args.tier0)
     idx = load_index(t0dir)
 
     def ready(todo):

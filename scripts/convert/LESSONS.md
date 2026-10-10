@@ -178,6 +178,22 @@ tables at 23%. **Decide what each page and region is first, route each region to
 for its kind, and spend effort by share of pages.** Measure on a random sample before
 fixing, not on the documents that happen to come first: the oldest 100 were all one kind.
 
+### Routing by kind, measured on the sample (2026-10-10)
+
+Converting the 300-document sample with and without the pages stage (convert-1c3ac531 against
+convert-e3f26a9e): transcript pages 21 errors to 0, contents pages 70 errors and 138 warnings to 0
+and 1; every other kind identical; export recall unchanged; 7% faster. What is left is tables:
+errors per 100 pages are 3 on text pages and 319 on table pages, 544 on mixed pages. Two
+checks reported false errors and were fixed: a table inside an image (OCR, no text layer to
+compare against: 4158647, 639 errors to 0) and the export check, which stripped Markdown
+formatting from the export but not from the evidence (four of five documents "missing" words
+were `CIRSDRU_09_01`, `Thiele*`, `#VALUE!`). One loss is real: OCR'd tables with overlapping
+cells, where the Markdown grid shows one cell per position (2813525, 2.7% of its words).
+
+The vision model's kind, taken on every scanned page, changed 177 pages; of 24 read by eye,
+about 8 were right (forms) and 13 wrong (scanned tables and drawings called text). It now
+decides only "form"; other disagreements are kept and marked.
+
 ## Lessons, with evidence
 
 ### Memory and time

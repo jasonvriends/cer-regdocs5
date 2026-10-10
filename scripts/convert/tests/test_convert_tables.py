@@ -174,5 +174,14 @@ class LineNumbers(unittest.TestCase):
         self.assertEqual(len(c.line_numbers(nums, 612)), 23)
 
 
+class ExportWords(unittest.TestCase):
+    """The export check compares words formatted the same way on both sides."""
+
+    def test_formatted_words_are_not_missing(self):
+        words = ["CIRSDRU_09_01", "Thiele*", "#VALUE!", "<name@example.ca>"]
+        md = "CIRSDRU\\_09\\_01 Thiele\\* \\#VALUE! &lt;name@example.ca&gt;"
+        self.assertTrue(set(c.tokens(c.md_plain(words))) <= set(c.tokens(c.md_words(md))))
+
+
 if __name__ == "__main__":
     unittest.main()

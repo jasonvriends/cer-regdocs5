@@ -81,10 +81,16 @@ class SecondOpinion(unittest.TestCase):
         return {"page": 1, "kind": kind, "kind_by": "layout", "source": source,
                 "shares": {"text": 1.0} if shares is None else shares}
 
-    def test_a_scanned_page_takes_its_kind(self):
+    def test_a_form_takes_its_kind(self):
+        x = self.p("table", source="ocr", shares={"table": 1.0})
+        self.run_with([x], {"kind": "form", "picture_type": "none", "rotated": False})
+        self.assertEqual((x["kind"], x["kind_by"], x["vlm"]["asked_because"]), ("form", "vlm", "scanned"))
+
+    def test_other_disagreements_keep_the_layout_kind_and_are_marked(self):
+        # 4462406's scanned mitigation tables, which it calls text
         x = self.p("table", source="ocr", shares={"table": 1.0})
         self.run_with([x], {"kind": "text", "picture_type": "none", "rotated": False})
-        self.assertEqual((x["kind"], x["kind_by"], x["vlm"]["asked_because"]), ("text", "vlm", "scanned"))
+        self.assertEqual((x["kind"], x["kind_by"], x.get("kind_disputed")), ("table", "layout", True))
 
     def test_a_picture_gets_a_type_but_keeps_its_kind(self):
         x = self.p("picture", shares={"picture": 1.0})
