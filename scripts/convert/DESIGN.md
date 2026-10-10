@@ -2,7 +2,9 @@
 
 Status: tier 0 is built (`tier0.py`), and so is a first conversion pass
 (`convert.py`). **The plan has since changed**: text layer first, structure as an
-overlay. See [LESSONS.md](LESSONS.md), which supersedes the build order below.
+overlay (see [LESSONS.md](LESSONS.md), which supersedes the build order below),
+and each region routed by what it is ([Page kinds](#page-kinds-what-each-page-and-region-is),
+2026-10-10).
 
 The corpus: about 265,000 CER REGDOCS PDFs, 2012-2026, used as regulatory
 evidence and extracted for RAG and AI. The 8,210 in `source/` today are the
@@ -34,14 +36,83 @@ sample everything below is measured on.
 
 ```
 tier0   file structure, no rendering                        built: 669 pages/s
+pages   what each page and region is: layout regions,       next (see Page kinds)
+        page kind, rotation, scan or text layer
 tier1   thumbnail + classical vision, only where tier0 is unsure
-route   per page: which readers, in which order, what to check
+route   per region: which reader, from its label and the page's kind
 read    readers write items (text, table, picture, field, ...) with boxes
 build   one DoclingDocument from all readers' items
 check   independent checks -> issues, each with page, box, kind, severity
 export  review PDF, tables, figures, forms, markdown, RAG chunks
 enrich  later passes: new versions, patch log, parent hash
 ```
+
+## Page kinds: what each page and region is
+
+Tier 0 says how a page's text is stored (a sound text layer, a scan, a broken
+layer). It does not say what the page *is*. Until 2026-10-10 the route went by
+storage alone, so a transcript, a contents page, a form and a spreadsheet all
+went to one reader (docling's layout and TableFormer) and its mistakes were
+patched in the checks afterwards: a transcript read as a two-column table, then
+a check to undo that, then a rule to stop the check undoing real tables. The
+`pages` stage decides what each page and region is first; the route sends each
+region to the reader for its kind.
+
+Two labels per page, never one: **where the text comes from** (text layer or
+OCR) and **what the content is**. A scanned table is a table that needs OCR
+first. And a page is not one kind: a page holds regions (a paragraph, a table, a
+photo), each routed to its own reader. The page kind summarises its regions; the
+document is only context (a page of numbered lines in a document that is mostly
+numbered lines is a transcript; one numbered table in a report is not).
+
+### The survey (2026-10-10)
+
+300 documents drawn at random, 12 a year from 2002 to 2026 (3,027 pages;
+[survey/sample-2026-10-10.csv](survey/sample-2026-10-10.csv)),
+weighted back to the corpus by year. docling's layout model (Heron) on every
+page, without OCR or table structure, at about 16 pages/s on the 4090; its raw
+regions (before docling drops regions it found no text for, which hides them on
+scans). A page's kind is the region group covering most of its content area,
+page headers and footers left out. Contact sheets of each kind were checked by
+eye.
+
+| page kind | share of pages | of them scans | reader |
+|---|---:|---:|---|
+| text: letters, decisions, reports | 41% | 1% | text layer + layout: headings, paragraphs, lists |
+| table | 23% | 22% | table readers, compared per table (see LESSONS) |
+| drawing, map, photo, chart | 12% | 38% | picture classifier; the words printed on it from the text layer or OCR |
+| form: fields, checkboxes, certificates | 10% | 47% | AcroForm values; labelled values (key/value) |
+| mixed: text beside a table or picture | 6% | ~5% | each region to its own reader |
+| empty or nearly | 3% | 99% | recorded blank; a faint scan goes to tier1 |
+| contents and indexes | 2% | 12% | entries: title, page number |
+| transcript (numbered lines) | 1% | 0% | numbered lines, each citable by page and line |
+
+What the contact sheets showed, and what the stage must add to the layout model:
+
+- **Forms are over-called.** The layout model marks a letter's address block as
+  a key/value region, so letters, a résumé and an email read as forms. A form
+  needs checkboxes, AcroForm fields or a `form` region, not key/value alone.
+- **Rotation.** Landscape tables printed sideways are common (4262837, 247294);
+  the page must be turned before tables are read.
+- **Pictures need a class.** Map, aerial photo, site photo, chart (with axes),
+  engineering drawing, chart-recorder disc (2931583): docling's picture
+  classifier, on every picture.
+- **Transcripts** are labelled `code` (monospaced type). Line numbers count only
+  on one line pitch (a table's numbered rows are as tall as their wrapped cells:
+  4656998 p39, 4647200 p432, 90732 p26) and only where most of the document is
+  numbered.
+- **Text pages** were right on the sheets checked, but for a map with little
+  ink (3224341 p9) and a rotated brochure (2967481 p2).
+
+Effort follows the shares: tables are the largest error source on the largest
+non-text share of pages; transcripts, where the first fixes were spent, are 1%.
+
+### What the stage records
+
+`output/<id>/convert/pages-<sig>/<id>.pages.json.gz`, per page: the kind, the
+text source, rotation, and every region (label, box, confidence), so a route
+can be explained and re-run from it without the layout model. Measured each
+time on the same 300 documents, kind by kind, against the labels checked by eye.
 
 ### tier1: only where tier0 cannot decide
 
@@ -203,6 +274,16 @@ version does not pin a model, and the legacy run id missed exactly that.
 
 Each step is measured before the next: on a stratified sample across years and
 page kinds, including the pages that got worse.
+
+Steps 1 and 2 above, and the OCR route of 3, are built, routed by page. From 2026-10-10:
+
+1. `pages`: layout regions and a kind for every page; the survey's 300
+   documents as its test set.
+2. Route each region by its label: text, tables, contents entries, transcript
+   lines, form values, pictures. The transcript and dot-leader handling in
+   `convert.py`'s checks moves into the route.
+3. Measure on the 300, before and after, by kind; then the next kind by share.
+4. The corpus.
 
 ## Open questions
 

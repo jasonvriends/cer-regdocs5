@@ -159,6 +159,25 @@ same table areas. Scored by the same conservation check:
   after measuring *cells dropped*; measured by *words in the wrong cell*, accurate is better.
   Choosing the better of the two per page cuts a further fifth.
 
+## Route by what a page is, not fix what a reader got wrong (2026-10-10)
+
+The oldest 100 documents (GH-3-97 hearing transcripts, 9,341 pages) had 1,697 errors. Three
+causes: transcripts' margin line numbers read by TableFormer as two-column tables (half the
+errors); a page-wide `code` box over a table taking its words, so every cell read as empty;
+and contents pages' dot leaders reported as text outside cells. Fixing each in the checks cut
+errors to 489 with no words lost from the export (recall unchanged, 99.9%). But the
+transcript rule then flattened three real tables numbered down the margin (4656998 p39,
+4647200 p432, 90732 p26) until a line-pitch test was added, and one shape of table can
+still pass it.
+
+Each fix was right and each opened the next case. The cause was the route: it knew how a
+page's text is stored, not what the page is, so every kind of page went to one reader and
+its mistakes were undone afterwards. A random survey of 300 documents across 2002-2026 (see
+DESIGN, Page kinds) put transcripts at 1% of pages, where the day's work had gone, and
+tables at 23%. **Decide what each page and region is first, route each region to the reader
+for its kind, and spend effort by share of pages.** Measure on a random sample before
+fixing, not on the documents that happen to come first: the oldest 100 were all one kind.
+
 ## Lessons, with evidence
 
 ### Memory and time
