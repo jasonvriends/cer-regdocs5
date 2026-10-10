@@ -141,6 +141,9 @@ SETTINGS = {
                                             # 100, all >= 0.97); a table's numbered rows wrap to varying heights
                                             # (4656998 p39 work plan 0.38, 4647200 p432 sampling stations 0.42)
                      "min_in_table": 8},    # a table holding at least this many of them was the transcript
+    "read_as_lines": ["transcript", "contents"],  # page kinds (the pages stage) read from the text layer as
+                                       # one text item per line, without docling: a transcript's numbered
+                                       # lines and a contents page's entries are lines, not tables
     "table_owns_its_words": True,      # a word in a table and in a larger text item belongs to the table:
                                        # docling's "code" box over a whole page (90793) took a table's words
                                        # and its cells all read as empty
@@ -277,8 +280,9 @@ class Convert(Stage):
     worker_module = "convert"
     min_start_gap_s = 5.0
 
-    def __init__(self, tier0_dir: Path):
+    def __init__(self, tier0_dir: Path, pages_dir: Path | None = None):
         self.tier0_dir = tier0_dir
+        self.pages_dir = pages_dir
         self._models = None
 
     def models(self):
@@ -287,10 +291,11 @@ class Convert(Stage):
         return self._models
 
     def worker_meta(self):
-        return {"tier0_dir": str(self.tier0_dir)}
+        return {"tier0_dir": str(self.tier0_dir), "pages_dir": str(self.pages_dir) if self.pages_dir else None}
 
     def extra_identity(self):
-        return {"models": self.models(), "tier0_run": self.tier0_dir.name, "routes": ROUTES["rules"]}
+        return {"models": self.models(), "tier0_run": self.tier0_dir.name, "routes": ROUTES["rules"],
+                "pages_run": self.pages_dir.name if self.pages_dir else None}
 
     def environment(self):
         import importlib.metadata as m
@@ -1404,7 +1409,26 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
         if why:
             text_only[pno] = why
     rec["text_only_pages"] = {str(k): v for k, v in text_only.items()}
-    todo_docling = [p for p in todo if p not in poison and p not in text_only]
+
+    # What each page is, from the pages stage: transcript and contents pages on the text layer
+    # are read as lines and never go to docling. Without a pages record every page goes to docling.
+    kinds = {}
+    if meta.get("pages_dir"):
+        pg_path = Path(meta["output"]) / doc_id / "convert" / Path(meta["pages_dir"]).name / f"{doc_id}.pages.json.gz"
+        if not pg_path.exists():
+            reasons.append("pages_record_missing")
+        else:
+            prec = read_json_gz(pg_path)
+            if (prec.get("file") or {}).get("sha256") != rec["file"]["sha256"]:
+                reasons.append("pages_record_describes_other_bytes")
+            else:
+                kinds = {p["page"]: p["kind"] for p in prec.get("pages") or []}
+                rec["pages_record"] = {"path": str(pg_path), "sha256": sha256_file(pg_path)}
+    rec["page_kinds"] = {str(k): v for k, v in kinds.items()}
+    as_lines = {pno: kinds[pno] for pno in todo if kinds.get(pno) in SETTINGS["read_as_lines"]
+                and reader_of[pno] == "text" and pno not in text_only and pno not in poison}
+    rec["read_as_lines"] = {str(k): v for k, v in as_lines.items()}
+    todo_docling = [p for p in todo if p not in poison and p not in text_only and p not in as_lines]
 
     seen = {}
 
@@ -1596,6 +1620,20 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     for e in ranges:
         if e["status"] != "success" and not (e["unfinished"] == [] and e["status"] == "partial_success"):
             reasons.append(f"docling_{e['status']}" + ("_on_retry" if e["retry"] else ""))
+    # Pages read as lines: a document of their own each, so the merge keeps them in page order.
+    for pno, kind in as_lines.items():
+        page = pdf[pno - 1]
+        pr = page.rect
+        d = DoclingDocument(name=doc_id)
+        d.add_page(page_no=pno, size=Size(width=pr.width, height=pr.height))
+        for line in text_lines(visible_words(pno)[0]):
+            ws = sorted(line["words"], key=lambda w: w["box"][0])
+            lb = union([w["box"] for w in ws])
+            txt = " ".join(w["text"] for w in ws)
+            bl = BoundingBox(l=lb[0], t=lb[1], r=lb[2], b=lb[3], coord_origin=CoordOrigin.TOPLEFT
+                             ).to_bottom_left_origin(page_height=pr.height)
+            d.add_text(label=DocItemLabel.TEXT, text=txt, prov=ProvenanceItem(page_no=pno, bbox=bl, charspan=(0, len(txt))))
+        chunks.append(([pno], 0, d))
     chunks.sort(key=lambda c: c[0][0])
     timings["docling"] = r((time.perf_counter() - s) * 1000, 1)
     rec["docling"] = {"ranges": ranges, "pipeline_options": ctx["pipeline_options"],
@@ -1699,10 +1737,11 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
 
     # A table holding a transcript's line numbers was the transcript: its words become one
     # text item per line, in its place. Done before the checks: deleting a table renumbers
-    # the tables after it, and the checks record references.
+    # the tables after it, and the checks record references. Only without a pages record:
+    # with one, transcript pages are read as lines and never reach docling.
     reader_of_item = {}
     numbered, dropped = {}, []
-    for tb in list(doc.tables):
+    for tb in ([] if kinds else list(doc.tables)):
         pno = tb.prov[0].page_no if tb.prov else None
         if pno not in doc.pages or pno in ocr_full_pages or pno in fallback:
             continue
@@ -1942,7 +1981,9 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
             ag, d_only, m_only, numeric = compare(theirs, mine)
             items_rows.append({"ref": it.self_ref, "label": str(it.label.value), "page": pno,
                                "bbox": [r(v, 1) for v in bx],
-                               "reader": reader_of_item.get(id(it), "layout: docling; text: docling-parse"),
+                               "reader": (f"text layer: one item per line (page kind: {as_lines[pno]})"
+                                          if pno in as_lines else
+                                          reader_of_item.get(id(it), "layout: docling; text: docling-parse")),
                                "grade": "exact", "chars": len(tx or ""),
                                "text_sha256": sha256_bytes((tx or "").encode()),
                                "mupdf_words": n_words, "mupdf_agreement": r(ag, 3),
@@ -2300,7 +2341,10 @@ def _annotate(review, issues: list[dict], meta: dict) -> None:
 def cmd_run(args) -> int:
     runs = Path(args.runs)
     t0dir = tier0_run(runs, args.tier0)
-    stage = Convert(t0dir)
+    pages_runs = runs_of(runs, "pages")
+    if args.pages:
+        pages_runs = [d for d in pages_runs if d.name in (args.pages, f"pages-{args.pages}")]
+    stage = Convert(t0dir, pages_runs[-1] if pages_runs and args.pages != "none" else None)
     idx = load_index(t0dir)
 
     def ready(todo):
@@ -2456,6 +2500,7 @@ def main(argv=None) -> int:
     run = sub.add_parser("run", help="convert PDFs (default: every PDF in source/)")
     add_run_arguments(run)
     run.add_argument("--tier0", help="tier 0 run to read (default: the newest)")
+    run.add_argument("--pages", help="pages run to route by (default: the newest; 'none' routes by tier 0 alone)")
     run.set_defaults(workers=2, timeout=3600, recycle_after=100)   # 2 workers: legacy batch.py's default
     sub.add_parser("status", help="what every run holds")
     sub.add_parser("models", help=f"download the models into {MODELS}")

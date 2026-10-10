@@ -26,12 +26,14 @@ layout model gets wrong:
 Record: output/<id>/convert/pages-<sig>/<id>.pages.json.gz.
 """
 import argparse
+import base64
 import collections
 import json
 import logging
 import re
 import sys
 import time
+import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -59,7 +61,27 @@ SETTINGS = {
     "contents_dot_lines": 0.25,        # share of a page's lines with dot leaders that makes it contents
     "transcript_doc_share": 0.5,       # share of a document's pages with text that carry line numbers
     "empty_max_words": 5,
+    # A second opinion from a vision model (Ollama), only where the layout model is weak. On 120
+    # random pages (2026-10-10) the two agreed on 90; of the earlier round's disagreements, read by
+    # eye, qwen3-vl was right on scans (skewed text the layout model calls a table), checkbox forms
+    # and pages with no regions, and wrong on drawings. So: asked about scanned pages, pages with no
+    # content regions, and pages with pictures (for the picture's type); its kind is taken only on
+    # scanned pages and pages without regions, and both readings are kept. Its confidence is not
+    # used (0.98 on every page, right or wrong).
+    "vlm": {"model": "qwen3-vl:8b-instruct", "url": "http://localhost:11434", "dpi": 72,
+            "picture_share": 0.2,      # a picture this large is asked about; a letterhead's logo is not
+            "timeout_s": 120, "kinds": ["text", "table", "form", "contents", "transcript", "picture",
+                                        "mixed", "empty"],
+            "picture_types": ["none", "map", "aerial_photo", "site_photo", "chart", "engineering_drawing",
+                              "instrument_record", "logo", "other"]},
 }
+VLM_PROMPT = (
+    "Classify this document page. Answer with JSON only: "
+    '{"kind": one of %(kinds)s, "picture_type": one of %(picture_types)s, "rotated": true or false}. '
+    "text = prose, letters, reports; table = mostly a table; form = fields to fill in or filled in, "
+    "checkboxes, certificates; contents = table of contents or index; transcript = numbered lines of a "
+    "hearing transcript; picture = mostly a map, photo, chart or drawing; mixed = text with a large table "
+    "or picture; empty = blank or nearly.")
 DOTS = re.compile(r"(\.\s?){4,}|…{2,}|_{6,}")
 
 
@@ -85,7 +107,7 @@ class Pages(Stage):
         return {"tier0_dir": str(self.tier0_dir)}
 
     def extra_identity(self):
-        return {"models": self.models(), "tier0_run": self.tier0_dir.name}
+        return {"models": self.models(), "tier0_run": self.tier0_dir.name, "vlm": vlm_identity()}
 
     def environment(self):
         import importlib.metadata as m
@@ -184,6 +206,71 @@ def page_kind(p: dict, transcript_doc: bool) -> str:
         return "text"
     parts = sorted(k if k != "code" else "text" for k, v in s.items() if v >= SETTINGS["mixed_part_share"])
     return "mixed:" + "+".join(sorted(set(parts))) if parts else "text"
+
+
+def vlm_identity() -> dict:
+    """The vision model's name and digest, or why it is not available."""
+    v = SETTINGS["vlm"]
+    try:
+        with urllib.request.urlopen(f"{v['url']}/api/tags", timeout=10) as resp:
+            tags = json.load(resp)["models"]
+        m = next((t for t in tags if t["name"] == v["model"]), None)
+        return {"model": v["model"], "digest": m["digest"]} if m else {"model": v["model"], "error": "not pulled"}
+    except Exception as e:
+        return {"model": v["model"], "error": repr(e)}
+
+
+def ask_vlm(png: bytes) -> dict:
+    v = SETTINGS["vlm"]
+    body = {"model": v["model"], "prompt": VLM_PROMPT % {"kinds": v["kinds"], "picture_types": v["picture_types"]},
+            "images": [base64.b64encode(png).decode()], "stream": False, "format": "json",
+            "options": {"temperature": 0}}
+    req = urllib.request.Request(f"{v['url']}/api/generate", json.dumps(body).encode(),
+                                 {"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=v["timeout_s"]) as resp:
+        ans = json.loads(json.load(resp)["response"])
+    return {k: ans.get(k) for k in ("kind", "picture_type", "rotated")}
+
+
+def needs_second_opinion(p: dict) -> str | None:
+    """Why the vision model is asked about this page, or None."""
+    if p.get("not_read"):
+        return None
+    if p["source"] == "ocr":
+        return "scanned"
+    if not p["shares"]:
+        return "no regions"
+    if p["shares"].get("picture", 0) >= SETTINGS["vlm"]["picture_share"]:
+        return "picture"
+    return None
+
+
+def second_opinion(pdf, pages: list[dict]) -> int:
+    """Ask the vision model where the layout model is weak; take its kind only on scans and
+    pages without regions (SETTINGS["vlm"]). Returns how many pages were asked."""
+    asked = 0
+    down = None
+    for p in pages:
+        why = needs_second_opinion(p)
+        if not why:
+            continue
+        if down:
+            p["vlm"] = {"asked_because": why, "error": down}
+            continue
+        ts = time.perf_counter()
+        try:
+            ans = ask_vlm(pdf[p["page"] - 1].get_pixmap(dpi=SETTINGS["vlm"]["dpi"]).tobytes("png"))
+        except Exception as e:             # Ollama down or not answering: the layout reading stands
+            down = repr(e)
+            p["vlm"] = {"asked_because": why, "error": down}
+            continue
+        asked += 1
+        p["vlm"] = {"asked_because": why, **ans, "seconds": r(time.perf_counter() - ts, 2)}
+        if why in ("scanned", "no regions") and ans.get("kind") in SETTINGS["vlm"]["kinds"] \
+                and ans["kind"] != p["kind"].split(":")[0]:
+            p["kind"] = ans["kind"]
+            p["kind_by"] = "vlm"
+    return asked
 
 
 def rotation(t0page: dict) -> int:
@@ -292,7 +379,9 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     numbered = sum(1 for p in with_text if p["line_numbers"])
     transcript_doc = bool(with_text) and numbered / len(with_text) >= SETTINGS["transcript_doc_share"]
     for p in pages:
-        p["kind"] = page_kind(p, transcript_doc)
+        p["kind"] = p["layout_kind"] = page_kind(p, transcript_doc)
+        p["kind_by"] = "layout"
+    vlm_asked = second_opinion(pdf, pages)
     rec["pages"] = pages
     rec["document"] = {"numbered_pages": numbered, "pages_with_text": len(with_text),
                        "transcript": transcript_doc}
@@ -301,7 +390,10 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
     rec["summary"] = {"pages": len(pages), "kinds": dict(collections.Counter(p["kind"] for p in pages)),
                       "ocr_pages": sum(1 for p in pages if p["source"] == "ocr"),
                       "rotated_pages": sum(1 for p in pages if p["rotation"]),
-                      "regions": sum(len(p["regions"]) for p in pages), "not_read": len(heavy)}
+                      "regions": sum(len(p["regions"]) for p in pages), "not_read": len(heavy),
+                      "vlm_asked": vlm_asked, "kind_by_vlm": sum(1 for p in pages if p["kind_by"] == "vlm")}
+    if any((p.get("vlm") or {}).get("error") for p in pages):
+        reasons.append("vlm_unavailable")
     missing = sum(1 for p in pages if p.get("not_read") and p["page"] not in heavy)
     return finish("failed" if pages and missing == len(pages) else "partial" if missing else "ok")
 
