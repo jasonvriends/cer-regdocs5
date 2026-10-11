@@ -208,6 +208,7 @@ heading on their page.
 | `text_not_in_table_cell` | error | words inside a table, in none of its cells: usually a grid TableFormer got wrong |
 | `ocr_readers_disagree_on_page` | warning | our OCR and the page's own OCR layer agree on under 80% of the page: one is unreadable, which is not known |
 | `table_cells_overlap` | warning | cells wholly under other cells, so not in the table's grid: their text is kept after the table |
+| `table_grid_doubtful` | warning | a fifth or more of a table's words badly placed by its grid: the structure, not the text, is in doubt |
 | `table_text_unchecked` | info | a table inside an image, read by OCR: no text layer to check it against |
 | `table_was_line_numbers` | info | a table over a transcript's line numbers: dropped, its words kept as one text item per line |
 | `text_disagrees`, `cell_text_disagrees` | error / warning | docling's text for a box differs from MuPDF's for the same box |

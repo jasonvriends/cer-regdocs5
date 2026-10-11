@@ -12,7 +12,8 @@ it says which documents and pages to read first.
   concentrated one document holding a large share of an issue kind
   out of line  a document with many more errors and warnings per page than its page kinds have
                across the batch
-  export       a document whose Markdown lacks more than 2% of its evidence words
+  export       a document whose Markdown lacks more than 2% of its evidence words, or repeats
+               them (30% more words than the evidence)
   disputed     pages where the vision model and the layout model disagree on the kind
 """
 import argparse
@@ -181,6 +182,12 @@ def main(argv=None) -> int:
                  if r and r.get("summary", {}).get("export_word_recall") is not None
                  and r["summary"]["export_word_recall"] < 0.98)
     lines += [f"- `{d}`: {100 * rc:.1f}% of evidence words" for rc, d in low] or ["None."]
+    lines.append("")
+    lines += ["## Export: repeated text (Markdown words per evidence word above 1.3)", ""]
+    rep = sorted(((r["summary"].get("export_word_ratio"), d) for d, r in recs.items()
+                  if r and (r.get("summary") or {}).get("export_word_ratio") and r["summary"]["export_word_ratio"] > 1.3),
+                 reverse=True)
+    lines += [f"- `{d}`: {x:.2f}" for x, d in rep[:args.top * 2]] or ["None."]
     lines.append("")
 
     # ---- disputed

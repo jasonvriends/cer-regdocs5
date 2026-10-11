@@ -224,6 +224,29 @@ and contents pages 0 errors. It found four things the first 300 had not:
 - **Docling reads text MuPDF does not.** 3922740 p2's table holds text no MuPDF word matches;
   probably content outside the crop box. Not fixed: one page.
 
+### By document type, and triage (2026-10-11)
+
+400 documents, 20 of each of the 20 most common REGDOCS document types
+([survey/sample-2026-10-11-types.csv](survey/sample-2026-10-11-types.csv)). No failures and no
+issue kind the earlier samples lacked; every type keeps 99.86% or more of its words in the
+export. `survey/triage.py` pointed at each of the following, and the cause was then read on the
+pages:
+
+- **Table cells kept docling's reading.** TableFormer drops and garbles words in cells
+  (862407: "...BLENHEIM BLACK CREEK" for "...BLENHEIM LYING W OF BLACK CREEK"), while every other
+  grid takes the text layer's words. Cells now take the words in their boxes, as text items do,
+  and a poor grid is a `table_grid_doubtful` warning instead of cell errors. Errors on the 400:
+  578 to 147.
+- **Markdown repeated spanning cells.** A cell is written into every position it spans:
+  556364's tables came out at 2.9 words per evidence word. A spanning cell is now written once,
+  except in tables whose cells overlap (docling's OCR of scanned forms), where collapsing spans
+  lost words; documents over 1.3 words per evidence word: 21 to 7. Recall fell by 0.1-0.3% on
+  three documents, all still above 99%. The export now records `export_word_ratio`.
+- **The export check misread links and backslashes:** `[text](url)` left "A8K6T7](https..."
+  as one word, and a backslash was dropped on one side only (a drawing's `P:\19731...` path).
+  Two documents "under 98%" were both only this.
+- **A stray control character became a text item and a warning** (2415559's "\x85").
+
 ## Lessons, with evidence
 
 ### Memory and time

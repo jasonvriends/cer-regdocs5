@@ -29,6 +29,7 @@ Checks, each written to `issues.json` with the page and box:
   text_not_extracted      words under no extracted item (error)
   text_not_in_table_cell  words inside a table but in none of its cells (error)
   table_text_unchecked    a table in an image, read by OCR, with no text layer to check it (info)
+  table_grid_doubtful     a fifth or more of a table's words badly placed by its grid (warning)
   ocr_readers_disagree_on_page  our OCR and the page's OCR layer disagree throughout (warning)
   table_cells_overlap     cells wholly under other cells: their text kept after the table (warning)
   table_was_line_numbers  a table over a transcript's line numbers, dropped and its
@@ -137,6 +138,9 @@ SETTINGS = {
     "line_numbers": PAGE_SETTINGS["line_numbers"],          # pagelib.py: transcript line numbers
     "structure_budget": PAGE_SETTINGS["structure_budget"],  # pagelib.py: pages too heavy for docling
     "min_free_gpu_mb": PAGE_SETTINGS["min_free_gpu_mb"],
+    "markdown_spans_once": True,       # a spanning cell's text appears once in the Markdown, not per position
+    "cells_from_text_layer": True,     # TableFormer's cells take the text-layer words in their boxes
+    "grid_doubtful": {"min_words": 10, "share": 0.2},  # a grid placing this many words badly is a warning
     "read_as_lines": ["transcript", "contents"],  # page kinds (the pages stage) read from the text layer as
                                        # one text item per line, without docling: a transcript's numbered
                                        # lines and a contents page's entries are lines, not tables
@@ -613,9 +617,32 @@ def export_markdown(doc) -> str:
     from docling_core.transforms.serializer.common import create_ser_result
     from docling_core.types.doc.document import DOCUMENT_TOKENS_EXPORT_LABELS, ContentLayer
 
+    def once(item):
+        """The table with every spanning cell at its top-left position only. docling's Markdown
+        writes a cell into every grid position it spans: a note across 4 columns and 10 rows
+        appears 40 times (556364: 2.9 Markdown words for each word in its tables)."""
+        if not getattr(item, "data", None) or not any(
+                c.end_row_offset_idx - c.start_row_offset_idx > 1 or c.end_col_offset_idx - c.start_col_offset_idx > 1
+                for c in item.data.table_cells):
+            return item
+        # Only where no two cells cover one position: overlapping cells (docling's OCR of a
+        # scanned form, 2813525) lost words when collapsed, so such a table keeps the repeats.
+        covered = collections.Counter((i, j) for c in item.data.table_cells
+                                      for i in range(c.start_row_offset_idx, c.end_row_offset_idx)
+                                      for j in range(c.start_col_offset_idx, c.end_col_offset_idx))
+        if any(n > 1 for n in covered.values()):
+            return item
+        copy = item.model_copy(deep=True)
+        for c in copy.data.table_cells:
+            c.end_row_offset_idx = c.start_row_offset_idx + 1
+            c.end_col_offset_idx = c.start_col_offset_idx + 1
+        return copy
+
     def with_footnotes(base):
         class Serializer(base):
             def serialize(self, *, item, doc_serializer, doc, **kwargs):
+                if base is MarkdownTableSerializer and SETTINGS["markdown_spans_once"]:
+                    item = once(item)
                 res = super().serialize(item=item, doc_serializer=doc_serializer, doc=doc, **kwargs)
                 if kwargs.get("_nested_in_table") or not item.footnotes:
                     return res
@@ -639,8 +666,9 @@ def md_words(md: str) -> list[str]:
     """The words of a Markdown export: escapes, tags, entities and table rules removed."""
     import html
     md = html.unescape(re.sub(r"<!--.*?-->|</?[A-Za-z][^<>]*>", " ", md))
-    md = re.sub(r"\\(.)", r"\1", md)
-    md = re.sub(r"[*_`#|]+", " ", md)
+    md = re.sub(r"\]\([^)\s]*\)", " ", md)       # a link's target: "A8K6T7](https://...)" (4360659)
+    md = md.replace("\\", "")                      # escapes, and backslashes in text (md_plain drops them too)
+    md = re.sub(r"[*_`#|\[\]]+", " ", md)
     return md.split()
 
 
@@ -649,8 +677,8 @@ def md_plain(words: list[str]) -> list[str]:
     tag-like text taken out the same way, so a word is not missing for being formatted.
     "CIRSDRU_09_01", "Thiele*", "#VALUE!" and "<name@example.ca>" read as lost before (623885:
     9% of its words; four of the sample's five documents under 98% were only this)."""
-    t = re.sub(r"<!--.*?-->|</?[A-Za-z][^<>]*>", " ", " ".join(words))
-    return re.sub(r"[*_`#|]+", " ", t).split()
+    t = re.sub(r"<!--.*?-->|</?[A-Za-z][^<>]*>", " ", " ".join(words)).replace("\\", "")
+    return re.sub(r"[*_`#|\[\]]+", " ", t).split()
 
 
 def reading_order(w: dict):
@@ -1737,7 +1765,9 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
             issue(pno, None, "page_empty", "warning",
                   f"{len(words)} words in the text layer, no docling items; all kept from the text layer", "coverage 2")
         # Step 2: a word no docling item claims is not lost; it becomes a text item of its own.
-        for g in cluster(uncovered, SETTINGS["cluster_gap_pt"]):
+        # A "word" without a letter or digit (a stray control character, 2415559's "\x85") is
+        # not text a reader missed: it stays in the evidence, unclaimed, and is not an item.
+        for g in cluster([w for w in uncovered if tokens([w["text"]])], SETTINGS["cluster_gap_pt"]):
             _, gb, txt = add_text_item(pno, g, ph, "text layer: words claimed by no docling item")
             added_text += 1
             issue(pno, gb, "text_added_from_text_layer", "warning",
@@ -1885,6 +1915,13 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                                    "reader": "docling TableFormer on OCR of an image", "grade": "ocr",
                                    "rows": tb.data.num_rows, "cols": tb.data.num_cols, "cells": len(cells)})
                 continue
+            # TableFormer's cells carry docling's reading of their text, which drops and garbles
+            # words (862407: "...BLENHEIM BLACK CREEK" for "...BLENHEIM LYING W OF BLACK CREEK").
+            # As for text items, the text-layer words become the cells' text: each word in the
+            # smallest cell box holding it, in reading order. The other grids are built that
+            # way already. docling's differing reading is then recorded, not an error.
+            retext = SETTINGS["cells_from_text_layer"] and \
+                table_mode_at.get((pno, tuple(r(v, 0) for v in tbx)), ctx["table_modes"][0]) in ctx["table_modes"]
             for c in cells:
                 if c.bbox is None or not (c.text or "").strip():
                     continue
@@ -1895,9 +1932,28 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                 ag, d_only, m_only, numeric = compare(theirs, mine)
                 if ag < thr and max(len(squash(mine)), len(squash(theirs))) >= 1:
                     cell_dis += 1
-                    issue(pno, cbx, "cell_text_disagrees", "error" if numeric else "warning",
+                    issue(pno, cbx, "cell_text_disagrees", "info" if retext else "error" if numeric else "warning",
                           f"cell r{c.start_row_offset_idx}c{c.start_col_offset_idx}: docling {clip(c.text, 120)!r}, "
                           f"MuPDF {clip(' '.join(mine), 120)!r}", "agreement 2", ref=tb.self_ref)
+            cells_retexted = 0
+            if retext:
+                boxes = []
+                for k, c in enumerate(cells):
+                    if c.bbox is not None:
+                        cb = c.bbox if c.bbox.coord_origin == CoordOrigin.TOPLEFT else c.bbox.to_top_left_origin(page_height=ph)
+                        boxes.append(((cb.l, cb.t, cb.r, cb.b), k))
+                boxes.sort(key=lambda bk: (bk[0][2] - bk[0][0]) * (bk[0][3] - bk[0][1]))
+                g_cell = Grid.of_items(boxes, pad)
+                got = collections.defaultdict(list)
+                for w in sorted(w_table.words_in(tbx, pad), key=reading_order):
+                    k = g_cell.owner(w["cx"], w["cy"], pad)
+                    if k is not None:
+                        got[k].append(w)
+                for k, ws in got.items():
+                    new = " ".join(w["text"] for w in ws)
+                    if new != cells[k].text:
+                        cells[k].text = new
+                        cells_retexted += 1
             boxed = []
             for c in cells:
                 if c.bbox is not None:
@@ -1914,6 +1970,14 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                       f"{fit['rows_merged']} of the table's words are in cells holding several rows each "
                       f"(stacked values beside stacked lines at the same heights)", "tables 2", ref=tb.self_ref,
                       words=fit["rows_merged"])
+            if fit["bad"] >= SETTINGS["grid_doubtful"]["min_words"] and \
+                    fit["bad"] >= SETTINGS["grid_doubtful"]["share"] * max(score["words"], 1):
+                # With cells read from the text layer, a poor grid no longer shows as cell text that
+                # disagrees: it shows here (4585358 p39: TableFormer and Table Transformer both wrong)
+                issue(pno, tbx, "table_grid_doubtful", "warning",
+                      f"{fit['bad']} of {score['words']} word(s) badly placed by the grid (straddling cells, "
+                      f"merged or split): the table's structure, not its text, is in doubt", "tables 2",
+                      ref=tb.self_ref, words=fit["bad"])
             if score["lost"]:
                 issue(pno, tbx, "table_text_lost", "error",
                       f"{score['lost']} of {score['words']} word(s) inside a cell's box but in no cell's text: "
@@ -1925,7 +1989,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                                           "Table Transformer v1.1 + text-layer words" if m == "tatr" else
                                           f"docling TableFormer ({m}) + text-layer cells")(
                                    table_mode_at.get((pno, tuple(r(v, 0) for v in tbx)), ctx['table_modes'][0])),
-                               "grade": "inferred_grid",
+                               "grade": "inferred_grid", "cells_retexted": cells_retexted,
                                "rows": tb.data.num_rows, "cols": tb.data.num_cols, "cells": len(cells),
                                "cells_disagreeing": cell_dis, "word_score": score, "structure": fit})
 
@@ -2162,6 +2226,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
         "evidence_words": len(evidence_rows),
         "evidence_unclaimed": sum(1 for e in evidence_rows if e["how"] == "unclaimed"),
         "export_word_recall": r(export_recall, 4),
+        "export_word_ratio": r(sum(got.values()) / total, 3) if total else None,  # above 1: repeated text
     }
     words = rec["summary"]["words"]
     rec["summary"]["coverage"] = r(1 - rec["summary"]["words_uncovered"] / words, 4) if words else None
