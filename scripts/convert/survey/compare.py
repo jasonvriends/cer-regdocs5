@@ -33,7 +33,7 @@ def main(argv=None) -> int:
     for i in ids:
         f = out / i / "convert" / args.pages / f"{i}.pages.json.gz"
         if f.exists():
-            for p in read_json_gz(f)["pages"]:
+            for p in read_json_gz(f).get("pages") or []:
                 kind_of[(i, p["page"])] = p["kind"].split(":")[0]
     pages_of_kind = collections.Counter(kind_of.values())
 

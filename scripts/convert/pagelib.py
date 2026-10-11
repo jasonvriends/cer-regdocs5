@@ -195,7 +195,7 @@ def line_numbers(words: list[dict], page_width: float) -> list[dict]:
     on one line pitch: a table's numbered rows are as tall as their wrapped cells."""
     s = SETTINGS["line_numbers"]
     nums = sorted((w for w in words if w["box"][2] < s["margin_frac"] * page_width
-                   and w["text"].isdigit() and 1 <= int(w["text"]) <= s["max"]), key=lambda w: w["cy"])
+                   and w["text"].isdecimal() and 1 <= int(w["text"]) <= s["max"]), key=lambda w: w["cy"])
     if len(nums) < s["min_lines"]:
         return []
     vals = [int(w["text"]) for w in nums]

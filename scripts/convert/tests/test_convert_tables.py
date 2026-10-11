@@ -158,6 +158,12 @@ class LineNumbers(unittest.TestCase):
     def test_too_few_numbers(self):
         self.assertEqual(c.line_numbers(self.margin(range(1, 10)), 612), [])
 
+    def test_superscript_digits_are_not_numbers(self):
+        # 2680246: a footnote mark "¹" in the margin; "¹".isdigit() is True and int("¹") raises
+        nums = self.margin(range(1, 21))
+        nums.append(word("¹", 60, 30))
+        self.assertEqual(len(c.line_numbers(nums, 612)), 20)
+
     def test_numbers_out_of_order(self):
         self.assertEqual(c.line_numbers(self.margin([3, 17, 5, 22, 9, 1, 14, 30, 2, 8, 25, 11, 6, 19, 4, 28]), 612), [])
 

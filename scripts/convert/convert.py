@@ -1194,6 +1194,11 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                        "severity": severity, "evidence": evidence, "check": check, **extra})
 
     pdf = pymupdf.open(path)
+    # PyMuPDF's find_tables() changes the page it reads: on a rotated page with a crop box
+    # smaller than its media box, the page then reports the media box (3922740 p2: 612x792
+    # became 1224x792, and every box read from it afterwards was misplaced). The table
+    # finders read their own copy of the file.
+    pdf_tables = pymupdf.open(path)
     for pno, rt in routes.items():
         if rt not in ROUTES["converted_now"]:
             pr = pdf[pno - 1].rect
@@ -1351,7 +1356,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                 # fine as TableFormer's (a partly ruled table gives a few large cells) and
                 # fits the words better.
                 words = grids[p].words_in(box, pad)
-                lg = line_grid(pdf[p - 1], box, words, pad) if words else None
+                lg = line_grid(pdf_tables[p - 1], box, words, pad) if words else None
                 if lg:
                     tf_fit = table_structure_score(words, [b for b, _ in cells], pad)
                     lg_fit = table_structure_score(words, [c["box"] for c in lg["cells"]], pad)
@@ -1378,7 +1383,7 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                         entry.setdefault("table_choice_errors", []).append({"mode": "tatr", "message": repr(e)})
                     entry["tatr_seconds"] = r(entry.get("tatr_seconds", 0) + time.perf_counter() - ts, 3)
                     better = []
-                    for name, g, below in (("aligned", align_grid(pdf[p - 1], box, words), SETTINGS["align_keep_below"]),
+                    for name, g, below in (("aligned", align_grid(pdf_tables[p - 1], box, words), SETTINGS["align_keep_below"]),
                                            ("tatr", tg, SETTINGS["tatr_keep_below"])):
                         if not g:
                             continue

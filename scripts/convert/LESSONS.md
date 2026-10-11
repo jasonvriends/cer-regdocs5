@@ -205,6 +205,25 @@ The vision model's kind, taken on every scanned page, changed 177 pages; of 24 r
 about 8 were right (forms) and 13 wrong (scanned tables and drawings called text). It now
 decides only "form"; other disagreements are kept and marked.
 
+### A fresh sample (2026-10-11)
+
+100 more documents drawn at random, 4 a year, none from the first sample
+([survey/sample-2026-10-11.csv](survey/sample-2026-10-11.csv)), run as the corpus will be run.
+The first sample's fixes held: 99.92% of evidence words in the export, none under 98%; transcript
+and contents pages 0 errors. It found four things the first 300 had not:
+
+- **A superscript digit crashed the pages stage.** `"¹".isdigit()` is true and `int("¹")` raises
+  (2680246). Digits are now `isdecimal()`.
+- **find_tables() changes the page it reads.** On a rotated page with a crop box smaller than its
+  media box, PyMuPDF's page then reports the media box (3922740 p2: 612x792 became 1224x792), and
+  every box read from it afterwards was misplaced. The table finders read their own copy.
+- **A text layer of one-character words is not text.** Type3 fonts whose codes are not their
+  letters read "/ 0 1 2 3 4 0 5 6" (2680246, 187 warnings), and tier0 called them sound. A page of
+  50+ words of which 70% are one letter or digit (MuPDF's words, not tier0's joined spans) is now
+  suspect and goes to OCR: on both samples' 4,469 pages only that document's pages changed.
+- **Docling reads text MuPDF does not.** 3922740 p2's table holds text no MuPDF word matches;
+  probably content outside the crop box. Not fixed: one page.
+
 ## Lessons, with evidence
 
 ### Memory and time

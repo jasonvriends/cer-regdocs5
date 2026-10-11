@@ -74,7 +74,7 @@ TOOL_RULES_PATH = HERE / "tool_families.json"
 # Everything that changes what a record says. Part of the signature.
 SETTINGS = {
     "schema": 3,     # 2: fixed keys everywhere; 3: origin of pages and documents
-    "hints": "hints-2",
+    "hints": "hints-3",
     "line_min_len_pt": 8.0,      # a stroke shorter than this is a mark, not a rule
     "line_max_thick_pt": 2.0,    # a filled rectangle thinner than this is a rule
     "max_images_listed": 100,    # per page; the counts always cover all of them
@@ -437,6 +437,9 @@ def page_text(page) -> dict:
     text = " ".join(" ".join(pieces).split())
     words = text.split()
     real_words = sum(1 for w in words if sum(ch.isalpha() for ch in w) >= 3)
+    # MuPDF's own word split, not the text joined from spans: a font drawing each glyph on its
+    # own reads as single characters there (2680246), where the joined spans run together
+    alnum = [w[4] for w in page.get_text("words") if any(ch.isalnum() for ch in w[4])]
     n_vis = sum(classes["visible"].values())
     n_inv = sum(classes["invisible"].values())
     allc = classes["visible"] + classes["invisible"]
@@ -461,6 +464,8 @@ def page_text(page) -> dict:
         "letter_share": r(letters / (letters + digits), 4) if letters + digits else None,
         "words": len(words),
         "real_words": real_words,
+        "alnum_words": len(alnum),
+        "single_char_share": r(sum(1 for w in alnum if len(w) == 1) / len(alnum), 4) if alnum else None,
         "directions": fixed(directions, DIRECTIONS),
         "fonts": named_counts(font_chars, "font"),
         "median_font_size": median_size,
@@ -632,6 +637,11 @@ def page_hints(p: dict) -> dict:
     elif inv >= 0.5 * chars:
         layer = "hidden_ocr"
     elif bad > 0.05 or (ls is not None and ls < 0.3 and t.get("real_words", 0) < 5 and chars > 50):
+        layer = "suspect"
+    elif (t.get("alnum_words") or 0) >= 50 and (t.get("single_char_share") or 0) >= 0.7:
+        # Every word one character: a font whose codes are not its letters (2680246's Type3
+        # fonts read "/ 0 1 2 3 4 0 5 6"), or junk OCR (4088410 p9). On both samples' 3,593
+        # pages of 50+ words no other page passes 0.55; a table of digits reaches 0.54.
         layer = "suspect"
     else:
         layer = "sound"
