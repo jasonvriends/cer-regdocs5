@@ -285,6 +285,14 @@ Steps 1 and 2 above, and the OCR route of 3, are built, routed by page. From 202
 3. Measure on the 300, before and after, by kind; then the next kind by share.
 4. The corpus.
 
+After every batch, `survey/triage.py` lists where to look: documents a stage failed on, issue
+kinds no earlier run had, one document holding most of an issue kind, documents far above the
+batch's issues per page, documents whose Markdown lacks evidence words, and pages the vision
+model disputes, each with page images from the review PDF. It finds symptoms; a cause still
+needs someone to read the pages. On the fresh 100 it found, unaided, every problem found there
+by hand. Fresh random samples, not the one fixes were tuned on, are what show new problems:
+`survey/sample-*.csv` (by year; by document type and era).
+
 ## Open questions
 
 - A small gold set: pages whose true text is known without typing it. Digital
