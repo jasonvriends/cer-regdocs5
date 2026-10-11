@@ -29,6 +29,8 @@ Checks, each written to `issues.json` with the page and box:
   text_not_extracted      words under no extracted item (error)
   text_not_in_table_cell  words inside a table but in none of its cells (error)
   table_text_unchecked    a table in an image, read by OCR, with no text layer to check it (info)
+  ocr_readers_disagree_on_page  our OCR and the page's OCR layer disagree throughout (warning)
+  table_cells_overlap     cells wholly under other cells: their text kept after the table (warning)
   table_was_line_numbers  a table over a transcript's line numbers, dropped and its
                           words kept as one text item per line (info)
   table_text_lost         words inside a cell's box that no cell's text holds (error);
@@ -147,7 +149,8 @@ SETTINGS = {
             # and pdfium render them cleanly; layout and OCR then found nothing. OCR pages are read
             # through docling's pdfium backend.
             "full_page_mode": "full_page", "images_mode": "pdf_aware_layout_regions",
-            "hidden_vote_threshold": 0.8},
+            "hidden_vote_threshold": 0.8,
+            "page_vote_min": 0.8},      # below this page-wide agreement the vote is one page warning
     "heading_hierarchy": True,
     "chunk_pages": 1,                  # one page per docling call, as legacy ingest did: every status,
                                        # warning, error, confidence and timing belongs to one page, and
@@ -1794,6 +1797,12 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
             # independent OCR of the same scan. A suspect layer is not (it is why we OCR).
             vote = routes[pno] == "ocr_with_hidden_vote"
             g_hidden = Grid.of_words(layer_words) if vote else None
+            # A disagreement means something only where the two readers mostly agree. On a page
+            # where they disagree throughout, one of them is unreadable (4088410's embedded OCR
+            # reads "ui. /ff" for our "14403kPa"; 478429's handwriting defeats ours), and item
+            # errors there claim a precision nobody has: one warning for the page instead.
+            # Below 0.8 page agreement: 33 of the sample's 107 voted pages, 1,291 of its 1,399 errors.
+            disputes, agreed = [], []
             for it, bx, tx in text_boxes:
                 row = {"ref": it.self_ref, "label": str(it.label.value), "page": pno,
                        "bbox": [r(v, 1) for v in bx], "reader": "layout: docling; text: RapidOCR (full page)",
@@ -1804,17 +1813,29 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
                     # case is not what two OCRs are voting on
                     ag, d_only, m_only, numeric = compare([t.lower() for t in theirs], [t.lower() for t in hidden])
                     row["hidden_layer_agreement"] = r(ag, 3)
+                    agreed.append((ag, len(tx or "")))
                     if max(len(squash(hidden)), len(squash(theirs))) >= minc and ag < SETTINGS["ocr"]["hidden_vote_threshold"]:
-                        disputed += 1
-                        issue(pno, bx, "ocr_disagrees_with_hidden_layer", "error" if numeric else "warning",
-                              f"similarity {ag:.2f}; only our OCR: {clip(d_only, 200)!r}; only the page's OCR layer: "
-                              f"{clip(m_only, 200)!r}; ours: {clip(tx, 200)!r}", "ocr vote 1", ref=it.self_ref,
-                              numeric=numeric)
+                        disputes.append((bx, "error" if numeric else "warning",
+                                         f"similarity {ag:.2f}; only our OCR: {clip(d_only, 200)!r}; only the page's OCR "
+                                         f"layer: {clip(m_only, 200)!r}; ours: {clip(tx, 200)!r}", it.self_ref, numeric))
                 items_rows.append(row)
                 ocr_stats["items"] += 1
                 ocr_stats["voted"] += "hidden_layer_agreement" in row
                 if "hidden_layer_agreement" in row:
                     ocr_stats["agreement_sum"] += row["hidden_layer_agreement"]
+            chars = sum(c for _, c in agreed)
+            page_ag = sum(a * c for a, c in agreed) / chars if chars else None
+            if page_ag is not None and page_ag < SETTINGS["ocr"]["page_vote_min"]:
+                ocr_stats["pages_readers_conflict"] += 1
+                issue(pno, None, "ocr_readers_disagree_on_page", "warning",
+                      f"our OCR and the page's own OCR layer agree on {page_ag:.0%} of the page's text "
+                      f"({len(disputes)} item(s) differ): one of them is unreadable here; a third reader or a "
+                      f"person must decide", "ocr vote 1", agreement=r(page_ag, 3))
+            else:
+                for bx, sev, ev_text, ref, numeric in disputes:
+                    disputed += 1
+                    issue(pno, bx, "ocr_disagrees_with_hidden_layer", sev, ev_text, "ocr vote 1", ref=ref,
+                          numeric=numeric)
         for it, bx, tx in ([] if ocr_page else text_boxes):
             mine = text_in(w_text, bx, pad)
             n_words = len(w_text.words_in(bx, pad))
@@ -2033,6 +2054,36 @@ def process(path: Path, doc_id: str, meta: dict, ctx) -> dict:
             forms.append({"page": p["index"] + 1, **w})
         for an in a.get("annots") or []:
             annots.append({"page": p["index"] + 1, **an})
+
+    # A table whose cells overlap shows one cell per grid position in the export, the last;
+    # a cell every position of which a later cell takes is not exported at all. docling's OCR
+    # of a scanned form gives such tables (2813525: 2.7% of its words). The hidden cells'
+    # text is kept as text after the table.
+    hidden_cells = 0
+    for tb in list(doc.tables):
+        data = tb.data
+        owner = {}
+        for k, c in enumerate(data.table_cells):
+            for i in range(min(c.start_row_offset_idx, data.num_rows), min(c.end_row_offset_idx, data.num_rows)):
+                for j in range(min(c.start_col_offset_idx, data.num_cols), min(c.end_col_offset_idx, data.num_cols)):
+                    owner[(i, j)] = k
+        shown = set(owner.values())
+        lost = [c for k, c in enumerate(data.table_cells) if k not in shown and (c.text or "").strip()]
+        if not lost or not tb.prov:
+            continue
+        pno = tb.prov[0].page_no
+        ph = doc.pages[pno].size.height if pno in doc.pages else pdf[pno - 1].rect.height
+        prev = tb
+        for c in lost:
+            bb = c.bbox if c.bbox is not None else tb.prov[0].bbox
+            bl = bb if bb.coord_origin == CoordOrigin.BOTTOMLEFT else bb.to_bottom_left_origin(page_height=ph)
+            prev = doc.insert_text(sibling=prev, label=DocItemLabel.TEXT, text=c.text, after=True,
+                                   prov=ProvenanceItem(page_no=pno, bbox=bl, charspan=(0, len(c.text))))
+        hidden_cells += len(lost)
+        issue(pno, tl_box(tb.prov[0].bbox, ph), "table_cells_overlap", "warning",
+              f"{len(lost)} cell(s) wholly under other cells of the table, so not in its grid: their text is kept "
+              f"after the table: {clip(' | '.join(c.text for c in lost), 300)}", "tables 3", ref=tb.self_ref)
+    rec["table_cells_hidden"] = hidden_cells
 
     # ---- write
     s = time.perf_counter()

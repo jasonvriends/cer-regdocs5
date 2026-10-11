@@ -189,6 +189,17 @@ compare against: 4158647, 639 errors to 0) and the export check, which stripped 
 formatting from the export but not from the evidence (four of five documents "missing" words
 were `CIRSDRU_09_01`, `Thiele*`, `#VALUE!`). One loss is real: OCR'd tables with overlapping
 cells, where the Markdown grid shows one cell per position (2813525, 2.7% of its words).
+*Correction:* a later look found no hidden cells in 2813525 and its table exports whole; about
+160 of its evidence words still do not match the export and the cause is not yet known. Cells
+wholly under other cells are now kept beside the table anyway (`table_cells_overlap`).
+
+Two more causes of most of the remaining errors, both measured on the sample: a dense table's
+rows ran together in the text-alignment grid, because word boxes overlap the next line and no
+gap separates rows (4438220: 990 errors to 1, rows now from evenly spaced lines); and the OCR
+vote against a page's own OCR layer, where on 33 of 107 voted pages the two readers disagree
+throughout (one of them unreadable: an embedded layer reading "ui. /ff" for "14403kPa", or our
+OCR on handwriting). Those 33 pages held 1,291 of 1,399 vote errors; a page agreeing under 80%
+is now one warning, not an error per item (4088410: 673 errors to 70).
 
 The vision model's kind, taken on every scanned page, changed 177 pages; of 24 read by eye,
 about 8 were right (forms) and 13 wrong (scanned tables and drawings called text). It now
