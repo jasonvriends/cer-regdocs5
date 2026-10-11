@@ -5,7 +5,7 @@
 import sys
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import convert as c  # noqa: E402
@@ -181,6 +181,26 @@ class ExportWords(unittest.TestCase):
         words = ["CIRSDRU_09_01", "Thiele*", "#VALUE!", "<name@example.ca>"]
         md = "CIRSDRU\\_09\\_01 Thiele\\* \\#VALUE! &lt;name@example.ca&gt;"
         self.assertTrue(set(c.tokens(c.md_plain(words))) <= set(c.tokens(c.md_words(md))))
+
+
+class DenseRows(unittest.TestCase):
+    """align_grid: one-line rows whose word boxes overlap the next line's (4438220)."""
+
+    def test_overlapping_lines_on_one_pitch_are_rows(self):
+        words = []
+        for i in range(20):
+            y = 100 + 7.0 * i                    # 7 pt pitch, 8 pt tall boxes: no gap between lines
+            for j, x in enumerate((60, 200, 340)):
+                w = word(f"v{i}{j}", x, y)
+                w["block"], w["line"], w["seq"] = i, 0, 3 * i + j
+                words.append(w)
+        box = (50, 95, 450, 100 + 7.0 * 20 + 10)
+        page = MagicMock()
+        table = MagicMock()
+        table.cells = [(50, 95, 190, box[3]), (190, 95, 330, box[3]), (330, 95, 450, box[3])]
+        page.find_tables.return_value.tables = [table]
+        g = c.align_grid(page, box, words)
+        self.assertEqual(g["num_rows"], 20)
 
 
 if __name__ == "__main__":

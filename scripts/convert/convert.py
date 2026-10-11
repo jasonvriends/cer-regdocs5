@@ -124,6 +124,8 @@ SETTINGS = {
     "table_choice_below": 0.99,        # ...re-read only if a table places fewer of its words than this in
                                        # the first mode: 99% of the words gained, 44% of the table pages
                                        # re-read (the ten, run convert-42ebc408)
+    "align_line_rows": {"rows_below": 0.5, "on_pitch": 0.8},  # align_grid: rows from lines when gaps find
+                                       # under half as many rows as lines and most lines sit on one pitch
     "align_keep_below": 0.5,           # text-alignment grid kept only below half the badly placed words
     "tatr": {"threshold": 0.5,         # detection score below which a row, column or spanning cell is ignored
              "scale": 2.0,             # table crop rendered at 144 dpi, then resized to 1000 px on its long side
@@ -845,6 +847,17 @@ def align_grid(page, box, words: list[dict]):
             gaps.append(round((hi + lo) / 2, 1))
         hi = h if hi is None else max(hi, h)
     ys = sorted(set(ys) | {g for g in gaps if ys[0] < g < ys[-1]})
+    # A dense table's word boxes overlap the next line's, so there is no gap between its
+    # rows and they ran together (4438220: about 80 one-line rows read as 3). Where the
+    # lines sit on one pitch and gaps found far fewer rows than lines, each line is a row.
+    lines = sorted(ln["cy"] for ln in text_lines(words))
+    steps = [b - a for a, b in zip(lines, lines[1:])]
+    if len(ys) - 1 < SETTINGS["align_line_rows"]["rows_below"] * len(lines) and len(steps) >= 4:
+        pitch = sorted(steps)[len(steps) // 2]
+        if pitch > 0 and sum(1 for s in steps if abs(s - pitch) <= 0.15 * pitch) >= \
+                SETTINGS["align_line_rows"]["on_pitch"] * len(steps):
+            mids = {round((a + b) / 2, 1) for a, b in zip(lines, lines[1:])}
+            ys = sorted({ys[0], ys[-1]} | {m for m in mids if ys[0] < m < ys[-1]})
     nr, nc = len(ys) - 1, len(xs) - 1
     parent = {(i, j): (i, j) for i in range(nr) for j in range(nc)}
 
