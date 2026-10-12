@@ -1,6 +1,12 @@
 # convert: design
 
-Turn every REGDOCS filing into evidence: every word on every page, where it is, which reader
+**Purpose.** Learn how REGDOCS filings should be *captured* - produced, signed, scanned, redacted,
+filed - so that future filings arrive as faithful digital documents. The findings go in
+[FILING-GUIDANCE.md](FILING-GUIDANCE.md); the converter is the measuring instrument, and the
+evidence it needs is exactly what this design produces: for every page, whether the file holds
+the words the page shows, and what was lost when it does not.
+
+To do that it turns every REGDOCS filing into evidence: every word on every page, where it is, which reader
 read it, and what is still missing, with structure (headings, paragraphs, tables, pictures,
 forms) laid over the words, never instead of them.
 
