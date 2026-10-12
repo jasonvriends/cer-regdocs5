@@ -2,7 +2,7 @@
 
 **Purpose.** Learn how REGDOCS filings should be *captured* - produced, signed, scanned, redacted,
 filed - so that future filings arrive as faithful digital documents. The findings go in
-[FILING-GUIDANCE.md](FILING-GUIDANCE.md); the converter is the measuring instrument, and the
+[docs/filing-guidance.md](../../docs/filing-guidance.md); the converter is the measuring instrument, and the
 evidence it needs is exactly what this design produces: for every page, whether the file holds
 the words the page shows, and what was lost when it does not.
 
@@ -11,7 +11,7 @@ read it, and what is still missing, with structure (headings, paragraphs, tables
 forms) laid over the words, never instead of them.
 
 The *why* behind each decision is in the lessons, cited as **[C §n]** for
-[LESSONS-CORPUS.md](LESSONS-CORPUS.md) (the five earlier pipelines, cer-regdocs1-5) and
+[docs/lessons_learned.md](../../docs/lessons_learned.md) (the five earlier pipelines, cer-regdocs1-5) and
 **[L heading]** for [LESSONS.md](LESSONS.md) (this converter's own history).
 
 ## Goals, in order

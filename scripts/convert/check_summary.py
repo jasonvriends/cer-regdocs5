@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rates from a check.py survey, with 95% confidence intervals: the numbers FILING-GUIDANCE cites.
+"""Rates from a check.py survey, with 95% confidence intervals: the numbers docs/filing-guidance.md cites.
 
     ~/.venvs/regdocs-convert/bin/python scripts/convert/check_summary.py runs/v2/capture-fast/FILE.jsonl [--out FILE.md]
 

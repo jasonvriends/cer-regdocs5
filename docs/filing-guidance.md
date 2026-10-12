@@ -3,7 +3,7 @@
 The point of this work is not conversion for its own sake. It is to learn **how filings
 should be captured** - produced, signed, scanned, redacted, filed - so that what the Canada
 Energy Regulator receives is a faithful digital document, and nobody has to recover the text
-afterwards. The converter ([DESIGN.md](DESIGN.md)) is the measuring instrument: it reads every
+afterwards. The converter ([scripts/convert/DESIGN.md](../scripts/convert/DESIGN.md)) is the measuring instrument: it reads every
 page with the text layer *and* with OCR, so it can say, page by page, whether the file holds
 the words the page shows, and what was lost when it does not.
 
@@ -13,10 +13,10 @@ filer knowing. The correct text existed in the filer's own software and was lost
 **Evidence, and how strong it is.** Each item says where its numbers come from:
 
 - **[2026-09 corpus]** the earlier pipelines: 4,296 filings, 16,085 pages, each page compared
-  with an independent commercial extraction ([LESSONS-CORPUS.md](LESSONS-CORPUS.md)).
+  with an independent commercial extraction ([lessons_learned.md](lessons_learned.md)).
 - **[v2 samples]** this converter on 420 sample documents, 7,268 pages: random draws, 55 document
-  types, 59 PDF producers, 2002 and 2026 ([samples/](samples/)); the full tables are the capture
-  reports in [runs/v2/reports/](runs/v2/reports/), produced by [capture.py](capture.py).
+  types, 59 PDF producers, 2002 and 2026 ([scripts/convert/samples/](../scripts/convert/samples/)); the full tables are the capture
+  reports in [scripts/convert/runs/v2/reports/](../scripts/convert/runs/v2/reports/), produced by [capture.py](../scripts/convert/capture.py).
 - **Measured** means the defect and its rate were measured; **proposed** means it follows from
   what was found but its benefit was not measured.
 
@@ -100,7 +100,7 @@ scanned signature page, not a scan of the whole document.
 also reads at the same place (median by producer): iText 95%, OmniPage 92%, Adobe Acrobat 79%,
 Acrobat Paper Capture 67%, EPSON Scan 51%, Canon MFP 36%, Xerox MFP 33%. Where two independent
 vision models were asked to settle a disagreement, they sided with the scanner's layer on some
-lines and with ours on most (LESSONS, v2). A multifunction printer's "searchable PDF" can carry
+lines and with ours on most ([LESSONS.md](../scripts/convert/LESSONS.md), v2). A multifunction printer's "searchable PDF" can carry
 a layer that matches a third of the page.
 
 ### 3.2 Stub layers: a stamp makes a scan look digital
@@ -151,7 +151,7 @@ phrase.
   printed grid (2684908) ran its rows together on one reader and placed 97% of values on another:
   a detection limit printed as `<0.01` is exactly where a misplaced value changes a finding.
 - **Spatial data as GIS files** alongside maps and alignment sheets. [v2 samples] OCR reads about
-  two-thirds of a digital drawing's labels and reading at more angles barely helps (LESSONS, v2):
+  two-thirds of a digital drawing's labels and reading at more angles barely helps ([LESSONS.md](../scripts/convert/LESSONS.md), v2):
   labels on maps are the hardest text to recover from a picture.
 - **Machine-readable codes are fine, and useful.** [v2 samples] courier waybills carry the address
   and tracking number as Code 128 and PDF417; decoded exactly.

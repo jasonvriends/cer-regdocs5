@@ -1,13 +1,13 @@
 # convert
 
 **What this is for:** learning how filings should be captured so future filings are faithful
-digital documents - see [FILING-GUIDANCE.md](FILING-GUIDANCE.md), measured with
+digital documents - see [docs/filing-guidance.md](../../docs/filing-guidance.md), measured with
 [capture.py](capture.py) on every round's samples.
 
 It turns REGDOCS filings into evidence: every word on every page with its box and the reader that
 read it, structure (headings, paragraphs, tables, pictures, forms) laid over those words, and a
 per-page ledger of what is still missing. [DESIGN.md](DESIGN.md) is the approach and why;
-[LESSONS.md](LESSONS.md) and [LESSONS-CORPUS.md](LESSONS-CORPUS.md) are the evidence behind it.
+[LESSONS.md](LESSONS.md) and [docs/lessons_learned.md](../../docs/lessons_learned.md) are the evidence behind it.
 
 ```bash
 ./scripts/convert/convert.sh run 4738464 90495                 # by REGDOCS id (PDF in source/)
@@ -28,7 +28,7 @@ expected). Models live in `scripts/convert/models/`.
 | [assemble.py](assemble.py) | readings to a document: evidence words, merged regions, words to regions, grid choice, DoclingDocument, Markdown |
 | [check.py](check.py) | intake check: one PDF's capture problems page by page, or a survey of many (`convert.sh check`) |
 | [check_summary.py](check_summary.py) | a survey's rates with 95% intervals by producer, tool kind, year, document type |
-| [capture.py](capture.py) | how each page was captured (digital, scan, stub layer, text as curves, ...) by producer, year and document type: the evidence for FILING-GUIDANCE.md |
+| [capture.py](capture.py) | how each page was captured (digital, scan, stub layer, text as curves, ...) by producer, year and document type: the evidence for docs/filing-guidance.md |
 | [vote.py](vote.py) | vision models (Ollama) as voters: `bench` measures them against the text layer, `run` votes where two OCR readings differ |
 | [ocr_bench.py](ocr_bench.py) | which RapidOCR models read best, against sound text layers |
 | [tool_families.json](tool_families.json) | producer/creator strings to tool families (what made the PDF) |
