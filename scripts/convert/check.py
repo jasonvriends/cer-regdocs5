@@ -5,7 +5,7 @@
     ./scripts/convert/convert.sh check some.pdf --json           # the same as JSON
     ./scripts/convert/convert.sh check --random 5000 --pages 3 --out FILE.jsonl   # corpus survey
 
-The checks FILING-GUIDANCE.md section 8 lists, on the file alone: no layout or table models,
+The checks docs/filing-guidance.md section 8 lists, on the file alone: no layout or table models,
 only the text layer and one OCR reading of each page checked. Every page gets a capture class:
 
   digital          the text layer holds the words the page shows

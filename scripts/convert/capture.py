@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""How each filing was captured, and what that cost: evidence for FILING-GUIDANCE.md.
+"""How each filing was captured, and what that cost: evidence for docs/filing-guidance.md.
 
     ~/.venvs/regdocs-convert/bin/python scripts/convert/capture.py --sample FILE [...] [--out FILE]
 

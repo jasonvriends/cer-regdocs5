@@ -1,7 +1,7 @@
 # Lessons learned: convert
 
 What building convert has shown so far, with the evidence for each lesson. The five earlier
-pipelines' findings are in [LESSONS-CORPUS.md](LESSONS-CORPUS.md); this document picks up where
+pipelines' findings are in [docs/lessons_learned.md](../../docs/lessons_learned.md); this document picks up where
 they stop. The newest work is first; everything from "What we now know" down is the history of
 the docling-based converter that v1 replaced (its baseline, bench and legacy files are in git
 history, cer-regdocs5).
@@ -259,7 +259,7 @@ DoclingDocument and Markdown at 100% of its words. Per producer, two new pattern
 
 105 letters, letters of comment, affidavits and applications to participate, 7 a year; no
 converter failures. Mostly-scanned documents fell from 34% (2012-16) to 11% (2017-21, 2022-26);
-affidavits stayed scanned (6 of 6). Into FILING-GUIDANCE section 2: the recommendation is about
+affidavits stayed scanned (6 of 6). Into docs/filing-guidance.md section 2: the recommendation is about
 sworn documents now more than letters.
 
 ### Tools added for the guidance
