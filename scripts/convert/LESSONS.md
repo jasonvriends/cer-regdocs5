@@ -239,6 +239,22 @@ DoclingDocument and Markdown at 100% of its words. Per producer, two new pattern
 - Re-run of the whole sample with both: 0 failures, 100% everywhere; 103 pages now `stub`;
   397 pages from OCR, 677 from the text layer; 60 unclaimed words in the 100 documents.
 
+### Round 3: regression and the 2002-2014 sample (`samples/years-2002-2014-100.txt`)
+
+- **Regression over all 420 earlier sample documents** after the stub, numbered-paper,
+  reading-order, checkbox and grid changes: 7,268 pages, 0 failed pages, 2,486,728 evidence words
+  every one named once in the DoclingDocument, item text and Markdown at 100% in every document.
+- **The fresh 100, spread evenly over 2002-2014** (7-8 a year), 1,104 pages: no failures, 100%
+  everywhere, no new converter fault. Tables (784) placed 96.1% of words (TableFormer accurate).
+- **Text drawn as strokes, in drawings.** Three drawings and technical sheets printed through a
+  PostScript driver or pdfFactory have no text layer and 5,000-205,000 paths a page; OCR read
+  270-413 words from each. CAD stroke fonts (AutoCAD SHX) exported as geometry. Into the guidance.
+- **No record filed before 2012 had facets** (a sample of 3,000 records: 2002-2011 none, 2012 on
+  all). Not REGDOCS: enriching one 2010 day (168 requests) returned full facets for its letter
+  (Letter of Comment, s.52 Facilities, Gas). The pre-2012 records came from the earlier pipeline's
+  seed and were never enriched, so document-type findings for the scan-heavy years were blind.
+  Fix: run `scout.sh enrich` over 2002-2011 (~107,000 documents).
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
