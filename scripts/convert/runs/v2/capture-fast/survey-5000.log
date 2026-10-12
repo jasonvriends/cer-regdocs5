@@ -1,2 +1,86 @@
 /home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
   return F.conv2d(
+100/5000 files, 131s
+200/5000 files, 253s
+300/5000 files, 380s
+400/5000 files, 520s
+500/5000 files, 683s
+600/5000 files, 832s
+MuPDF error: format error: No default Layer config
+
+700/5000 files, 969s
+800/5000 files, 1136s
+MuPDF error: format error: No default Layer config
+
+900/5000 files, 1286s
+1000/5000 files, 1415s
+1100/5000 files, 1550s
+MuPDF error: format error: No default Layer config
+
+MuPDF error: format error: No default Layer config
+
+1200/5000 files, 1702s
+1300/5000 files, 1831s
+MuPDF error: format error: No default Layer config
+
+MuPDF error: format error: No default Layer config
+
+1400/5000 files, 1982s
+1500/5000 files, 2114s
+1600/5000 files, 2245s
+1700/5000 files, 2381s
+1800/5000 files, 2523s
+1900/5000 files, 2641s
+2000/5000 files, 2778s
+2100/5000 files, 2906s
+2200/5000 files, 3026s
+2300/5000 files, 3188s
+2400/5000 files, 3313s
+2500/5000 files, 3449s
+2600/5000 files, 3581s
+2700/5000 files, 3724s
+2800/5000 files, 3864s
+MuPDF error: format error: No default Layer config
+
+MuPDF error: format error: No default Layer config
+
+MuPDF error: format error: No default Layer config
+
+2900/5000 files, 3996s
+3000/5000 files, 4144s
+MuPDF error: format error: No default Layer config
+
+3100/5000 files, 4283s
+3200/5000 files, 4416s
+MuPDF error: format error: No default Layer config
+
+3300/5000 files, 4544s
+MuPDF error: format error: No default Layer config
+
+3400/5000 files, 4689s
+MuPDF error: format error: No default Layer config
+
+3500/5000 files, 4813s
+3600/5000 files, 4957s
+3700/5000 files, 5107s
+MuPDF error: format error: No default Layer config
+
+3800/5000 files, 5249s
+3900/5000 files, 5393s
+MuPDF error: format error: No default Layer config
+
+4000/5000 files, 5516s
+4100/5000 files, 5664s
+4200/5000 files, 5809s
+4300/5000 files, 5937s
+4400/5000 files, 6079s
+MuPDF error: format error: No default Layer config
+
+4500/5000 files, 6208s
+4600/5000 files, 6337s
+MuPDF error: format error: No default Layer config
+
+4700/5000 files, 6499s
+4800/5000 files, 6665s
+4900/5000 files, 6805s
+5000/5000 files, 6942s

@@ -269,6 +269,21 @@ sworn documents now more than letters.
   survey into rates with 95% intervals by producer, tool kind, year and document type.
 - `capture.py` reads facets live from the scout record, so enrichment after conversion counts.
 
+### The 5,000-document capture survey (2026-10-12)
+
+`check.py --random 5000 --pages 3`: 4,999 documents read (one would not open), 11,086 pages,
+116 minutes on the GPU - text layer and OCR only. 23.2% of documents (95% CI 22.1-24.4%) are mostly
+not digital; by year 28-47% before 2012 and 6-10% in 2021-2026; affidavits 79%, letters 23%,
+scanner-made PDFs 98%, office and reporting tools 0-1%. Results in docs/filing-guidance.md.
+
+**Samples of a few hundred documents set wrong rates for anything a handful of documents
+dominate** [C Key findings 8]. The full converter's samples had given: Canon / Xerox / EPSON scanner
+OCR layers 36% / 33% / 51% agreement (the survey: medians 92% / 84% / 76%, with a quarter of pages
+under 60% for Xerox and EPSON); stub layers on 92% of RICOH pages (survey 17%); text drawn as
+graphics on 35% of Microsoft Print to PDF pages (survey 2%). Each was one or two filings. The
+samples are for finding *kinds* of problem and checking the converter; rates for the guidance come
+from the survey, with intervals, and every sample rate quoted there now says so or is corrected.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
