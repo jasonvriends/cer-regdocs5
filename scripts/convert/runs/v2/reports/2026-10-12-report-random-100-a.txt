@@ -1,0 +1,360 @@
+100 documents, 1190 pages
+
+## Pages by producer, size, orientation
+producer                     size      orientation  pages  pdf_vs_ocr  layout_agree  unclaimed  ocr_extra  s_per_page
+Adobe PDF Library            letter    portrait     183    0.916       0.938         4          582        1.2       
+Microsoft Word               letter    portrait     174    0.946       0.947         0          1321       1.1       
+Microsoft Word               letter    landscape    174    1.0         0.94          4          6          1.6       
+Acrobat Distiller            letter    portrait     134    0.977       0.919         0          563        1.4       
+Adobe Acrobat                letter    portrait     100    0.97        0.947         0          2604       1.0       
+Adobe PDF Library            tabloid   landscape    31     0.893       0.943         0          413        1.9       
+Adobe Acrobat Paper Capture  letter    portrait     31     0.79        0.965         0          3          1.1       
+Xerox MFP                    letter    portrait     26     0.031       0.959         0          0          0.7       
+Scanner (generic)            letter    portrait     25     None        0.972         1          0          0.8       
+Microsoft Print to PDF       letter    landscape    24     0.957       0.757         0          1          2.4       
+Adobe Acrobat Paper Capture  letter    landscape    22     0.748       0.952         0          0          2.9       
+Microsoft Word               tabloid   portrait     20     0.848       1.0           0          20         2.3       
+Adobe Acrobat                tabloid   landscape    17     0.908       0.876         0          2          2.6       
+Adobe Acrobat                letter    landscape    16     0.927       0.959         0          3          1.8       
+Adobe PDF Library            letter    landscape    15     0.998       0.941         0          183        1.3       
+?                            legal     landscape    14     None        0.816         8          0          1.2       
+Acrobat Distiller            tabloid   landscape    14     0.804       0.955         0          679        2.7       
+Acrobat Distiller            letter    landscape    13     0.93        0.971         0          0          2.3       
+Crystal Reports              letter    portrait     13     0.976       0.95          0          57         0.7       
+Microsoft Word               a4        portrait     13     0.995       0.894         0          32         1.0       
+?                            oversize  landscape    12     None        1.0           0          0          3.2       
+iText                        letter    portrait     11     0.993       0.93          0          55         1.0       
+Foxit PDF printer            letter    portrait     10     0.963       0.954         0          501        0.8       
+SSRS                         letter    portrait     9      0.96        0.972         0          30         0.7       
+Microsoft Word               other     portrait     9      0.972       1.0           0          1513       1.5       
+OmniPage                     letter    portrait     9      0.0         0.957         0          0          0.7       
+Bentley MicroStation         tabloid   landscape    9      0.861       0.972         0          482        3.5       
+PDFlib                       letter    portrait     8      None        0.967         0          0          1.0       
+Microsoft Excel              letter    portrait     6      0.978       0.868         0          0          1.0       
+Scanner (generic)            letter    landscape    6      None        0.992         4          0          1.2       
+Bluebeam                     legal     portrait     5      0.926       0.894         0          1          0.9       
+?                            letter    portrait     5      0.984       0.875         0          0          0.8       
+Lexmark MFP                  tabloid   portrait     4      1.0         1.0           0          1109       1.5       
+Adobe PDF Library            tabloid   portrait     4      0.841       0.97          6          29         1.4       
+Scanner (generic)            oversize  portrait     3      None        1.0           0          0          4.1       
+PDFsharp                     letter    portrait     2      0.911       0.968         1          0          0.6       
+Esri ArcGIS                  tabloid   landscape    2      0.492       1.0           9          13         2.0       
+Ghostscript                  letter    landscape    2      0.985       0.988         0          0          0.8       
+Microsoft Excel              letter    landscape    2      1.0         0.881         0          0          1.3       
+Adobe Acrobat                a4        landscape    1      0.483       1.0           0          172        1.2       
+Adobe PDF Library            other     landscape    1      0.958       0.934         0          0          1.1       
+Microsoft Print to PDF       letter    portrait     1      1.0         0.748         0          0          0.3       
+Ghostscript                  letter    portrait     1      None        1.0           0          0          0.4       
+Microsoft Visio              oversize  portrait     1      0.908       0.947         0          95         4.2       
+Esri ArcGIS                  letter    landscape    1      0.357       1.0           0          1          1.7       
+PDFlib                       oversize  landscape    1      None        0.745         0          0          3.5       
+macOS Quartz                 letter    portrait     1      0.957       1.0           0          0          0.9       
+Esri ArcGIS                  letter    portrait     1      1.0         1.0           0          0          0.3       
+Neevia docuPrinter           letter    portrait     1      0.925       0.926         0          4          0.6       
+Adobe Acrobat                other     landscape    1      1.0         1.0           0          181        1.2       
+EPSON Scan                   letter    portrait     1      None        0.938         0          0          0.7       
+Adobe Acrobat                a4        portrait     1      1.0         0.967         0          218        1.2       
+
+## Text layer verdict and where the text came from
+year  text_layer  source  pages  pdf_vs_ocr
+2002  hidden_ocr  ocr     9      0.0       
+2002  suspect     ocr     1      0.988     
+2002  none        ocr     1      None      
+2006  none        ocr     3      None      
+2006  sound       pdf     1      0.925     
+2007  none        ocr     20     None      
+2007  sound       pdf     2      0.952     
+2009  sound       pdf     40     0.928     
+2010  sound       pdf     22     0.931     
+2011  sound       pdf     37     0.981     
+2011  none        ocr     31     None      
+2012  none        ocr     19     None      
+2012  sound       pdf     17     0.982     
+2012  hidden_ocr  ocr     1      None      
+2013  hidden_ocr  ocr     31     0.023     
+2013  none        ocr     4      None      
+2013  sound       pdf     3      0.904     
+2014  sound       pdf     9      0.928     
+2014  none        ocr     4      None      
+2015  sound       pdf     61     0.973     
+2015  none        ocr     6      None      
+2016  sound       pdf     7      0.909     
+2016  hidden_ocr  ocr     1      None      
+2017  none        ocr     195    1.0       
+2017  sound       pdf     79     0.977     
+2018  sound       pdf     19     0.976     
+2018  none        ocr     1      None      
+2019  sound       pdf     150    0.925     
+2020  sound       pdf     13     0.936     
+2021  sound       pdf     155    0.887     
+2021  hidden_ocr  ocr     34     0.827     
+2022  sound       pdf     87     0.955     
+2023  sound       pdf     27     0.978     
+2024  sound       pdf     15     0.947     
+2024  none        ocr     1      None      
+2025  sound       pdf     62     0.966     
+2025  hidden_ocr  ocr     4      None      
+2026  sound       pdf     18     0.915     
+
+## By REGDOCS document type
+doc_type                                              docs  pages  layout_agree  disputed_regions  unclaimed
+Other                                                 13    335    0.919         420               6        
+Compliance after a Board Order                        5     221    0.936         240               2        
+(no facet)                                            23    168    0.942         218               13       
+Written Evidence                                      3     151    0.97          89                0        
+Supplemental Information                              5     98     0.964         70                0        
+Information Request Response                          6     59     0.879         63                0        
+Application                                           9     57     0.957         119               6        
+Letter                                                17    30     0.946         63                0        
+Letter of Comment                                     4     27     0.969         32                0        
+Application to Participate                            2     16     0.952         28                0        
+Order                                                 7     13     0.965         11                0        
+Surveillance report                                   1     6      0.868         12                0        
+Map                                                   2     5      1.0           0                 9        
+Receipt                                               1     2      0.968         2                 1        
+Notification of Operation and Maintenance Activities  1     1      0.944         0                 0        
+Affidavit                                             1     1      0.908         10                0        
+
+## Which table reader places the most words, by page feature (ties count for each)
+producer                     size     orientation  doc_type                        n_tables  fast_best  accurate_best  lines_best  text_best  best_score
+Microsoft Word               letter   landscape    Other                           114       64         107            0           0          0.954     
+Microsoft Word               letter   portrait     Written Evidence                75        47         71             48          5          0.995     
+Acrobat Distiller            letter   portrait     Other                           59        42         41             12          2          0.998     
+Adobe PDF Library            letter   portrait     Compliance after a Board Order  36        24         29             13          1          0.988     
+Acrobat Distiller            letter   portrait     (none)                          21        10         13             12          1          0.999     
+Adobe Acrobat Paper Capture  letter   landscape    Application                     20        17         16             1           0          0.983     
+Adobe Acrobat Paper Capture  letter   portrait     Application                     20        17         20             1           0          0.993     
+Adobe Acrobat                letter   portrait     Supplemental Information        18        11         16             7           1          0.993     
+Adobe PDF Library            letter   landscape    Compliance after a Board Order  17        11         16             5           1          0.984     
+Adobe Acrobat                letter   landscape    Supplemental Information        15        1          13             6           0          0.996     
+Adobe Acrobat                tabloid  landscape    Compliance after a Board Order  14        3          8              5           0          0.939     
+Adobe PDF Library            tabloid  landscape    Compliance after a Board Order  11        2          9              3           0          0.987     
+Adobe PDF Library            tabloid  landscape    Written Evidence                9         1          6              9           0          1.0       
+Acrobat Distiller            letter   landscape    Other                           7         4          6              0           0          0.996     
+Adobe PDF Library            letter   portrait     Information Request Response    7         2          6              2           0          0.994     
+Crystal Reports              letter   portrait     Application                     7         7          7              0           0          1.0       
+Microsoft Excel              letter   portrait     Surveillance report             6         6          6              1           0          1.0       
+Bentley MicroStation         tabloid  landscape    Information Request Response    5         4          4              0           0          1.0       
+iText                        letter   portrait     Other                           4         3          4              0           0          1.0       
+None                         legal    landscape    (none)                          4         1          4              0           0          0.946     
+Adobe Acrobat                letter   portrait     Compliance after a Board Order  3         1          2              3           0          1.0       
+SSRS                         letter   portrait     Letter of Comment               3         3          3              0           0          1.0       
+Microsoft Word               letter   portrait     Other                           3         3          3              2           0          1.0       
+None                         letter   portrait     (none)                          2         1          2              0           0          1.0       
+Microsoft Word               a4       portrait     Written Evidence                2         1          2              0           0          1.0       
+
+## Table readers: words placed, and how often each was chosen
+reader                n_tables  mean_score  placed  straddle  orphan  chosen  errors  s   
+tableformer_fast      498       0.935       76196   2249      2397    244     0       0.21
+tableformer_accurate  498       0.972       81152   1474      1332    147     0       0.4 
+mupdf_lines           498       0.388       43336   499       40169   107     0       0.08
+mupdf_text            498       0.447       46414   17111     18398   0       0       0.11
+
+## Merged regions by label: models agreeing
+label                regions  models_found_it  vote_share  disputed
+text                 11023    3.33             0.962       405     
+page_header          3222     3.38             0.946       196     
+list_item            2101     3.69             0.952       117     
+section_header       2090     3.64             0.927       159     
+page_footer          1727     3.57             0.963       76      
+picture              1726     3.32             0.958       91      
+key_value_region     1128     3.0              0.874       168     
+table                501      3.62             0.928       49      
+footnote             351      3.69             0.945       25      
+form                 300      3.09             0.88        33      
+caption              282      3.72             0.848       46      
+checkbox_unselected  116      3.16             0.954       5       
+checkbox_selected    32       3.5              0.925       3       
+document_index       23       3.61             0.894       4       
+formula              12       3.75             0.898       0       
+title                5        3.8              0.826       0       
+
+## Layout models agreeing, by box type and page feature
+label             producer                size     orientation  source  regions  models_found_it  vote_share
+page_footer       Microsoft Print to PDF  letter   landscape    pdf     23       4.0              0.572     
+list_item         None                    legal    landscape    ocr     19       2.58             0.62      
+key_value_region  Adobe PDF Library       tabloid  landscape    pdf     12       2.83             0.623     
+section_header    Adobe Acrobat           tabloid  landscape    pdf     11       3.73             0.662     
+text              Adobe Acrobat           letter   landscape    pdf     14       3.93             0.697     
+section_header    None                    legal    landscape    ocr     32       3.34             0.718     
+page_footer       None                    legal    landscape    ocr     11       3.09             0.719     
+footnote          Microsoft Word          letter   landscape    ocr     11       3.73             0.746     
+key_value_region  Adobe PDF Library       letter   landscape    pdf     11       3.27             0.752     
+caption           Microsoft Word          letter   landscape    ocr     33       3.76             0.754     
+list_item         Bluebeam                legal    portrait     pdf     20       3.85             0.779     
+section_header    None                    letter   portrait     pdf     22       4.0              0.802     
+form              Xerox MFP               letter   portrait     ocr     27       3.15             0.815     
+caption           Adobe PDF Library       letter   landscape    pdf     13       4.0              0.816     
+key_value_region  iText                   letter   portrait     pdf     13       3.08             0.818     
+key_value_region  Adobe PDF Library       letter   portrait     pdf     124      3.17             0.821     
+key_value_region  Crystal Reports         letter   portrait     pdf     41       3.39             0.822     
+text              Adobe Acrobat           tabloid  landscape    pdf     14       3.14             0.828     
+footnote          Adobe Acrobat           tabloid  landscape    pdf     13       3.69             0.83      
+key_value_region  Scanner (generic)       letter   portrait     ocr     18       2.94             0.831     
+section_header    Microsoft Word          a4       portrait     pdf     34       3.74             0.834     
+caption           Microsoft Word          letter   portrait     pdf     63       3.83             0.84      
+section_header    Bluebeam                legal    portrait     pdf     54       3.74             0.841     
+page_header       None                    legal    landscape    ocr     10       3.2              0.842     
+section_header    Microsoft Excel         letter   portrait     pdf     28       3.39             0.842     
+
+## Detections per layout model
+model         detections  mean_conf
+egret-large   31414       0.588    
+egret-xlarge  29430       0.607    
+heron         31607       0.594    
+heron-101     28660       0.603    
+
+## Pictures by class
+    627  logo
+    278  signature
+    221  engineering_drawing
+    174  icon
+     91  geographical_map
+     90  table
+     88  photograph
+     41  pie_chart
+     33  line_chart
+     21  other
+     14  stamp
+     12  full_page_image
+      9  bar_chart
+      7  flow_chart
+      6  page_thumbnail
+      4  screenshot_from_computer
+      3  screenshot_from_manual
+      2  topographical_map
+      2  calendar
+      1  music
+      1  bar_code
+      1  qr_code
+
+## Todo (pages)
+    583  layout_disputed
+    536  picture_text_by_ocr
+    356  ocr_page
+    335  text_in_images
+    228  drawing
+     73  ocr_vote
+     31  table_grid_doubtful
+     17  oversize
+     11  pdf_ocr_disagree
+      2  form_fields
+      1  barcodes
+
+## Issues
+    583  layout_models_disagree (info)
+    335  ink_not_in_text_layer (info)
+     80  text_layer_hidden_ocr (warning)
+     73  ocr_readings_disagree (warning)
+     31  table_grid_doubtful (warning)
+     28  lines_from_scan_ocr_layer (info)
+     22  words_outside_regions (info)
+     10  pdf_ocr_disagree (info)
+      9  blank_page (info)
+      4  text_layer_none (warning)
+      1  text_layer_suspect (warning)
+      1  no_text_found (info)
+      1  pdf_ocr_disagree (warning)
+      1  barcodes_decoded (info)
+
+## Export: share of evidence words in the Markdown, words per evidence word
+  154133     100.00%  1.00
+  235830     100.00%  1.00
+  249221     100.00%  1.00
+  411367     100.00%  1.00
+  440959     100.00%  1.00
+  454775     100.00%  1.00
+  459903     100.00%  1.00
+  464892     100.00%  1.00
+  490481     100.00%  1.00
+  545490     100.00%  1.00
+  555153     100.00%  1.00
+  558047     100.00%  1.00
+  575446     100.00%  1.00
+  628523     100.00%  1.00
+  634987     100.00%  1.00
+  724670     100.00%  1.01
+  747202     100.00%  1.00
+  759178     100.00%  1.00
+  761157     100.00%  1.00
+  774658     100.00%  1.00
+  774943     100.00%  1.00
+  777308     100.00%  1.00
+  801324     100.00%  1.00
+  831328     100.00%  1.00
+  834804     100.00%  1.00
+  835125     100.00%  1.00
+  847022     100.00%  1.00
+  851597     100.00%  1.00
+  894583     100.00%  1.00
+  895667     100.00%  1.00
+  919596     100.00%  1.00
+  938349     100.00%  1.00
+  945438     100.00%  1.02
+  984753     100.00%  1.00
+  1044322    100.00%  1.00
+  2393328    100.00%  1.00
+  2396007    100.00%  1.00
+  2398275    100.00%  1.00
+  2451800    100.00%  1.00
+  2480847    100.00%  1.00
+  2482214    100.00%  1.00
+  2522918    100.00%  1.00
+  2564753    100.00%  1.00
+  2684908    100.00%  1.00
+  2785444    100.00%  1.00
+  2809132    100.00%  1.00
+  2810590    100.00%  1.00
+  2957503    100.00%  1.00
+  3004277    100.00%  1.00
+  3066155    100.00%  1.00
+  3210153    100.00%  1.00
+  3225708    100.00%  1.00
+  3284072    100.00%  1.00
+  3338141    100.00%  1.00
+  3422749    100.00%  1.00
+  3463345    100.00%  1.00
+  3559563    100.00%  1.00
+  3691960    100.00%  1.00
+  3705807    100.00%  1.00
+  3767841    100.00%  1.10
+  3768464    100.00%  1.00
+  3777260    100.00%  1.00
+  3806203    100.00%  1.00
+  3872675    100.00%  1.00
+  3898889    100.00%  1.00
+  3899840    100.00%  1.00
+  3905827    100.00%  1.00
+  3912616    100.00%  1.00
+  3913342    100.00%  1.00
+  3956820    100.00%  1.00
+  3956884    100.00%  1.00
+  4034412    100.00%  1.00
+  4041560    100.00%  1.00
+  4160320    100.00%  1.00
+  4166493    100.00%  1.00
+  4205653    100.00%  1.00
+  4253282    100.00%  1.00
+  4276685    100.00%  1.00
+  4295926    100.00%  1.00
+  4328131    100.00%  1.00
+  4387907    100.00%  1.00
+  4402225    100.00%  1.00
+  4427679    100.00%  1.00
+  4439603    100.00%  1.00
+  4461717    100.00%  1.00
+  4465288    100.00%  1.03
+  4479926    100.00%  1.00
+  4498336    100.00%  1.00
+  4507555    100.00%  1.00
+  4509955    100.00%  1.00
+  4539772    100.00%  1.00
+  4567914    100.00%  1.00
+  4571834    100.00%  1.00
+  4572454    100.00%  1.00
+  4581753    100.00%  1.00
+  4590860    100.00%  1.00
+  4605313    100.00%  1.00
+  4657051    100.00%  1.00
+  4665635    100.00%  1.00
+  4665705    100.00%  1.00

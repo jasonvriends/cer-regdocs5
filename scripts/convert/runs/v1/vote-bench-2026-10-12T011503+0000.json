@@ -1,0 +1,20 @@
+{
+ "at": "2026-10-12T01:15:03+00:00",
+ "samples": [
+  "scripts/convert/samples/random-100-a.txt"
+ ],
+ "results": {
+  "glm-ocr:latest": {
+   "model": "glm-ocr:latest",
+   "digest": "6effedd0dc8aec66ad86c94b8099395376e212f22c87a9d7147c422f7e447be4",
+   "lines": 20,
+   "words_right": 1.0,
+   "numbers_right": 1.0,
+   "made_up_per_100_read": 85.15,
+   "blanks_with_text": "0/3",
+   "loops": 11,
+   "seconds_per_crop": 0.47,
+   "misreads": []
+  }
+ }
+}

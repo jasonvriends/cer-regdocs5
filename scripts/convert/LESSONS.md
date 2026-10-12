@@ -1,9 +1,251 @@
 # Lessons learned: convert
 
-What building convert has shown so far, with the evidence for each lesson. The docling
-pipeline's own history is in [../legacy/docs/lessons_learned.md](../legacy/docs/lessons_learned.md);
-this document picks up where it stops. The test set is [BASELINE.md](BASELINE.md), the tool
-comparison [../bench/RESULTS.md](../bench/RESULTS.md).
+What building convert has shown so far, with the evidence for each lesson. The five earlier
+pipelines' findings are in [LESSONS-CORPUS.md](LESSONS-CORPUS.md); this document picks up where
+they stop. The newest work is first; everything from "What we now know" down is the history of
+the docling-based converter that v1 replaced (its baseline, bench and legacy files are in git
+history, cer-regdocs5).
+
+## v1: the evidence-ledger converter (2026-10-11)
+
+Rebuilt as [DESIGN.md](DESIGN.md) describes: words from the text layer and from OCR on every page,
+four layout models (heron, heron-101, egret-large, egret-xlarge) merged by vote, four table
+readers per table, the figure classifier on every picture, a DoclingDocument built with
+docling-core whose items name their evidence words. Docling's converter is no longer used.
+
+**Test sets:** `samples/early-10.txt` (2002), `samples/recent-10.txt` (Oct 2026), and
+`samples/random-100-a.txt`, drawn at random from the 267,365 PDFs not in any earlier sample.
+
+| | 20 first | + random 100 (120 docs) |
+|---|---:|---:|
+| pages | 820 | 2,010 |
+| documents failed / pages failed | 0 / 0 | 0 / 0 |
+| evidence words | 285,850 | 666,475 |
+| evidence words named by exactly one DoclingDocument item | 100% | 100% |
+| item text holding the words it names | 100% | 100% |
+| evidence words in the Markdown | 100% | 100% |
+| time, RTX 4090, everything run on every page | 0.8 s/page | 1.1 s/page |
+
+### What the readings show
+
+- **Text layer vs OCR.** On pages whose layer is sound, OCR finds 85-99% of the layer's words at
+  the same place (by producer: Acrobat Distiller 0.976, Word 0.942-0.987, Adobe PDF Library
+  0.82-0.98). The layer stays the evidence; OCR is the check. 384 of 2,010 pages (19%) had their
+  text from OCR: no layer, a suspect layer, or a scanner's hidden OCR layer.
+- **Scans with a digital stamp.** 3225708 pp. 27-35 hold ~25 digital words (a stamp) over a
+  scanned page; the layer holds only the stamp, and OCR recovers the other ~600 words as "ink
+  not in the text layer". 521 pages had such words. Without OCR on every page these pages read
+  as nearly empty with a sound layer: silent loss of exactly the kind [C Key findings 1] warns of.
+- **Two OCR readings of one scan.** Our OCR and a scanner's own hidden layer agree on 65-83% of
+  words on 2013 Paper Capture scans; ours read "Office natlonal da l'ánergle". Neither is known
+  better: 67 pages are tagged `ocr_vote` for a voter pass (olmOCR-2 / GLM-OCR), not decided here.
+- **Layout models agree least on** code (52-73%), key-value regions (82-87%), captions (85%),
+  tables (80-93%); most on page footers, text and pictures (95-100%). 849 pages hold a region
+  the models split on (`layout_disputed`).
+- **Tables (632).** Words placed, on average: TableFormer accurate 96.7%, fast 93.7%, MuPDF
+  text alignment 49%, MuPDF ruling lines 31% (but best on ruled tables: chosen 117 times, mostly
+  Word and Adobe PDF Library tables; the 2002 Distiller tables are not ruled at all).
+- **Pictures (2,000+):** logos 676, signatures 283, engineering drawings 234, icons, maps 97,
+  photographs, charts. 601 pages have picture text only OCR read (`picture_text_by_ocr`).
+
+### Problems found, and fixed
+
+- **Transcripts read as tables.** Margin numbers made TableFormer see two-column tables
+  (90560: 72 tables). Two numbering styles exist: line numbers 1-30 on the left restarting each
+  page (GH-3-97, MH-2-95) and paragraph numbers on the right counting on across pages
+  (EH-1-2000: 162, 163 ...), and a wrapped paragraph breaks the one-pitch test. The REGDOCS
+  title ("Hearing Transcript") marks the document; a numbered page of it is read as one item per
+  number, the number with its text. 90560: 72 tables to 4; 90517: 65 to 8 and 346 s to 101 s.
+- **The canonical output was not the one checked.** The 100% check ran on the Markdown. Run on
+  the DoclingDocument JSON loaded back, it found 757 words "missing" on 90476: text under
+  pictures, which docling's `iterate_items` skips unless `traverse_pictures=True` - the same
+  trap that cost the old pipeline's Markdown 91% of a filing [L docling's behaviour]. The check
+  now reads the JSON as a consumer would, and the README says how to iterate it.
+- **A table item named words its text did not hold:** words inside the table's box but in no
+  cell. They are now a text item after the table (3225708: 97.8% to 100%).
+- **Overlapping cells repeated a word** (90517: 1.12 Markdown words per evidence word): each
+  word now goes to one cell, the smallest holding it.
+- **RapidOCR returns odd shapes on blank pages and some others** (a float for the word list, or
+  inside it). Unguarded, it failed the page; on 459903 it hid that the page is a photograph with
+  no text. OCR failure is now an issue on the page, never the page's failure.
+- **A grid cut into slivers scores perfectly on words.** 3768464 p28, a 2-column Word table with
+  shaded bands: ruling lines gave 9 x 10 with 8 empty columns, TableFormer accurate 5 x 2, both
+  placing 100% of the words. Rows and columns no word falls in are now counted, and among grids
+  within 1% of the best word score the one with the least empty structure wins. Neither grid
+  was right (about 9 x 2 with spanning headers): merging the two readings is open.
+- **Contents pages** are read as one entry per line (dot leaders, or a `document_index` region),
+  every grid still recorded.
+
+### A second random 100 (`samples/random-100-b.txt`)
+
+2,029 pages, much more scanned: 876 pages from OCR (a 572-page 2018 fax campaign, 2002 French
+hearing volumes with Paper Capture OCR layers). No failures; every document's DoclingDocument and
+Markdown hold 100% of its evidence words; no new code fault. Tables (769): TableFormer accurate
+98.8% of words placed, fast 98.0%. What it showed:
+
+- **"Scanned, no text" is right on all 11 pages tagged so**: photographs scanned sideways
+  (797813), a blank scan, an oversize sheet with nothing printed. The tag stays: a picture
+  reader may still want them.
+- **On maps OCR misses what the layer holds, and that is not a bad layer.** Trans Mountain map
+  sheets (3283303): the layer holds 621 labels; OCR finds 32% of them. Not text size (the boxes
+  are 7-12 pt): labels set at angles along roads and rivers, over aerial imagery. The layer stays
+  the evidence; `pdf_ocr_disagree` is now information on a page a map or drawing mostly covers,
+  a warning elsewhere. (Agreement is also measured on words of OCR-readable size, ≥5 pt at 200 dpi.)
+- **OCR on clean French scans is good with small, typical errors** (".hommes", "jeunes·qui",
+  "rra d dn es"): the scan's own OCR layer (84% agreement on 155587) is the natural second
+  reading. Both are kept; the voter pass decides word by word.
+
+### Vision models as voters, measured against the text layer (2026-10-12)
+
+`vote.py bench`: 150 line crops from sound-layer pages of the two random samples (the layer is
+the answer, exactly; half the lines hold numbers) and 6 blank strips. Ollama, temperature 0.
+
+| model | words right | numbers right | text on blanks | s/crop | verdict |
+|---|---:|---:|---:|---:|---|
+| qwen3-vl 8B instruct | 95.7% | 95.3% | 0/6 | 0.70 | voter |
+| GLM-OCR | 92.9% | 91.9% | 0/6 | **0.10** | voter |
+| olmOCR-2 7B (q8) | 90.7% | 91.3% | **6/6** | 0.66 | not a voter |
+| DeepSeek-OCR 3B | 78.0% | 71.3% | **6/6** | 0.52 | not a voter |
+| Granite 3.2 Vision 2B | 56.7% | 44.8% | 0/6 | 0.40 | not a voter |
+
+- **A model carries on after the answer.** Asked for one line, GLM-OCR gave the line right and
+  then repeated it, or added Markdown fences, `<table>` markup or `---` rules, until the token
+  limit ("100% 100% 100% ..." for "O'Chiese First Nation"). Read only the first line of the
+  answer; give each model the prompt it was trained on (GLM-OCR `Text Recognition:`, DeepSeek-OCR
+  `Free OCR.`); treat a looping answer as an abstention, never a reading. With that, GLM-OCR went
+  from 11 loops in 23 crops and text on every blank to none of either.
+- **Strip only known tags** from a model's HTML (`<table>`, `<td>` ...): `<0.01` must survive.
+- **Two models write text on blank crops** (olmOCR-2, DeepSeek-OCR), as the earlier pipelines
+  found on blank pages [C §5.6]. They are left out.
+- **Baidu Unlimited-OCR could not be tested under Ollama**: both community uploads
+  (`richardyoung/unlimited-ocr`, `frob/unlimited-ocr`) answer with filler ("输出正确", "Text to the
+  source image.") where DeepSeek-OCR, its parent, reads the same crop. Testing it needs Baidu's
+  weights through transformers or vLLM.
+- The figures understate every model alike: a table row whose cells align makes one "line"
+  whose crop takes in neighbouring text, and letter-spaced text ("A n n u a l") counts its
+  letters as words. The ranking is what the bench is for.
+
+### OCR models, votes, barcodes, blanks: v2 (2026-10-12)
+
+**Our OCR was the weak reader on some scans, and the voters showed it.** On lines where our OCR
+and a scan's own OCR layer differed, both voters agreed with each other on 81.5% of 2,173 lines,
+and on 372 of them both chose the scan's layer: 154133 p7, ours "RES E E J T T E S E TE T E S ULE",
+the layer and both voters "RESIDENTS ARE AT A GREATER RISK DUE TO THE INADEQUACY OF THE SCHEDULE".
+The line is clean bold capitals; RapidOCR's small models misread it in full-page context, as the
+earlier pipelines found [C §5.6]. `ocr_bench.py`, 60 sound pages (the layer as the answer):
+
+| RapidOCR models | words at their place | extra per 100 | s/page |
+|---|---:|---:|---:|
+| **PP-OCRv6 medium** | **92.5%** | **3.2** | 0.71 |
+| PP-OCRv6 small (v1) | 89.9% | 4.3 | 0.60 |
+| PP-OCRv5 mobile | 88.1% | 3.9 | 0.71 |
+| PP-OCRv5 server | 77.0% | 8.3 | 4.05 |
+| PP-OCRv4 mobile | 75.3% | 10.1 | 0.59 |
+
+v2 uses v6 medium (weights copied into `models/`, hashed in the run identity); 154133 now reads
+the line right. A line both voters give to the scan's layer takes that layer's words as its
+evidence, ours kept as a reading (`lines_from_scan_ocr_layer`). Votes are applied by the line's
+place, not by word ids, which shift when a page gains words, and only when cast on the same OCR
+model's words and version.
+
+- **A vote file lost its own provenance.** Votes were written beside older ones, and pyarrow's
+  `Table.from_pylist` takes its columns from the first row: an older row without `ocr_model`
+  dropped that field from every new vote, so 2,084 of 2,606 votes per voter read as stale and
+  only 47 lines were applied. The table is now built from every row's keys, and stale votes are
+  dropped when writing. A provenance field that can vanish silently needs its own check.
+- **Barcodes are now read** (zxing-cpp on every picture region): the classifier found 35 barcodes
+  in the facets sample and nothing decoded them. Courier waybills (619625) carry the address and
+  tracking number as Code 128 and the shipment as PDF417: 19 values, each an evidence word
+  (reader `barcode`, its box, the raw value kept beside a printable one).
+- **Blank backs of duplex scans** were 53 "no text found" warnings in one 102-page filing
+  (2784935, every second page). A page with no words and under 0.2% of it dark is `blank_page`
+  (info), off the todo list.
+
+**v2 over every sample** (320 documents: facets-100, random-100-a, random-100-b, early-10,
+recent-10): 6,194 pages, 0 failed, 0 error issues. 2,167,243 evidence words, every one named by
+exactly one DoclingDocument item; item text and Markdown hold 100% of them in every document.
+4,710 pages from the text layer, 1,484 from OCR; 352 lines from a scan's own OCR layer by
+both-voter decision; 76 blank pages; barcodes on 10 pages. Left on the todo list: 2,457 pages with a
+region the layout models split on, 1,773 with picture text only OCR read, 504 drawings, 152
+`ocr_vote` pages, 53 doubtful table grids. Run time 2 h 14 min, ~1.3 s a page with every reader
+on every page.
+
+**The facets sample** (`samples/facets-100.txt`): 100 documents across 55 REGDOCS document types,
+two each, rarest first - geospatial data, plans/profiles/books of reference, exhibit lists,
+certificates, permits, hearing orders, rulings, transcripts, maps. 2,155 pages, no failures, every
+document's DoclingDocument and Markdown holding 100% of its words; tables (1,344) placed 98.7% of
+their words with TableFormer accurate. Its new problems were the two above (blank backs, barcodes).
+
+### Drawings, reading order, checkboxes, stacked cells (2026-10-12)
+
+- **OCR at more rotations does not pay on drawings.** `picture_bench.py`, 60 digital drawings
+  and maps (the layer's labels the answer): OCR of the crop at 0° found 67.3% of the labels;
+  0°+90°+270° 70.7% and all four 71.4%, but with 40-58 more junk words per 100 found and three
+  times the time; 300 dpi found fewer (65.5%). The earlier pipeline's +10.8 points came from six
+  pages [C §5.5]; on sixty it is +3.4. Not adopted: the missing third of a drawing's labels needs
+  another reader, not another angle.
+- **Reading order, measured** (`order_bench.py`): the share of item pairs our order puts the other
+  way from the text layer's own order, on born-digital pages. Single-column pages agree (median
+  0); two-column pages do not (median 0.18, a third of them over 0.2). Disagreement is a symptom,
+  not a verdict - on a Scotiabank report page (552663 p33) the layer stored the footer and chart
+  data first and ours was right. Two faults of ours were real: a large region whose lines its
+  smaller neighbours took was placed by its own top, ahead of text it no longer held (835125's
+  address block), and words no region claimed were appended at the page's end. Items are now
+  placed by the box of their words, items within 4 pt of the same top are one line, columns are
+  decided per page, and every item on the page is ordered together. Random-100-a: mean
+  disagreement fell for every producer (Adobe PDF Library 0.074 to 0.066, Word 0.083 to 0.076,
+  Distiller 0.137 to 0.125); two-column median 0.182 to 0.167. On all three hundreds (3,011
+  born-digital pages) with the grid and checkbox fixes too: two-column median 0.127 to 0.100,
+  two-column pages over 0.2 from 232 to 208, single-column from 127 to 116; Adobe PDF Library
+  0.052 to 0.035, Word 0.042 to 0.032, Distiller 0.084 to 0.070. Still open on two-column pages,
+  and on files with no producer at all (mean 0.26 over 168 pages).
+- **Regression run, all 320 samples after these changes:** 0 failures; 2,167,243 evidence words,
+  every one named once in the DoclingDocument, item text and Markdown at 100% for every
+  document; 510 checkboxes (123 ticked, 497 with a label); 33 tables where the ruling-line grid
+  stacked values and lost to a finer one.
+- **Checkbox states were lost**: a checkbox region holds no words of its own, and regions without
+  words were dropped. Kept now with the state the layout models give (☒ / ☐) and its label - the
+  words inside its box (the models' box usually takes in the label) or just right of it. On a
+  2011 Application to Participate (2414747) the text layer's own Wingdings glyphs ("~" ";" ticked,
+  "{" not) agree with the models' states.
+- **Values stacked in one cell** are rows run together, and a coarse grid places every word that
+  way: 2684908's ALS lab report, ruling lines 5 x 6 at 100% of words placed, TableFormer accurate
+  43 x 7 at 97.2%. A cell of three or more lines, two-thirds of them values (a number, date or
+  amount - not an equipment tag), no longer counts as placing its words (`fit`); the coarse grid
+  falls to 42% and the 43 x 7 grid is chosen. Wrapped prose in a cell is not penalised.
+- Table cell boxes are clamped to the page (a grid line drawn to x = -107).
+
+### The producers sample (`samples/producers-100.txt`, 2026-10-12)
+
+100 fresh documents drawn across 59 PDF producers, rarest first (Visio, PowerPoint, Google Docs,
+ABBYY, Kofax, Workiva, Acrobat Sign, Sharp / RICOH / Konica / HP / Canon / EQScan scanners,
+MicroStation, Bluebeam, LibreOffice, oversize sheets). 1,074 pages, no failures, every document's
+DoclingDocument and Markdown at 100% of its words. Per producer, two new patterns:
+
+- **Stub text layers were called sound.** Scanners and markup tools leave ~20 digital words on a
+  scanned page (a "received" stamp, a Bluebeam markup); the layer's own characters are healthy, so
+  the page counted as a text-layer page and OCR's 500-1,600 words a page came in as "extra ink"
+  (4244189, Bluebeam: 34,454 such words). Nothing was lost - extra ink is evidence - but the page
+  was misclassified, kept out of scan statistics and of voting. A page that is mostly image, whose
+  layer holds under 100 words while OCR finds over 4 times as many, is now `stub`: OCR is its
+  source and the stub's words stay as evidence where OCR does not cover them. 4244189: 58 of 61
+  pages now OCR, extra ink 34,454 to 49. The earlier pipelines named this case [C §5.2].
+- **Numbered paper.** Written arguments and evidence printed with line numbers 1-27 down the margin
+  (2905206, Nitro): the numbers fell outside the layout regions, or inside a heading's, and came out
+  as 410 stray one-number paragraphs. A page's margin run of numbers is now one furniture item
+  (`line_numbers`), kept and citable, the paragraphs clean. Only the longest unbroken 1, 2, 3 ...
+  run: footnote markers below restart at 1 and stay with their footnotes. 2905206: 410 to 4
+  unclaimed words.
+- Re-run of the whole sample with both: 0 failures, 100% everywhere; 103 pages now `stub`;
+  397 pages from OCR, 677 from the text layer; 60 unclaimed words in the 100 documents.
+
+### Open
+
+- Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
+- Text inside scanned drawings and maps; checkboxes (detected as regions, state not yet used).
+- Reading order on multi-column and rotated pages is a simple column rule; not yet measured.
+- Table grids that neither reader gets right; Table Transformer as a fifth reader.
+- Baidu Unlimited-OCR through transformers/vLLM, since Ollama uploads do not work.
 
 ## What we now know
 
