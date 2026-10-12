@@ -46,6 +46,13 @@ copied, and only OCR recovers it (528 words a page). 35% of Microsoft Print to P
 samples, 85% of the Exhibit List pages. Cause: a printer-driver setting ("print text as
 graphics", "convert fonts to outlines") or an application drawing text as shapes.
 
+**Measured, and the same failure in drawings.** In the 2002-2014 sample, three drawings and
+technical sheets printed to PDF through a PostScript driver or pdfFactory (335411, 524567, 534342)
+hold no text at all: their labels are strokes, 5,000 to 205,000 paths a page, readable only by
+OCR. This is how CAD exports behave when their stroke fonts (AutoCAD SHX) are drawn as geometry.
+Export drawings with text kept as text (TrueType fonts, or the CAD tool's "searchable text" export
+option) - and file the GIS or CAD data with them (6).
+
 **Check.** No characters in the text layer on a page with visible text and many paths.
 
 ### 1.3 Text must decode to the characters it shows
