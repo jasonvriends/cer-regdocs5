@@ -75,6 +75,14 @@ plans and certificates in the samples: all digital. A signed letter is printed, 
 scanned - and the text the filer typed is replaced by a picture of it. One letter-writing campaign
 (3700525) filed 572 scanned fax pages.
 
+**The trend [v2 samples, `samples/signed-2012-2026.txt`]:** 105 signed documents, 7 a year
+2012-2026 (letters, letters of comment, affidavits, applications to participate). Mostly scanned:
+**2012-2016: 12 of 35 (34%, 95% CI 20-51%); 2017-2021: 4 of 35 (11%, 5-26%); 2022-2026: 4 of 35
+(11%, 5-26%).** Print-sign-scan is fading for letters (11 of 72 scanned; 20 more are digital
+letters carrying an image, usually a pasted signature, which keeps the text). **Affidavits are
+not: 6 of 6 scanned here, 5 of 5 in the other samples** - sworn documents are where the paper
+habit remains, and where a digital signing or commissioning process would change most.
+
 Documents signed through an e-signature service (Adobe Acrobat Sign, 2 documents, 11 pages) were
 100% digital - a small sample, but the mechanism is plain: nothing is printed.
 

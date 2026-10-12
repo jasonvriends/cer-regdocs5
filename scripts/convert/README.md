@@ -26,6 +26,8 @@ expected). Models live in `scripts/convert/models/`.
 | [convert.py](convert.py) | the pipeline per page and document, the ledger, the worker, `run` / `status` / `report` |
 | [readers.py](readers.py) | the readers: MuPDF words and page facts, RapidOCR, four layout models, TableFormer, MuPDF tables, the figure classifier |
 | [assemble.py](assemble.py) | readings to a document: evidence words, merged regions, words to regions, grid choice, DoclingDocument, Markdown |
+| [check.py](check.py) | intake check: one PDF's capture problems page by page, or a survey of many (`convert.sh check`) |
+| [check_summary.py](check_summary.py) | a survey's rates with 95% intervals by producer, tool kind, year, document type |
 | [capture.py](capture.py) | how each page was captured (digital, scan, stub layer, text as curves, ...) by producer, year and document type: the evidence for FILING-GUIDANCE.md |
 | [vote.py](vote.py) | vision models (Ollama) as voters: `bench` measures them against the text layer, `run` votes where two OCR readings differ |
 | [ocr_bench.py](ocr_bench.py) | which RapidOCR models read best, against sound text layers |

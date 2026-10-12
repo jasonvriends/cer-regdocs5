@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: ./scripts/convert/convert.sh <run|status|report|vote> [ids ...] [--sample FILE]
+# Usage: ./scripts/convert/convert.sh <run|status|report|vote|check> [ids ...] [--sample FILE]
 # Sets up the environment (torch, models' code; ~7 GB) in ~/.venvs/regdocs-convert on first
 # use, and again when requirements.txt changes: on WSL a Linux-side venv loads far faster than
 # one on /mnt. VENV=... puts it elsewhere.
@@ -13,6 +13,10 @@ if [[ ! -x "$venv/bin/python" || "$here/requirements.txt" -nt "$venv/.installed"
     "$venv/bin/python" -m pip install -q --upgrade pip
     "$venv/bin/python" -m pip install -q -r "$here/requirements.txt"
     touch "$venv/.installed"
+fi
+if [[ "${1:-}" == check ]]; then
+    shift
+    exec "$venv/bin/python" "$here/check.py" "$@"
 fi
 if [[ "${1:-}" == vote ]]; then
     shift

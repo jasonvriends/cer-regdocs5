@@ -73,7 +73,8 @@ def catalog_facts(pdf_path: Path) -> dict:
 
 
 def main() -> int:
-    from convert import SOURCE, out_dir
+    import gzip
+    from convert import OUT, SOURCE, out_dir
     ap = argparse.ArgumentParser()
     ap.add_argument("--sample", action="append", required=True)
     ap.add_argument("--out", help="also write the report to this file")
@@ -93,9 +94,14 @@ def main() -> int:
         L = json.loads(led.read_text())
         c = L["context"]
         tool = c["pdf"].get("producer") or c["pdf"].get("creator") or {}
+        # facets read live from the scout record: enrichment after conversion (2002-2011 had none
+        # at conversion time) shows here without converting again
+        cer = OUT / d / f"{d}.cer.meta.json.gz"
+        facets = (json.loads(gzip.decompress(cer.read_bytes())).get("facets") or {}) if cer.exists() \
+            else c["regdocs"]["facets"]
         keys = {"producer": tool.get("family") or "(none recorded)", "kind": tool.get("kind") or "(none recorded)",
                 "year": (c["regdocs"].get("date") or "????")[:4],
-                "doc_type": ",".join(c["regdocs"]["facets"].get("Document Type") or []) or "(no facet)"}
+                "doc_type": ",".join(facets.get("Document Type") or []) or "(no facet)"}
         cat = catalog_facts(SOURCE / f"{d}.pdf")
         dom = collections.Counter(page_class(p) for p in L["pages"]).most_common(1)
         for g in ("kind", "doc_type", "year"):

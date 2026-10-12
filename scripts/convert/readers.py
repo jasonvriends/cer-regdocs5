@@ -298,6 +298,27 @@ def tool_family(raw) -> dict | None:
 # --------------------------------------------------------------------------
 # the models
 
+def ocr_engine(device: str = "cuda"):
+    """RapidOCR with PP-OCRv6 medium, from models/ (hashed in the run identity)."""
+    from rapidocr import RapidOCR
+    from rapidocr.utils.typings import EngineType
+    t = EngineType.TORCH
+    return RapidOCR(params={
+        "Det.model_path": str(RAPIDOCR / "PP-OCRv6_det_medium.pth"),
+        "Cls.model_path": str(RAPIDOCR / "ch_ptocr_mobile_v2.0_cls_mobile.pth"),
+        "Rec.model_path": str(RAPIDOCR / "PP-OCRv6_rec_medium.pth"),
+        "Rec.rec_keys_path": str(RAPIDOCR / "ppocrv6_dict.txt"),
+        "Det.engine_type": t, "Cls.engine_type": t, "Rec.engine_type": t,
+        "EngineConfig.torch.use_cuda": device == "cuda", "Global.log_level": "error"})
+
+
+class OcrOnly:
+    """Just the OCR reader, for checks that need no layout or table models (check.py)."""
+
+    def __init__(self, device: str = "cuda"):
+        self.ocr_engine = ocr_engine(device)
+
+
 class Models:
     """Every model, loaded once per worker, on the GPU."""
 
@@ -323,16 +344,7 @@ class Models:
             cfg["model"]["save_dir"] = str(TABLEFORMER / mode)
             self.tableformer[mode] = TFPredictor(cfg, device, 4)
 
-        from rapidocr import RapidOCR
-        from rapidocr.utils.typings import EngineType
-        t = EngineType.TORCH
-        self.ocr_engine = RapidOCR(params={
-            "Det.model_path": str(RAPIDOCR / "PP-OCRv6_det_medium.pth"),
-            "Cls.model_path": str(RAPIDOCR / "ch_ptocr_mobile_v2.0_cls_mobile.pth"),
-            "Rec.model_path": str(RAPIDOCR / "PP-OCRv6_rec_medium.pth"),
-            "Rec.rec_keys_path": str(RAPIDOCR / "ppocrv6_dict.txt"),
-            "Det.engine_type": t, "Cls.engine_type": t, "Rec.engine_type": t,
-            "EngineConfig.torch.use_cuda": device == "cuda", "Global.log_level": "error"})
+        self.ocr_engine = ocr_engine(device)
 
     # ---- layout: every model on the same render
     def layout_all(self, page) -> dict[str, list[dict]]:
@@ -425,6 +437,9 @@ class Models:
                           "box": (b["l"] / scale, b["t"] / scale, b["r"] / scale, b["b"] / scale),
                           "header": bool(el.get("column_header"))})
         return cells
+
+
+OcrOnly.ocr = Models.ocr      # the same OCR method, without loading the other models
 
 
 def barcodes(page, box, dpi: int = 300) -> list[dict]:
