@@ -255,6 +255,20 @@ DoclingDocument and Markdown at 100% of its words. Per producer, two new pattern
   seed and were never enriched, so document-type findings for the scan-heavy years were blind.
   Fix: run `scout.sh enrich` over 2002-2011 (~107,000 documents).
 
+### Signed documents, 2012-2026 (`samples/signed-2012-2026.txt`)
+
+105 letters, letters of comment, affidavits and applications to participate, 7 a year; no
+converter failures. Mostly-scanned documents fell from 34% (2012-16) to 11% (2017-21, 2022-26);
+affidavits stayed scanned (6 of 6). Into FILING-GUIDANCE section 2: the recommendation is about
+sworn documents now more than letters.
+
+### Tools added for the guidance
+
+- `check.py`: the intake check on one PDF, or a survey of many (`--random N --pages 3 --out`),
+  text layer plus one OCR reading a page, no layout or table models; `check_summary.py` turns a
+  survey into rates with 95% intervals by producer, tool kind, year and document type.
+- `capture.py` reads facets live from the scout record, so enrichment after conversion counts.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
