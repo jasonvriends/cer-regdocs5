@@ -1,0 +1,376 @@
+100 documents, 2155 pages
+
+## Pages by producer, size, orientation
+producer                size      orientation  pages  pdf_vs_ocr  layout_agree  unclaimed  ocr_extra  s_per_page
+Foxit PDF printer       letter    portrait     583    0.956       0.987         12         773        0.9       
+Microsoft Word          letter    portrait     262    0.981       0.948         1          1095       0.8       
+Adobe PDF Library       letter    portrait     262    0.957       0.944         0          1104       0.9       
+Adobe PDF Library       tabloid   landscape    216    0.992       0.9           0          549        4.3       
+Acrobat Distiller       letter    portrait     160    0.971       0.953         6          7512       1.0       
+?                       letter    landscape    102    None        0.891         16         0          0.7       
+Foxit PDF printer       letter    landscape    97     0.967       0.998         0          2          1.2       
+Adobe Acrobat           letter    portrait     73     0.979       0.931         5          11727      2.4       
+PrimoPDF                letter    portrait     59     0.934       0.979         0          338        1.8       
+Adobe PDF Library       letter    landscape    44     0.985       0.954         0          69         1.9       
+Xerox MFP               letter    portrait     32     0.884       0.966         3          170        1.0       
+Microsoft Print to PDF  letter    landscape    26     0.945       0.969         1          0          3.5       
+Acrobat Distiller       tabloid   landscape    26     0.925       0.989         0          603        1.9       
+Adobe PDF Library       legal     landscape    24     0.842       0.842         0          0          0.6       
+PDF-XChange             letter    portrait     21     0.924       0.924         0          7          0.8       
+Bluebeam                letter    portrait     21     0.977       0.942         0          38         1.2       
+macOS Quartz            letter    portrait     20     0.985       0.991         0          3          0.8       
+?                       letter    portrait     18     0.988       0.96          0          29         1.5       
+Adobe Acrobat           letter    landscape    13     1.0         0.956         2          3366       3.2       
+Aspose                  letter    portrait     13     0.935       0.977         0          0          0.6       
+Ghostscript             a4        portrait     11     0.986       0.979         0          11         0.7       
+Konica Minolta MFP      letter    portrait     9      None        0.927         0          0          0.6       
+Microsoft Print to PDF  letter    portrait     9      0.747       0.977         0          464        1.2       
+Adobe Acrobat           tabloid   landscape    8      0.787       0.99          0          6          3.3       
+Crystal Reports         letter    portrait     7      0.971       0.956         0          70         0.8       
+Xerox MFP               tabloid   landscape    5      0.239       0.942         0          260        3.0       
+Adobe PDF Library       legal     portrait     5      None        0.977         0          0          0.9       
+iText                   letter    portrait     4      None        0.929         0          0          0.9       
+Xerox MFP               legal     landscape    3      1.0         0.997         0          3          2.4       
+SSRS                    letter    landscape    3      0.987       0.973         0          5          1.6       
+Canon MFP               letter    portrait     2      None        0.962         0          0          0.7       
+Chromium                letter    portrait     2      0.944       0.976         0          0          1.0       
+Adobe PDF Library       other     portrait     2      0.985       0.964         0          28         8.4       
+Acrobat Distiller       legal     landscape    2      0.997       0.96          0          0          2.3       
+Adobe PDF Library       tabloid   portrait     2      0.788       0.836         0          4          1.8       
+SSRS                    letter    portrait     2      0.959       0.984         0          9          0.6       
+Esri ArcGIS             tabloid   landscape    1      None        1.0           0          0          1.4       
+Xerox MFP               letter    landscape    1      1.0         0.988         0          1          0.6       
+iText                   a4        portrait     1      0.847       0.899         0          7          0.6       
+Bentley MicroStation    oversize  landscape    1      0.406       1.0           0          485        3.1       
+Esri ArcGIS             oversize  landscape    1      0.245       1.0           0          0          4.9       
+Microsoft Visio         oversize  portrait     1      0.559       0.937         0          8          3.8       
+?                       a4        portrait     1      None        0.82          0          0          7.1       
+
+## Text layer verdict and where the text came from
+year  text_layer  source  pages  pdf_vs_ocr
+2005  sound       pdf     1      0.953     
+2010  hidden_ocr  ocr     11     None      
+2012  sound       pdf     109    0.98      
+2012  none        ocr     1      None      
+2012  hidden_ocr  ocr     1      None      
+2013  sound       pdf     91     0.94      
+2014  sound       pdf     54     0.901     
+2015  none        ocr     128    None      
+2015  sound       pdf     87     0.94      
+2016  sound       pdf     28     0.989     
+2017  sound       pdf     67     0.993     
+2018  sound       pdf     584    0.975     
+2018  none        ocr     16     None      
+2019  sound       pdf     16     0.976     
+2020  sound       pdf     400    0.961     
+2020  none        ocr     2      None      
+2021  sound       pdf     43     0.955     
+2021  none        ocr     2      None      
+2022  sound       pdf     343    0.955     
+2022  hidden_ocr  ocr     6      None      
+2022  suspect     ocr     1      0.983     
+2023  sound       pdf     16     0.929     
+2023  none        ocr     2      None      
+2024  sound       pdf     54     0.95      
+2024  none        ocr     26     None      
+2025  sound       pdf     11     0.979     
+2025  suspect     ocr     4      0.465     
+2026  sound       pdf     51     0.942     
+
+## By REGDOCS document type
+doc_type                                              docs  pages  layout_agree  disputed_regions  unclaimed
+Environmental Protection Plan                         2     368    0.911         415               0        
+NEB Report                                            1     356    0.985         92                12       
+CER Report                                            1     293    0.995         19                0        
+Hearing Transcript                                    2     179    0.937         402               0        
+Written Evidence                                      2     110    0.893         242               16       
+Environmental Assessment                              2     85     0.973         102               3        
+Environmental Report                                  2     79     0.963         82                1        
+Other                                                 2     79     0.978         71                0        
+Hearing Order                                         2     72     0.95          106               5        
+Compliance after a Board Order                        2     62     0.925         255               7        
+Certificate                                           2     43     0.966         21                0        
+Post Construction Monitoring Report                   1     35     0.955         22                0        
+Audit Report                                          2     29     0.933         28                0        
+Information Request                                   2     28     0.856         34                0        
+Argument                                              2     26     0.971         10                0        
+Exhibit List                                          2     26     0.972         16                1        
+Engineering Assessment                                1     24     0.979         11                0        
+Receipt                                               2     23     0.945         35                0        
+Project Notification                                  2     20     0.976         14                0        
+Safety Report                                         2     14     0.973         6                 0        
+Authorization                                         1     13     0.956         10                0        
+Application to Participate                            2     13     0.98          5                 0        
+Procedural Update                                     2     13     0.969         11                0        
+Notification of Operation and Maintenance Activities  2     12     0.992         4                 0        
+(no facet)                                            2     12     0.963         31                0        
+Permit                                                2     12     0.971         14                0        
+Order                                                 2     11     0.954         9                 1        
+Letter                                                2     10     0.968         10                0        
+Comprehensive Study                                   1     9      0.967         9                 0        
+Environmental Screening                               1     8      0.981         1                 0        
+Application                                           2     8      0.915         25                0        
+Ruling                                                2     8      0.961         7                 0        
+Intervention                                          2     6      0.977         5                 0        
+Project Description                                   2     6      0.948         8                 0        
+Statement of Concern                                  2     6      0.983         2                 0        
+Map                                                   2     5      0.979         1                 0        
+Information Request Response                          2     5      0.924         29                0        
+Supplemental Information                              2     4      0.925         6                 0        
+Affidavit                                             2     4      0.937         8                 0        
+Request to make an Oral Statement                     2     4      0.973         8                 0        
+Surveillance report                                   2     4      0.948         4                 0        
+Undertaking                                           2     4      0.974         1                 0        
+Letter Decision                                       2     3      0.912         8                 0        
+Errata                                                2     3      0.958         8                 0        
+Plans, Profiles, Books of Reference                   2     3      0.976         8                 0        
+Geospatial Data                                       2     2      0.978         2                 0        
+Registration to Participate                           2     2      0.969         3                 0        
+Image                                                 2     2      1.0           0                 0        
+Letter of Comment                                     2     2      0.967         4                 0        
+News Release                                          2     2      0.96          10                0        
+License                                               1     2      0.972         1                 0        
+Compliance to an Order or Certificate                 2     2      0.911         7                 0        
+Written Comment Form                                  2     2      0.94          4                 0        
+Land Matters Assessment                               1     1      0.911         0                 0        
+Graph                                                 1     1      0.82          1                 0        
+
+## Which table reader places the most words, by page feature (ties count for each)
+producer                size     orientation  doc_type                             n_tables  fast_best  accurate_best  lines_best  text_best  best_score
+PrimoPDF                letter   portrait     Other                                283       284        281            11          13         1.0       
+Adobe PDF Library       tabloid  landscape    Environmental Protection Plan        192       2          16             179         0          0.999     
+Microsoft Word          letter   portrait     Hearing Transcript                   80        44         78             0           0          0.994     
+Foxit PDF printer       letter   landscape    NEB Report                           69        17         58             60          4          1.0       
+Foxit PDF printer       letter   portrait     CER Report                           67        46         64             32          4          0.998     
+Adobe PDF Library       letter   portrait     Environmental Protection Plan        65        32         50             39          0          0.999     
+Adobe Acrobat           letter   portrait     Compliance after a Board Order       63        44         51             1           1          0.957     
+Foxit PDF printer       letter   portrait     NEB Report                           61        44         50             25          7          0.991     
+Adobe PDF Library       letter   landscape    Environmental Protection Plan        42        32         38             16          0          1.0       
+Bluebeam                letter   portrait     Receipt                              41        20         40             24          0          1.0       
+Foxit PDF printer       letter   landscape    CER Report                           29        9          26             28          3          1.0       
+Microsoft Print to PDF  letter   landscape    Exhibit List                         26        18         16             0           0          0.984     
+Adobe Acrobat           letter   landscape    Compliance after a Board Order       26        20         25             0           0          0.984     
+PDF-XChange             letter   portrait     Audit Report                         23        21         23             0           5          1.0       
+Acrobat Distiller       tabloid  landscape    Environmental Assessment             22        16         21             0           0          1.0       
+Acrobat Distiller       letter   portrait     Hearing Order                        21        9          21             1           2          0.961     
+Xerox MFP               letter   portrait     Environmental Assessment             20        17         17             2           1          0.997     
+Adobe PDF Library       legal    landscape    Information Request                  16        10         15             2           0          0.975     
+Adobe PDF Library       other    portrait     Plans, Profiles, Books of Reference  15        15         15             0           6          1.0       
+Adobe PDF Library       letter   portrait     Environmental Report                 14        12         12             6           1          1.0       
+Adobe PDF Library       tabloid  landscape    Post Construction Monitoring Report  13        0          1              12          0          1.0       
+Acrobat Distiller       letter   portrait     Environmental Assessment             11        7          9              7           0          0.989     
+None                    letter   landscape    Written Evidence                     10        4          9              0           0          0.937     
+Adobe Acrobat           letter   portrait     Project Notification                 8         6          8              2           0          0.987     
+Acrobat Distiller       letter   portrait     Environmental Report                 8         8          8              4           1          1.0       
+
+## Table readers: words placed, and how often each was chosen
+reader                n_tables  mean_score  placed  straddle  orphan  chosen  errors  s   
+tableformer_fast      1344      0.954       228445  3007      6196    746     0       0.22
+mupdf_lines           1344      0.456       175426  161       68432   344     0       0.1 
+tableformer_accurate  1344      0.987       239868  1820      1285    253     0       0.42
+mupdf_text            1344      0.466       178778  28206     32430   0       0       0.13
+
+## Merged regions by label: models agreeing
+label                regions  models_found_it  vote_share  disputed
+text                 19508    3.36             0.965       753     
+list_item            6484     3.81             0.96        271     
+section_header       4583     3.75             0.911       357     
+page_footer          3162     3.68             0.976       91      
+page_header          2744     3.48             0.918       243     
+picture              2398     3.43             0.978       68      
+key_value_region     1750     2.87             0.906       194     
+table                1292     3.62             0.943       79      
+caption              631      3.88             0.947       46      
+form                 335      3.01             0.864       59      
+footnote             275      3.65             0.918       36      
+checkbox_unselected  176      3.74             0.987       3       
+document_index       98       3.33             0.752       37      
+checkbox_selected    63       3.65             0.93        5       
+formula              11       4.0              1.0         0       
+code                 8        3.75             0.641       4       
+title                5        3.4              0.719       1       
+
+## Layout models agreeing, by box type and page feature
+label              producer            size     orientation  source  regions  models_found_it  vote_share
+form               Microsoft Word      letter   portrait     pdf     52       2.52             0.637     
+document_index     Microsoft Word      letter   portrait     pdf     52       3.35             0.648     
+form               iText               letter   portrait     ocr     12       3.42             0.684     
+page_header        Adobe PDF Library   tabloid  landscape    pdf     103      3.91             0.711     
+table              Adobe PDF Library   legal    landscape    pdf     10       3.1              0.715     
+caption            Adobe Acrobat       letter   portrait     pdf     30       2.93             0.717     
+key_value_region   Bluebeam            letter   portrait     pdf     27       2.7              0.734     
+footnote           Adobe Acrobat       letter   portrait     pdf     12       3.67             0.749     
+section_header     Adobe PDF Library   tabloid  landscape    pdf     527      4.0              0.772     
+table              Microsoft Word      letter   portrait     pdf     45       2.93             0.772     
+form               Adobe Acrobat       letter   portrait     pdf     22       2.95             0.776     
+page_footer        None                letter   landscape    ocr     51       3.33             0.78      
+text               None                letter   landscape    ocr     391      3.23             0.797     
+footnote           Acrobat Distiller   letter   portrait     pdf     47       3.34             0.803     
+list_item          Konica Minolta MFP  letter   portrait     ocr     24       4.0              0.807     
+picture            iText               letter   portrait     ocr     13       2.62             0.813     
+section_header     None                letter   portrait     ocr     17       3.53             0.825     
+key_value_region   Xerox MFP           letter   portrait     pdf     25       2.68             0.841     
+text               Adobe PDF Library   legal    landscape    pdf     27       3.33             0.845     
+page_header        None                letter   landscape    ocr     179      3.06             0.847     
+key_value_region   Foxit PDF printer   letter   portrait     pdf     62       2.97             0.848     
+list_item          None                letter   landscape    ocr     427      2.89             0.849     
+checkbox_selected  Xerox MFP           letter   portrait     pdf     11       3.55             0.85      
+table              Bluebeam            letter   portrait     pdf     43       3.53             0.853     
+table              Xerox MFP           letter   portrait     pdf     20       2.55             0.854     
+
+## Detections per layout model
+model         detections  mean_conf
+egret-large   52343       0.642    
+egret-xlarge  51004       0.648    
+heron         54606       0.637    
+heron-101     52809       0.643    
+
+## Pictures by class
+    919  logo
+    559  icon
+    423  photograph
+    120  table
+    101  signature
+     96  engineering_drawing
+     64  geographical_map
+     35  bar_code
+     21  stamp
+     18  other
+     14  bar_chart
+      7  line_chart
+      6  full_page_image
+      4  flow_chart
+      3  screenshot_from_computer
+      3  page_thumbnail
+      2  screenshot_from_manual
+      1  topographical_map
+
+## Todo (pages)
+    906  layout_disputed
+    737  picture_text_by_ocr
+    717  text_in_images
+    136  ocr_page
+    111  drawing
+     17  ocr_vote
+     14  pdf_ocr_disagree
+     13  table_grid_doubtful
+      7  barcodes
+      3  oversize
+      2  form_fields
+
+## Issues
+    906  layout_models_disagree (info)
+    717  ink_not_in_text_layer (info)
+     64  blank_page (info)
+     28  words_outside_regions (info)
+     18  text_layer_hidden_ocr (warning)
+     17  ocr_readings_disagree (warning)
+     15  lines_from_scan_ocr_layer (info)
+     13  table_grid_doubtful (warning)
+      8  pdf_ocr_disagree (warning)
+      7  barcodes_decoded (info)
+      6  pdf_ocr_disagree (info)
+      5  text_layer_suspect (warning)
+      1  table_not_read (warning)
+
+## Export: share of evidence words in the Markdown, words per evidence word
+  376407     100.00%  1.00
+  619625     100.00%  1.00
+  782362     100.00%  1.00
+  783160     100.00%  1.00
+  789060     100.00%  1.00
+  792285     100.00%  1.00
+  796389     100.00%  1.00
+  818948     100.00%  1.04
+  825917     100.00%  1.00
+  831238     100.00%  1.00
+  837148     100.00%  1.00
+  849018     100.00%  1.00
+  869640     100.00%  1.00
+  892228     100.00%  1.00
+  995751     100.00%  1.00
+  1006614    100.00%  1.00
+  1036748    100.00%  1.00
+  2411900    100.00%  1.00
+  2414747    100.00%  1.08
+  2431124    100.00%  1.00
+  2445615    100.00%  1.00
+  2445966    100.00%  1.00
+  2498399    100.00%  1.00
+  2504091    100.00%  1.00
+  2672093    100.00%  1.00
+  2765703    100.00%  1.00
+  2784935    100.00%  1.00
+  2797913    100.00%  1.00
+  2809654    100.00%  1.00
+  2811952    100.00%  1.24
+  2812378    100.00%  1.00
+  2813773    100.00%  1.03
+  2856403    100.00%  1.04
+  2931125    100.00%  1.00
+  2968109    100.00%  1.00
+  3006468    100.00%  1.00
+  3027567    100.00%  1.17
+  3296431    100.00%  1.00
+  3336533    100.00%  1.00
+  3346853    100.00%  1.00
+  3408089    100.00%  1.00
+  3464084    100.00%  1.00
+  3491154    100.00%  1.00
+  3516573    100.00%  1.01
+  3579887    100.00%  1.00
+  3609912    100.00%  1.00
+  3611012    100.00%  1.00
+  3718411    100.00%  1.00
+  3746033    100.00%  1.00
+  3779370    100.00%  1.00
+  3783785    100.00%  1.00
+  3802873    100.00%  1.00
+  3813160    100.00%  1.00
+  3905627    100.00%  1.00
+  3913002    100.00%  1.00
+  3923221    100.00%  1.00
+  3954197    100.00%  1.00
+  4003840    100.00%  1.00
+  4012820    100.00%  1.00
+  4036188    100.00%  1.00
+  4040068    100.00%  1.00
+  4088479    100.00%  1.00
+  4091431    100.00%  1.00
+  4094341    100.00%  1.00
+  4099837    100.00%  1.00
+  4165334    100.00%  1.00
+  4168155    100.00%  1.00
+  4200433    100.00%  1.00
+  4202048    100.00%  1.00
+  4228316    100.00%  1.00
+  4246665    100.00%  1.00
+  4247414    100.00%  1.00
+  4251350    100.00%  1.00
+  4302448    100.00%  1.00
+  4303211    100.00%  1.00
+  4305358    100.00%  1.00
+  4367082    100.00%  1.00
+  4370790    100.00%  1.00
+  4392984    100.00%  1.00
+  4417907    100.00%  1.00
+  4448962    100.00%  1.00
+  4467335    100.00%  1.05
+  4468801    100.00%  1.00
+  4482135    100.00%  1.00
+  4493251    100.00%  1.00
+  4495825    100.00%  1.00
+  4518954    100.00%  1.00
+  4555472    100.00%  1.00
+  4652840    100.00%  1.00
+  4659931    100.00%  1.00
+  4662281    100.00%  1.00
+  4664834    100.00%  1.00
+  4664942    100.00%  1.02
+  4665385    100.00%  1.00
+  4665400    100.00%  1.00
+  4681674    100.00%  1.00
+  4681693    100.00%  1.00
+  4699159    100.00%  1.00
+  4724117    100.00%  1.01
+  4724902    100.00%  1.00

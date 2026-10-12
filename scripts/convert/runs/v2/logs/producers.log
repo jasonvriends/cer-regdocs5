@@ -1,0 +1,338 @@
+convert v2: 100 document(s); run identity /mnt/e/_REGDOCS_/scripts/convert/runs/v2/run.json
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  35%|███▌      | 271/770 [00:00<00:00, 2697.11it/s]Loading weights:  70%|███████   | 541/770 [00:00<00:00, 1814.08it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 2361.88it/s]
+Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 267/1025 [00:00<00:00, 2655.88it/s]Loading weights:  55%|█████▌    | 564/1025 [00:00<00:00, 2837.80it/s]Loading weights:  83%|████████▎ | 848/1025 [00:00<00:00, 2595.88it/s]Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 2863.53it/s]
+Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 399/1197 [00:00<00:00, 3968.22it/s]Loading weights:  66%|██████▋   | 796/1197 [00:00<00:00, 3043.29it/s]Loading weights:  99%|█████████▉| 1188/1197 [00:00<00:00, 3377.93it/s]Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3380.85it/s]
+Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 354/1465 [00:00<00:00, 3520.64it/s]Loading weights:  48%|████▊     | 707/1465 [00:00<00:00, 3226.32it/s]Loading weights:  70%|███████   | 1032/1465 [00:00<00:00, 3012.51it/s]Loading weights:  97%|█████████▋| 1425/1465 [00:00<00:00, 3345.10it/s]Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 3301.56it/s]
+Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3741.27it/s]
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+ok       156404        4p     6.3s  words 1310 (ocr:4)  tables 2 pictures 7  docling 1310/1310 text 100.0%  md 100.0%  issues warning:7 info:4
+ok       172001       25p    32.5s  words 8188 (ocr:25)  tables 3 pictures 31  docling 8188/8188 text 100.0%  md 100.0%  issues warning:33 info:9
+ok       311846        2p     1.4s  words 481 (pdf:2)  tables 0 pictures 1  docling 481/481 text 100.0%  md 100.0%  issues info:3
+ok       341160        1p     0.9s  words 285 (pdf:1)  tables 0 pictures 1  docling 285/285 text 100.0%  md 100.0%  issues info:2
+ok       409490        1p     4.0s  words 382 (ocr:1)  tables 0 pictures 1  docling 382/382 text 100.0%  md 100.0%  issues none
+ok       421937        1p     1.7s  words 227 (pdf:1)  tables 2 pictures 1  docling 227/227 text 100.0%  md 100.0%  issues info:2
+ok       500271       13p    16.7s  words 5562 (pdf:11/ocr:2)  tables 9 pictures 32  docling 5562/5562 text 100.0%  md 100.0%  issues info:23
+ok       506199        1p     1.6s  words 296 (ocr:1)  tables 0 pictures 7  docling 296/296 text 100.0%  md 100.0%  issues warning:1 info:1
+ok       522248       11p    72.3s  words 4677 (pdf:11)  tables 49 pictures 3  docling 4677/4677 text 100.0%  md 100.0%  issues info:8 warning:2
+ok       558694        9p     9.6s  words 1153 (pdf:9)  tables 7 pictures 0  docling 1153/1153 text 100.0%  md 100.0%  issues info:10
+ok       629565        1p     0.9s  words 169 (pdf:1)  tables 1 pictures 0  docling 169/169 text 100.0%  md 100.0%  issues info:2
+ok       705296        2p     1.1s  words 287 (ocr:2)  tables 0 pictures 2  docling 287/287 text 100.0%  md 100.0%  issues info:1
+ok       748936       15p    12.0s  words 2897 (ocr:15)  tables 10 pictures 26  docling 2897/2897 text 100.0%  md 100.0%  issues warning:2 info:7
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 19 is outside page bounds: value=902.88 > hi=614.4; clamping to 614.4
+  prov.bbox = cls._clamp_bbox_to_page(
+ok       775403       34p    24.1s  words 3635 (ocr:34)  tables 3 pictures 162  docling 3635/3635 text 100.0%  md 100.0%  issues info:27
+ok       776027        3p     6.7s  words 460 (pdf:3)  tables 21 pictures 4  docling 460/460 text 100.0%  md 100.0%  issues info:6
+ok       791609        9p     7.5s  words 3474 (pdf:8/ocr:1)  tables 0 pictures 0  docling 3474/3474 text 100.0%  md 100.0%  issues info:7
+ok       847150        3p     5.3s  words 1099 (pdf:3)  tables 0 pictures 3  docling 1099/1099 text 100.0%  md 100.0%  issues info:3
+ok       850172        1p     1.0s  words 13 (pdf:1)  tables 0 pictures 2  docling 13/13 text 100.0%  md 100.0%  issues info:1
+ok       851715        2p     1.7s  words 428 (ocr:2)  tables 0 pictures 4  docling 428/428 text 100.0%  md 100.0%  issues warning:4 info:2
+ok       856443        1p     0.9s  words 245 (pdf:1)  tables 0 pictures 6  docling 245/245 text 100.0%  md 100.0%  issues info:2
+ok       902026       16p    18.0s  words 9571 (pdf:16)  tables 1 pictures 0  docling 9571/9571 text 100.0%  md 100.0%  issues info:10
+ok       940189        6p     7.9s  words 1940 (pdf:6)  tables 6 pictures 0  docling 1940/1940 text 100.0%  md 100.0%  issues info:6
+ok       949636        1p     0.9s  words 281 (ocr:1)  tables 0 pictures 5  docling 281/281 text 100.0%  md 100.0%  issues info:1
+ok       959025        1p     1.0s  words 237 (ocr:1)  tables 0 pictures 3  docling 237/237 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       1006569       9p    19.8s  words 4575 (ocr:9)  tables 0 pictures 9  docling 4575/4575 text 100.0%  md 100.0%  issues none
+ok       2392812      26p    53.6s  words 3903 (pdf:26)  tables 118 pictures 176  docling 3903/3903 text 100.0%  md 100.0%  issues info:44
+ok       2453565      98p    70.5s  words 17565 (pdf:98)  tables 9 pictures 10  docling 17565/17565 text 100.0%  md 100.0%  issues info:22
+ok       2453778       8p    12.2s  words 2561 (pdf:8)  tables 12 pictures 23  docling 2561/2561 text 100.0%  md 100.0%  issues info:12
+ok       2484413       1p     1.6s  words 203 (ocr:1)  tables 0 pictures 1  docling 203/203 text 100.0%  md 100.0%  issues none
+ok       2491027       1p     8.8s  words 661 (pdf:1)  tables 0 pictures 1  docling 661/661 text 100.0%  md 100.0%  issues info:2
+ok       2491051      16p    18.4s  words 10321 (pdf:16)  tables 0 pictures 2  docling 10321/10321 text 100.0%  md 100.0%  issues info:9
+ok       2545761      10p    24.3s  words 1558 (pdf:10)  tables 0 pictures 51  docling 1558/1558 text 100.0%  md 100.0%  issues info:19
+ok       2578184       1p     1.3s  words 269 (ocr:1)  tables 0 pictures 7  docling 269/269 text 100.0%  md 100.0%  issues warning:1 info:1
+ok       2692358       3p     2.6s  words 984 (pdf:3)  tables 0 pictures 4  docling 984/984 text 100.0%  md 100.0%  issues info:5
+ok       2696528       4p     2.9s  words 905 (pdf:4)  tables 0 pictures 5  docling 905/905 text 100.0%  md 100.0%  issues info:6
+ok       2791636      29p    22.5s  words 8948 (pdf:1/ocr:28)  tables 3 pictures 7  docling 8948/8948 text 100.0%  md 100.0%  issues info:14
+ok       2798578       2p     1.5s  words 352 (pdf:2)  tables 0 pictures 1  docling 352/352 text 100.0%  md 100.0%  issues info:3
+ok       2857831       2p     1.8s  words 585 (ocr:2)  tables 0 pictures 1  docling 585/585 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       2902502       1p     0.7s  words 154 (ocr:1)  tables 0 pictures 2  docling 154/154 text 100.0%  md 100.0%  issues none
+ok       2905206      58p    75.2s  words 26898 (pdf:58)  tables 15 pictures 13  docling 26898/26898 text 100.0%  md 100.0%  issues info:66
+ok       2931455      11p    33.2s  words 5746 (pdf:11)  tables 4 pictures 6  docling 5746/5746 text 100.0%  md 100.0%  issues info:17
+ok       2937960       7p    15.6s  words 4822 (pdf:7)  tables 0 pictures 6  docling 4822/4822 text 100.0%  md 100.0%  issues info:6
+ok       2938298      18p    43.3s  words 4831 (pdf:1/ocr:17)  tables 28 pictures 45  docling 4831/4831 text 100.0%  md 100.0%  issues info:13
+ok       2958132       4p     8.1s  words 541 (pdf:4)  tables 0 pictures 2  docling 541/541 text 100.0%  md 100.0%  issues info:4
+ok       2996040       1p     1.0s  words 131 (ocr:1)  tables 0 pictures 1  docling 131/131 text 100.0%  md 100.0%  issues none
+ok       3065420       2p     3.5s  words 883 (pdf:1/ocr:1)  tables 0 pictures 2  docling 883/883 text 100.0%  md 100.0%  issues info:2
+ok       3213111      23p    34.6s  words 6508 (pdf:23)  tables 15 pictures 132  docling 6508/6508 text 100.0%  md 100.0%  issues info:38
+ok       3225681      14p    24.9s  words 3689 (pdf:14)  tables 20 pictures 26  docling 3689/3689 text 100.0%  md 100.0%  issues info:30
+ok       3257627       7p     7.2s  words 1336 (pdf:1/ocr:6)  tables 4 pictures 28  docling 1336/1336 text 100.0%  md 100.0%  issues warning:7 info:6
+ok       3258947       1p     1.4s  words 362 (ocr:1)  tables 0 pictures 1  docling 362/362 text 100.0%  md 100.0%  issues none
+ok       3268115       1p     1.0s  words 103 (ocr:1)  tables 0 pictures 4  docling 103/103 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       3283829       1p     0.8s  words 181 (ocr:1)  tables 0 pictures 1  docling 181/181 text 100.0%  md 100.0%  issues none
+ok       3306273       1p     4.7s  words 793 (ocr:1)  tables 0 pictures 1  docling 793/793 text 100.0%  md 100.0%  issues none
+ok       3348080       2p     1.0s  words 90 (ocr:2)  tables 0 pictures 4  docling 90/90 text 100.0%  md 100.0%  issues info:2
+ok       3390073       5p     3.7s  words 1498 (ocr:5)  tables 2 pictures 4  docling 1498/1498 text 100.0%  md 100.0%  issues info:2
+ok       3390264       4p     2.6s  words 1281 (ocr:4)  tables 0 pictures 0  docling 1281/1281 text 100.0%  md 100.0%  issues info:1
+ok       3404901      44p    20.5s  words 3821 (pdf:44)  tables 0 pictures 117  docling 3821/3821 text 100.0%  md 100.0%  issues info:50
+ok       3509190      10p    63.8s  words 7022 (pdf:1/ocr:9)  tables 6 pictures 53  docling 7022/7022 text 100.0%  md 100.0%  issues info:4 warning:10
+ok       3636681       4p     3.2s  words 1274 (pdf:4)  tables 0 pictures 4  docling 1274/1274 text 100.0%  md 100.0%  issues info:4
+ok       3692280       4p     2.8s  words 1203 (ocr:4)  tables 0 pictures 6  docling 1203/1203 text 100.0%  md 100.0%  issues info:2
+ok       3746913       1p     1.0s  words 237 (ocr:1)  tables 0 pictures 5  docling 237/237 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       3811740      16p    12.8s  words 2785 (ocr:16)  tables 6 pictures 32  docling 2785/2785 text 100.0%  md 100.0%  issues warning:31 info:11
+ok       3913197      26p    69.2s  words 8658 (pdf:3/ocr:23)  tables 63 pictures 137  docling 8658/8658 text 100.0%  md 100.0%  issues info:19 warning:47
+ok       3963044       1p     8.5s  words 1358 (pdf:1)  tables 0 pictures 49  docling 1358/1358 text 100.0%  md 100.0%  issues info:2
+ok       4087645       2p     1.7s  words 241 (ocr:2)  tables 0 pictures 5  docling 241/241 text 100.0%  md 100.0%  issues info:2
+ok       4104249       1p     0.7s  words 113 (pdf:1)  tables 0 pictures 3  docling 113/113 text 100.0%  md 100.0%  issues info:2
+ok       4104800       1p     1.0s  words 238 (pdf:1)  tables 0 pictures 5  docling 238/238 text 100.0%  md 100.0%  issues info:2
+ok       4105899      15p    11.8s  words 4040 (pdf:15)  tables 0 pictures 13  docling 4040/4040 text 100.0%  md 100.0%  issues info:11
+ok       4194711       1p     0.9s  words 108 (ocr:1)  tables 0 pictures 6  docling 108/108 text 100.0%  md 100.0%  issues info:1
+ok       4200169       1p     0.7s  words 160 (pdf:1)  tables 0 pictures 2  docling 160/160 text 100.0%  md 100.0%  issues info:2
+ok       4205820       2p     1.6s  words 672 (pdf:2)  tables 0 pictures 4  docling 672/672 text 100.0%  md 100.0%  issues info:2
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 15 is outside page bounds: value=653.76 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 16 is outside page bounds: value=646.9200000000001 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 20 is outside page bounds: value=647.28 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 21 is outside page bounds: value=648.0 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+ok       4244189      61p   125.7s  words 36221 (pdf:61)  tables 43 pictures 578  docling 36221/36221 text 100.0%  md 100.0%  issues info:116 warning:4
+ok       4248265       1p     0.9s  words 141 (pdf:1)  tables 0 pictures 2  docling 141/141 text 100.0%  md 100.0%  issues info:2
+ok       4286090       1p     1.2s  words 117 (ocr:1)  tables 0 pictures 3  docling 117/117 text 100.0%  md 100.0%  issues none
+ok       4367092       5p     3.8s  words 1126 (pdf:5)  tables 2 pictures 0  docling 1126/1126 text 100.0%  md 100.0%  issues info:1
+ok       4439953      10p    24.2s  words 7330 (pdf:10)  tables 10 pictures 0  docling 7330/7330 text 100.0%  md 100.0%  issues info:6
+ok       4441990       1p     0.9s  words 140 (pdf:1)  tables 0 pictures 3  docling 140/140 text 100.0%  md 100.0%  issues info:2
+ok       4451830       1p     1.6s  words 209 (ocr:1)  tables 0 pictures 2  docling 209/209 text 100.0%  md 100.0%  issues warning:1 info:1
+ok       4464247       2p     2.4s  words 678 (ocr:2)  tables 2 pictures 10  docling 678/678 text 100.0%  md 100.0%  issues info:2
+ok       4482062      16p    16.6s  words 6785 (pdf:16)  tables 3 pictures 5  docling 6785/6785 text 100.0%  md 100.0%  issues info:6
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:209: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+ok       4482124      12p     8.7s  words 1603 (pdf:12)  tables 2 pictures 6  docling 1603/1603 text 100.0%  md 100.0%  issues info:14
+ok       4496619      51p    49.8s  words 12944 (ocr:51)  tables 0 pictures 103  docling 12944/12944 text 100.0%  md 100.0%  issues info:13
+ok       4498088       1p     0.8s  words 183 (pdf:1)  tables 0 pictures 5  docling 183/183 text 100.0%  md 100.0%  issues info:2
+ok       4507529       7p     5.3s  words 1848 (pdf:7)  tables 1 pictures 17  docling 1848/1848 text 100.0%  md 100.0%  issues info:13
+ok       4518895      16p   130.5s  words 6779 (pdf:16)  tables 0 pictures 15  docling 6779/6779 text 100.0%  md 100.0%  issues info:15
+ok       4549531       5p     7.3s  words 1002 (pdf:5)  tables 1 pictures 0  docling 1002/1002 text 100.0%  md 100.0%  issues info:5
+ok       4556910       1p     3.0s  words 27 (pdf:1)  tables 0 pictures 4  docling 27/27 text 100.0%  md 100.0%  issues info:3
+ok       4567964      15p    14.0s  words 3559 (pdf:15)  tables 11 pictures 5  docling 3559/3559 text 100.0%  md 100.0%  issues info:15
+ok       4568396       2p     1.6s  words 443 (pdf:2)  tables 0 pictures 6  docling 443/443 text 100.0%  md 100.0%  issues info:3
+ok       4572337       5p     3.7s  words 1122 (pdf:5)  tables 1 pictures 0  docling 1122/1122 text 100.0%  md 100.0%  issues info:4
+ok       4573090       4p     4.7s  words 1079 (pdf:4)  tables 2 pictures 11  docling 1079/1079 text 100.0%  md 100.0%  issues info:4
+ok       4577791       2p     1.7s  words 362 (pdf:2)  tables 1 pictures 0  docling 362/362 text 100.0%  md 100.0%  issues info:1
+ok       4591992       2p     1.6s  words 428 (pdf:2)  tables 1 pictures 0  docling 428/428 text 100.0%  md 100.0%  issues info:2
+ok       4605509       1p     0.9s  words 303 (pdf:1)  tables 0 pictures 4  docling 303/303 text 100.0%  md 100.0%  issues info:2
+ok       4662897      14p    13.7s  words 4147 (pdf:14)  tables 8 pictures 2  docling 4147/4147 text 100.0%  md 100.0%  issues info:4
+ok       4665000       9p    13.9s  words 1848 (pdf:9)  tables 8 pictures 0  docling 1848/1848 text 100.0%  md 100.0%  issues info:15
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:209: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+ok       4665382     160p   372.3s  words 35251 (pdf:148/ocr:12)  tables 220 pictures 211  docling 35251/35251 text 100.0%  md 100.0%  issues info:142 warning:71
+ok       4689554       1p     2.1s  words 201 (ocr:1)  tables 0 pictures 5  docling 201/201 text 100.0%  md 100.0%  issues info:1
+ok       4692504       4p     3.4s  words 1073 (pdf:4)  tables 3 pictures 4  docling 1073/1073 text 100.0%  md 100.0%  issues info:4
+ok       4726781       1p     0.6s  words 136 (pdf:1)  tables 0 pictures 0  docling 136/136 text 100.0%  md 100.0%  issues info:1
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+done: 100 converted, 0 failed, 1772s

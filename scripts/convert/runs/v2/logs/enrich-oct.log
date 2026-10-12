@@ -1,0 +1,5 @@
+  2026-10-01..2026-10-10 containers: 100 requests so far
+  2026-10-01..2026-10-10 containers: 200 requests so far
+  2026-10-01..2026-10-10 containers: 300 requests so far
+  2026-10-01..2026-10-10 facets: 400 requests so far
+enrich 2026-10-01..2026-10-10: 618 PDFs, 483 requests, done

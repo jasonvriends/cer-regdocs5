@@ -4,7 +4,8 @@ __pycache__/
 output/
 source/
 scripts/scout/scout-state/
-*.log
+scripts/scout/.venv/
 scripts/convert/.venv/
-scripts/convert/models
-scripts/convert/runs/
+scripts/convert/models/
+*.log
+!scripts/convert/runs/**/*.log
