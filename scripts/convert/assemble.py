@@ -504,7 +504,8 @@ def check_docling(json_bytes: bytes, words: list[dict]) -> dict:
     import gzip
     from docling_core.types.doc import DoclingDocument, TableItem
     from docling_core.types.doc.common.content_layer import ContentLayer
-    doc = DoclingDocument.model_validate_json(gzip.decompress(json_bytes))
+    doc = json_bytes if isinstance(json_bytes, DoclingDocument) else \
+        DoclingDocument.model_validate_json(gzip.decompress(json_bytes))
     named = collections.Counter()
     held = want = 0
     for item, _ in doc.iterate_items(included_content_layers=set(ContentLayer), with_groups=False, traverse_pictures=True):

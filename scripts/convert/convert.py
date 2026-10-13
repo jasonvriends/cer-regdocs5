@@ -21,6 +21,7 @@ import datetime
 import gzip
 import json
 import multiprocessing as mp
+import multiprocessing.connection
 import os
 import platform
 import sys
@@ -91,7 +92,7 @@ def tool_family(raw):
 # one page
 
 def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, transcript_doc: bool = False,
-                 votes: list[dict] = (), base: int = 0, light: bool = False) -> dict:
+                 votes: list[dict] = (), base: int = 0, light: bool = False, cached=None) -> dict:
     """One page. `light`: the evidence pass for the whole corpus - words from the text layer, OCR
     only where the layer is not sound or images may hold text, no layout, table or figure models."""
     t0 = time.perf_counter()
@@ -106,7 +107,7 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
 
     issues = []
     facts = timed("facts", lambda: rd.page_facts(page))
-    pdf_w, health = timed("pdf_words", lambda: rd.pdf_words(page))
+    pdf_w, health = cached or timed("pdf_words", lambda: rd.pdf_words(page))
     verdict = rd.text_layer_verdict(health)
     vis_words = [w for w in pdf_w if not w["hidden"] and not w["redacted"]]
     try:
@@ -481,8 +482,10 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     # A transcript is known from the document, not one page: its title, or line numbers on most
     # pages with text (a numbered table in a report is not a transcript) [L Route by what a page is]
     numbered = with_text = 0
-    for pg in pdf:
-        ws, _ = rd.pdf_words(pg)
+    layer = {}                       # each page's text layer, read once and reused below
+    for i, pg in enumerate(pdf):
+        layer[i + 1] = rd.pdf_words(pg)
+        ws = layer[i + 1][0]
         if len(ws) > 5:
             with_text += 1
             numbered += bool(asm.line_numbers(ws, pg.rect.width))
@@ -506,7 +509,8 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     for pno in range(1, pdf.page_count + 1):
         page = pdf[pno - 1]
         try:
-            p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light)
+            p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
+                             layer.pop(pno, None))
         except Exception as e:
             p = {"page": pno, "error": repr(e), "trace": traceback.format_exc(), "elements": [], "todo": ["page_failed"],
                  "issues": [{"page": pno, "kind": "page_failed", "severity": "error", "evidence": repr(e)}],
@@ -548,7 +552,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     for w in all_words:
         w["item"] = owner.get(w["id"])
     doc_json = gzip.compress(doc.model_dump_json().encode(), mtime=0)
-    dcheck = asm.check_docling(doc_json, all_words)
+    # full conversions check the JSON as a consumer reloads it; the corpus pass checks the same
+    # items in memory (reloading every document costs more than converting it)
+    dcheck = asm.check_docling(doc if light else doc_json, all_words)
     if dcheck["not_named"] or dcheck["named_twice"]:
         doc_issues.append({"kind": "docling_words_unaccounted", "severity": "error",
                            "evidence": f"in the DoclingDocument: {dcheck['not_named']} evidence words in no item, "
@@ -682,41 +688,33 @@ def cmd_run(args) -> int:
     print(f"convert {VERSION}{' (light)' if args.light else ''}: {len(todo)} document(s); run identity {run_file}",
           flush=True)
     ctx = mp.get_context("spawn")
-    proc = conn = None
     failed = 0
+    queue = list(reversed(todo))          # pop() from the end: todo order kept
 
-    def start():
-        nonlocal proc, conn
-        conn, child = ctx.Pipe()
-        proc = ctx.Process(target=worker, args=(child, run, args.light), daemon=True)
-        proc.start()
-        msg = conn.recv()
-        if not msg.get("ready"):
-            raise SystemExit(f"models failed to load: {msg.get('error')}\n{msg.get('trace')}")
+    class Slot:
+        """One worker process and the document it is on."""
+        def __init__(self):
+            self.conn, child = ctx.Pipe()
+            self.proc = ctx.Process(target=worker, args=(child, run, args.light), daemon=True)
+            self.proc.start()
+            msg = self.conn.recv()
+            if not msg.get("ready"):
+                raise SystemExit(f"models failed to load: {msg.get('error')}\n{msg.get('trace')}")
+            self.doc = None
+            self.since = 0.0
 
-    t_all = time.perf_counter()
-    for d in todo:
-        if proc is None or not proc.is_alive():
-            start()
-        s = time.perf_counter()
-        conn.send(d)
-        res = None
-        if conn.poll(args.timeout):
-            try:
-                res = conn.recv()
-            except EOFError:
-                res = {"doc_id": d, "status": "failed", "error": f"worker crashed (exit {proc.exitcode})"}
-                proc = None
-        else:
-            proc.kill()
-            proc = None
-            res = {"doc_id": d, "status": "failed", "error": f"timeout after {args.timeout}s"}
+        def give(self, d):
+            self.doc, self.since = d, time.perf_counter()
+            self.conn.send(d)
+
+    def report(d, res, s):
+        nonlocal failed
         if res["status"] == "failed":
             failed += 1
             print(f"FAILED   {d:<10} {time.perf_counter() - s:7.1f}s  {res.get('error')}", flush=True)
             if res.get("trace"):
                 print(res["trace"], flush=True)
-            continue
+            return
         sev = res.get("issues") or {}
         dc = res.get("docling") or {}
         print(f"{res['status']:<8} {d:<10} {res['pages']:>4}p {res['seconds']:7.1f}s  "
@@ -724,9 +722,42 @@ def cmd_run(args) -> int:
               f"tables {res['tables']} pictures {res['pictures']}  docling {dc.get('named_once', 0)}/{dc.get('evidence_words', 0)} "
               f"text {dc.get('text_holds_words', 0):.1%}  md {res['export_recall']:.1%}  "
               f"issues {' '.join(f'{k}:{v}' for k, v in sev.items()) or 'none'}", flush=True)
-    if proc is not None and proc.is_alive():
-        conn.send(None)
-        proc.join(10)
+
+    # several workers, each holding its own models; a crash or a hang costs one document
+    t_all = time.perf_counter()
+    slots = [Slot() for _ in range(max(1, min(args.workers, len(queue))))] if queue else []
+    for sl in slots:
+        if queue:
+            sl.give(queue.pop())
+    while any(sl.doc for sl in slots):
+        busy = [sl for sl in slots if sl.doc]
+        ready = mp.connection.wait([sl.conn for sl in busy] + [sl.proc.sentinel for sl in busy], timeout=5)
+        for i, sl in enumerate(slots):
+            if not sl.doc:
+                continue
+            res = None
+            if sl.conn in ready:
+                try:
+                    res = sl.conn.recv()
+                except EOFError:
+                    res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
+            elif sl.proc.sentinel in ready:
+                res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
+            elif time.perf_counter() - sl.since > args.timeout:
+                sl.proc.kill()
+                res = {"doc_id": sl.doc, "status": "failed", "error": f"timeout after {args.timeout}s"}
+            if res is None:
+                continue
+            report(sl.doc, res, sl.since)
+            sl.doc = None
+            if not sl.proc.is_alive():
+                slots[i] = sl = Slot()
+            if queue:
+                sl.give(queue.pop())
+    for sl in slots:
+        if sl.proc.is_alive():
+            sl.conn.send(None)
+            sl.proc.join(10)
     print(f"done: {len(todo) - failed} converted, {failed} failed, {time.perf_counter() - t_all:.0f}s")
     return 1 if failed else 0
 
@@ -869,6 +900,8 @@ def main(argv=None) -> int:
             c.add_argument("--light", action="store_true",
                            help="evidence pass: text layer, OCR only where needed, no layout/table/figure models")
             c.add_argument("--all", action="store_true", help="every PDF in source/, newest first")
+            c.add_argument("--workers", type=int, default=1,
+                           help="worker processes, each with its own models (light mode: 6-8 is reasonable)")
             c.add_argument("--timeout", type=float, default=3600, help="seconds per document")
     args = ap.parse_args(argv)
     return {"run": cmd_run, "status": cmd_status, "report": cmd_report}[args.cmd](args)

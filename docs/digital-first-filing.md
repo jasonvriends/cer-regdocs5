@@ -45,9 +45,21 @@ file can show (`./scripts/convert/convert.sh check filing.pdf`).
 
 | # | requirement | why | check |
 |---|---|---|---|
-| A1 | **Tables of results as CSV or Excel beside the PDF** - lab and monitoring results, schedules, financial tables *(proposed)* | tables are the weakest part of every extraction: the best readers place ~97% of table words, and a misplaced `<0.01` changes a finding | manifest |
-| A2 | **Maps and drawings with their GIS or CAD data** (GeoJSON, shapefile, DWG/DXF) *(proposed)* | OCR reads about two-thirds of a drawing's labels; labels on maps are the hardest text to recover | manifest |
-| A3 | **Barcodes and QR codes are welcome** - they carry exact data | courier waybills' addresses and tracking numbers decode exactly | - |
+| A1 | **Tables of results as CSV (UTF-8) or Excel (.xlsx) beside the PDF**, with a data dictionary (column, meaning, unit) - lab and monitoring results, schedules, financial tables *(proposed)* | tables are the weakest part of every extraction: the best readers place ~97% of table words, and a misplaced `<0.01` changes a finding | manifest |
+| A2 | **Spatial data as GeoPackage (.gpkg)**, the coordinate reference system stated (EPSG code); GeoJSON for small files *(proposed)* | OCR reads about two-thirds of a drawing's labels; labels on maps are the hardest text to recover | manifest |
+| A3 | **Drawings with their CAD file** (DXF, or DWG) beside the PDF *(proposed)* | the PDF is for reading; the CAD file is the data, its text kept as text (D3) | manifest |
+| A4 | **Barcodes and QR codes are welcome** - they carry exact data | courier waybills' addresses and tracking numbers decode exactly | - |
+
+**Formats - what filers send, and what CER keeps.** Filers send what their tools already make;
+intake converts to formats built for storage and analysis, keeping the original beside them.
+
+| data | filers submit | CER stores (derived at intake) | not |
+|---|---|---|---|
+| tables | CSV (UTF-8) or Excel (.xlsx), plus a data dictionary | Parquet (typed, compressed, columnar; queried with DuckDB) | Parquet as a *submission* format: ideal to store, but few filers' tools produce it |
+| spatial | GeoPackage (.gpkg), GeoJSON for small files; CRS as an EPSG code | GeoParquet | shapefiles (3-7 files per layer, 10-character field names, 2 GB limit); KML for data (drops attributes) |
+| drawings | DXF or DWG, beside the PDF | as filed | drawings as images only |
+| documents | PDF/A-2u or -3u (data files may be embedded in PDF/A-3) | as filed, plus the converter's evidence (words, structure, ledger) | |
+| the filing | `manifest.json` (section 5) | the catalog (DuckDB) | |
 
 ## 5. The filing describes itself *(proposed)*
 
