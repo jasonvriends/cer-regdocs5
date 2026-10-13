@@ -41,6 +41,18 @@ RUNS = HERE / "runs"
 FACETS = ["Document Type", "Application Type", "Commodity", "Role", "File Type"]
 
 
+def _word_schema():
+    import pyarrow as pa
+    return pa.schema([("id", pa.int64()), ("page", pa.int64()), ("reader", pa.string()), ("text", pa.string()),
+                      ("raw", pa.string()), ("format", pa.string()), ("conf", pa.float64()), ("evidence", pa.bool_()),
+                      ("extra", pa.bool_()), ("hidden", pa.bool_()), ("redacted", pa.bool_()), ("voted", pa.bool_()),
+                      ("block", pa.int64()), ("line", pa.int64()), ("item", pa.string()),
+                      ("x0", pa.float64()), ("y0", pa.float64()), ("x1", pa.float64()), ("y1", pa.float64())])
+
+
+WORD_SCHEMA = _word_schema()
+
+
 def now() -> str:
     return datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
 
@@ -574,11 +586,12 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         doc_issues.append({"kind": "export_repeats_words", "severity": "warning",
                            "evidence": f"Markdown has {ratio:.2f} words per evidence word"})
 
-    cols = ["id", "page", "reader", "text", "raw", "format", "conf", "evidence", "extra", "hidden", "redacted", "voted",
-            "block", "line", "item"]
+    # an explicit schema: a document with no words (a photograph) still gets a readable file;
+    # inferred from no rows, the file had no columns and no reader could open it (459903)
     pq.write_table(pa.Table.from_pylist(
-        [{**{k: w.get(k) for k in cols}, "x0": w["box"][0], "y0": w["box"][1], "x1": w["box"][2], "y1": w["box"][3]}
-         for w in all_words]), out / f"{doc_id}.words.parquet", compression="zstd")
+        [{**{k: w.get(k) for k in WORD_SCHEMA.names[:-4]}, "x0": w["box"][0], "y0": w["box"][1],
+          "x1": w["box"][2], "y1": w["box"][3]} for w in all_words], schema=WORD_SCHEMA),
+        out / f"{doc_id}.words.parquet", compression="zstd")
     if region_rows:
         pq.write_table(pa.Table.from_pylist(region_rows), out / f"{doc_id}.regions.parquet", compression="zstd")
     if table_rows:
@@ -697,11 +710,14 @@ def cmd_run(args) -> int:
             self.conn, child = ctx.Pipe()
             self.proc = ctx.Process(target=worker, args=(child, run, args.light), daemon=True)
             self.proc.start()
+            self.doc = None
+            self.since = 0.0
+
+        def wait_ready(self):
             msg = self.conn.recv()
             if not msg.get("ready"):
                 raise SystemExit(f"models failed to load: {msg.get('error')}\n{msg.get('trace')}")
-            self.doc = None
-            self.since = 0.0
+            return self
 
         def give(self, d):
             self.doc, self.since = d, time.perf_counter()
@@ -725,7 +741,10 @@ def cmd_run(args) -> int:
 
     # several workers, each holding its own models; a crash or a hang costs one document
     t_all = time.perf_counter()
+    # all workers load their models at once (one after another, 10 took 25 minutes to start)
     slots = [Slot() for _ in range(max(1, min(args.workers, len(queue))))] if queue else []
+    for sl in slots:
+        sl.wait_ready()
     for sl in slots:
         if queue:
             sl.give(queue.pop())
@@ -751,7 +770,7 @@ def cmd_run(args) -> int:
             report(sl.doc, res, sl.since)
             sl.doc = None
             if not sl.proc.is_alive():
-                slots[i] = sl = Slot()
+                slots[i] = sl = Slot().wait_ready()
             if queue:
                 sl.give(queue.pop())
     for sl in slots:
