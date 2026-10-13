@@ -638,6 +638,22 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   (it is a page's furniture, not data). Same columns without a repeated header (131 pairs) is
   mixed: continuations (mitigation tables, records of engagement) and separate tables (a
   financial statement's consecutive schedules) - by rows and column positions, to be measured.
+- **Pages are not units of meaning: 70% of headings start partway down a page, and about one page
+  break in six splits a sentence.** Over 430 full-mode documents of two pages or more
+  (`runs/v2/reports/boundaries-flow.json`), furniture (repeated band lines, layout headers and
+  footers) and tables/pictures set aside: 12,274 of 17,487 section headings are not the first body
+  line on their page. Of 5,903 page breaks, 1,173 (20%) end a page without closing punctuation
+  and start the next in lower case; of 15 read, about 12 are a sentence split across the break
+  ("...dissolution, reorganization or || similar transaction involving..."; "...the taxpayers' ||
+  dollars have been spent...") and 3 are not (a fax header, a running footer the repetition
+  rule missed, a fragment) - so roughly 16% of breaks. 136 of the 430 documents have at least
+  one. Another 2,283 breaks end without punctuation but go on with a capital: mixed, from real
+  continuations into a proper name ("The Consumers' || Gas Company Ltd.") to contents pages,
+  headings and lists. So (*proposed*): chunk by section, never by page; where a body text item
+  ends open and the next page's first body item goes on in lower case (furniture between them
+  removed), make them one item with two provenance entries, one per page - DoclingDocument
+  allows an item several `prov`, so the page of every word stays known. A capital after an
+  open end needs more than this to decide.
 - **Lines the layout calls furniture that do not repeat** are first-page-only letterhead and
   footers ("www.neb-one.gc.ca"), and roman page numbers before they were read as numbers.
 

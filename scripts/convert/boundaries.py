@@ -12,6 +12,11 @@ tables      a table ending in the bottom quarter of a page followed by one start
             quarter of the next (furniture aside): the same number of columns? does the second
             open with the first's header line? - how often a table runs across pages.
 
+flow        what a page break interrupts: section headings at the top of a page or partway down,
+            and sentences split across the break (a page's last body line without closing
+            punctuation, the next page's first body line going on) - furniture, by repetition,
+            set aside.
+
 Reads each document's ledger (pages.json), words.parquet and regions.parquet; writes nothing
 but its report.
 """
@@ -150,9 +155,79 @@ def table_pairs(doc_id: str) -> list[dict]:
     return out
 
 
+END = re.compile(r"[.!?:;]['\")\]]?$")
+
+
+def flow(doc_id: str) -> dict | None:
+    L, words, regions = load(doc_id)
+    pages = {p["page"]: p for p in L["pages"] if not p.get("error")}
+    if len(pages) < 2:
+        return None
+    by_page = collections.defaultdict(list)
+    for w in words:
+        w["box"] = (w["x0"], w["y0"], w["x1"], w["y1"])
+        by_page[w["page"]].append(w)
+    # furniture: band lines that repeat, and what the layout calls header/footer/line numbers
+    seen, band_lines = collections.defaultdict(set), {}
+    for pno, ws in by_page.items():
+        h = pages.get(pno, {}).get("facts", {}).get("height_pt") or 792
+        lines = asm.lines_of(ws)
+        band_lines[pno] = lines
+        for ln in lines:
+            y = sum(asm.centre(w["box"])[1] for w in ln) / len(ln)
+            if y < BAND * h or y > (1 - BAND) * h:
+                seen[shape(ln)].add(pno)
+    need = max(3, 0.3 * len(pages))
+    furn = collections.defaultdict(list)
+    heads = collections.defaultdict(list)
+    tabular = collections.defaultdict(list)
+    for r in regions:
+        box = (r["x0"], r["y0"], r["x1"], r["y1"])
+        if r["label"] in ("page_header", "page_footer", "line_numbers"):
+            furn[r["page"]].append(box)
+        elif r["label"] in ("section_header", "title"):
+            heads[r["page"]].append(box)
+        elif r["label"] in ("table", "picture", "document_index", "form"):
+            tabular[r["page"]].append(box)
+    body = {}
+    for pno, lines in band_lines.items():
+        keep = []
+        for ln in lines:
+            cx = sum(asm.centre(w["box"])[0] for w in ln) / len(ln)
+            cy = sum(asm.centre(w["box"])[1] for w in ln) / len(ln)
+            if (len(seen[shape(ln)]) >= need and len(pages) >= 4) or \
+                    any(asm.inside(b, cx, cy, 3.0) for b in furn[pno]) or \
+                    any(asm.inside(b, cx, cy, 3.0) for b in tabular[pno]):
+                continue
+            keep.append(ln)
+        body[pno] = keep
+    out = collections.Counter()
+    examples = collections.defaultdict(list)
+    for pno, hs in heads.items():
+        lines = body.get(pno) or []
+        top = min((asm.centre(ln[0]["box"])[1] for ln in lines), default=None)
+        for b in hs:
+            first = top is not None and b[1] <= top + 2
+            out["heading_first_on_page" if first else "heading_mid_page"] += 1
+    for pno in sorted(body):
+        nxt = body.get(pno + 1)
+        if not body[pno] or not nxt:
+            continue
+        last = " ".join(w["text"] for w in body[pno][-1])
+        first = " ".join(w["text"] for w in nxt[0])
+        open_end = not END.search(last.strip())
+        goes_on = first[:1].islower() or first[:1] in ",;)" if first else False
+        key = "break_mid_sentence" if open_end and goes_on else \
+            "break_open_end_only" if open_end else "break_at_sentence_end"
+        out[key] += 1
+        if len(examples[key]) < 4:
+            examples[key].append(f"p{pno}: ...{last[-50:]} || {first[:50]}...")
+    return {"doc_id": doc_id, "pages": len(pages), "counts": dict(out), "examples": dict(examples)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("what", choices=["furniture", "tables"])
+    ap.add_argument("what", choices=["furniture", "tables", "flow"])
     ap.add_argument("--sample", action="append", required=True)
     ap.add_argument("--out")
     args = ap.parse_args()
@@ -175,6 +250,26 @@ def main() -> int:
         print(json.dumps(summary, indent=1))
         if args.out:
             Path(args.out).write_text(json.dumps({"summary": summary, "pairs": pairs}, indent=1))
+        return 0
+    if args.what == "flow":
+        rows, total = [], collections.Counter()
+        for d in ids:
+            try:
+                r = flow(d)
+            except (OSError, ValueError, KeyError):
+                continue
+            if r:
+                rows.append(r)
+                total.update(r["counts"])
+        breaks = total["break_mid_sentence"] + total["break_open_end_only"] + total["break_at_sentence_end"]
+        summary = {"documents": len(rows), **dict(total),
+                   "share_of_breaks_mid_sentence": round(total["break_mid_sentence"] / max(1, breaks), 3),
+                   "share_of_headings_mid_page": round(total["heading_mid_page"] / max(1, total["heading_mid_page"]
+                                                                                       + total["heading_first_on_page"]), 3),
+                   "documents_with_a_sentence_across_pages": sum(1 for r in rows if r["counts"].get("break_mid_sentence"))}
+        print(json.dumps(summary, indent=1))
+        if args.out:
+            Path(args.out).write_text(json.dumps({"summary": summary, "documents": rows}, indent=1))
         return 0
     rows, total = [], collections.Counter()
     for d in ids:
