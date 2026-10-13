@@ -310,6 +310,19 @@ from the survey, with intervals, and every sample rate quoted there now says so 
   96.6%, fast + accurate 96.1%, accurate + lines 95.9%, accurate 95.2%, fast 91.3%. Written into
   DESIGN as the table rule.
 
+### The corpus pass and the catalog (2026-10-12)
+
+- **One worker made the corpus pass take 9 days.** 3.5 pages/s: per-document overhead (each
+  page's text layer read twice, the DoclingDocument reloaded to check it, six files written to a
+  slow mount) in a single process. Workers now run in parallel, the text layer is read once, and
+  the light pass checks its document in memory: 13.3 pages/s with 6 workers. Workers also loaded
+  their models one after another (10 took 25 minutes to start); they now load at once.
+- **A document with no words wrote a Parquet file with no columns**, which nothing can read
+  (459903, a photograph). Building the catalog found it. `words.parquet` now has an explicit
+  schema; files written before the fix are found by `pq.read_schema(...).names == []` and redone.
+- Findings are now records too (docs/findings.jsonl), loaded into the catalog with everything
+  else (docs/catalog.md).
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
