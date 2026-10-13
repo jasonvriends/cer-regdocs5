@@ -9,3 +9,4 @@ scripts/convert/.venv/
 scripts/convert/models/
 *.log
 !scripts/convert/runs/**/*.log
+scripts/convert/runs/v2/logs/light-all.log
