@@ -493,7 +493,10 @@ def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | No
         if L.get("ocr_model") != rd.SETTINGS["ocr_model"] or L.get("mode", "full") != ("light" if light else "full") \
                 or not light:          # full mode also OCRs crops and turned renders: not reused
             return {}, None
-        ran = {p["page"] for p in L["pages"] if "ocr" in (p.get("step_seconds") or {}) and not p.get("error")}
+        # OCR ran on the page, or a rerun took its words from the run before (which then records no
+        # OCR step: without this, a second reuse would OCR those pages again)
+        ran = {p["page"] for p in L["pages"] if ("ocr" in (p.get("step_seconds") or {}) or p.get("ocr_reused"))
+               and not p.get("error")}
         cache = {pno: [] for pno in ran}
         for w in sorted(pq.read_table(wf).to_pylist(), key=lambda w: w["id"]):
             if w["reader"] == "ocr" and w["page"] in cache:
@@ -612,6 +615,13 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     out = out_dir(doc_id)
     out.mkdir(parents=True, exist_ok=True)
 
+    # page boundaries: running headers and footers by repetition, sentences across breaks [L Page boundaries]
+    try:
+        boundaries = {**asm.mark_furniture(pages, all_words), **asm.join_across_pages(pages, all_words)}
+    except Exception as e:
+        boundaries = {"error": repr(e)}
+        doc_issues.append({"kind": "boundaries_failed", "severity": "warning", "evidence": repr(e)})
+
     # sections: the filer's bookmarks, else heading numbers in sequence [L Sections]
     try:
         outline = pdf.get_toc(simple=True)
@@ -679,7 +689,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                     "pictures": sum(len(p.get("pictures") or []) for p in pages),
                     "docling": dcheck, "export_recall": round(recall, 4), "export_word_ratio": round(ratio, 3),
                     "issues": dict(sev), "todo": dict(todo),
-                    "sections": {k: v for k, v in sections.items() if k != "list"}},
+                    "sections": {k: v for k, v in sections.items() if k != "list"}, "boundaries": boundaries},
         "sections": sections.get("list", []),
         "issues": doc_issues,
         "pages": [{k: v for k, v in p.items() if k != "elements"} for p in pages],
