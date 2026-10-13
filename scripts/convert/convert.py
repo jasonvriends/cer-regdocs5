@@ -721,6 +721,15 @@ def cmd_run(args) -> int:
 
         def give(self, d):
             self.doc, self.since = d, time.perf_counter()
+            # a long document gets longer: a fixed hour stopped a 171-page drawing set, and
+            # REGDOCS has documents of 900 and 7,280 pages (LESSONS.md, Memory and time)
+            try:
+                import pymupdf
+                with pymupdf.open(SOURCE / f"{d}.pdf") as pdf:
+                    pages = pdf.page_count
+            except Exception:
+                pages = 0
+            self.limit = max(args.timeout, args.timeout_per_page * pages)
             self.conn.send(d)
 
     def report(d, res, s):
@@ -762,10 +771,10 @@ def cmd_run(args) -> int:
                     res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
             elif sl.proc.sentinel in ready:
                 res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
-            elif time.perf_counter() - sl.since > args.timeout:
+            elif time.perf_counter() - sl.since > sl.limit:
                 sl.proc.kill()
                 sl.proc.join(30)                 # not reaped yet, it still looks alive and gets the next document
-                res = {"doc_id": sl.doc, "status": "failed", "error": f"timeout after {args.timeout}s"}
+                res = {"doc_id": sl.doc, "status": "failed", "error": f"timeout after {sl.limit:.0f}s"}
             if res is None:
                 continue
             report(sl.doc, res, sl.since)
@@ -922,7 +931,9 @@ def main(argv=None) -> int:
             c.add_argument("--all", action="store_true", help="every PDF in source/, newest first")
             c.add_argument("--workers", type=int, default=1,
                            help="worker processes, each with its own models (light mode: 6-8 is reasonable)")
-            c.add_argument("--timeout", type=float, default=3600, help="seconds per document")
+            c.add_argument("--timeout", type=float, default=3600, help="seconds per document, at least")
+            c.add_argument("--timeout-per-page", type=float, default=20,
+                           help="seconds per page, when that is more than --timeout (900 pages: 5 hours)")
     args = ap.parse_args(argv)
     return {"run": cmd_run, "status": cmd_status, "report": cmd_report}[args.cmd](args)
 
