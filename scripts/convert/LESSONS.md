@@ -635,6 +635,16 @@ pages:
   where it was ("no progress for 900s (at page 6)"); `max(--timeout, --timeout-per-page x pages)`
   (60 s a page) stays as a generous cap. Azure's 300-page ranges are the other route - each range a
   unit of work, retried on its own - not needed while pages report progress.
+- **On WSL a full GPU does not fail, it crawls - and that looked like slow documents.** With the
+  stall limit on, four ordinary documents stopped with no page finished in 15 minutes, one of them
+  a 4-page, 0.2 MiB letter (4595648, at page 1). The card was full: 23.3 of 24.5 GB, up from 14.2
+  GB with the same 10 workers an hour earlier. PyTorch keeps the memory the largest page needed,
+  and the workers emptied the cache only between documents, so each grew to ~2.3 GB; past the
+  card, WSL's driver spills to system memory instead of raising out-of-memory, and every worker
+  slows together. `release_gpu()` now hands the cache back after any OCR call that leaves a
+  worker over 1 GB. After the restart: peak 19.7 GB over 15 minutes, 0 stalls, ~23 pages a second
+  (from 6.7). Some of what was put down to GPU contention above was probably this. Watch the
+  card's memory, not only its utilisation: 100% busy can mean thrashing.
   *Open:* the angle classifier (a third of OCR time here) could be skipped on pages whose
   orientation is already known; measure what it costs in words before turning it off.
 - **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
