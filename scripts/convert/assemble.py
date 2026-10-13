@@ -529,6 +529,119 @@ def _part(el: dict, ids: list[int], words: list[dict]) -> dict:
             "order_box": box}
 
 
+# --------------------------------------------------------------------------
+# page boundaries: what repeats on every page is furniture; what a page break interrupts goes on
+# [L Page boundaries]
+
+BAND = 0.12
+PAGE_NO = re.compile(r"\d+|\b[ivxlc]{1,6}\b")
+
+
+def line_shape(ws: list[dict]) -> str:
+    """A line's text with numbers (roman too) as '#': "Page 3 of 12" and "Page 4 of 12" alike."""
+    return PAGE_NO.sub("#", " ".join(norm(w["text"]) for w in ws)).strip()
+
+
+def mark_furniture(pages: list[dict], words: list[dict]) -> dict:
+    """Lines in the top or bottom 12% of the page that repeat (see `runs`; bare page numbers too)
+    are running headers and footers: their words are taken out of whatever elements hold them and
+    become page_header / page_footer items (the furniture layer). The layout models label only 40%
+    of these (F040); light mode has no layout at all. Lines are read across the page, not within
+    an element: clusters cut a header differently on each page (4403940). Words in a table are
+    its header row, not furniture."""
+    if len(pages) < 4:
+        return {"lines": 0}
+    seen, cand = collections.defaultdict(set), []
+    for pi, p in enumerate(pages):
+        h = (p.get("facts") or {}).get("height_pt")
+        if not h:
+            continue
+        free = [i for el in p["elements"] if el["label"] not in NO_SPLIT for i in el["words"]]
+        for ln in lines_of([words[i] for i in free]):
+            y = sum(centre(w["box"])[1] for w in ln) / len(ln)
+            band = "page_header" if y < BAND * h else "page_footer" if y > (1 - BAND) * h else None
+            s = line_shape(ln)
+            if band and s and (any(ch.isalnum() for ch in s) or s.strip("# -–|/.ofpage") == ""):
+                seen[(band, s)].add(p["page"])
+                cand.append((pi, band, s, [w["id"] for w in ln]))
+
+    def runs(pgs: set) -> bool:
+        """On at least three pages, and on at least half the pages from its first to its last: a
+        filing of several documents has each one's header only over its own pages (4403940: an
+        article from p.43, its header on alternate pages), and odd and even pages differ."""
+        return len(pgs) >= 3 and len(pgs) >= 0.5 * (max(pgs) - min(pgs) + 1)
+    by_page = collections.defaultdict(list)
+    for pi, band, s, ids in cand:
+        if runs(seen[(band, s)]):
+            by_page[pi].append((band, ids))
+    n = 0
+    for pi, hits in by_page.items():
+        p = pages[pi]
+        taken = {i for _, ids in hits for i in ids}
+        out = []
+        for el in p["elements"]:
+            if el["label"] in NO_SPLIT or not taken.intersection(el["words"]):
+                out.append(el)
+                continue
+            rest = [i for i in el["words"] if i not in taken]
+            if rest:
+                out.append(_part(el, rest, words))
+        for band, ids in hits:
+            f = {"region": None, "label": band, "reader": words[ids[0]].get("reader", "pdf") + "+repeated",
+                 "share": None, "words": ids}
+            f.update({k: v for k, v in _part(f, ids, words).items() if k in ("box", "order_box")})
+            out.append(f)
+            n += 1
+        p["elements"] = out
+    return {"lines": n}
+
+
+SENTENCE_END = re.compile(r"[.!?:;]['\")\]]?$")
+ENUMERATOR = re.compile(r"^\(?([a-z]{1,2}|[ivxl]{1,5})[).]$")      # "b)", "iv.", "(c)": a list item, not a sentence
+FLOWING = ("text", "paragraph", "footnote")
+
+
+def join_across_pages(pages: list[dict], words: list[dict]) -> dict:
+    """A page that ends a body text item without closing punctuation, followed by a page whose
+    first body text item goes on in lower case: one sentence split by the break (about one break
+    in six, F042). The second item is marked `continues`, so the document holds the two as one
+    item with a provenance entry per page."""
+    joins = 0
+    for a, b in zip(pages, pages[1:]):
+        if b["page"] != a["page"] + 1:
+            continue
+        body_a = [e for e in a["elements"] if e["label"] not in FURNITURE + ("line_numbers",) and e["words"]]
+        body_b = [e for e in b["elements"] if e["label"] not in FURNITURE + ("line_numbers",) and e["words"]]
+        if not body_a or not body_b:
+            continue
+        last, first = body_a[-1], body_b[0]
+        if last["label"] not in FLOWING or first["label"] not in FLOWING or last.get("section") or first.get("section"):
+            continue
+        tail = lines_of([words[i] for i in last["words"]])[-1]
+        head = lines_of([words[i] for i in first["words"]])[0]
+        end, start = tail[-1]["text"], head[0]["text"]
+        # the same column, at the foot of one page and the head of the next: on a two-column page
+        # the last item read is not the last line written (4415269 joined across columns)
+        ha, hb = (a.get("facts") or {}).get("height_pt") or 792, (b.get("facts") or {}).get("height_pt") or 792
+        bottom_a = max(words[i]["box"][3] for e in body_a for i in e["words"])
+        top_b = min(words[i]["box"][1] for e in body_b for i in e["words"])
+        xa = (min(w["box"][0] for w in tail), max(w["box"][2] for w in tail))
+        xb = (min(w["box"][0] for w in head), max(w["box"][2] for w in head))
+        overlap = min(xa[1], xb[1]) - max(xa[0], xb[0])
+        placed = tail[0]["box"][3] >= bottom_a - 0.05 * ha and head[0]["box"][1] <= top_b + 0.05 * hb \
+            and overlap >= 0.5 * min(xa[1] - xa[0], xb[1] - xb[0])
+        # footnotes sit at the foot of the page in smaller type: their last line is not where the
+        # sentence breaks off (4403940, a law review: "See James Keller & Bill || thus has...")
+        hs = sorted(words[i]["box"][3] - words[i]["box"][1] for e in body_a for i in e["words"])
+        typical = hs[len(hs) // 2] if hs else 0
+        small = sum(w["box"][3] - w["box"][1] for w in tail) / len(tail) < 0.85 * typical
+        if placed and not small and not SENTENCE_END.search(end) and (start[:1].islower() or start[:1] in ",;)") \
+                and not ENUMERATOR.match(start) and any(ch.isalpha() for ch in " ".join(w["text"] for w in tail)):
+            first["continues"] = True
+            joins += 1
+    return {"joins": joins}
+
+
 def build_document(name: str, pages: list[dict], words: list[dict]):
     """The chosen structure as a DoclingDocument. Each item's meta names its evidence words
     (`regdocs__words`), its region and the readers behind it. -> (document, item per word)."""
@@ -540,6 +653,7 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
     doc = DoclingDocument(name=name)
     owner = {}
     stack = []                   # open sections: (level, group); body items go in the deepest
+    flow = {"item": None, "ids": []}    # the last body text item, which the next page may continue
 
     def under():
         return stack[-1][1] if stack else None
@@ -565,6 +679,8 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
             ws = [words[i] for i in ids]
             text = text_of(ws)
             layer = ContentLayer.FURNITURE if label in FURNITURE or label == "line_numbers" else ContentLayer.BODY
+            if layer == ContentLayer.BODY and not el.get("continues") and label not in FLOWING:
+                flow["item"] = None     # a table, heading, picture...: the sentence did not go on past it
             meta = {"region": el.get("region"), "label_share": el.get("share"), "reader": el["reader"]}
             if label != "list_item":
                 list_group = None
@@ -619,18 +735,34 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
                 item = (doc.add_code if label == "code" else doc.add_formula)(text=text, prov=prov(pno, box, text),
                                                                               parent=under())
                 tag(item, ids, **meta)
+            elif el.get("continues") and flow["item"] is not None and layer == ContentLayer.BODY:
+                # the sentence the last page broke off: the same item, a provenance entry per page
+                item = flow["item"]
+                start = len(item.text) + 1
+                item.text = item.text + " " + text
+                item.orig = item.text
+                p_ = prov(pno, box, text)
+                p_.charspan = (start, start + len(text))
+                item.prov.append(p_)
+                flow["ids"] = flow["ids"] + ids
+                item.meta.set_custom_field("regdocs", "words", flow["ids"])
+                item.meta.set_custom_field("regdocs", "continued_on_page", pno)
+                for i in ids:
+                    owner[i] = item.self_ref
             else:
                 item = doc.add_text(label=DocItemLabel[LABELS.get(label, "TEXT")], text=text,
                                     prov=prov(pno, box, text), content_layer=layer,
                                     parent=None if layer == ContentLayer.FURNITURE else under())
                 tag(item, ids, **meta)
+                if layer == ContentLayer.BODY and label in FLOWING:
+                    flow["item"], flow["ids"] = item, list(ids)
     return doc, owner
 
 
 def markdown(pages: list[dict], words: list[dict]) -> str:
     """Written from the elements, so it holds exactly what the document holds: furniture,
     text under pictures and table cells (a spanning cell once) included."""
-    out = []
+    out, last_para = [], None
     for p in pages:
         out.append(f"<!-- page {p['page']} -->")
         for el in p["elements"]:
@@ -667,8 +799,14 @@ def markdown(pages: list[dict], words: list[dict]) -> str:
             elif el.get("line_no") is not None:      # a transcript's numbered line or paragraph
                 rest = [w for w in ws if not (w["text"] == str(el["line_no"]) and w is ws[0])]
                 out.append(f"{el['line_no']}  " + " ".join(text_of(rest).split()))
+            elif el.get("continues") and last_para is not None:
+                out[last_para] += " " + " ".join(text_of(ws).split())     # the sentence the break cut
             elif ws:
                 out.append(text_of(ws))
+                last_para = len(out) - 1 if label in FLOWING else None
+                continue
+            if label not in FURNITURE + ("line_numbers",):
+                last_para = None if not el.get("continues") else last_para
     return "\n\n".join(out) + "\n"
 
 

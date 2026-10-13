@@ -654,6 +654,24 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   removed), make them one item with two provenance entries, one per page - DoclingDocument
   allows an item several `prov`, so the page of every word stays known. A capital after an
   open end needs more than this to decide.
+- **Built (2026-10-13): furniture by repetition and sentences joined across breaks**, in both modes,
+  before sections (so heading numbers in a running head are not sections). Measured on 20 light
+  documents rebuilt from their saved OCR (`--reuse-ocr`, no GPU), evidence intact in all 20:
+  - *Furniture*: a band line is furniture when it repeats on at least three pages **and on at
+    least half the pages from its first to its last** - not "30% of the document": a filing of
+    several documents has each one's header only over its own pages, alternating odd/even
+    (4403940, an article from p.43: 26 of 93 pages, every other page of its span). Bare page
+    numbers count. Lines are read across the whole page, not inside an element: light-mode
+    clusters cut a header differently on each page, so its shape within a cluster never repeated.
+    Map sheets' graticule labels and title blocks are caught too - the frame of the sheet, kept
+    in the furniture layer, not lost.
+  - *Joins*: body text that ends a page open and goes on in lower case on the next, **at the foot
+    of one and the head of the next, in the same column** (4415269's two-column submission tables
+    were joined across columns), not a list marker ("b) If two...") and not a footnote (a tail in
+    smaller type than the page's body). 22 joins in the 20 documents; about 19 are a sentence
+    split by the break ("...whether weldments are in || accordance with the maintenance
+    project..."); the rest a footnote or a column light mode cannot see. A wrong join loses
+    nothing: each part keeps its own page and box (`prov` per page).
 - **Lines the layout calls furniture that do not repeat** are first-page-only letterhead and
   footers ("www.neb-one.gc.ca"), and roman page numbers before they were read as numbers.
 
