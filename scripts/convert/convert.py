@@ -758,12 +758,13 @@ def cmd_run(args) -> int:
             if sl.conn in ready:
                 try:
                     res = sl.conn.recv()
-                except EOFError:
+                except (EOFError, OSError):      # the worker died mid-send
                     res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
             elif sl.proc.sentinel in ready:
                 res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
             elif time.perf_counter() - sl.since > args.timeout:
                 sl.proc.kill()
+                sl.proc.join(30)                 # not reaped yet, it still looks alive and gets the next document
                 res = {"doc_id": sl.doc, "status": "failed", "error": f"timeout after {args.timeout}s"}
             if res is None:
                 continue
