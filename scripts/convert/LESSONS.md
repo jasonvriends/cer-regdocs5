@@ -605,6 +605,29 @@ list with no levels, and in light mode no headings at all.
   contents pages); layout's section headers in full mode take their level from their numbers or
   the open section.
 
+## Page boundaries: running headers and footers (2026-10-13)
+
+What crosses a page break decides how text reads and chunks: a running header in the middle of a
+paragraph, a table split in two, a section that starts mid-page. `boundaries.py` measures these
+from saved evidence (CPU only). First, furniture, over the 274 full-mode sample documents of four
+pages or more (`runs/v2/reports/boundaries-furniture.json`):
+
+- **The layout models miss most running headers and footers.** A line in the top or bottom 12%
+  of the page whose text (numbers, roman ones too, as `#`) recurs on at least three pages and 30%
+  of them: 13,322 such lines in 195 of the 274 documents; the four-model layout vote calls only
+  40% of them page_header / page_footer. Of 30 the layout called body, judged by reading: about
+  23 are running heads ("trans mountain pipeline ulc attachment #.# august #", "tmep-civ# revision
+  # november # page # of #", "transcript mh-#-#", a law firm's "cassels page #", letterheads),
+  2-3 are a table's header row repeated on each page (a multi-page table - next), about 4
+  unclear. 75% of what the layout does call furniture repeats.
+- **So repetition is the rule for furniture, in both modes**, and the only one light mode has
+  (no layout models): a band line that repeats is furniture, unless it sits in a table region,
+  where it is a repeated header row and the table continues. *Proposed; not yet in the
+  assembler* - it changes which words are body, so it goes in with the reassembly of the corpus
+  (`--reuse-ocr`) and is measured there.
+- **Lines the layout calls furniture that do not repeat** are first-page-only letterhead and
+  footers ("www.neb-one.gc.ca"), and roman page numbers before they were read as numbers.
+
 ## Lessons, with evidence
 
 ### Memory and time
