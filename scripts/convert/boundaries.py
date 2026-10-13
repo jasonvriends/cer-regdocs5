@@ -8,6 +8,10 @@ furniture   lines repeated in the same top or bottom band across a document's pa
             page_header / page_footer on the same words. Light mode has no layout models, so
             repetition is the only way it can tell furniture from body text.
 
+tables      a table ending in the bottom quarter of a page followed by one starting in the top
+            quarter of the next (furniture aside): the same number of columns? does the second
+            open with the first's header line? - how often a table runs across pages.
+
 Reads each document's ledger (pages.json), words.parquet and regions.parquet; writes nothing
 but its report.
 """
@@ -91,13 +95,87 @@ def furniture(doc_id: str) -> dict | None:
             "furniture_regions": sum(len(v) for v in furn_regions.values())}
 
 
+def similar(a: str, b: str) -> bool:
+    """Two header lines alike enough: OCR differs a little between pages ("tera com" / "tera
+    comm"), and a line may be cut at a different word."""
+    ta, tb = a.split(), b.split()
+    if not ta or not tb:
+        return False
+    if len(ta) >= 3 and len(tb) >= 3 and (a.startswith(b) or b.startswith(a)):
+        return True
+    sa, sb = set(ta), set(tb)
+    return len(sa & sb) / len(sa | sb) >= 0.7
+
+
+def table_pairs(doc_id: str) -> list[dict]:
+    import pyarrow.parquet as pq
+    L, words, regions = load(doc_id)
+    pages = {p["page"]: p for p in L["pages"] if not p.get("error")}
+    tf = OUT / doc_id / "convert" / f"{doc_id}.tables.parquet"
+    cols = {(t["page"], t["region"]): t["cols"] for t in pq.read_table(tf).to_pylist() if t["chosen"]} \
+        if tf.exists() else {}
+    by_page = collections.defaultdict(list)
+    for w in words:
+        w["box"] = (w["x0"], w["y0"], w["x1"], w["y1"])
+        by_page[w["page"]].append(w)
+    tables = collections.defaultdict(list)
+    body_top = {}
+    for r in regions:
+        box = (r["x0"], r["y0"], r["x1"], r["y1"])
+        if r["label"] == "table":
+            tables[r["page"]].append((r["region"], box))
+        if r["label"] not in ("page_header", "page_footer"):
+            body_top[r["page"]] = min(body_top.get(r["page"], 1e9), r["y0"])
+
+    def first_line(pno, box):
+        ws = [w for w in by_page.get(pno, []) if asm.inside(box, *asm.centre(w["box"]), 2.0)]
+        lines = asm.lines_of(ws)
+        return shape(lines[0]) if lines else ""
+
+    out = []
+    for pno, ts in tables.items():
+        h = pages.get(pno, {}).get("facts", {}).get("height_pt")
+        nxt = tables.get(pno + 1)
+        h2 = pages.get(pno + 1, {}).get("facts", {}).get("height_pt")
+        if not h or not nxt or not h2:
+            continue
+        a = max(ts, key=lambda t: t[1][3])                 # the lowest table on this page
+        b = min(nxt, key=lambda t: t[1][1])                # the highest on the next
+        if a[1][3] < 0.75 * h or b[1][1] > max(0.25 * h2, body_top.get(pno + 1, 0) + 1):
+            continue
+        ca, cb = cols.get((pno, a[0])), cols.get((pno + 1, b[0]))
+        ha, hb = first_line(pno, a[1]), first_line(pno + 1, b[1])
+        out.append({"doc_id": doc_id, "page": pno, "cols": [ca, cb], "same_cols": ca is not None and ca == cb,
+                    "header_repeated": similar(ha, hb), "header": ha[:60], "next_first_line": hb[:60]})
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("what", choices=["furniture"])
+    ap.add_argument("what", choices=["furniture", "tables"])
     ap.add_argument("--sample", action="append", required=True)
     ap.add_argument("--out")
     args = ap.parse_args()
     ids = list(dict.fromkeys(l.strip() for s in args.sample for l in Path(s).read_text().split() if l.strip()))
+    if args.what == "tables":
+        pairs = []
+        for d in ids:
+            try:
+                pairs += table_pairs(d)
+            except (OSError, ValueError, KeyError):
+                continue
+        c = collections.Counter((p["same_cols"], p["header_repeated"]) for p in pairs)
+        docs = collections.defaultdict(list)
+        for p in pairs:
+            docs[p["doc_id"]].append(p)
+        summary = {"pairs": len(pairs), "documents": len(docs), "of_documents": len(ids),
+                   "documents_with_a_header_repeated": sum(1 for v in docs.values() if any(p["header_repeated"] for p in v)),
+                   "same_cols_and_header": c[(True, True)], "same_cols_only": c[(True, False)],
+                   "header_only": c[(False, True)], "neither": c[(False, False)]}
+        print(json.dumps(summary, indent=1))
+        if args.out:
+            Path(args.out).write_text(json.dumps({"summary": summary, "pairs": pairs}, indent=1))
+        return 0
     rows, total = [], collections.Counter()
     for d in ids:
         try:

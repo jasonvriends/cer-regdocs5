@@ -625,6 +625,19 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   where it is a repeated header row and the table continues. *Proposed; not yet in the
   assembler* - it changes which words are body, so it goes in with the reassembly of the corpus
   (`--reuse-ocr`) and is measured there.
+- **Tables run across pages in one document in six, and the header line says so, not the
+  columns.** A table ending in the bottom quarter of a page and one starting in the top quarter
+  of the next (`runs/v2/reports/boundaries-tables.json`): 1,073 such pairs in 103 of the 625
+  full-mode documents (16%); 3611012 alone has 242. The second repeats the first's header line
+  (words alike, not equal: OCR reads "tera com" on one page and "tera comm" on the next) in 669
+  pairs, 49 documents. The column count is the weaker sign: in 123 pairs the header repeats but
+  the readers chose different grids on each page ([4, 3], [13, 12], one page with no grid at
+  all) - each page's table is read on its own. So stitching (*proposed*): join a table to the
+  one opening the next page when the header line repeats, then lay the continuation's words on
+  the **first page's** columns rather than trusting its own grid; drop the repeated header row
+  (it is a page's furniture, not data). Same columns without a repeated header (131 pairs) is
+  mixed: continuations (mitigation tables, records of engagement) and separate tables (a
+  financial statement's consecutive schedules) - by rows and column positions, to be measured.
 - **Lines the layout calls furniture that do not repeat** are first-page-only letterhead and
   footers ("www.neb-one.gc.ca"), and roman page numbers before they were read as numbers.
 
