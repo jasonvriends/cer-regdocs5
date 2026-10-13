@@ -375,16 +375,174 @@ LABELS = {"caption": "CAPTION", "footnote": "FOOTNOTE", "page_header": "PAGE_HEA
           "formula": "FORMULA", "code": "CODE", "section_header": "SECTION_HEADER", "title": "TITLE"}
 
 
+# --------------------------------------------------------------------------
+# sections: where each starts and how deep, so a reader (or a chunker) can walk the document as
+# a tree [L Sections]. The filer's own structure first - bookmarks - then heading numbers.
+
+NUMBERED = re.compile(r"^(?:(?:section|part|article|appendix)\s+)?(\d{1,2}(?:\.\d{1,2}){0,4})\.?\s+[^\W\d_]", re.I)
+TOC_LINE = re.compile(r"(\.\s?){4,}|\s\d{1,4}$")
+NO_SPLIT = ("table", "document_index", "picture", "line_numbers") + FURNITURE
+
+
+def heading_number(text: str) -> tuple[int, ...] | None:
+    """3.2.1 -> (3, 2, 1); "2.0" is 2, as reports number their chapters; none from 0 (a revision row)
+    or without a word after the number (a legend's "5 - 10-15%")."""
+    m = NUMBERED.match(text)
+    if not m:
+        return None
+    n = tuple(int(x) for x in m.group(1).split("."))
+    while len(n) > 1 and n[-1] == 0:
+        n = n[:-1]
+    return n if n[0] > 0 else None
+
+
+def follows(prev: tuple[int, ...], n: tuple[int, ...]) -> bool:
+    """n can come straight after heading prev: 2.3 -> 2.4, 2.3.1 or 3 (not 2.5, not 7)."""
+    return n == prev + (1,) or any(n == prev[:k] + (prev[k] + 1,) for k in range(len(prev)))
+
+
+def _first_lines(pages: list[dict], words: list[dict]):
+    """Each splittable element's lines, in reading order: (page index, element index, line words)."""
+    for pi, p in enumerate(pages):
+        for ei, el in enumerate(p["elements"]):
+            if el["label"] in NO_SPLIT or not el["words"]:
+                continue
+            for ln in lines_of([words[i] for i in el["words"]]):
+                yield pi, ei, ln
+
+
+def find_sections(pages: list[dict], words: list[dict], outline: list) -> tuple[list[dict], str | None]:
+    """Section starts: {page index, element index, word ids of the heading line(s) or [], level,
+    title, source}. From the bookmarks when there are at least two; else from heading numbers that
+    run in sequence (the longest chain, at least three, so a numbered list or table rows do not
+    pass for sections); else none - layout's section headers stay plain headings."""
+    marks = []
+    entries = [(lvl, title.strip(), pg) for lvl, title, pg in (outline or [])[:5000] if title.strip() and pg > 0]
+    if len(entries) >= 2:
+        by_page = collections.defaultdict(list)
+        for pi, ei, ln in _first_lines(pages, words):
+            by_page[pages[pi]["page"]].append((pi, ei, ln))
+        for lvl, title, pg in entries:
+            want = collections.Counter(tokens(title.split()))
+            hit = None
+            lines = by_page.get(pg, [])
+            for k, (pi, ei, ln) in enumerate(lines):
+                # a title may wrap onto a second line of the same element
+                for span in (1, 2):
+                    if span == 2 and (k + 1 >= len(lines) or lines[k + 1][:2] != (pi, ei)):
+                        continue
+                    ws = ln + (lines[k + 1][2] if span == 2 else [])
+                    have = collections.Counter(tokens(w["text"] for w in ws))
+                    common = sum((want & have).values())
+                    if want and common >= 0.6 * sum(want.values()) and common >= 0.5 * sum(have.values()):
+                        hit = (pi, ei, [w["id"] for w in ws])
+                        break
+                if hit:
+                    break
+            if hit is None:              # anchored at the page's first element; the heading is the bookmark's
+                pi = next((i for i, p in enumerate(pages) if p["page"] == pg), None)
+                if pi is None:
+                    continue
+                ei = next((i for i, el in enumerate(pages[pi]["elements"]) if el["label"] not in FURNITURE), None)
+                hit = (pi, ei, [])
+            marks.append({"pi": hit[0], "ei": hit[1], "words": hit[2], "level": lvl, "title": title,
+                          "page": pg, "source": "bookmarks", "matched": bool(hit[2])})
+        return marks, "bookmarks"
+    cands = []
+    for pi, ei, ln in _first_lines(pages, words):
+        if (pages[pi].get("facts") or {}).get("size") == "oversize":
+            continue                     # a drawing sheet's numbered notes are notes, not sections (834804)
+        text = " ".join(w["text"] for w in ln)
+        n = heading_number(text)
+        # a heading line: short, not a contents line, not a sentence ending in a full stop, and a
+        # title of words - OCR of a scanned sheet gives "2 B°", "3 C64" (3338141, 4041560)
+        title = [t for t in tokens(w["text"] for w in ln[1:])]
+        worded = sum(t.isalpha() for t in title) >= 0.5 * len(title) and any(len(t) >= 4 and t.isalpha() for t in title)
+        if n and worded and len(ln) <= 14 and not TOC_LINE.search(text) and not text.rstrip().endswith((".", ";", ",")):
+            cands.append((pi, ei, ln, n, text))
+    if len(cands) > 3000:
+        cands = cands[:3000]
+    best, back = [1] * len(cands), [-1] * len(cands)
+    for j in range(len(cands)):
+        for i in range(j):
+            if best[i] + 1 > best[j] and follows(cands[i][3], cands[j][3]):
+                best[j], back[j] = best[i] + 1, i
+    if not cands or max(best) < 3:
+        return [], None
+    j, chain = best.index(max(best)), []
+    while j >= 0:
+        chain.append(cands[j])
+        j = back[j]
+    # one level only is how numbered notes and lists look: sections of it must be spread out
+    pages_hit = {pages[c[0]]["page"] for c in chain}
+    if all(len(c[3]) == 1 for c in chain) and (len(pages_hit) < 2 or len(chain) / len(pages_hit) > 3):
+        return [], None
+    for pi, ei, ln, n, text in reversed(chain):
+        marks.append({"pi": pi, "ei": ei, "words": [w["id"] for w in ln], "level": len(n), "title": text,
+                      "page": pages[pi]["page"], "source": "numbering", "matched": True})
+    return marks, "numbering"
+
+
+def mark_sections(pages: list[dict], words: list[dict], outline: list) -> dict:
+    """Split each section's heading out of the element it sits in (in light mode a heading is
+    usually clustered with the paragraph below it) and mark it `section`; returns the summary
+    for the ledger."""
+    marks, source = find_sections(pages, words, outline)
+    by_el = collections.defaultdict(list)
+    for m in marks:
+        by_el[(m["pi"], m["ei"])].append(m)
+    for pi, p in enumerate(pages):
+        out = []
+        for ei, el in enumerate(p["elements"]):
+            ms = by_el.get((pi, ei))
+            if not ms:
+                out.append(el)
+                continue
+            rest = list(el["words"])
+            for m in ms:
+                sec = {k: m[k] for k in ("level", "title", "source", "matched")}
+                head = [i for i in rest if i in set(m["words"])]
+                if not head:             # a bookmark with no line found: the section opens here
+                    out.append({"region": None, "label": "section_header", "reader": "bookmarks", "share": None,
+                                "box": el["box"], "words": [], "section": sec})
+                    continue
+                k = rest.index(head[0])
+                before, rest = rest[:k], [i for i in rest[k:] if i not in set(head)]
+                if before:
+                    out.append(_part(el, before, words))
+                h = _part(el, head, words)
+                h.update(label="section_header", section=sec, reader=el["reader"] + "+" + m["source"])
+                out.append(h)
+            if rest:
+                out.append(_part(el, rest, words))
+        p["elements"] = out
+    levels = [m["level"] for m in marks]
+    return {"source": source, "headings": len(marks), "matched": sum(m["matched"] for m in marks),
+            "depth": max(levels) if levels else 0, "bookmarks": len(outline or []),
+            "list": [{k: m[k] for k in ("page", "level", "title", "source", "matched")} for m in marks[:2000]]}
+
+
+def _part(el: dict, ids: list[int], words: list[dict]) -> dict:
+    bs = [words[i]["box"] for i in ids]
+    box = (min(b[0] for b in bs), min(b[1] for b in bs), max(b[2] for b in bs), max(b[3] for b in bs))
+    return {**{k: v for k, v in el.items() if k not in ("cells", "loose", "section")}, "words": ids, "box": box,
+            "order_box": box}
+
+
 def build_document(name: str, pages: list[dict], words: list[dict]):
     """The chosen structure as a DoclingDocument. Each item's meta names its evidence words
     (`regdocs__words`), its region and the readers behind it. -> (document, item per word)."""
-    from docling_core.types.doc import (BoundingBox, CoordOrigin, DocItemLabel, DoclingDocument,
+    from docling_core.types.doc import (BoundingBox, CoordOrigin, DocItemLabel, DoclingDocument, GroupLabel,
                                         ProvenanceItem, Size, TableCell, TableData)
     from docling_core.types.doc.common.content_layer import ContentLayer
     from docling_core.types.doc.common.meta import BaseMeta
 
     doc = DoclingDocument(name=name)
     owner = {}
+    stack = []                   # open sections: (level, group); body items go in the deepest
+
+    def under():
+        return stack[-1][1] if stack else None
 
     def prov(pno, box, text=""):
         return ProvenanceItem(page_no=pno, charspan=(0, len(text)),
@@ -419,38 +577,52 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
                                    text=text_of([words[i] for i in c["words"]]), column_header=c["header"])
                          for c in el["cells"]]
                 data = TableData(num_rows=el["rows"], num_cols=el["cols"], table_cells=cells)
-                item = doc.add_table(data=data, prov=prov(pno, box),
+                item = doc.add_table(data=data, prov=prov(pno, box), parent=under(),
                                      label=DocItemLabel.DOCUMENT_INDEX if label == "document_index" else DocItemLabel.TABLE)
                 tag(item, [i for c in el["cells"] for i in c["words"]], grid=el["grid"], **meta)
                 if el.get("loose"):              # words inside the table, in no cell: kept after it
                     lw = [words[i] for i in el["loose"]]
                     lt = text_of(lw)
-                    t = doc.add_text(label=DocItemLabel.TEXT, text=lt, prov=prov(pno, box, lt))
+                    t = doc.add_text(label=DocItemLabel.TEXT, text=lt, prov=prov(pno, box, lt), parent=under())
                     tag(t, el["loose"], **{**meta, "reader": meta["reader"] + "+table_loose"})
             elif label == "picture":
-                item = doc.add_picture(prov=prov(pno, box))
+                item = doc.add_picture(prov=prov(pno, box), parent=under())
                 tag(item, [], figure=el.get("figure"), **meta)
                 if ids:
                     t = doc.add_text(label=DocItemLabel.TEXT, text=text, prov=prov(pno, box, text), parent=item)
                     tag(t, ids, **meta)
             elif label == "list_item":
                 if list_group is None:
-                    list_group = doc.add_list_group()
+                    list_group = doc.add_list_group(parent=under())
                 item = doc.add_list_item(text=text, prov=prov(pno, box, text), parent=list_group)
                 tag(item, ids, **meta)
+            elif el.get("section"):         # a section opens: a group holding its heading and what follows
+                sec = el["section"]
+                while stack and stack[-1][0] >= sec["level"]:
+                    stack.pop()
+                g = doc.add_group(label=GroupLabel.SECTION, name=sec["title"][:200], parent=under())
+                stack.append((sec["level"], g))
+                item = doc.add_heading(text=text or sec["title"], level=min(max(sec["level"], 1), 100),
+                                       prov=prov(pno, box, text) if ids else None, parent=g)
+                tag(item, ids, section_source=sec["source"], bookmark_only=not ids, **meta)
             elif label in ("section_header", "title"):
-                item = (doc.add_title if label == "title" else doc.add_heading)(text=text, prov=prov(pno, box, text))
+                item = (doc.add_title(text=text, prov=prov(pno, box, text), parent=under()) if label == "title" else
+                        doc.add_heading(text=text, level=min(len(stack) + 1, 100), prov=prov(pno, box, text),
+                                        parent=under()))
                 tag(item, ids, **meta)
             elif label in ("checkbox_selected", "checkbox_unselected") and "checked" in el:
                 mark = ("☒" if el["checked"] else "☐") + (" " + text if text else "")
-                item = doc.add_text(label=DocItemLabel[LABELS[label]], text=mark, prov=prov(pno, box, mark))
+                item = doc.add_text(label=DocItemLabel[LABELS[label]], text=mark, prov=prov(pno, box, mark),
+                                    parent=under())
                 tag(item, ids, checkbox_label=el.get("checkbox_label"), **meta)
             elif label in ("code", "formula"):      # their own item types, not a TextItem with that label
-                item = (doc.add_code if label == "code" else doc.add_formula)(text=text, prov=prov(pno, box, text))
+                item = (doc.add_code if label == "code" else doc.add_formula)(text=text, prov=prov(pno, box, text),
+                                                                              parent=under())
                 tag(item, ids, **meta)
             else:
                 item = doc.add_text(label=DocItemLabel[LABELS.get(label, "TEXT")], text=text,
-                                    prov=prov(pno, box, text), content_layer=layer)
+                                    prov=prov(pno, box, text), content_layer=layer,
+                                    parent=None if layer == ContentLayer.FURNITURE else under())
                 tag(item, ids, **meta)
     return doc, owner
 
@@ -479,6 +651,9 @@ def markdown(pages: list[dict], words: list[dict]) -> str:
             elif label == "picture":
                 fig = (el.get("figure") or {}).get("class", "picture")
                 out.append(f"*[{fig}]*" + (f"\n\n{text_of(ws)}" if ws else ""))
+            elif el.get("section"):
+                sec = el["section"]
+                out.append("#" * min(sec["level"] + 1, 6) + " " + (text_of(ws).replace("\n", " ") or sec["title"]))
             elif label in ("section_header", "title"):
                 out.append(("# " if label == "title" else "## ") + text_of(ws).replace("\n", " "))
             elif label == "line_numbers":            # numbered paper's margin: kept, out of the paragraphs
