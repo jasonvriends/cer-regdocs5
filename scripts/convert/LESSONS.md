@@ -732,6 +732,16 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   hangs (its text already read in the pre-scan) is now drawn by pdfium on the retry and keeps its
   text and its OCR (`rendered_by_pdfium`); a hang while reading text, or pdfium failing too,
   leaves the page out. 4473998: six retries, then 65 of 65 pages, 6 drawn by pdfium.
+  **Hanging text too goes to pdfium, and a retry must move on.** 4449303 (68 pages, Microsoft Word)
+  hangs MuPDF's text extraction on nine pages with letter-spaced headings ("P A T C H I N G A S S O C I
+  A T E S"); pdfium reads their text and draws them in under 0.1 s. Skipping them lost the pages,
+  and worse, the pass retried the same page six times: a skipped page reported no progress, so
+  "text layer 22" kept naming page 23 while the worker hung on 24. Now skipped pages report
+  progress, the stuck page is the next one not already handled, a page is never retried the same
+  way twice, and any page MuPDF did not finish is read entirely by pdfium (`pdfium_words`, its
+  render, facts without interpreting the content); only a page pdfium fails too is left out.
+  4449303: 68 of 68 pages, 9 read by pdfium. *Open:* each hang costs the stall limit (here 9 x
+  300 s); a document with several could go to pdfium whole after the third.
   **GPU memory, again:** at 1 GB kept per worker, OCR-heavy stretches still reached 21.9-22.7 GB
   and 3 pages a second; workers now keep 256 MB and the pass runs 8 of them.
   Reading from the Windows drive is ~28 times slower per page than from Linux's disk (5 pages:
