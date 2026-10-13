@@ -324,6 +324,19 @@ class OcrOnly:
         self.ocr_engine = ocr_engine(device)
 
 
+def release_gpu(keep: int = 1 << 30) -> None:
+    """Hand cached GPU memory back once a worker holds more than `keep` bytes. PyTorch keeps what
+    the largest page needed; ten workers each keeping theirs filled the 24 GB card, and on WSL a
+    full card spills to system memory instead of failing - pages then took over 15 minutes
+    [L Memory and time]."""
+    try:
+        import torch
+        if torch.cuda.is_available() and torch.cuda.memory_reserved() > keep:
+            torch.cuda.empty_cache()
+    except Exception:
+        pass
+
+
 class Models:
     """Every model, loaded once per worker, on the GPU."""
 
@@ -391,6 +404,7 @@ class Models:
                 x, y = ww - 1 - y, x
             return x, y
         res = self.ocr_engine(img, return_word_box=True)
+        release_gpu()
         words = []
         found = res.word_results if isinstance(res.word_results, (list, tuple)) else ()   # a blank page: a float
         for line_no, line in enumerate(found):
