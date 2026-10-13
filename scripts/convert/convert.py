@@ -617,7 +617,8 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
 
     # page boundaries: running headers and footers by repetition, sentences across breaks [L Page boundaries]
     try:
-        boundaries = {**asm.mark_furniture(pages, all_words), **asm.join_across_pages(pages, all_words)}
+        boundaries = {**asm.mark_furniture(pages, all_words), **asm.stitch_tables(pages, all_words),
+                      **asm.join_across_pages(pages, all_words)}
     except Exception as e:
         boundaries = {"error": repr(e)}
         doc_issues.append({"kind": "boundaries_failed", "severity": "warning", "evidence": repr(e)})

@@ -672,6 +672,20 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
     split by the break ("...whether weldments are in || accordance with the maintenance
     project..."); the rest a footnote or a column light mode cannot see. A wrong join loses
     nothing: each part keeps its own page and box (`prov` per page).
+- **Built: tables stitched across pages** (full mode; light mode reads no tables). A table at a
+  page's foot (nothing below it) and the next page's first table at its head (nothing above it)
+  whose first rows say the same thing (words alike) are one table: the continuation's cells go
+  onto the **first page's columns** by where their middles fall, its rows are appended, its
+  repeated header row becomes that page's furniture, and the table carries a `prov` per page; a
+  table running on over several pages is carried page to page. Tested on the CPU on the 103
+  full-mode documents with a table at a page boundary, rebuilt from their saved words, regions
+  and chosen grids: 186 stitches, evidence intact in all 103. 995751's weed survey is one table
+  of 33 rows over pages 42-46, its six columns aligned at every break (KP 1.66 -> 2.50 -> 3.33
+  ...); 940189's condition table runs from item 6 on p.1 to item 7 on p.2, eight columns. Stricter
+  than the measurement (669 pairs with a repeated header line): nothing may sit between the
+  table and the page edge, and the header comes from the grid's first row. Full documents are
+  read again only with the GPU (no `--reuse-ocr` for full mode), so stitching reaches them on
+  their next full conversion.
 - **Lines the layout calls furniture that do not repeat** are first-page-only letterhead and
   footers ("www.neb-one.gc.ca"), and roman page numbers before they were read as numbers.
 
