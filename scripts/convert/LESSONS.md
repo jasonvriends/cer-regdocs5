@@ -677,6 +677,19 @@ list with no levels, and in light mode no headings at all.
   worker over 1 GB. After the restart: peak 19.7 GB over 15 minutes, 0 stalls, ~23 pages a second
   (from 6.7). Some of what was put down to GPU contention above was probably this. Watch the
   card's memory, not only its utilisation: 100% busy can mean thrashing.
+- **Some pages never finish, and that costs the page, not the document.** Eleven documents stalled
+  in one hour, ten from one filing (4553641-4553652), two of them while reading the text layer -
+  so not the GPU. 4537539 page 130, an ArcGIS map (69 nested form XObjects, 644 KB of drawing
+  operators, ESRI symbol fonts): MuPDF 1.28.2 neither extracts its words nor renders it at 36 dpi
+  within minutes, from the Windows drive or from Linux's own disk; the other 169 pages read in
+  well under a second each. A call into MuPDF cannot be stopped from inside, so the parent does
+  it: on a stall it knows where the worker was ("text layer 129": stuck on page 130), and the
+  document goes back in the queue without that page, recorded as `page_skipped` (an error, so it
+  is listed as missing); after three such pages the document fails. The stall limit is 300 s:
+  the slowest real page seen took under 90 s with ten workers sharing the GPU, and a limit of
+  20 s (tried) skipped pages that were only slow OCR (117 and 125 read in 0.05 s alone).
+  Reading from the Windows drive is ~28 times slower per page than from Linux's disk (5 pages:
+  0.56 s against 0.02 s) - slow, not stuck.
   *Open:* the angle classifier (a third of OCR time here) could be skipped on pages whose
   orientation is already known; measure what it costs in words before turning it off.
 - **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
