@@ -573,6 +573,38 @@ pages:
   Two documents "under 98%" were both only this.
 - **A stray control character became a text item and a warning** (2415559's "\x85").
 
+## Sections: a tree, from the filer's structure first (2026-10-13)
+
+A chunker that slides a window over text loses where it is; one that walks sections keeps it
+("the schema carries most of the weight", r/Rag). The DoclingDocument had headings as a flat
+list with no levels, and in light mode no headings at all.
+
+- **Bookmarks are the filer's own tree, and the cheapest.** 4034412 (148 pages): 118 sections, 7
+  levels, 116 titles found on their pages. 4646669 (Book of Authorities): 13 tabs, 3 found - a
+  bookmark names a tab ("TAB 3 - CER Reasons for Decision") the page does not repeat, so the
+  section opens at the page's top with the bookmark's text, marked `bookmark_only`. A single
+  bookmark (the document's title) is not a tree; two or more are needed.
+- **Heading numbers work when they must run in sequence.** 777308 (code of practice): 72
+  sections, 4 levels; 3768464: down to 2.3.2.1. Taken alone, a number at the start of a line is
+  as often a list, a legend or a note. False sections found on 77 random documents (random-100-a), each now
+  rejected: a revision row "0 2010/09/07 ISSUED FOR CONSTRUCTION" (no section 0; "2.0" is 2); a
+  slope legend "5 - 10-15% moderate slopes" (a title starts with a word); a drawing's numbered
+  notes 1-15 (not on sheets over 17.5 in; a one-level chain needs two pages and at most three a
+  page); OCR of scanned sheets "2 B°", "3 C64", "5 力 ℃" (a title has a word of four letters and
+  is mostly words). The chain is the longest run where each number can follow the last
+  (2.3 -> 2.4, 2.3.1 or 3), at least three long, so one stray number does not start a tree.
+- **In light mode a heading sits in the same cluster as the paragraph under it**, so the
+  heading line is split out into its own element; the evidence check still finds every word
+  named once (77 of 77).
+- **Evidence kept means assembly can be redone.** `--reuse-ocr` takes the OCR words a light
+  conversion saved instead of running OCR again: 4657424 (149 pages, 64 OCR'd) reassembled in 48 s
+  against 188 s, the GPU never loaded, all 41,735 words identical - and 77 sections from its 79
+  bookmarks. Sections (and the next assembly change) reach the whole corpus without the GPU.
+- *Open:* tagged PDFs' structure trees (H1-H6) as a third source (47% of documents are tagged;
+  needs a structure-tree reader); a section tree for documents with neither (title-case lines,
+  contents pages); layout's section headers in full mode take their level from their numbers or
+  the open section.
+
 ## Lessons, with evidence
 
 ### Memory and time

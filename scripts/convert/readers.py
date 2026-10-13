@@ -318,10 +318,17 @@ def ocr_engine(device: str = "cuda"):
 
 
 class OcrOnly:
-    """Just the OCR reader, for checks that need no layout or table models (check.py)."""
+    """Just the OCR reader, for checks that need no layout or table models (check.py). `lazy`:
+    loaded on the first page that needs it (a rerun on saved OCR words may need none)."""
 
-    def __init__(self, device: str = "cuda"):
-        self.ocr_engine = ocr_engine(device)
+    def __init__(self, device: str = "cuda", lazy: bool = False):
+        self.device, self._engine = device, None if lazy else ocr_engine(device)
+
+    @property
+    def ocr_engine(self):
+        if self._engine is None:
+            self._engine = ocr_engine(self.device)
+        return self._engine
 
 
 def release_gpu(keep: int = 1 << 30) -> None:

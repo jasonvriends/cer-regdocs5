@@ -70,8 +70,16 @@ read      per region, by label:
                      + the words inside it (text layer, or OCR of the crop)   [C §5.5]
             form, key_value, checkbox -> words + AcroForm fields + checkbox state  [C §5.5]
           words no region claims become text items of their own  (55.5% -> 99.3% [C §5.3])
+sections  where each section starts and how deep: the filer's bookmarks (two or more; each
+          title matched to its line on the target page, else the section opens at the page's
+          top with the bookmark's text), else heading numbers that run in sequence (the
+          longest chain of 2.3 -> 2.4 / 2.3.1 / 3, at least three; titles of words; not on
+          drawing sheets; one-level chains spread over pages). The heading line is split out of
+          the element it was clustered with                              [L Sections]
 build     DoclingDocument (docling-core, our own code, not docling's converter); each item
-          carries meta `regdocs__words` (evidence word ids) and `regdocs__reader`
+          carries meta `regdocs__words` (evidence word ids) and `regdocs__reader`; each
+          section is a SECTION group holding its heading (with its level) and what follows,
+          so a chunker walks the tree instead of a window over text
 vote      vote.py: on lines where our OCR and a scan's own OCR layer differ, two vision models
           measured first (vote.py bench); where both choose the layer, its words are the evidence
 check     coverage (every evidence word in exactly one item), duplicates, tables' fit,
@@ -158,9 +166,12 @@ trees, which cost more than it bought.
 
 ## Operations
 
-One worker process holds the models and converts one document at a time; the parent restarts
-it on a crash or a timeout and records the failure, so one bad PDF costs one document
-[C §7 Reliability]. Pages are rendered under a pixel budget [C §5.5]. GPU memory is checked
+Worker processes each hold the models and convert one document at a time; the parent replaces
+a worker on a crash, or when no page has finished for `--stall` seconds (a cap scaled by pages
+stays as a backstop), and records the failure, so one bad PDF costs one document
+[C §7 Reliability, L Memory and time]. Workers hand cached GPU memory back after OCR.
+Assembly can be redone without the GPU: `--reuse-ocr` takes the OCR words a light conversion
+saved (same OCR model) instead of reading the page again. Pages are rendered under a pixel budget [C §5.5]. GPU memory is checked
 before starting [C §7 Reliability: a game on the GPU].
 
 ## Measuring

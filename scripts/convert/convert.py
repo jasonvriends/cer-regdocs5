@@ -104,7 +104,7 @@ def tool_family(raw):
 # one page
 
 def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, transcript_doc: bool = False,
-                 votes: list[dict] = (), base: int = 0, light: bool = False, cached=None) -> dict:
+                 votes: list[dict] = (), base: int = 0, light: bool = False, cached=None, ocr_cached=None) -> dict:
     """One page. `light`: the evidence pass for the whole corpus - words from the text layer, OCR
     only where the layer is not sound or images may hold text, no layout, table or figure models."""
     t0 = time.perf_counter()
@@ -125,7 +125,7 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
     try:
         # light: a sound layer with no image of any size needs no OCR (nothing it could add)
         skip_ocr = light and verdict == "sound" and facts["largest_image_cover"] < 0.05
-        ocr_w = [] if skip_ocr else timed("ocr", lambda: models.ocr(page))
+        ocr_w = [] if skip_ocr else ocr_cached if ocr_cached is not None else timed("ocr", lambda: models.ocr(page))
     except Exception as e:                  # OCR is one reader: its failure is recorded, not the page's
         ocr_w = []
         issues.append({"kind": "ocr_failed", "severity": "warning", "evidence": repr(e)})
@@ -482,8 +482,33 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
 # --------------------------------------------------------------------------
 # one document
 
-def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None) -> dict:
+def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | None]:
+    """The OCR words an earlier conversion of this document saved, by page - for pages where OCR
+    ran - when it read them with the same OCR model in the same mode; else nothing. Assembly can
+    then be redone without the GPU [L Sections]."""
+    import pyarrow.parquet as pq
+    led, wf = out_dir(doc_id) / f"{doc_id}.pages.json", out_dir(doc_id) / f"{doc_id}.words.parquet"
+    try:
+        L = json.loads(led.read_text())
+        if L.get("ocr_model") != rd.SETTINGS["ocr_model"] or L.get("mode", "full") != ("light" if light else "full") \
+                or not light:          # full mode also OCRs crops and turned renders: not reused
+            return {}, None
+        ran = {p["page"] for p in L["pages"] if "ocr" in (p.get("step_seconds") or {}) and not p.get("error")}
+        cache = {pno: [] for pno in ran}
+        for w in sorted(pq.read_table(wf).to_pylist(), key=lambda w: w["id"]):
+            if w["reader"] == "ocr" and w["page"] in cache:
+                cache[w["page"]].append({"text": w["text"], "conf": w["conf"], "line": w["line"], "block": w["block"],
+                                         "rotate": 0, "box": (w["x0"], w["y0"], w["x1"], w["y1"]),
+                                         "hidden": False, "redacted": False})
+        return cache, L.get("converted_at")
+    except (OSError, ValueError, KeyError):
+        return {}, None
+
+
+def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None,
+                     reuse_ocr: bool = False) -> dict:
     progress = progress or (lambda stage, n: None)    # tells the parent the document is moving
+    ocr_saved, ocr_from = saved_ocr(doc_id, light) if reuse_ocr else ({}, None)
     import pymupdf
     import pyarrow as pa
     import pyarrow.parquet as pq
@@ -524,7 +549,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         page = pdf[pno - 1]
         try:
             p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
-                             layer.pop(pno, None))
+                             layer.pop(pno, None), ocr_saved.get(pno))
+            if pno in ocr_saved:
+                p["ocr_reused"] = True
             progress("page", pno)
         except Exception as e:
             p = {"page": pno, "error": repr(e), "trace": traceback.format_exc(), "elements": [], "todo": ["page_failed"],
@@ -560,6 +587,17 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
 
     out = out_dir(doc_id)
     out.mkdir(parents=True, exist_ok=True)
+
+    # sections: the filer's bookmarks, else heading numbers in sequence [L Sections]
+    try:
+        outline = pdf.get_toc(simple=True)
+    except Exception:
+        outline = []
+    try:
+        sections = asm.mark_sections(pages, all_words, outline)
+    except Exception as e:
+        sections = {"source": None, "headings": 0, "error": repr(e)}
+        doc_issues.append({"kind": "sections_failed", "severity": "warning", "evidence": repr(e)})
 
     # document, export, checks over the whole document
     doc, owner = asm.build_document(doc_id, pages, all_words)
@@ -607,7 +645,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     todo = collections.Counter(t for p in pages for t in p["todo"])
     ledger = {
         "doc_id": doc_id, "version": VERSION, "mode": "light" if light else "full", "run": run,
-        "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"],
+        "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"], "ocr_reused_from": ocr_from,
         "seconds": round(time.perf_counter() - t0, 2), "context": ctx,
         "summary": {"pages": len(pages), "words_evidence": sum(1 for w in all_words if w["evidence"]),
                     "words_pdf": sum(1 for w in all_words if w["reader"] == "pdf"),
@@ -616,7 +654,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                     "tables": sum(len(p.get("tables") or []) for p in pages),
                     "pictures": sum(len(p.get("pictures") or []) for p in pages),
                     "docling": dcheck, "export_recall": round(recall, 4), "export_word_ratio": round(ratio, 3),
-                    "issues": dict(sev), "todo": dict(todo)},
+                    "issues": dict(sev), "todo": dict(todo),
+                    "sections": {k: v for k, v in sections.items() if k != "list"}},
+        "sections": sections.get("list", []),
         "issues": doc_issues,
         "pages": [{k: v for k, v in p.items() if k != "elements"} for p in pages],
         "files": sorted(f.name for f in out.iterdir() if f.name.startswith(doc_id)),
@@ -630,11 +670,11 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
 # --------------------------------------------------------------------------
 # the worker: models load once; the parent survives its crashes and hangs
 
-def worker(conn, run: str, light: bool = False):
+def worker(conn, run: str, light: bool = False, reuse_ocr: bool = False):
     import logging
     logging.disable(logging.WARNING)
     try:
-        models = rd.OcrOnly() if light else rd.Models()
+        models = rd.OcrOnly(lazy=reuse_ocr) if light else rd.Models()
     except Exception as e:
         conn.send({"ready": False, "error": repr(e), "trace": traceback.format_exc()})
         return
@@ -645,7 +685,7 @@ def worker(conn, run: str, light: bool = False):
             return
         try:
             res = convert_document(models, doc_id, run, light,
-                                   lambda stage, n: conn.send({"progress": stage, "n": n}))
+                                   lambda stage, n: conn.send({"progress": stage, "n": n}), reuse_ocr)
         except Exception as e:
             res = {"doc_id": doc_id, "status": "failed", "error": repr(e), "trace": traceback.format_exc()}
         try:
@@ -712,7 +752,7 @@ def cmd_run(args) -> int:
         """One worker process and the document it is on."""
         def __init__(self):
             self.conn, child = ctx.Pipe()
-            self.proc = ctx.Process(target=worker, args=(child, run, args.light), daemon=True)
+            self.proc = ctx.Process(target=worker, args=(child, run, args.light, args.reuse_ocr), daemon=True)
             self.proc.start()
             self.doc = None
             self.since = 0.0
@@ -944,6 +984,9 @@ def main(argv=None) -> int:
             c.add_argument("--all", action="store_true", help="every PDF in source/, newest first")
             c.add_argument("--workers", type=int, default=1,
                            help="worker processes, each with its own models (light mode: 6-8 is reasonable)")
+            c.add_argument("--reuse-ocr", action="store_true",
+                           help="light mode: take OCR words from the document's last light conversion (same OCR "
+                                "model) instead of running OCR again - redo assembly without the GPU")
             c.add_argument("--stall", type=float, default=900,
                            help="stop a document when no page has finished for this many seconds")
             c.add_argument("--timeout", type=float, default=3600, help="seconds per document, at least")
