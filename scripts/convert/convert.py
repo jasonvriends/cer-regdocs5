@@ -482,7 +482,8 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
 # --------------------------------------------------------------------------
 # one document
 
-def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False) -> dict:
+def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None) -> dict:
+    progress = progress or (lambda stage, n: None)    # tells the parent the document is moving
     import pymupdf
     import pyarrow as pa
     import pyarrow.parquet as pq
@@ -497,6 +498,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     layer = {}                       # each page's text layer, read once and reused below
     for i, pg in enumerate(pdf):
         layer[i + 1] = rd.pdf_words(pg)
+        progress("text layer", i + 1)
         ws = layer[i + 1][0]
         if len(ws) > 5:
             with_text += 1
@@ -523,6 +525,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         try:
             p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
                              layer.pop(pno, None))
+            progress("page", pno)
         except Exception as e:
             p = {"page": pno, "error": repr(e), "trace": traceback.format_exc(), "elements": [], "todo": ["page_failed"],
                  "issues": [{"page": pno, "kind": "page_failed", "severity": "error", "evidence": repr(e)}],
@@ -641,7 +644,8 @@ def worker(conn, run: str, light: bool = False):
         if doc_id is None:
             return
         try:
-            res = convert_document(models, doc_id, run, light)
+            res = convert_document(models, doc_id, run, light,
+                                   lambda stage, n: conn.send({"progress": stage, "n": n}))
         except Exception as e:
             res = {"doc_id": doc_id, "status": "failed", "error": repr(e), "trace": traceback.format_exc()}
         try:
@@ -721,6 +725,7 @@ def cmd_run(args) -> int:
 
         def give(self, d):
             self.doc, self.since = d, time.perf_counter()
+            self.moved, self.where = self.since, "start"
             # a long document gets longer: a fixed hour stopped a 171-page drawing set, and
             # REGDOCS has documents of 900 and 7,280 pages (LESSONS.md, Memory and time)
             try:
@@ -764,17 +769,25 @@ def cmd_run(args) -> int:
             if not sl.doc:
                 continue
             res = None
+            now = time.perf_counter()
             if sl.conn in ready:
                 try:
                     res = sl.conn.recv()
+                    while "progress" in res:         # a page done: the document is moving
+                        sl.moved, sl.where = now, f"{res['progress']} {res['n']}"
+                        res = sl.conn.recv() if sl.conn.poll() else None
+                        if res is None:
+                            break
                 except (EOFError, OSError):      # the worker died mid-send
                     res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
             elif sl.proc.sentinel in ready:
                 res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
-            elif time.perf_counter() - sl.since > sl.limit:
+            elif now - sl.moved > args.stall or now - sl.since > sl.limit:
                 sl.proc.kill()
                 sl.proc.join(30)                 # not reaped yet, it still looks alive and gets the next document
-                res = {"doc_id": sl.doc, "status": "failed", "error": f"timeout after {sl.limit:.0f}s"}
+                why = (f"no progress for {args.stall:.0f}s" if now - sl.moved > args.stall
+                       else f"timeout after {sl.limit:.0f}s")
+                res = {"doc_id": sl.doc, "status": "failed", "error": f"{why} (at {sl.where})"}
             if res is None:
                 continue
             report(sl.doc, res, sl.since)
@@ -931,9 +944,12 @@ def main(argv=None) -> int:
             c.add_argument("--all", action="store_true", help="every PDF in source/, newest first")
             c.add_argument("--workers", type=int, default=1,
                            help="worker processes, each with its own models (light mode: 6-8 is reasonable)")
+            c.add_argument("--stall", type=float, default=900,
+                           help="stop a document when no page has finished for this many seconds")
             c.add_argument("--timeout", type=float, default=3600, help="seconds per document, at least")
-            c.add_argument("--timeout-per-page", type=float, default=20,
-                           help="seconds per page, when that is more than --timeout (900 pages: 5 hours)")
+            c.add_argument("--timeout-per-page", type=float, default=60,
+                           help="seconds per page, when that is more than --timeout (900 pages: 15 hours); "
+                                "a cap only - a stuck document is stopped by --stall")
     args = ap.parse_args(argv)
     return {"run": cmd_run, "status": cmd_status, "report": cmd_report}[args.cmd](args)
 
