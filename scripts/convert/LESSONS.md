@@ -284,6 +284,18 @@ graphics on 35% of Microsoft Print to PDF pages (survey 2%). Each was one or two
 samples are for finding *kinds* of problem and checking the converter; rates for the guidance come
 from the survey, with intervals, and every sample rate quoted there now says so or is corrected.
 
+- **A privacy finding must be looked at before it is reported.** The survey's 7 "cover-up
+  redactions" were each one glyph on a dark box (a ticked checkbox "X", Wingdings "qqqq" on a map,
+  a bullet). A redaction hides text, so three or more covered words of two or more letters or
+  digits are now required; 4710294's real redaction is still found (13,159 words, 36 pages), the 7
+  are not, and those glyphs stay evidence in conversion instead of being dropped as "redacted".
+
+- **2024's outlier is one filer's publishing system.** 81 of 2024's 94 mostly-not-digital
+  documents are Trans Mountain information request responses made with iText: born-digital pages
+  rasterized to 300 dpi colour images with no text (4461679). Not scanned - the capture class
+  calls them `scan_no_layer`, so it cannot yet tell a rendered page from a scanned one; a scan has
+  noise and often one bit per pixel, a render is clean colour. Worth a class of its own.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.

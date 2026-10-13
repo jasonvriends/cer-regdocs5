@@ -18,7 +18,8 @@ not digital documents** - their pages are scans, stub layers, broken layers or t
 graphics. Pages: 65% digital, 11% digital with text also inside images, 15% page images with no
 text at all, 5% scans with an OCR layer, 2% scans with a stub layer, 0.5% layers that do not decode,
 0.4% text drawn as graphics. It is falling: **28-47% of documents in most years before 2012,
-6-10% in 2021-2026** (2024: 32%, a year to look into).
+6-10% in 2021-2026**. (2024 reads 32%, but 81 of its 94 such documents are one filer's
+information request responses, rasterized on the way to filing - 1.4; without them 6%.)
 
 The documents that are not digital are **the signed ones** (affidavits 79%, letters 23%) and
 **the scanned ones** (scanner-made PDFs 98%, PDFs with no producer recorded 75%). What made a
@@ -75,13 +76,28 @@ display correctly and extract as nonsense; silent - the file opens, prints and r
 eye. Do not re-distil a finished PDF; do not strip font data; PDF/A "u" conformance rules it out
 (19 of 5,000 documents are PDF/A).
 
+### 1.4 Do not turn a digital document into pictures of its pages
+
+**[survey] Not a scan: digital documents rasterized by the filing process.** 81 of 5,000 random
+documents (1.6%), all Trans Mountain information request responses filed in 2024 and made by an
+iText-based system: each page a 300 dpi colour image (2550 x 3300) of a crisp, born-digital page
+- a Health and Safety Management Plan, tables in colour, page numbers - and no text at all
+(4461679). The text existed and was removed by the system that prepared the filing. It is why
+information request responses read 37% not digital (without this filer: 31 of 222, 14%) and why
+2024 stands out.
+
+**Recommendation (proposed):** a document-management or publishing step must not rasterize; if a
+system "flattens" documents, it must keep or restore the text layer (or file the original).
+**Check:** a page that is one full-page image with no text, from a digital source - the same
+text-layer-against-OCR check catches it, whatever made it.
+
 ---
 
 ## 2. Sign digitally; do not print, sign and scan
 
 **[survey] The documents that are scans are the signed ones.** Mostly not digital, by REGDOCS
-document type: **affidavits 79% (95% CI 64-89%)**, information request responses 37% (32-43%),
-written evidence 37% (27-48%), **letters 23% (21-26%)**, letters of comment 20% (15-26%) - against
+document type: **affidavits 79% (95% CI 64-89%)**, information request responses 37% (32-43%; 14%
+without one filer's rasterized responses - 1.4), written evidence 37% (27-48%), **letters 23% (21-26%)**, letters of comment 20% (15-26%) - against
 orders 3%, notifications 3%, applications to participate 2%, receipts 0%, rulings 0%.
 
 **[samples] Fading for letters, not for affidavits.** 105 signed documents, 7 a year 2012-2026:
@@ -134,10 +150,12 @@ catches no layer, a stub layer and a poor scanner layer alike.
 
 ## 4. Redact by removing, not covering
 
-**[survey]** 7 of 5,000 documents (0.14%) have words still in the text layer under a dark box that
-renders flat - and only 3 pages of each were checked, so this undercounts. **[2026-09 corpus]**
-one filing: 11,246 words of blacked-out invoice descriptions recoverable by copying the page. Rare,
-and a privacy failure each time. Use a redaction tool that deletes the text; verify by searching
+**[2026-09 corpus]** one filing (4710294): blacked-out invoice descriptions - 13,159 words on 36
+pages - still in the text layer, recoverable by copying the page. **[survey]** no other case in
+5,000 documents (3 pages each, so a scattered redaction could be missed). *Correction:* a first
+count gave 7 documents; looked at, every one was a single glyph on a dark box - a ticked checkbox,
+a bullet, a map symbol - not a redaction, and the check now requires covered words. Rare, and a
+privacy failure each time. Use a redaction tool that deletes the text; verify by searching
 for a redacted phrase.
 
 ---

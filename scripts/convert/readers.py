@@ -217,7 +217,12 @@ def redacted_words(page, words: list[dict]) -> set[int]:
         cut = a[max(int((y0 + dy) * k), 0):int((y1 - dy) * k) + 1, max(int((x0 + dx) * k), 0):int((x1 - dx) * k) + 1]
         if cut.size and cut.mean() < 80 and cut.std() < 12:
             out.add(i)
-    return out
+    # a redaction hides text: three or more real words (two or more letters or digits). A lone
+    # glyph on a dark box is a filled checkbox, a bullet or a map symbol ("X", "qqqq", "G": all
+    # seven survey hits, 2026-10-12), and stays evidence
+    real = [i for i in out if sum(ch.isalnum() for ch in words[i]["text"]) >= 2
+            and len(set(words[i]["text"])) > 1]
+    return out if len(real) >= 3 else set()
 
 
 def page_facts(page) -> dict:
