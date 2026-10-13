@@ -596,6 +596,99 @@ def mark_furniture(pages: list[dict], words: list[dict]) -> dict:
     return {"lines": n}
 
 
+def header_alike(a: str, b: str) -> bool:
+    """Two header lines alike enough: OCR differs a little between pages ("tera com" / "tera
+    comm"), and a line may be cut at a different word (F041)."""
+    ta, tb = a.split(), b.split()
+    if not ta or not tb:
+        return False
+    if len(ta) >= 3 and len(tb) >= 3 and (a.startswith(b) or b.startswith(a)):
+        return True
+    return len(set(ta) & set(tb)) / len(set(ta) | set(tb)) >= 0.7
+
+
+def stitch_tables(pages: list[dict], words: list[dict]) -> dict:
+    """A table ending a page whose header line opens the next page's first table is one table
+    (F041): the continuation's cells are laid on the first page's columns - each page's grid is
+    read on its own, and the readers often split the same columns differently ([4, 3], [13, 12])
+    - its rows appended, and its repeated header row moved to the page's furniture."""
+    n = 0
+    carry = None                 # a table stitched onto the page before, which may go on again
+    for a, b in zip(pages, pages[1:]):
+        held, carry = carry, None
+        if b["page"] != a["page"] + 1:
+            continue
+        body_a = [e for e in a["elements"] if e["label"] not in FURNITURE + ("line_numbers",) and e["words"]
+                  and not e["reader"].endswith("+table_loose")]
+        body_b = [e for e in b["elements"] if e["label"] not in FURNITURE + ("line_numbers",) and e["words"]]
+        if not body_b:
+            continue
+        ta = max((e for e in body_a if e["label"] == "table" and e.get("cells")), key=lambda e: e["box"][3], default=None)
+        foot = ta["box"] if ta is not None else None
+        if held is not None and not body_a:      # page a was all continuation: the table goes on from there
+            ta, foot = held
+        tb = min((e for e in body_b if e["label"] == "table" and e.get("cells")), key=lambda e: e["box"][1], default=None)
+        if ta is None or tb is None:
+            continue
+        ha, hb = (a.get("facts") or {}).get("height_pt") or 792, (b.get("facts") or {}).get("height_pt") or 792
+        below = [e for e in body_a if e["box"][1] > foot[3] + 2]
+        above = [e for e in body_b if e["box"][3] < tb["box"][1] - 2]
+        if foot[3] < 0.75 * ha or tb["box"][1] > 0.25 * hb or below or above:
+            continue
+        head_a = [c for c in ta["cells"] if c["r0"] == 0]
+        head_b = [c for c in tb["cells"] if c["r0"] == 0]
+        line_a = line_shape(sorted((words[i] for c in head_a for i in c["words"]), key=lambda w: w["box"][0]))
+        line_b = line_shape(sorted((words[i] for c in head_b for i in c["words"]), key=lambda w: w["box"][0]))
+        if not header_alike(line_a, line_b):
+            continue
+        # the first page's columns, as x ranges; each continuation cell goes to the one its middle is in
+        spans = collections.defaultdict(lambda: [1e9, -1e9])
+        for c in ta["cells"]:
+            if c["c1"] - c["c0"] == 1:
+                sp = spans[c["c0"]]
+                sp[0], sp[1] = min(sp[0], c["box"][0]), max(sp[1], c["box"][2])
+        if len(spans) < 2:
+            continue
+
+        def column(cell):
+            cx = (cell["box"][0] + cell["box"][2]) / 2
+            return min(spans, key=lambda k: 0 if spans[k][0] <= cx <= spans[k][1]
+                       else min(abs(cx - spans[k][0]), abs(cx - spans[k][1])))
+        merged = {}
+        for c in tb["cells"]:
+            if c["r0"] == 0:
+                continue
+            key = (ta["rows"] + c["r0"] - 1, column(c))
+            if key in merged:
+                merged[key]["words"] += c["words"]
+                bx = merged[key]["box"]
+                merged[key]["box"] = (min(bx[0], c["box"][0]), min(bx[1], c["box"][1]),
+                                      max(bx[2], c["box"][2]), max(bx[3], c["box"][3]))
+            else:
+                merged[key] = {"r0": key[0], "r1": key[0] + 1, "c0": key[1], "c1": key[1] + 1,
+                               "box": c["box"], "words": list(c["words"]), "header": False, "page": b["page"]}
+        added_rows = max((c["r0"] for c in tb["cells"]), default=0)
+        ta["cells"] = ta["cells"] + list(merged.values())
+        ta["rows"] = ta["rows"] + added_rows
+        ta.setdefault("continued", []).append({"page": b["page"], "box": tb["box"], "first_row": ta["rows"] - added_rows,
+                                               "cols_there": tb.get("cols")})
+        ta["words"] = ta["words"] + [i for c in merged.values() for i in c["words"]]
+        rest = list(b["elements"])
+        rest.remove(tb)
+        hdr = [i for c in head_b for i in c["words"]]
+        if hdr:
+            rest.append({**_part(tb, hdr, words), "label": "page_header", "region": tb.get("region"),
+                         "reader": tb["reader"] + "+repeated_table_header"})
+        if tb.get("loose"):
+            rest.append({**_part(tb, tb["loose"], words), "label": "text", "reader": tb["reader"] + "+table_loose"})
+        b["elements"] = rest
+        n += 1
+        if not [e for e in rest if e["label"] not in FURNITURE + ("line_numbers",) and e["words"]
+                and e["box"][1] > tb["box"][1] and not e["reader"].endswith("+table_loose")]:
+            carry = (ta, tb["box"])          # the continuation reached this page's foot: it may go on
+    return {"tables_stitched": n}
+
+
 SENTENCE_END = re.compile(r"[.!?:;]['\")\]]?$")
 ENUMERATOR = re.compile(r"^\(?([a-z]{1,2}|[ivxl]{1,5})[).]$")      # "b)", "iv.", "(c)": a list item, not a sentence
 FLOWING = ("text", "paragraph", "footnote")
@@ -695,7 +788,11 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
                 data = TableData(num_rows=el["rows"], num_cols=el["cols"], table_cells=cells)
                 item = doc.add_table(data=data, prov=prov(pno, box), parent=under(),
                                      label=DocItemLabel.DOCUMENT_INDEX if label == "document_index" else DocItemLabel.TABLE)
+                for cont in el.get("continued") or []:      # a table stitched across pages: a prov per page
+                    item.prov.append(prov(cont["page"], cont["box"]))
                 tag(item, [i for c in el["cells"] for i in c["words"]], grid=el["grid"], **meta)
+                if el.get("continued"):
+                    item.meta.set_custom_field("regdocs", "continued", el["continued"])
                 if el.get("loose"):              # words inside the table, in no cell: kept after it
                     lw = [words[i] for i in el["loose"]]
                     lt = text_of(lw)
