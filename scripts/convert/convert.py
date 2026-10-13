@@ -506,9 +506,10 @@ def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | No
 
 
 def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None,
-                     reuse_ocr: bool = False, skip: tuple = ()) -> dict:
+                     reuse_ocr: bool = False, skip: tuple = (), pdfium: tuple = ()) -> dict:
     """`skip`: pages not to read at all - MuPDF did not finish them on an earlier try (an ArcGIS
-    map page in 4537539 hangs text extraction and rendering alike) [L Memory and time]."""
+    map page in 4537539 hangs text extraction and rendering alike). `pdfium`: pages whose render
+    crashed or hung MuPDF on an earlier try, drawn by pdfium instead [L Memory and time]."""
     progress = progress or (lambda stage, n: None)    # tells the parent the document is moving
     ocr_saved, ocr_from = saved_ocr(doc_id, light) if reuse_ocr else ({}, None)
     import pymupdf
@@ -561,9 +562,15 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
             pages.append(p)
             progress("page", pno)
             continue
+        if pno in pdfium:
+            page.regdocs_render = "pdfium"
         try:
             p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
                              layer.pop(pno, None), ocr_saved.get(pno))
+            if pno in pdfium:
+                p["renderer"] = "pdfium"
+                p["issues"].append({"page": pno, "kind": "rendered_by_pdfium", "severity": "info",
+                                    "evidence": "MuPDF crashed or hung rendering this page on an earlier try"})
             if pno in ocr_saved:
                 p["ocr_reused"] = True
             progress("page", pno)
@@ -698,9 +705,10 @@ def worker(conn, run: str, light: bool = False, reuse_ocr: bool = False):
         if job is None:
             return
         try:
-            doc_id, skip = job
+            doc_id, skip, pdfium = job
             res = convert_document(models, doc_id, run, light,
-                                   lambda stage, n: conn.send({"progress": stage, "n": n}), reuse_ocr, tuple(skip))
+                                   lambda stage, n: conn.send({"progress": stage, "n": n}), reuse_ocr, tuple(skip),
+                                   tuple(pdfium))
         except Exception as e:
             res = {"doc_id": doc_id, "status": "failed", "error": repr(e), "trace": traceback.format_exc()}
         try:
@@ -763,6 +771,7 @@ def cmd_run(args) -> int:
     failed = 0
     queue = list(reversed(todo))          # pop() from the end: todo order kept
     skips = collections.defaultdict(set)  # pages MuPDF did not finish, per document: not read on the retry
+    pdfiums = collections.defaultdict(set)  # pages whose MuPDF render failed: drawn by pdfium on the retry
 
     class Slot:
         """One worker process and the document it is on."""
@@ -792,7 +801,7 @@ def cmd_run(args) -> int:
                 pages = 0
             self.limit = max(args.timeout, args.timeout_per_page * pages)
             self.pages = pages
-            self.conn.send((d, sorted(skips[d])))
+            self.conn.send((d, sorted(skips[d]), sorted(pdfiums[d])))
 
     def report(d, res, s):
         nonlocal failed
@@ -836,21 +845,34 @@ def cmd_run(args) -> int:
                         if res is None:
                             break
                 except (EOFError, OSError):      # the worker died mid-send
-                    res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
+                    res = "crashed"
             elif sl.proc.sentinel in ready:
-                res = {"doc_id": sl.doc, "status": "failed", "error": f"worker crashed (exit {sl.proc.exitcode})"}
+                res = "crashed"
             elif now - sl.moved > args.stall or now - sl.since > sl.limit:
-                sl.proc.kill()
+                res = "stalled" if now - sl.moved > args.stall else "timeout"
+            if res in ("crashed", "stalled", "timeout"):
+                if sl.proc.is_alive():
+                    sl.proc.kill()
                 sl.proc.join(30)                 # not reaped yet, it still looks alive and gets the next document
-                stalled = now - sl.moved > args.stall
-                why = f"no progress for {args.stall:.0f}s" if stalled else f"timeout after {sl.limit:.0f}s"
+                stalled = res != "timeout"       # a crash on a page (4473998: "double free") is as page-bound as a hang
+                why = {"crashed": f"worker crashed (exit {sl.proc.exitcode})", "stalled": f"no progress for {args.stall:.0f}s",
+                       "timeout": f"timeout after {sl.limit:.0f}s"}[res]
                 # a page that never finishes costs that page, not the document: retry without it
                 stage, _, n = sl.where.rpartition(" ")
                 first = min(set(range(1, sl.pages + 1)) - skips[sl.doc], default=0)
                 stuck = int(n) + 1 if n.isdigit() else first
                 if stage == "text layer" and stuck > sl.pages:    # past the pre-scan: on the first page read
                     stuck = first
-                if stalled and 0 < stuck <= sl.pages and len(skips[sl.doc]) < 3:
+                # stuck converting a page (its text was read in the pre-scan): render it with pdfium
+                # next time; stuck reading text, or pdfium failed it too: leave the page out
+                if stalled and stage == "page" and 0 < stuck <= sl.pages and stuck not in pdfiums[sl.doc] \
+                        and len(pdfiums[sl.doc]) < 10:
+                    pdfiums[sl.doc].add(stuck)
+                    print(f"RETRY    {sl.doc:<10} {now - sl.since:7.1f}s  {why} (page {stuck}): "
+                          f"again with page(s) {sorted(pdfiums[sl.doc])} drawn by pdfium", flush=True)
+                    queue.append(sl.doc)
+                    res = "retry"
+                elif stalled and 0 < stuck <= sl.pages and len(skips[sl.doc]) < 3:
                     skips[sl.doc].add(stuck)
                     print(f"RETRY    {sl.doc:<10} {now - sl.since:7.1f}s  {why} ({stage or sl.where} {stuck}): "
                           f"again without page(s) {sorted(skips[sl.doc])}", flush=True)

@@ -688,6 +688,16 @@ list with no levels, and in light mode no headings at all.
   is listed as missing); after three such pages the document fails. The stall limit is 300 s:
   the slowest real page seen took under 90 s with ten workers sharing the GPU, and a limit of
   20 s (tried) skipped pages that were only slow OCR (117 and 125 read in 0.05 s alone).
+  **A crash while drawing a page costs a renderer, not the page.** 4473998 (65 slides) crashed the
+  worker natively ("free(): double free"), at a different page each time once the last was
+  skipped (41, 45, 55). Isolated: its text reads fine; MuPDF 1.28.2's *rendering* of pages with a
+  Display P3 JPEG under 30% transparency corrupts the heap, at 72 dpi as at 200, ICC on or off;
+  the JPEG alone decodes. pdfium draws all 65 pages in 1.8 s. A page whose conversion crashes or
+  hangs (its text already read in the pre-scan) is now drawn by pdfium on the retry and keeps its
+  text and its OCR (`rendered_by_pdfium`); a hang while reading text, or pdfium failing too,
+  leaves the page out. 4473998: six retries, then 65 of 65 pages, 6 drawn by pdfium.
+  **GPU memory, again:** at 1 GB kept per worker, OCR-heavy stretches still reached 21.9-22.7 GB
+  and 3 pages a second; workers now keep 256 MB and the pass runs 8 of them.
   Reading from the Windows drive is ~28 times slower per page than from Linux's disk (5 pages:
   0.56 s against 0.02 s) - slow, not stuck.
   *Open:* the angle classifier (a third of OCR time here) could be skipped on pages whose
