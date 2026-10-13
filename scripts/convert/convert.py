@@ -863,10 +863,25 @@ def cmd_run(args) -> int:
             if res != "retry":
                 report(sl.doc, res, sl.since)
             sl.doc = None
+            # a worker whose pipe broke may still look alive while it exits (4473998): anything but
+            # a clean result means it is finished with, and replaced
+            if res == "retry" or not isinstance(res, dict) or res.get("status") == "failed" and \
+                    str(res.get("error", "")).startswith(("worker crashed", "no progress", "timeout")):
+                if sl.proc.is_alive():
+                    sl.proc.kill()
+                sl.proc.join(30)
             if not sl.proc.is_alive():
                 slots[i] = sl = Slot().wait_ready()
-            if queue:
-                sl.give(queue.pop())
+            while queue:
+                d = queue.pop()
+                try:
+                    sl.give(d)
+                    break
+                except OSError:               # died between its result and the next document
+                    queue.append(d)
+                    sl.proc.kill()
+                    sl.proc.join(30)
+                    slots[i] = sl = Slot().wait_ready()
     for sl in slots:
         if sl.proc.is_alive():
             sl.conn.send(None)

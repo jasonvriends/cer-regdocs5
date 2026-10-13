@@ -692,6 +692,11 @@ list with no levels, and in light mode no headings at all.
   0.56 s against 0.02 s) - slow, not stuck.
   *Open:* the angle classifier (a third of OCR time here) could be skipped on pages whose
   orientation is already known; measure what it costs in words before turning it off.
+- **A worker that crashed may still look alive; replace it on any failure, not on `is_alive()`.**
+  Six hours after the reaping fix the pass stopped again the same way: 4473998's worker broke its
+  pipe while exiting, `is_alive()` was still true, it was handed the next document and `send`
+  raised `BrokenPipeError`. Now any crash, stall or timeout kills, joins and replaces the
+  worker, and a failed hand-off puts the document back and replaces the worker again.
 - **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
   `kill()` on the timed-out worker left `is_alive()` true for a moment, the worker was handed the
   next document, and reading its pipe raised `ConnectionResetError`, which the crash handler (it
