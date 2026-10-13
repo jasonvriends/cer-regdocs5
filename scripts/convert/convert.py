@@ -91,7 +91,9 @@ def tool_family(raw):
 # one page
 
 def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, transcript_doc: bool = False,
-                 votes: list[dict] = (), base: int = 0) -> dict:
+                 votes: list[dict] = (), base: int = 0, light: bool = False) -> dict:
+    """One page. `light`: the evidence pass for the whole corpus - words from the text layer, OCR
+    only where the layer is not sound or images may hold text, no layout, table or figure models."""
     t0 = time.perf_counter()
     timings = {}
 
@@ -108,7 +110,9 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
     verdict = rd.text_layer_verdict(health)
     vis_words = [w for w in pdf_w if not w["hidden"] and not w["redacted"]]
     try:
-        ocr_w = timed("ocr", lambda: models.ocr(page))
+        # light: a sound layer with no image of any size needs no OCR (nothing it could add)
+        skip_ocr = light and verdict == "sound" and facts["largest_image_cover"] < 0.05
+        ocr_w = [] if skip_ocr else timed("ocr", lambda: models.ocr(page))
     except Exception as e:                  # OCR is one reader: its failure is recorded, not the page's
         ocr_w = []
         issues.append({"kind": "ocr_failed", "severity": "warning", "evidence": repr(e)})
@@ -175,8 +179,8 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
                        "evidence": f"{n_red} text-layer words under a redaction, left out of every output"})
 
     # ---- layout: every model, merged
-    layouts = timed("layout", lambda: models.layout_all(page))
-    regions = asm.merge_layouts({m: v["detections"] for m, v in layouts.items()})
+    layouts = {} if light else timed("layout", lambda: models.layout_all(page))
+    regions = asm.merge_layouts({m: v["detections"] for m, v in layouts.items()}) if layouts else []
     # barcodes in every picture region, decoded: exact values, evidence like the text layer
     codes = []
     for r in regions:
@@ -372,11 +376,11 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
         elements.append({"region": None, "label": "text", "reader": source + "+unclaimed", "share": None,
                          "box": (min(b[0] for b in bs), min(b[1] for b in bs), max(b[2] for b in bs), max(b[3] for b in bs)),
                          "words": ids})
-    if loose:
+    if loose and not light:
         issues.append({"kind": "words_outside_regions", "severity": "info",
                        "evidence": f"{len(loose)} evidence words in no layout region, kept as text of their own"})
 
-    if source == "pdf" and fa is not None and agreement["readable"]["pdf_words"] >= 20 and fa < 0.6:
+    if source == "pdf" and ocr_w and fa is not None and agreement["readable"]["pdf_words"] >= 20 and fa < 0.6:
         # on a map or drawing OCR misses labels set at angles over imagery (3283303): expected there
         page_area = page.rect.width * page.rect.height
         drawn = sum(asm.area(p["box"]) for p in pictures if p.get("class") in
@@ -465,7 +469,7 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
 # --------------------------------------------------------------------------
 # one document
 
-def convert_document(models: rd.Models, doc_id: str, run: str) -> dict:
+def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False) -> dict:
     import pymupdf
     import pyarrow as pa
     import pyarrow.parquet as pq
@@ -502,7 +506,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str) -> dict:
     for pno in range(1, pdf.page_count + 1):
         page = pdf[pno - 1]
         try:
-            p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words))
+            p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light)
         except Exception as e:
             p = {"page": pno, "error": repr(e), "trace": traceback.format_exc(), "elements": [], "todo": ["page_failed"],
                  "issues": [{"page": pno, "kind": "page_failed", "severity": "error", "evidence": repr(e)}],
@@ -580,7 +584,8 @@ def convert_document(models: rd.Models, doc_id: str, run: str) -> dict:
     sev = collections.Counter(i["severity"] for i in issues)
     todo = collections.Counter(t for p in pages for t in p["todo"])
     ledger = {
-        "doc_id": doc_id, "version": VERSION, "run": run, "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"],
+        "doc_id": doc_id, "version": VERSION, "mode": "light" if light else "full", "run": run,
+        "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"],
         "seconds": round(time.perf_counter() - t0, 2), "context": ctx,
         "summary": {"pages": len(pages), "words_evidence": sum(1 for w in all_words if w["evidence"]),
                     "words_pdf": sum(1 for w in all_words if w["reader"] == "pdf"),
@@ -603,11 +608,11 @@ def convert_document(models: rd.Models, doc_id: str, run: str) -> dict:
 # --------------------------------------------------------------------------
 # the worker: models load once; the parent survives its crashes and hangs
 
-def worker(conn, run: str):
+def worker(conn, run: str, light: bool = False):
     import logging
     logging.disable(logging.WARNING)
     try:
-        models = rd.Models()
+        models = rd.OcrOnly() if light else rd.Models()
     except Exception as e:
         conn.send({"ready": False, "error": repr(e), "trace": traceback.format_exc()})
         return
@@ -617,7 +622,7 @@ def worker(conn, run: str):
         if doc_id is None:
             return
         try:
-            res = convert_document(models, doc_id, run)
+            res = convert_document(models, doc_id, run, light)
         except Exception as e:
             res = {"doc_id": doc_id, "status": "failed", "error": repr(e), "trace": traceback.format_exc()}
         try:
@@ -651,20 +656,31 @@ def ids_from(args) -> list[str]:
 
 def cmd_run(args) -> int:
     ids = ids_from(args)
+    if args.all:                       # every PDF in source/, newest first
+        ids += sorted((n[:-4] for n in os.listdir(SOURCE) if n.endswith(".pdf") and n[:-4].isdigit()),
+                      key=int, reverse=True)
+        ids = list(dict.fromkeys(ids))
     if not ids:
-        print("nothing to convert: give ids or --sample")
+        print("nothing to convert: give ids, --sample or --all")
         return 2
     run, run_file = run_identity()
-    todo = []
+    todo, skipped = [], collections.Counter()
     for d in ids:
         led = out_dir(d) / f"{d}.pages.json"
         if not (SOURCE / f"{d}.pdf").exists():
-            print(f"skip     {d:<10} no PDF in source/")
+            skipped["no PDF in source/"] += 1
         elif led.exists() and not args.force and json.loads(led.read_text()).get("version") == VERSION:
-            print(f"skip     {d:<10} already converted ({VERSION}); --force to redo")
+            # a light pass never replaces a full conversion; a full run redoes a light one
+            if args.light or json.loads(led.read_text()).get("mode", "full") == "full":
+                skipped[f"already converted ({VERSION})"] += 1
+            else:
+                todo.append(d)
         else:
             todo.append(d)
-    print(f"convert {VERSION}: {len(todo)} document(s); run identity {run_file}", flush=True)
+    if skipped:
+        print("skipped: " + ", ".join(f"{k} {v}" for k, v in skipped.items()))
+    print(f"convert {VERSION}{' (light)' if args.light else ''}: {len(todo)} document(s); run identity {run_file}",
+          flush=True)
     ctx = mp.get_context("spawn")
     proc = conn = None
     failed = 0
@@ -672,7 +688,7 @@ def cmd_run(args) -> int:
     def start():
         nonlocal proc, conn
         conn, child = ctx.Pipe()
-        proc = ctx.Process(target=worker, args=(child, run), daemon=True)
+        proc = ctx.Process(target=worker, args=(child, run, args.light), daemon=True)
         proc.start()
         msg = conn.recv()
         if not msg.get("ready"):
@@ -850,6 +866,9 @@ def main(argv=None) -> int:
         c.add_argument("--sample", action="append", help="a file of REGDOCS ids, one per line")
         if name == "run":
             c.add_argument("--force", action="store_true", help="redo documents already converted")
+            c.add_argument("--light", action="store_true",
+                           help="evidence pass: text layer, OCR only where needed, no layout/table/figure models")
+            c.add_argument("--all", action="store_true", help="every PDF in source/, newest first")
             c.add_argument("--timeout", type=float, default=3600, help="seconds per document")
     args = ap.parse_args(argv)
     return {"run": cmd_run, "status": cmd_status, "report": cmd_report}[args.cmd](args)
