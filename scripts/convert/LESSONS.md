@@ -623,10 +623,20 @@ pages:
   documents slow is size in bytes and pages needing OCR, not page count alone: the 285- and
   297-page ones that crashed docling took 22 s here (all text layer). 4647200 is queued in
   `runs/v2/redo-timeouts.txt` for the scaled limit (986 pages: 5.5 hours at most).
-  *Open:* a limit on time **without progress** (no page finished in N minutes) would stop a hung
-  document sooner and never stop a long one that is moving; it needs the worker to report pages
-  as it goes. Azure's 300-page ranges are the other route - each range a unit of work, retried
-  on its own.
+- **A document that is slow is not a document that is stuck: limit time without progress.** Three
+  more documents hit the hour in the pass (4646037, 4646096, 4646565: 108-208 pages, 20-43 MiB,
+  mostly 11 x 17 in page images from one filing). 4646037 alone, profiled: 635 s, 90% OCR, 364 s
+  of it waiting on the GPU (`.cpu()`), and RapidOCR's text-line angle classifier 224 s. Newest
+  first puts a filing's scanned documents side by side, so several workers OCR at once on one
+  GPU and each runs many times slower - an hour on a 10-minute document. A page-scaled limit
+  does not catch that (108 pages x 20 s is under the hour); it is not the document, it is the
+  company it keeps. Workers now report each page (and the text-layer pre-scan) to the parent, and
+  a document is stopped when **no page has finished for `--stall` seconds** (900), reported with
+  where it was ("no progress for 900s (at page 6)"); `max(--timeout, --timeout-per-page x pages)`
+  (60 s a page) stays as a generous cap. Azure's 300-page ranges are the other route - each range a
+  unit of work, retried on its own - not needed while pages report progress.
+  *Open:* the angle classifier (a third of OCR time here) could be skipped on pages whose
+  orientation is already known; measure what it costs in words before turning it off.
 - **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
   `kill()` on the timed-out worker left `is_alive()` true for a moment, the worker was handed the
   next document, and reading its pipe raised `ConnectionResetError`, which the crash handler (it
