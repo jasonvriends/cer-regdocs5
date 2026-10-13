@@ -526,8 +526,11 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     layer = {}                       # each page's text layer, read once and reused below
     for i, pg in enumerate(pdf):
         if i + 1 in skip:
+            progress("text layer", i + 1)
             continue
-        layer[i + 1] = rd.pdf_words(pg)
+        if i + 1 in pdfium:
+            pg.regdocs_render = "pdfium"
+        layer[i + 1] = rd.pdfium_words(pg) if i + 1 in pdfium else rd.pdf_words(pg)
         progress("text layer", i + 1)
         ws = layer[i + 1][0]
         if len(ws) > 5:
@@ -570,7 +573,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
             if pno in pdfium:
                 p["renderer"] = "pdfium"
                 p["issues"].append({"page": pno, "kind": "rendered_by_pdfium", "severity": "info",
-                                    "evidence": "MuPDF crashed or hung rendering this page on an earlier try"})
+                                    "evidence": "MuPDF crashed or hung on this page on an earlier try: read and drawn by pdfium"})
             if pno in ocr_saved:
                 p["ocr_reused"] = True
             progress("page", pno)
@@ -859,17 +862,22 @@ def cmd_run(args) -> int:
                        "timeout": f"timeout after {sl.limit:.0f}s"}[res]
                 # a page that never finishes costs that page, not the document: retry without it
                 stage, _, n = sl.where.rpartition(" ")
-                first = min(set(range(1, sl.pages + 1)) - skips[sl.doc], default=0)
-                stuck = int(n) + 1 if n.isdigit() else first
-                if stage == "text layer" and stuck > sl.pages:    # past the pre-scan: on the first page read
-                    stuck = first
-                # stuck converting a page (its text was read in the pre-scan): render it with pdfium
-                # next time; stuck reading text, or pdfium failed it too: leave the page out
-                if stalled and stage == "page" and 0 < stuck <= sl.pages and stuck not in pdfiums[sl.doc] \
-                        and len(pdfiums[sl.doc]) < 10:
+                # the next page not already left out: skipped pages report no progress, so after
+                # "text layer 22" with 23 skipped the worker is on 24 (4449303 retried 23 six times)
+                after = int(n) if n.isdigit() else 0
+                left = sorted(set(range(1, sl.pages + 1)) - skips[sl.doc])
+                stuck = next((q for q in left if q > after), 0)
+                if stage == "text layer" and not stuck:            # past the pre-scan: on the first page read
+                    stuck = left[0] if left else 0
+                if stuck in skips[sl.doc] or (stage == "page" and stuck in pdfiums[sl.doc] and stuck in skips[sl.doc]):
+                    stuck = 0                                      # never the same retry twice
+                # a page MuPDF did not finish (reading its text or drawing it) is read by pdfium next
+                # time, text and image; if pdfium fails it too, the page is left out
+                if stalled and 0 < stuck <= sl.pages and stuck not in pdfiums[sl.doc] \
+                        and len(pdfiums[sl.doc]) < max(10, sl.pages // 5):
                     pdfiums[sl.doc].add(stuck)
-                    print(f"RETRY    {sl.doc:<10} {now - sl.since:7.1f}s  {why} (page {stuck}): "
-                          f"again with page(s) {sorted(pdfiums[sl.doc])} drawn by pdfium", flush=True)
+                    print(f"RETRY    {sl.doc:<10} {now - sl.since:7.1f}s  {why} ({stage or sl.where} {stuck}): "
+                          f"again with page(s) {sorted(pdfiums[sl.doc])} read by pdfium", flush=True)
                     queue.append(sl.doc)
                     res = "retry"
                 elif stalled and 0 < stuck <= sl.pages and len(skips[sl.doc]) < 3:

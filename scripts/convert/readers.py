@@ -178,6 +178,56 @@ def pdf_words(page) -> tuple[list[dict], dict]:
     return words, health
 
 
+def pdfium_words(page) -> tuple[list[dict], dict]:
+    """The page's words by pdfium, for a page whose text MuPDF did not finish reading (4449303:
+    letter-spaced Word headings; pdfium reads them in 0.1 s). Same shape as `pdf_words`; pdfium
+    does not say which text is invisible, so nothing is marked hidden or redacted."""
+    import pypdfium2 as pdfium
+    pdf = pdfium.PdfDocument(page.parent.name)
+    try:
+        pg = pdf[page.number]
+        tp = pg.get_textpage()
+        h = pg.get_height()
+        chars = []
+        for i in range(tp.count_chars()):
+            ch = tp.get_text_range(i, 1)
+            l, b, r, t = tp.get_charbox(i)
+            chars.append((ch, (l, h - t, r, h - b)))
+    finally:
+        pdf.close()
+    m = page.rotation_matrix
+    words, cur = [], []
+
+    def flush():
+        if cur:
+            import pymupdf
+            box = pymupdf.Rect(min(c[1][0] for c in cur), min(c[1][1] for c in cur),
+                               max(c[1][2] for c in cur), max(c[1][3] for c in cur)) * m
+            words.append({"text": "".join(c[0] for c in cur), "box": (box.x0, box.y0, box.x1, box.y1),
+                          "block": None, "line": None, "conf": None, "hidden": False, "redacted": False})
+            cur.clear()
+    for ch, box in chars:
+        if not ch.strip():
+            flush()
+        elif cur and (box[0] - cur[-1][1][2] > 0.6 * max(box[3] - box[1], 1) or abs(box[1] - cur[-1][1][1]) > 3):
+            flush()
+            cur.append((ch, box))
+        else:
+            cur.append((ch, box))
+    flush()
+    allc = collections.Counter(char_class(c[0]) for c in chars if c[0].strip())
+    n = sum(allc.values())
+    bad = sum(allc[k] for k in ("replacement", "control", "private_use", "unassigned"))
+    letters, digits = allc["letter"], allc["digit"]
+    alnum = [w["text"] for w in words if any(ch.isalnum() for ch in w["text"])]
+    health = {"chars_visible": n, "chars_invisible": 0, "bad_char_share": round(bad / n, 4) if n else None,
+              "letter_share": round(letters / (letters + digits), 4) if letters + digits else None,
+              "single_char_share": round(sum(1 for w in alnum if len(w) == 1) / len(alnum), 4) if alnum else None,
+              "real_words": sum(1 for w in alnum if sum(ch.isalpha() for ch in w) >= 3), "alnum_words": len(alnum),
+              "directions": {}, "fonts": [], "reader": "pdfium"}
+    return words, health
+
+
 def text_layer_verdict(h: dict) -> str:
     """sound / suspect / hidden_ocr / none, from the layer's own characters [C §5.2]."""
     vis, inv = h["chars_visible"], h["chars_invisible"]
@@ -259,6 +309,13 @@ def page_facts(page) -> dict:
     else:
         size = "other"
     area = max(r.width * r.height, 1)
+    if getattr(page, "regdocs_render", "mupdf") == "pdfium":
+        # MuPDF hung or crashed on this page: nothing that interprets its content (images,
+        # drawings); an image cover of 1 makes OCR read it [L Memory and time]
+        return {"width_pt": round(r.width, 1), "height_pt": round(r.height, 1), "size": size,
+                "orientation": "landscape" if r.width > r.height * 1.05 else "portrait",
+                "rotation": page.rotation, "images": None, "largest_image_cover": 1.0, "paths": None,
+                "hlines": 0, "vlines": 0, "ruled": False, "widgets": [], "annotations": [], "read_by": "pdfium"}
     infos = page.get_image_info()
     largest = max(((i["bbox"][2] - i["bbox"][0]) * (i["bbox"][3] - i["bbox"][1]) for i in infos), default=0) / area
     hl = vl = 0
