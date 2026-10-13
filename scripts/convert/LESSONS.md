@@ -611,6 +611,22 @@ pages:
   raise `--timeout-per-page` for full runs of long documents rather than the floor. Oversize
   sheets cost more than their page count says (pixels, not pages): 4724234's 7.7 s a page is
   three times a scanned letter page's.
+- **The hard documents are the same documents, whatever the tool.** cer-regdocs2's Azure/Docling
+  comparison (`reports/azure-docling/REPORT.md`, 8,213 documents, August 2026) quarantined 10
+  documents (8 unique files) after repeated 1,200 s timeouts or segmentation faults: 4647200 (986
+  pages, 44 MiB), 4672628 (691), 4664989 (450), 4646680, 4648258, 4657424/4657571/4656998 (one
+  file, 149 pages), 4659381, 4681578. Azure finished all of them by splitting the large ones into
+  300-page ranges (4647200 in 284 s). In the corpus light pass, 9 of the 10 finished (4672628 in
+  31 minutes, 4664989 in 21), and 4647200 hit the fixed hour again. cer-regdocs4 had tuned on
+  4647200 and measured it at 1,574-2,119 s for a full docling run (1.6-2.1 s a page) - 315 of its
+  986 pages have a text layer that decodes to nonsense, so they all need OCR. What makes these
+  documents slow is size in bytes and pages needing OCR, not page count alone: the 285- and
+  297-page ones that crashed docling took 22 s here (all text layer). 4647200 is queued in
+  `runs/v2/redo-timeouts.txt` for the scaled limit (986 pages: 5.5 hours at most).
+  *Open:* a limit on time **without progress** (no page finished in N minutes) would stop a hung
+  document sooner and never stop a long one that is moving; it needs the worker to report pages
+  as it goes. Azure's 300-page ranges are the other route - each range a unit of work, retried
+  on its own.
 - **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
   `kill()` on the timed-out worker left `is_alive()` true for a moment, the worker was handed the
   next document, and reading its pipe raised `ConnectionResetError`, which the crash handler (it
