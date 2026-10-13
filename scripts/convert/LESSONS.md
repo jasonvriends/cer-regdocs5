@@ -596,6 +596,26 @@ pages:
   document let one worker grow to 23.8 GB mid-document. The cap now applies mid-document
   (`--kill-worker-ram-gb`), and each page's start and finish, with the worker's memory, is
   logged, so a stopped worker is reported with the page it was on.
+- **A fixed time limit per document stops the long ones, so the limit scales with pages.**
+  REGDOCS documents run from 1 page to thousands: in the 5,000-document survey the median is 3
+  pages, the 99th percentile 171, and the longest are 7,280 (2498373), 716 and 604 pages; 4 of
+  5,000 have 500 or more, but they hold 13% of the pages. In the corpus light pass (2026-10-13)
+  the slowest documents took 2.2-2.8 s a page (4672628: 691 pages, 31 minutes; 4664989: 450
+  pages, 21 minutes) - mostly scans that need OCR - against 0.2-0.5 s for digital ones. 4724234
+  (171 pages, 125 of them A0 drawing sheets and 3 at 66 x 47 in, Bluebeam) hit the one-hour limit
+  while the disk was shared with the scout, then finished in 22 minutes on retry (7.7 s a page).
+  At those rates a 900-page scanned document needs about 40 minutes in light mode and far more in
+  full mode, and the 7,280-page one would need hours even if digital. The limit is now
+  `max(--timeout, --timeout-per-page x pages)`: an hour at least, 20 s a page (900 pages: 5
+  hours). Full mode runs layout, table and figure models on every page and is far slower per page;
+  raise `--timeout-per-page` for full runs of long documents rather than the floor. Oversize
+  sheets cost more than their page count says (pixels, not pages): 4724234's 7.7 s a page is
+  three times a scanned letter page's.
+- **A killed worker is not dead until it is reaped.** The pass stopped after 1,049 documents:
+  `kill()` on the timed-out worker left `is_alive()` true for a moment, the worker was handed the
+  next document, and reading its pipe raised `ConnectionResetError`, which the crash handler (it
+  caught `EOFError`) did not. The parent now joins a killed worker and treats any `OSError` on
+  the pipe as that worker crashing: one document lost, not the run.
 - **The legacy pipeline did not get through these documents either.** It never reached 4656998 or
   4657424 (the same file), and stopped 4681376 at page 10 of 24 with no progress for 30 minutes, the same place
   convert stalls.
