@@ -79,9 +79,22 @@ def scale_for(page, dpi: float) -> float:
 
 
 def render(page, dpi: float, clip=None):
-    """RGB array of the page as displayed, and the scale used."""
+    """RGB array of the page as displayed, and the scale used. A page marked
+    `regdocs_render = "pdfium"` is drawn by pdfium: MuPDF 1.28.2 corrupts its heap on some pages
+    ("double free" - a P3 photo under 30% transparency, 4473998 p.41) [L Memory and time]."""
     import pymupdf
     s = scale_for(page, dpi)
+    if getattr(page, "regdocs_render", "mupdf") == "pdfium":
+        import pypdfium2 as pdfium
+        pdf = pdfium.PdfDocument(page.parent.name)
+        try:
+            img = pdf[page.number].render(scale=s).to_numpy()[:, :, :3]
+        finally:
+            pdf.close()
+        if clip is not None:
+            x0, y0 = max(int((clip.x0 - page.rect.x0) * s), 0), max(int((clip.y0 - page.rect.y0) * s), 0)
+            img = img[y0:int((clip.y1 - page.rect.y0) * s), x0:int((clip.x1 - page.rect.x0) * s)]
+        return np.ascontiguousarray(img), s
     pix = page.get_pixmap(matrix=pymupdf.Matrix(s, s), clip=clip, alpha=False, colorspace=pymupdf.csRGB)
     return np.frombuffer(pix.samples, np.uint8).reshape(pix.h, pix.w, 3).copy(), s
 
@@ -331,10 +344,11 @@ class OcrOnly:
         return self._engine
 
 
-def release_gpu(keep: int = 1 << 30) -> None:
+def release_gpu(keep: int = 256 << 20) -> None:
     """Hand cached GPU memory back once a worker holds more than `keep` bytes. PyTorch keeps what
     the largest page needed; ten workers each keeping theirs filled the 24 GB card, and on WSL a
-    full card spills to system memory instead of failing - pages then took over 15 minutes
+    full card spills to system memory instead of failing - pages then took over 15 minutes (at
+    1 GB kept, OCR-heavy stretches still reached 21.9 GB: now 256 MB)
     [L Memory and time]."""
     try:
         import torch
