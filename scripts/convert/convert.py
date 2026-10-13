@@ -506,7 +506,9 @@ def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | No
 
 
 def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None,
-                     reuse_ocr: bool = False) -> dict:
+                     reuse_ocr: bool = False, skip: tuple = ()) -> dict:
+    """`skip`: pages not to read at all - MuPDF did not finish them on an earlier try (an ArcGIS
+    map page in 4537539 hangs text extraction and rendering alike) [L Memory and time]."""
     progress = progress or (lambda stage, n: None)    # tells the parent the document is moving
     ocr_saved, ocr_from = saved_ocr(doc_id, light) if reuse_ocr else ({}, None)
     import pymupdf
@@ -522,6 +524,8 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     numbered = with_text = 0
     layer = {}                       # each page's text layer, read once and reused below
     for i, pg in enumerate(pdf):
+        if i + 1 in skip:
+            continue
         layer[i + 1] = rd.pdf_words(pg)
         progress("text layer", i + 1)
         ws = layer[i + 1][0]
@@ -547,6 +551,16 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     pages, all_words, region_rows, table_rows = [], [], [], []
     for pno in range(1, pdf.page_count + 1):
         page = pdf[pno - 1]
+        if pno in skip:
+            r = page.rect
+            p = {"page": pno, "error": "skipped", "elements": [], "todo": ["page_skipped"],
+                 "issues": [{"page": pno, "kind": "page_skipped", "severity": "error",
+                             "evidence": "MuPDF did not finish reading this page on an earlier try; not read"}],
+                 "_words": [], "_regions": [], "_layouts": {}, "_tables": [],
+                 "facts": {"width_pt": r.width, "height_pt": r.height, "skipped": True}}
+            pages.append(p)
+            progress("page", pno)
+            continue
         try:
             p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
                              layer.pop(pno, None), ocr_saved.get(pno))
@@ -680,12 +694,13 @@ def worker(conn, run: str, light: bool = False, reuse_ocr: bool = False):
         return
     conn.send({"ready": True})
     while True:
-        doc_id = conn.recv()
-        if doc_id is None:
+        job = conn.recv()
+        if job is None:
             return
         try:
+            doc_id, skip = job
             res = convert_document(models, doc_id, run, light,
-                                   lambda stage, n: conn.send({"progress": stage, "n": n}), reuse_ocr)
+                                   lambda stage, n: conn.send({"progress": stage, "n": n}), reuse_ocr, tuple(skip))
         except Exception as e:
             res = {"doc_id": doc_id, "status": "failed", "error": repr(e), "trace": traceback.format_exc()}
         try:
@@ -747,6 +762,7 @@ def cmd_run(args) -> int:
     ctx = mp.get_context("spawn")
     failed = 0
     queue = list(reversed(todo))          # pop() from the end: todo order kept
+    skips = collections.defaultdict(set)  # pages MuPDF did not finish, per document: not read on the retry
 
     class Slot:
         """One worker process and the document it is on."""
@@ -775,7 +791,8 @@ def cmd_run(args) -> int:
             except Exception:
                 pages = 0
             self.limit = max(args.timeout, args.timeout_per_page * pages)
-            self.conn.send(d)
+            self.pages = pages
+            self.conn.send((d, sorted(skips[d])))
 
     def report(d, res, s):
         nonlocal failed
@@ -825,12 +842,26 @@ def cmd_run(args) -> int:
             elif now - sl.moved > args.stall or now - sl.since > sl.limit:
                 sl.proc.kill()
                 sl.proc.join(30)                 # not reaped yet, it still looks alive and gets the next document
-                why = (f"no progress for {args.stall:.0f}s" if now - sl.moved > args.stall
-                       else f"timeout after {sl.limit:.0f}s")
-                res = {"doc_id": sl.doc, "status": "failed", "error": f"{why} (at {sl.where})"}
+                stalled = now - sl.moved > args.stall
+                why = f"no progress for {args.stall:.0f}s" if stalled else f"timeout after {sl.limit:.0f}s"
+                # a page that never finishes costs that page, not the document: retry without it
+                stage, _, n = sl.where.rpartition(" ")
+                first = min(set(range(1, sl.pages + 1)) - skips[sl.doc], default=0)
+                stuck = int(n) + 1 if n.isdigit() else first
+                if stage == "text layer" and stuck > sl.pages:    # past the pre-scan: on the first page read
+                    stuck = first
+                if stalled and 0 < stuck <= sl.pages and len(skips[sl.doc]) < 3:
+                    skips[sl.doc].add(stuck)
+                    print(f"RETRY    {sl.doc:<10} {now - sl.since:7.1f}s  {why} ({stage or sl.where} {stuck}): "
+                          f"again without page(s) {sorted(skips[sl.doc])}", flush=True)
+                    queue.append(sl.doc)
+                    res = "retry"
+                else:
+                    res = {"doc_id": sl.doc, "status": "failed", "error": f"{why} (at {sl.where})"}
             if res is None:
                 continue
-            report(sl.doc, res, sl.since)
+            if res != "retry":
+                report(sl.doc, res, sl.since)
             sl.doc = None
             if not sl.proc.is_alive():
                 slots[i] = sl = Slot().wait_ready()
@@ -987,7 +1018,7 @@ def main(argv=None) -> int:
             c.add_argument("--reuse-ocr", action="store_true",
                            help="light mode: take OCR words from the document's last light conversion (same OCR "
                                 "model) instead of running OCR again - redo assembly without the GPU")
-            c.add_argument("--stall", type=float, default=900,
+            c.add_argument("--stall", type=float, default=300,
                            help="stop a document when no page has finished for this many seconds")
             c.add_argument("--timeout", type=float, default=3600, help="seconds per document, at least")
             c.add_argument("--timeout-per-page", type=float, default=60,
