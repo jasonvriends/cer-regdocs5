@@ -80,6 +80,39 @@ ledger    per page: features, readers run and their status, coverage, issues, to
 export    Markdown written from the items, checked to hold every evidence word
 ```
 
+## The rules: which reader for which page and box (as measured, 2026-10-12)
+
+Research mode still runs every reader; these are the rules that choose among them, and the
+measured winners that a production route can keep. Evidence in [LESSONS.md](LESSONS.md).
+
+**Per page - where the words come from**
+
+| page | rule | measured |
+|---|---|---|
+| text layer sound | the layer's words; OCR words over ink the layer lacks added, flagged | OCR finds 85-99% of a sound layer's words at their place |
+| stub layer (image page, <100 layer words, OCR finds 4x more) | OCR; the stub's own words kept where OCR does not cover them | 2% of pages (survey) |
+| suspect, none, scanner OCR layer | OCR (PP-OCRv6 medium); a scanner layer kept as a second reading | v6 medium 92.5% vs small 89.9% |
+| two OCR readings disagree on a line | qwen3-vl and GLM-OCR vote; both for the scanner layer: its words | voters 95.7% / 92.9% vs the layer as truth |
+| nothing on it (<0.2% ink) | blank | duplex backs, separators |
+| transcript (title, or margin numbers on half the pages) | one item per line or paragraph number | 72 tables to 4 (90560) |
+| numbered paper (8+ margin numbers, not a transcript) | the numbers one furniture item | 410 to 4 stray paragraphs |
+
+**Per box - which reader for what the box is** (boxes from four layout models merged by vote;
+a box kept if two models found it or one at 0.5)
+
+| box | rule | measured |
+|---|---|---|
+| text, heading, list, caption, footnote, code, formula, key-value, form | the evidence words in it (tables, pictures and forms take theirs first; else the smallest box) | 100% of words in exactly one item |
+| page header, footer | the same, in the furniture layer | |
+| table | **TableFormer fast + accurate + ruling lines**, kept by fit (words placed, stacked values not counted), ties to the least empty grid; text alignment only below 60% | 96.6% of table words placed across 4,348 tables (accurate alone 95.2%, fast alone 91.3%) |
+| table that is a contents page (dot leaders, document_index) | one item per entry line | |
+| picture | figure classifier (26 classes); barcodes decoded; the words in it as its child text | 2,000+ pictures; OCR at more angles not worth it (+3 points, +40 junk words per 100) |
+| checkbox | state from the models' vote; label from the words in or beside its box | agrees with the text layer's tick glyphs where present |
+| words in no box | text items of their own, grouped by place | nothing lost |
+
+Not yet decided from measurement: one layout model instead of four (no truth for regions yet),
+and reading order on two-column pages (median disagreement 0.10 with the text layer's order).
+
 ## Why DoclingDocument, and why not docling's converter
 
 DoclingDocument is open (MIT), serialises losslessly to JSON, gives every item a page, box and

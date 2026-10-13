@@ -86,6 +86,14 @@ iText-based system: each page a 300 dpi colour image (2550 x 3300) of a crisp, b
 information request responses read 37% not digital (without this filer: 31 of 222, 14%) and why
 2024 stands out.
 
+**[survey, by eye] About one image-only page in four is not paper.** 40 page-image pages drawn at
+random from the survey and looked at: 29 scanned paper (signed letters and affidavits, faxes,
+hand-filled forms, a handwritten log, stamped drawings, web maps printed and scanned back) and
+**11 digital pages turned into images (28%, 95% CI ~16-43%)** - Trans Mountain's iText pages,
+drawings exported as images, and a Word table rasterized to black out a column (a legitimate way
+to redact: nothing is left underneath). Pixel statistics cannot tell the two apart reliably
+(both can be one-bit and clean); the eye can.
+
 **Recommendation (proposed):** a document-management or publishing step must not rasterize; if a
 system "flattens" documents, it must keep or restore the text layer (or file the original).
 **Check:** a page that is one full-page image with no text, from a digital source - the same
@@ -228,6 +236,8 @@ already runs them on one PDF (`./scripts/convert/convert.sh check filing.pdf`):
 - **Table formatting rules**: nobody can yet say what makes a printed table easier to read; file
   the data instead (6).
 - **A named PDF product**: the path matters more than the product.
+- **Scans filed sideways** [survey, by eye]: 9 of 29 scanned pages were sideways, and OCR read
+  them (185-542 words a page; a sideways reporting form read word for word).
 - **Line-numbered paper** [samples]: written arguments on numbered paper read cleanly and the
   numbers make lines citable.
 - **Blank backs of duplex scans** [samples]: recognised and skipped (0.3% of pages in the survey).

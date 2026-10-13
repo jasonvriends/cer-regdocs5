@@ -284,6 +284,11 @@ graphics on 35% of Microsoft Print to PDF pages (survey 2%). Each was one or two
 samples are for finding *kinds* of problem and checking the converter; rates for the guidance come
 from the survey, with intervals, and every sample rate quoted there now says so or is corrected.
 
+- **A covered redaction leaves the text readable.** 4710294 (invoices, 2024): 13,159 words on 36
+  pages under black boxes are still in the text layer - anyone copying the page reads them. The
+  converter leaves them out of every output and records only their count; the guidance says to
+  redact by removing. A rasterized page is the opposite case: the redaction is real (4243920, a
+  Word table blacked out and turned into an image).
 - **A privacy finding must be looked at before it is reported.** The survey's 7 "cover-up
   redactions" were each one glyph on a dark box (a ticked checkbox "X", Wingdings "qqqq" on a map,
   a bullet). A redaction hides text, so three or more covered words of two or more letters or
@@ -295,6 +300,15 @@ from the survey, with intervals, and every sample rate quoted there now says so 
   rasterized to 300 dpi colour images with no text (4461679). Not scanned - the capture class
   calls them `scan_no_layer`, so it cannot yet tell a rendered page from a scanned one; a scan has
   noise and often one bit per pixel, a render is clean colour. Worth a class of its own.
+
+- **Scan or rasterized page: the eye, not pixel statistics.** One-bit images and clean white
+  backgrounds occur in both (Trans Mountain's iText renders are one-bit on some pages). 40 random
+  image-only pages judged by eye: 29 paper, 11 digital pages turned into images. `check.py`
+  reports an `image_kind` (bilevel / noisy / clean) as a hint, not a verdict. 9 of the 29 scans
+  were sideways and OCR read them.
+- **Table routing, measured on 4,348 tables:** words placed with fast + accurate + ruling lines
+  96.6%, fast + accurate 96.1%, accurate + lines 95.9%, accurate 95.2%, fast 91.3%. Written into
+  DESIGN as the table rule.
 
 ### Open
 

@@ -45,7 +45,11 @@ reversed are recorded with their corrections.
    added as well as lost, and look at the page.
 8. **Small samples of a skewed corpus mislead.** Median filing: 2 pages.
 9. **Isolate every conversion in its own process with hard limits.**
-10. **Careful local extraction beat the cloud service** on 113 test documents
+10. **A redaction drawn over text is not a redaction.** The covered words stay in the text layer
+    and anyone can copy them out: 4710294, 13,159 words on 36 pages (confirmed again by the
+    current converter, 2026-10-12). Detect it by a dark fill that renders flat *and* real words
+    beneath it - a lone glyph on a dark box is a ticked checkbox, not a redaction.
+11. **Careful local extraction beat the cloud service** on 113 test documents
     (99.9% vs 84.2% of visible words), but the cloud service is still ahead on
     text inside drawings, checkboxes and barcodes.
 

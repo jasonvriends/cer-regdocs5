@@ -64,6 +64,33 @@ def classify(verdict, n_layer, n_ocr, extra, facts, ink) -> str:
     return "other"
 
 
+def image_kind(page) -> str | None:
+    """What a page image looks like: `bilevel` (1-bit: a fax or black-and-white scan), `noisy`
+    (speckled paper or colour noise: a scan), or `clean` (flat white, exact greys: a digital page
+    rendered to an image - or a scan its scanner cleaned). Measured on the embedded image's own
+    pixels, every other one, never resampled (resampling smooths the noise away)."""
+    import io
+    import numpy as np
+    from PIL import Image
+    imgs = page.get_images(full=True)
+    if not imgs:
+        return None
+    xref, _, w, h, bpc = max(imgs, key=lambda t: t[2] * t[3])[:5]
+    if bpc == 1:
+        return "bilevel"
+    try:
+        im = Image.open(io.BytesIO(page.parent.extract_image(xref)["image"]))
+    except Exception:
+        return None
+    a = np.asarray(im.convert("RGB"))[::2, ::2].astype(np.int16)
+    chroma = a.max(2) - a.min(2)
+    g = a.mean(2)
+    light = g[g >= 200]
+    noise = float(((chroma > 0) & (chroma <= 24)).mean())
+    paper = float((light < 253).mean()) if light.size else 0.0
+    return "noisy" if noise > 0.1 or paper > 0.3 else "clean"
+
+
 def check_page(ocr, page) -> dict:
     facts = rd.page_facts(page)
     words, health = rd.pdf_words(page)
@@ -81,6 +108,8 @@ def check_page(ocr, page) -> dict:
            "form_fields": len(facts["widgets"])}
     if hidden and o:
         out["scanner_layer_agreement"] = asm.match_readings(hidden, o)["pdf_found_by_ocr"]
+    if cls in ("scan_no_layer", "scanner_ocr", "stub"):
+        out["image_kind"] = image_kind(page)
     return out
 
 
