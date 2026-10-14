@@ -1,0 +1,47 @@
+{"year": "2002", "container": "90552", "reason": "ConnectTimeout: timed out", "kind": "other"}
+{"year": "2002", "container": "92272", "reason": "ConnectTimeout: timed out", "kind": "other"}
+{"year": "2002", "container": "209418", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "338661", "reason": "container incomplete: observed 12, reported 13 (1 of 3 runs)", "kind": "short_container", "observed": 12, "reported": 13, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "378367", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "378983", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "408789", "reason": "1 result row(s) could not be parsed; refusing to advance the page", "kind": "unparsed_row"}
+{"year": "2002", "container": "486589", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "621159", "reason": "container incomplete: observed 20, reported 21 (1 of 3 runs)", "kind": "short_container", "observed": 20, "reported": 21, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "643350", "reason": "container incomplete: observed 3, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3013003", "reason": "container incomplete: observed 2, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3013152", "reason": "container incomplete: observed 1, reported 2 (1 of 3 runs)", "kind": "short_container", "observed": 1, "reported": 2, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3013695", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3028314", "reason": "container incomplete: observed 3, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3084319", "reason": "container incomplete: observed 3, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2002", "container": "3096650", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2003", "container": "378983", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2004", "container": "338661", "reason": "container incomplete: observed 12, reported 13 (1 of 3 runs)", "kind": "short_container", "observed": 12, "reported": 13, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2005", "container": "375766", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2005", "container": "378367", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2005", "container": "378983", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2005", "container": "620327", "reason": "1 result row(s) could not be parsed; refusing to advance the page", "kind": "unparsed_row"}
+{"year": "2006", "container": "408789", "reason": "1 result row(s) could not be parsed; refusing to advance the page", "kind": "unparsed_row"}
+{"year": "2006", "container": "3013152", "reason": "container incomplete: observed 1, reported 2 (1 of 3 runs)", "kind": "short_container", "observed": 1, "reported": 2, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2006", "container": "3013695", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2006", "container": "3028314", "reason": "container incomplete: observed 3, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2007", "container": "461845", "reason": "1 result row(s) could not be parsed; refusing to advance the page", "kind": "unparsed_row"}
+{"year": "2007", "container": "486589", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2007", "container": "490152", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2007", "container": "490330", "reason": "container incomplete: observed 3, reported 4 (1 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2007", "container": "490388", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2007", "container": "634094", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2008", "container": "634094", "reason": "container incomplete: observed 2, reported 3 (1 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 1, "runs_to_confirm": 3}
+{"year": "2009", "container": "209418", "reason": "container incomplete: observed 2, reported 3 (2 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "378367", "reason": "container incomplete: observed 2, reported 3 (2 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "621159", "reason": "container incomplete: observed 20, reported 21 (2 of 3 runs)", "kind": "short_container", "observed": 20, "reported": 21, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "2477488", "reason": "container incomplete: observed 0, reported 2 (2 of 3 runs)", "kind": "short_container", "observed": 0, "reported": 2, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "2477704", "reason": "container incomplete: observed 0, reported 4 (2 of 3 runs)", "kind": "short_container", "observed": 0, "reported": 4, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "2478365", "reason": "container incomplete: observed 0, reported 2 (2 of 3 runs)", "kind": "short_container", "observed": 0, "reported": 2, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "2809188", "reason": "container incomplete: observed 4, reported 5 (2 of 3 runs)", "kind": "short_container", "observed": 4, "reported": 5, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2009", "container": "3320893", "reason": "REGDOCS says it cannot locate this item; recorded, and the range goes on", "kind": "recorded_gap"}
+{"year": "2009", "container": "4244072", "reason": "REGDOCS says it cannot locate this item; recorded, and the range goes on", "kind": "recorded_gap"}
+{"year": "2010", "container": "620327", "reason": "1 result row(s) could not be parsed; refusing to advance the page", "kind": "unparsed_row"}
+{"year": "2010", "container": "621159", "reason": "container incomplete: observed 20, reported 21 (2 of 3 runs)", "kind": "short_container", "observed": 20, "reported": 21, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2010", "container": "634094", "reason": "container incomplete: observed 2, reported 3 (2 of 3 runs)", "kind": "short_container", "observed": 2, "reported": 3, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2010", "container": "643350", "reason": "container incomplete: observed 3, reported 4 (2 of 3 runs)", "kind": "short_container", "observed": 3, "reported": 4, "runs_seen": 2, "runs_to_confirm": 3}
+{"year": "2011", "container": "3819949", "reason": "REGDOCS says it cannot locate this item; recorded, and the range goes on", "kind": "recorded_gap"}

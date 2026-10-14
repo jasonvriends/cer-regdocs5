@@ -50,3 +50,25 @@ stop the run, in case the download URLs themselves changed.
 Records for documents filed before 2012 came from an earlier pipeline's seed and had no facets;
 REGDOCS does have them (enriching a 2010 day returned full facets). Run `enrich` over a range to
 fill them in; it resumes per range.
+
+## Known gaps (2002-2011 enrichment)
+
+[scout-gaps.jsonl](scout-gaps.jsonl) lists what the 2002-2011 enrichment could not read, one line
+per container or search, taken from its log (`scout-state/enrich-2002-2011.log`), the latest
+outcome for each: 47 in all.
+
+| kind | count | what it is |
+|---|---|---|
+| `short_container` | 37 | REGDOCS reports more members than it lists (43 missing in all), the same way each time |
+| `unparsed_row` | 5 | a results page with a row the scout could not read; it refuses to advance past it |
+| `recorded_gap` | 3 | already recorded by the scout (an item REGDOCS says it cannot locate, or a list cut short three times) |
+| `other` | 2 | connection timeouts - the only kind a plain retry is likely to fix |
+
+A short container becomes a recorded gap only after the same counts on three separate runs
+(`SHORT_CONTAINER_TRIES`): 27 have been seen short once and 10 twice. A retry of 2009 and 2010
+(2026-10-14) saw all 11 of their failures again, so these are REGDOCS withholding or mislisting
+an item, not the network. The list records them now; a later rerun can still confirm them the
+scout's way. A rerun is cheap in requests and costly in time: each year runs as its own process
+and first reads every year's saved jobs (~200,000 small files) from the Windows drive - 2011 took
+1 h 43 min to make no requests - so run it when nothing else is using the drive.
+
