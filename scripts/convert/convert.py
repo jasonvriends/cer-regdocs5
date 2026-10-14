@@ -703,7 +703,10 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         "pages": [{k: v for k, v in p.items() if k != "elements"} for p in pages],
         "files": sorted(f.name for f in out.iterdir() if f.name.startswith(doc_id)),
     }
-    (out / f"{doc_id}.pages.json").write_text(json.dumps(ledger, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    # the ledger last, and whole or not at all: a restart mid-write left nothing half-written to trip on
+    tmp = out / f"{doc_id}.pages.json.part"
+    tmp.write_text(json.dumps(ledger, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
+    os.replace(tmp, out / f"{doc_id}.pages.json")
     status = "failed" if any(p.get("error") for p in pages) and len(pages) == sum(1 for p in pages if p.get("error")) \
         else "partial" if any(p.get("error") for p in pages) else "ok"
     return {"doc_id": doc_id, "status": status, **ledger["summary"], "seconds": ledger["seconds"]}
@@ -772,13 +775,19 @@ def cmd_run(args) -> int:
         return 2
     run, run_file = run_identity()
     todo, skipped = [], collections.Counter()
+    def ledger_of(led):
+        try:
+            return json.loads(led.read_text())
+        except (OSError, ValueError):     # cut off mid-write (a restart): convert it again
+            return {}
     for d in ids:
         led = out_dir(d) / f"{d}.pages.json"
+        L = ledger_of(led) if led.exists() and not args.force else {}
         if not (SOURCE / f"{d}.pdf").exists():
             skipped["no PDF in source/"] += 1
-        elif led.exists() and not args.force and json.loads(led.read_text()).get("version") == VERSION:
+        elif L.get("version") == VERSION:
             # a light pass never replaces a full conversion; a full run redoes a light one
-            if args.light or json.loads(led.read_text()).get("mode", "full") == "full":
+            if args.light or L.get("mode", "full") == "full":
                 skipped[f"already converted ({VERSION})"] += 1
             else:
                 todo.append(d)
