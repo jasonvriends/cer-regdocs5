@@ -23,6 +23,7 @@ import json
 import multiprocessing as mp
 import multiprocessing.connection
 import os
+import re
 import platform
 import sys
 import time
@@ -776,10 +777,24 @@ def cmd_run(args) -> int:
     run, run_file = run_identity()
     todo, skipped = [], collections.Counter()
     def ledger_of(led):
+        """Only what deciding to skip needs: version and mode lead the ledger, and a complete
+        ledger ends with "}". Reading whole ledgers (MBs each, ~70,000 of them) took over an hour
+        from the Windows drive after a restart emptied its cache."""
         try:
-            return json.loads(led.read_text())
-        except (OSError, ValueError):     # cut off mid-write (a restart): convert it again
+            with open(led, "rb") as f:
+                head = f.read(400).decode("utf-8", "replace")
+                f.seek(-8, os.SEEK_END)
+                whole = f.read().rstrip().endswith(b"}")
+        except OSError:
             return {}
+        if not whole:                     # cut off mid-write (a restart): convert it again
+            return {}
+        out = {}
+        for key in ("version", "mode"):
+            m = re.search(rf'"{key}": "([^"]*)"', head)
+            if m:
+                out[key] = m.group(1)
+        return out
     for d in ids:
         led = out_dir(d) / f"{d}.pages.json"
         L = ledger_of(led) if led.exists() and not args.force else {}
