@@ -533,7 +533,14 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
             continue
         if i + 1 in pdfium:
             pg.regdocs_render = "pdfium"
-        layer[i + 1] = rd.pdfium_words(pg) if i + 1 in pdfium else rd.pdf_words(pg)
+        try:
+            layer[i + 1] = rd.pdfium_words(pg) if i + 1 in pdfium else rd.pdf_words(pg)
+        except Exception as e:           # MuPDF gave up on the page ("layer/clip nesting too deep",
+            pdfium = tuple(pdfium) + (i + 1,)          # 3718735): pdfium reads it, here and below
+            pg.regdocs_render = "pdfium"
+            layer[i + 1] = rd.pdfium_words(pg)
+            doc_issues.append({"kind": "text_read_by_pdfium", "severity": "info", "page": i + 1,
+                               "evidence": f"MuPDF: {e}"[:300]})
         progress("text layer", i + 1)
         ws = layer[i + 1][0]
         if len(ws) > 5:

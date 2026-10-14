@@ -790,6 +790,9 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   render, facts without interpreting the content); only a page pdfium fails too is left out.
   4449303: 68 of 68 pages, 9 read by pdfium. *Open:* each hang costs the stall limit (here 9 x
   300 s); a document with several could go to pdfium whole after the third.
+  **MuPDF can also refuse a page outright** ("layer/clip nesting too deep", 3718735 p.115): an
+  exception in the text pre-scan failed the whole document. The pre-scan now hands such a page
+  to pdfium too (`text_read_by_pdfium`): 200 of 200 pages.
   **GPU memory, again:** at 1 GB kept per worker, OCR-heavy stretches still reached 21.9-22.7 GB
   and 3 pages a second; workers now keep 256 MB and the pass runs 8 of them.
   Reading from the Windows drive is ~28 times slower per page than from Linux's disk (5 pages:
