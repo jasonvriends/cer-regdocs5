@@ -5,6 +5,8 @@
     ./scripts/scout/scout.sh enrich   --from 2026-01-01 --to 2026-07-31
     ./scripts/scout/scout.sh status
     ./scripts/scout/scout.sh download [--limit N]
+    ./scripts/scout/scout.sh download 4647200 https://apps.cer-rec.gc.ca/REGDOCS/Item/View/4692360
+    ./scripts/scout/scout.sh download --list ids.txt
     ./scripts/scout/scout.sh doc 4647200 [4692360 ...]
     ./scripts/scout/scout.sh missing [--limit N]
 
@@ -19,7 +21,8 @@ filings (Compound Documents and Folders) those items sit in, and runs one
 search per facet value to learn each document's Document Type, Commodity and
 so on. Both checkpoint every page under scripts/scout/scout-state/<from>_<to>/:
 running the same command again resumes, and --refresh starts the range over.
-`download` fetches every recorded PDF not yet in source/.
+`download` fetches every recorded PDF not yet in source/, or only the ones
+named by id or REGDOCS link (recording any that have no record first).
 
 Requests go one at a time, about a second apart, slowing down on errors; a run
 stops once requests keep failing rather than add load to REGDOCS.
@@ -1391,6 +1394,7 @@ class NotPdf(Refused):
 
 
 HTML_ITEM = "served as HTML, not a PDF"
+EMPTY_FILE = "REGDOCS served an empty file (0 bytes)"
 
 
 def download(http: Http, rec: dict) -> tuple[str | None, bool]:
@@ -1410,6 +1414,10 @@ def download(http: Http, rec: dict) -> tuple[str | None, bool]:
                             first += chunk[:512 - len(first)]
                         digest.update(chunk)
                         fh.write(chunk)
+                if not first:
+                    # "200 OK", application/pdf, Content-Length 0 (4471674, 2026-10-17): REGDOCS
+                    # has no bytes for this file; the same answer every time, so not retried.
+                    raise NotPdf(EMPTY_FILE, retryable=False)
                 head = first.lstrip().lower()
                 if head.startswith((b"<!doctype html", b"<html")):
                     # REGDOCS serves some "PDF Document" items (2023 filing receipts) as an
@@ -1438,16 +1446,71 @@ def download(http: Http, rec: dict) -> tuple[str | None, bool]:
     return None, False
 
 
+def requested_ids(items: list[str], list_file: str | None) -> list[str]:
+    """REGDOCS ids from ids and REGDOCS links (File/Download or Item/View), given
+    directly or one per line in a file ('#' starts a comment), in order, once each."""
+    if list_file:
+        try:
+            lines = Path(list_file).read_text().splitlines()
+        except OSError as exc:
+            raise UsageError(f"cannot read {list_file}: {exc}")
+        items = [*items, *(t for ln in lines if (t := ln.split("#", 1)[0].strip()))]
+    ids, bad = [], []
+    for item in items:
+        if item.isdigit():
+            ids.append(item)
+        elif (m := ITEM_HREF_RE.search(item)) and urlsplit(item).netloc.lower() == urlsplit(DOMAIN).netloc:
+            ids.append(m.group(2))
+        else:
+            bad.append(item)
+    if bad:
+        raise UsageError(f"not REGDOCS document ids or links: {', '.join(bad[:5])}"
+                         + (f" and {len(bad) - 5} more" if len(bad) > 5 else ""))
+    return list(dict.fromkeys(ids))
+
+
+def named_downloads(ids: list[str], have: set[str]) -> tuple[list[dict], int]:
+    """The records to fetch for documents asked for by name -> (records, how many cannot be).
+    Each is fetched from its record's own URL; one with no record is recorded first. A file
+    REGDOCS answered 404 for is tried again (it was asked for); one served as HTML is not."""
+    skipped = 0
+    for doc_id in (d for d in ids if d in have):
+        print(f"  {doc_id}: already in source/", flush=True)
+    ids = [d for d in ids if d not in have]
+    if unrecorded := [d for d in ids if read_record(d) is None]:
+        print(f"recording {len(unrecorded)} document(s) first", flush=True)
+        record_documents(unrecorded)
+    todo = []
+    for doc_id in ids:
+        rec = read_record(doc_id)
+        why = ("no record" if rec is None
+               else f"it is {rec.get('kind') or 'of unknown kind'}, not a PDF" if not is_pdf_kind(rec.get("kind"))
+               else "its record has no download link" if "/File/Download/" not in (rec.get("url") or "")
+               else (rec.get("download") or {}).get("excluded"))
+        if why:
+            print(f"  {doc_id}: not downloaded -- {why}", flush=True)
+            skipped += 1
+        else:
+            todo.append(rec)
+    return todo, skipped
+
+
 def cmd_download(args) -> int:
-    """Fetch every recorded PDF not already in source/. Existing files are left alone."""
+    """Fetch every recorded PDF not already in source/, or the ones named. Existing
+    files are left alone."""
+    named = requested_ids(args.items, args.list)
     have = {n[:-4] for n in os.listdir(SOURCE) if n.endswith(".pdf")} if SOURCE.is_dir() else set()
-    # Newest first: an old record without its PDF is usually one REGDOCS no longer has.
-    names = sorted((e.name for e in os.scandir(OUT) if e.is_dir() and e.name.isdigit()
-                    and e.name not in have), key=int, reverse=True) if OUT.is_dir() else []
-    todo = [rec for n in names if (rec := read_record(n)) and is_pdf_kind(rec.get("kind"))
-            and "/File/Download/" in (rec.get("url") or "")
-            and not (rec.get("download") or {}).get("excluded")
-            and (args.retry_unavailable or not (rec.get("download") or {}).get("unavailable"))]
+    skipped = 0
+    if named:
+        todo, skipped = named_downloads(named, have)
+    else:
+        # Newest first: an old record without its PDF is usually one REGDOCS no longer has.
+        names = sorted((e.name for e in os.scandir(OUT) if e.is_dir() and e.name.isdigit()
+                        and e.name not in have), key=int, reverse=True) if OUT.is_dir() else []
+        todo = [rec for n in names if (rec := read_record(n)) and is_pdf_kind(rec.get("kind"))
+                and "/File/Download/" in (rec.get("url") or "")
+                and not (rec.get("download") or {}).get("excluded")
+                and (args.retry_unavailable or not (rec.get("download") or {}).get("unavailable"))]
     if args.limit:
         todo = todo[:args.limit]
     print(f"{len(todo)} file(s) to download", flush=True)
@@ -1467,7 +1530,7 @@ def cmd_download(args) -> int:
                 # An HTML item is excluded for good: later runs skip it, --retry-unavailable too.
                 rec["download"] = {**(rec.get("download") or {}), "excluded": error, "checked_at": now()}
                 write_json(record_path(rec["doc_id"]), rec)
-            elif error.startswith("HTTP 4"):
+            elif error.startswith("HTTP 4") or error == EMPTY_FILE:
                 # REGDOCS says this file is not there: noted, so later runs skip it.
                 rec["download"] = {**(rec.get("download") or {}), "unavailable": error, "checked_at": now()}
                 write_json(record_path(rec["doc_id"]), rec)
@@ -1484,8 +1547,8 @@ def cmd_download(args) -> int:
         fail_n += 1
     finally:
         http.close()
-    print(f"\ndownloaded {ok_n}, failed {fail_n}")
-    return 1 if fail_n else 0
+    print(f"\ndownloaded {ok_n}, failed {fail_n}" + (f", not downloadable {skipped}" if skipped else ""))
+    return 1 if fail_n or skipped else 0
 
 
 def parser() -> argparse.ArgumentParser:
@@ -1513,7 +1576,10 @@ def parser() -> argparse.ArgumentParser:
         pacing(c)
     c = sub.add_parser("status", help="show saved crawl progress, offline")
     c.add_argument("--state", help="one checkpoint directory instead of every saved range")
-    c = sub.add_parser("download", help="fetch recorded PDFs not already in source/")
+    c = sub.add_parser("download", help="fetch recorded PDFs not already in source/, or the ones named")
+    c.add_argument("items", nargs="*", metavar="ID_OR_URL",
+                   help="only these: REGDOCS ids or links (File/Download/<id>, Item/View/<id>)")
+    c.add_argument("--list", metavar="FILE", help="ids or links, one per line ('#' starts a comment)")
     c.add_argument("--limit", type=int)
     c.add_argument("--retry-unavailable", action="store_true",
                    help="also try files REGDOCS answered 404 (or another 4xx) for before")
