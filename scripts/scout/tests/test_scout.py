@@ -422,6 +422,18 @@ class DownloadTests(Base):
             self.assertEqual(s.main(['download']), 0)
         self.assertEqual(again.client.stream.call_count, 0)
 
+    def test_an_empty_file_is_remembered_not_retried_and_does_not_stop_the_run(self):
+        http = self.http(lambda d: (200, b'%PDF-1.7 ' + d.encode()) if d == '7' else (200, b''))
+        self.assertEqual(self.download(http), 1)
+        self.assertEqual(http.client.stream.call_count, 7)       # once each, no retries
+        self.assertEqual(s.read_record('1')['download']['unavailable'], s.EMPTY_FILE)
+        self.assertTrue((s.SOURCE / '7.pdf').exists())
+        self.assertFalse((s.SOURCE / '1.pdf').exists())
+        again = self.http(lambda d: (200, b''))
+        with patch.object(s, 'Http', return_value=again), redirect_stdout(StringIO()):
+            self.assertEqual(s.main(['download']), 0)
+        self.assertEqual(again.client.stream.call_count, 0)
+
     def test_stops_when_regdocs_keeps_failing(self):
         http = self.http(lambda d: (503, b''))
         self.assertEqual(self.download(http), 1)
@@ -431,6 +443,66 @@ class DownloadTests(Base):
         http = self.http(lambda d: (404, b''))
         self.assertEqual(self.download(http, unavailable=3), 1)
         self.assertEqual(http.client.stream.call_count, 3)
+
+    def named(self, http, argv, record=None):
+        """Seven records, then download with argv; record stands in for record_documents."""
+        self.a.run(Http([page([str(i) for i in range(1, 8)], 7), page([])]), 'inventory')
+        out = StringIO()
+        with patch.object(s, 'Http', return_value=http), patch.object(s.time, 'sleep'), \
+                patch.object(s, 'record_documents', record or MagicMock()), redirect_stdout(out):
+            code = s.main(['download', *argv])
+        return code, out.getvalue()
+
+    def pdf(self):
+        return self.http(lambda d: (200, b'%PDF-1.7 ' + d.encode()))
+
+    def test_named_ids_and_links_download_only_those_once_each(self):
+        http = self.pdf()
+        code, _ = self.named(http, ['2', f'{s.DOMAIN}/REGDOCS/File/Download/5',
+                                    f'{s.DOMAIN}/REGDOCS/Item/View/2?lang=en'])
+        self.assertEqual(code, 0)
+        self.assertEqual(sorted(p.name for p in s.SOURCE.iterdir()), ['2.pdf', '5.pdf'])
+        self.assertEqual(http.client.stream.call_count, 2)
+
+    def test_a_list_file_with_comments(self):
+        ids = self.root / 'ids.txt'
+        ids.write_text('# wanted\n3\n\n6   # the sixth\n')
+        code, _ = self.named(self.pdf(), ['--list', str(ids)])
+        self.assertEqual(code, 0)
+        self.assertEqual(sorted(p.name for p in s.SOURCE.iterdir()), ['3.pdf', '6.pdf'])
+
+    def test_anything_but_regdocs_ids_and_links_is_refused_before_any_request(self):
+        for item in ('https://example.com/REGDOCS/File/Download/4', 'Download/4', 'abc'):
+            with self.subTest(item=item):
+                http = self.pdf()
+                code, out = self.named(http, ['1', item])
+                self.assertEqual(code, 2)
+                self.assertIn('refusing', out)
+                self.assertEqual(http.client.stream.call_count, 0)
+
+    def test_named_404_is_tried_again_but_html_and_files_in_source_are_not(self):
+        self.a.run(Http([page([str(i) for i in range(1, 8)], 7), page([])]), 'inventory')
+        for doc_id, mark in (('1', {'unavailable': 'HTTP 404'}), ('2', {'excluded': s.HTML_ITEM})):
+            rec = s.read_record(doc_id)
+            rec['download'] = mark
+            s.write_json(s.record_path(doc_id), rec)
+        s.SOURCE.mkdir(parents=True)
+        (s.SOURCE / '3.pdf').write_bytes(b'%PDF-1.7 kept')
+        http = self.pdf()
+        code, out = self.named(http, ['1', '2', '3'])
+        self.assertEqual(code, 1)                                 # 2 cannot be downloaded
+        self.assertEqual(http.client.stream.call_count, 1)        # only 1
+        self.assertTrue((s.SOURCE / '1.pdf').exists())
+        self.assertEqual((s.SOURCE / '3.pdf').read_bytes(), b'%PDF-1.7 kept')
+        self.assertIn('2: not downloaded', out)
+
+    def test_a_named_document_without_a_record_is_recorded_first(self):
+        record = MagicMock()
+        code, out = self.named(self.pdf(), ['4', '99'], record=record)
+        record.assert_called_once_with(['99'])
+        self.assertTrue((s.SOURCE / '4.pdf').exists())
+        self.assertIn('99: not downloaded -- no record', out)    # still none after recording
+        self.assertEqual(code, 1)
 
 
 if __name__ == '__main__':

@@ -21,6 +21,7 @@ Linux or WSL (file locking uses `fcntl`), Python 3.10+, network access to apps.c
 ./scripts/scout/scout.sh enrich   --from 2026-09-01                   # + filings and facets (--to: today)
 ./scripts/scout/scout.sh status                                        # progress, offline
 ./scripts/scout/scout.sh download [--limit N]                          # PDFs not yet in source/
+./scripts/scout/scout.sh download 4647200 <REGDOCS link> [--list FILE]  # only these, by id or link
 ./scripts/scout/scout.sh doc 4647200 4692360                           # specific documents
 ./scripts/scout/scout.sh missing                                       # PDFs in source/ without a record
 ./scripts/scout/scout.sh test
@@ -28,6 +29,13 @@ Linux or WSL (file locking uses `fcntl`), Python 3.10+, network access to apps.c
 
 `enrich` includes discovery and is the usual command. Neither downloads; `download` fetches every
 recorded PDF missing from `source/`, newest first, and never downloads a file twice.
+
+`download` can also be given what to fetch: REGDOCS ids, REGDOCS links (`File/Download/<id>` or
+`Item/View/<id>`, on apps.cer-rec.gc.ca only), or a file of them one per line (`--list`; `#` starts
+a comment). A named document with no record is recorded first, as `doc` would (the download writes
+its hash into the record); the file always comes from the record's own link. One REGDOCS answered
+404 for is tried again, since it was asked for; one served as HTML stays excluded. Anything already
+in `source/` is left alone.
 
 ## Resuming, refreshing, failing politely
 
