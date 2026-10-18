@@ -100,21 +100,27 @@ Person-years assume 3 minutes to check a page against its image and 1,600 workin
 
 **Recommendation: C for every new filing, B for the existing record, and A only on the pages B flags.** The backlog is where the cost is; the flow of new filings is small enough to fix at the source, and a single publishing system in 2024 showed how fast the problem returns without a rule.
 
-## What to ask of filers
+## Recommendations, ranked by value
 
-**Most of the problem is a setting or a habit, and a few asks cover nearly all of it.** Today e-filing accepts PDF only, image-only PDFs are "not recommended" rather than refused, and nothing is checked at upload.
+**An automatic check at upload comes first, because it turns every other recommendation from advice into a rule; after it, digital signing and "export, don't scan" fix the most documents.** Today e-filing accepts PDF only, image-only PDFs are "not recommended" rather than refused, and nothing is checked at upload.
 
-| Ask | What it fixes |
-| --- | --- |
-| Export the PDF from the application that made it; never print, scan, flatten or paste screenshots | page images and pictures of text from digital tools (16,254 documents; 140,804 pages with words only in images) |
-| Sign digitally (PAdES), including sworn documents | the largest single source: printed, signed and scanned correspondence and affidavits |
-| Where paper is unavoidable, OCR it at 300 dpi and check it; fonts that decode (PDF/A-2u) | stub layers, poor scanner OCR, text that decodes to nonsense |
-| Redact with a tool that removes the text, and say what was withheld | words left under black boxes; pages blacked out whole |
-| Keep structure: tagged PDF (headings, tables and lists marked as such), bookmarks on long documents, live forms filled electronically, no JavaScript | 46% of documents are tagged, and in a sample of 50 of them almost half tag their tables - rows and cells a machine reads exactly instead of rebuilding them with models; half of long documents lack bookmarks; forms read only from pixels |
-| File data as data: tables as CSV or Excel with a data dictionary, maps as GeoPackage, drawings with CAD files - through e-filing | tables, the weakest part of every extraction; GIS now travels by e-mail or USB |
-| A signed manifest per filing: each file, its fingerprint and the data it supports | integrity and a table of contents for machines in one |
+| # | Recommendation | Reach in the record | Why it ranks here | Effort |
+| --- | --- | --- | --- | --- |
+| 1 | Check every file automatically at upload | every problem below | turns each ask into a rule while the filer still has the source; the checker exists | CER system; tool exists |
+| 2 | Sign digitally, sworn documents too | 28,592 non-digital documents (46%) | the largest single source; digitally signed documents stay digital | process |
+| 3 | Export the PDF; never scan, flatten or paste screenshots | 16,254 documents degraded by digital tools; 140,804 pages with pictures of text | avoidable at no cost; one system made 4,137 in a year | a setting |
+| 4 | Fingerprint and timestamp every file, published on the record | every file | integrity provable without paper | CER system, small |
+| 5 | File data as data: tables as CSV with a data dictionary, maps as GeoPackage, through e-filing | tables are the weakest step of every extraction (samples) | the values decisions rest on, and where AI readers invent most | rule and e-filing change |
+| 6 | Redact by removing the text, and say what was withheld | 313 documents flagged | each real case exposes personal information | a tool |
+| 7 | Text that matches the page: OCR checked, fonts that decode (PDF/A-2u), no hidden duplicate text | 172,381 scanner-OCR, 107,949 stub and 38,596 undecodable pages | text that looks right and is not is the most dangerous case for AI | setting or process |
+| 8 | Tagged PDF: headings, tables and lists marked as such | 54% of documents untagged; almost half of tagged ones mark their tables (sample of 50) | exact headings and table cells instead of model guesses | a setting |
+| 9 | Bulk access, and metadata published with each file | the whole record | every automated use starts here | CER system |
+| 10 | A signed manifest per filing | every filing | integrity and a machine table of contents in one | proposal |
+| 11 | Bookmarks on long documents, live forms filled electronically, no JavaScript | 18,024 long documents without bookmarks | structure the author already had | a setting |
+| 12 | Readable page sizes, whole documents | 7,682 documents with oversize sheets; 20 MB splits | keeps drawings and long documents whole in the record | rule and CER limit |
+| 13 | The file is a real document | 20 of 860 recent downloads were not | a missing document is invisible to AI | intake check |
 
-**An automatic check at upload turns each ask into a rule.** It runs on the file alone in about a second a page and tells the filer "page 47 has no usable text" while the source still exists. The checker already exists. The full guidance - problem, why it matters, the solution, proposed Filing Manual wording and the check for each area - is in the project's filing guidance.
+The ranking weighs reach (counts from the census), risk (a wrong value or a privacy leak weighs more than a missing one), effort and leverage; it is a judgement, the counts are not. Not worth requiring: rules on page rotation, document length, fonts by name or table formatting - none affected how well a page could be read. The full guidance gives each recommendation's evidence, proposed Filing Manual wording and intake check.
 
 ## What the CER's own systems should fix
 

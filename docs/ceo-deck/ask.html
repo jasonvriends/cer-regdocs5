@@ -1,31 +1,21 @@
-<section id="ask" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<h2 style="font-family:'Libre Baskerville', Georgia, serif;font-size:72px;font-weight:700;line-height:1.15;color:#14213D">What to ask of every electronic filing</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px">
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #2F5F9E;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">Export, don’t scan</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">PDF saved from the application that made it; never printed, scanned or flattened.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #2F5F9E;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">Sign digitally</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">PAdES digital signatures, including sworn documents, instead of print, sign, scan.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #2F5F9E;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">Text that is the page</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">Paper OCR’d and checked; fonts that decode (PDF/A-2u).</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #2F5F9E;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">Redact by removing</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">A tool that deletes the text, and a note of what was withheld and why.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #2F5F9E;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">Data as data</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">Tagged PDFs, so tables and headings are marked; tables also as CSV with a data dictionary, maps as GeoPackage.</p>
-</div>
-<div style="display:flex;flex-direction:column;gap:12px;border-top:6px solid #C8651B;padding:24px 0 0 0">
-<h3 style="font-size:36px;font-weight:700;line-height:1.2;color:#14213D">A check at upload</h3>
-<p style="font-size:28px;line-height:1.35;color:#4A5568">Automatic, a second a page: “page 47 has no usable text” while the source exists.</p>
-</div>
-</div>
-<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A7280">Each ask is tied to corpus counts and to the current rule it would change in the filing guidance (docs/filing-guidance.md).</p>
-<aside>Six asks cover nearly all of it. Export from the authoring application instead of scanning. Sign digitally instead of printing and scanning - the largest single source. Where paper is unavoidable, OCR it and check it, and use fonts that decode. Redact with a tool that removes the text. File tables and maps as data, through e-filing - today e-filing accepts only PDF, and GIS data travels by e-mail or USB. And ask for tagged PDFs: a tag is the author's own note of what is a heading and where each table cell is; in a sample of tagged filings almost half marked their tables, which a machine then reads exactly instead of guessing. And make it a rule by checking at upload: a sentence in a manual is advice, a check is a rule. Today, image-only PDFs are only 'not recommended' and nothing is checked.</aside>
+<section id="ask" data-transition="fade" style="background:#FBFBF8;color:#14213D;font-family:'Public Sans', Arial, sans-serif;padding:120px 128px 150px;display:flex;flex-direction:column;gap:24px">
+<h2 style="font-family:'Libre Baskerville', Georgia, serif;font-size:60px;font-weight:700;line-height:1.15;color:#14213D">Recommendations, ranked by value</h2>
+<table style="font-size:24px;color:#14213D;font-family:'Public Sans', Arial, sans-serif">
+<tr><th style="width:5%;text-align:left">#</th><th style="width:55%;text-align:left">Recommendation</th><th style="width:40%;text-align:left">Reach in the record</th></tr>
+<tr><td>1</td><td><b>Check every file automatically at upload</b></td><td>makes every ask below a rule</td></tr>
+<tr><td>2</td><td><b>Sign digitally, sworn documents too</b></td><td>28,592 non-digital documents (46%)</td></tr>
+<tr><td>3</td><td><b>Export the PDF; never scan, flatten or screenshot</b></td><td>16,254 documents; 140,804 pages</td></tr>
+<tr><td>4</td><td>Fingerprint and timestamp every file</td><td>every file</td></tr>
+<tr><td>5</td><td>Data as data: CSV with a dictionary, GeoPackage</td><td>the values decisions rest on</td></tr>
+<tr><td>6</td><td>Redact by removing, and say what was withheld</td><td>313 documents flagged</td></tr>
+<tr><td>7</td><td>Text that matches the page: checked OCR, fonts</td><td>318,926 pages of untrustworthy text</td></tr>
+<tr><td>8</td><td>Tagged PDF: headings and tables marked</td><td>54% untagged</td></tr>
+<tr><td>9</td><td>Bulk access, metadata with each file</td><td>the whole record</td></tr>
+<tr><td>10</td><td>A signed manifest per filing</td><td>every filing</td></tr>
+<tr><td>11</td><td>Bookmarks, live forms, no JavaScript</td><td>18,024 long documents</td></tr>
+<tr><td>12</td><td>Readable page sizes, whole documents</td><td>7,682 documents</td></tr>
+<tr><td>13</td><td>The file is a real document</td><td>20 of 860 recent downloads</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:56px;width:1664px;font-size:24px;color:#6A7280">Ranked on reach (census counts), risk (wrong values and privacy leaks first), effort and leverage. Details: docs/filing-guidance.md.</p>
+<aside>This ranks everything we learned by value. First, an automatic check at upload, because it turns every other item from advice into a rule while the filer still has the source - and the checker already exists. Second, digital signing, the largest single source of non-digital documents. Third, export instead of scanning, flattening or pasting screenshots - free to do, and one publishing system alone produced over four thousand image-only documents in a year. Then the CER's own fingerprinting of files, data filed as data, proper redaction, text that matches the page, tagged PDFs, bulk access, a signed manifest, and the smaller structural asks. Not worth requiring: rules on page rotation, length, named fonts or table formatting - none of them affected how well a page could be read.</aside>
 </section>

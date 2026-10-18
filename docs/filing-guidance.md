@@ -56,6 +56,31 @@ three business days [rules].
 
 ---
 
+## Recommendations ranked by value
+
+Ranked by **reach** (documents or pages it would have fixed, from the census), **risk** (a wrong value or
+a privacy leak weighs more than a missing one), **effort** (a software setting is cheap; a process or
+system change is not) and **leverage** (whether it makes the rest enforceable). The ranking is a
+judgement on those four; the numbers behind it are counts.
+
+| # | recommendation (section) | reach | why here | effort |
+|---|---|---|---|---|
+| 1 | Check every file automatically at upload (11) | every class below | turns each ask from advice into a rule, while the filer still has the source; the checker exists | CER system; tool exists |
+| 2 | Sign digitally, sworn documents too (3) | 28,592 not-digital documents (46%) | the largest single source; digitally signed documents stay digital (73 of 1,410 are not) | process |
+| 3 | Export the PDF; never scan, flatten or paste screenshots (1) | 16,254 documents from digital tools; 140,804 pages with pictures of text | avoidable at no cost; one system made 4,137 in a year | a setting |
+| 4 | Fingerprint and timestamp every file, published on the record (3, 13) | every file | integrity provable without paper | CER system, small |
+| 5 | Data as data: CSV with a dictionary, GeoPackage, through e-filing (6, 7) | samples: tables are the weakest step of every extraction | the values decisions rest on, where AI readers invent most | rule + e-filing |
+| 6 | Redact by removing, and say what was withheld (4) | 313 documents flagged | each real case is a privacy breach | a tool |
+| 7 | Text that is the page: checked OCR, fonts that decode (2) | 172,381 scanner-OCR, 107,949 stub, 38,596 undecodable pages | text that looks right and is not is the most dangerous case for AI | setting / process |
+| 8 | Tagged PDF (5) | 54% untagged; tables tagged in 23 of 50 tagged filings | exact headings and table cells | a setting |
+| 9 | Bulk access, and metadata with each file (13) | the whole record | every automated use starts here | CER system |
+| 10 | A signed filing manifest (10) | every filing | integrity and a machine table of contents in one | proposal |
+| 11 | Bookmarks, live forms filled electronically, no JavaScript (5) | 18,024 long documents without bookmarks | structure the author already had | a setting |
+| 12 | Readable pages, whole documents (8) | 7,682 documents with oversize sheets | keeps drawings in the record | rule + CER limit |
+| 13 | The file is the document (9) | 20 of 860 recent downloads | small, but a missing document is invisible to AI | intake check |
+
+---
+
 ## 1. Born digital: export, do not print, scan or flatten
 
 **Problem.** [census] 40,295 documents are mostly page images with no text; 14,275 more carry only a
