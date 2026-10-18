@@ -740,6 +740,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                                     "evidence": "MuPDF crashed or hung on this page on an earlier try: read and drawn by pdfium"})
             if pno in ocr_saved:
                 p["ocr_reused"] = True
+            heads = rd.tagged_headings(page)
+            if heads:
+                p["tag_headings"] = heads     # the author's headings, for the section tree
             if waited:
                 p["issues"].append({"page": pno, "kind": "gpu_wait", "severity": "info",
                                     "evidence": f"waited {waited:.0f}s for room on the GPU (another program using it)"})

@@ -570,21 +570,56 @@ def ink_share(page, dpi: int = 50) -> float:
     return float((a < 128).mean()) if a.size else 0.0
 
 
+def _tag_tree(page):
+    """The page's tagged structure as parsed XML (MuPDF's structure collection), or None for an
+    untagged file; parsed once a page (about 2 ms) and shared by the table and heading readers."""
+    import pymupdf
+    import xml.etree.ElementTree as ET
+    if hasattr(page, "_regdocs_tag_tree"):
+        return page._regdocs_tag_tree
+    root = None
+    try:
+        doc = page.parent
+        if doc.xref_get_key(doc.pdf_catalog(), "StructTreeRoot")[0] != "null":
+            root = ET.fromstring(page.get_text("xml", flags=pymupdf.TEXT_COLLECT_STRUCTURE))
+    except Exception:
+        root = None
+    try:
+        page._regdocs_tag_tree = root
+    except Exception:
+        pass
+    return root
+
+
+def _tag_box(e):
+    b = e.get("bbox")
+    return tuple(float(v) for v in b.split()) if b else None
+
+
+def tagged_headings(page) -> list[dict]:
+    """The headings a tagged PDF marks on this page: {"level", "box"}, H1-H6 by their number and a
+    bare H as level 1. 15 of 50 tagged filings sampled tag headings [L Tags: the author's own structure]."""
+    root = _tag_tree(page)
+    out = []
+    for e in root.iter("struct") if root is not None else []:
+        std = e.get("std") or ""
+        if (std == "H" or (len(std) == 2 and std[0] == "H" and std[1] in "123456")) and _tag_box(e):
+            out.append({"level": int(std[1]) if len(std) == 2 else 1, "box": _tag_box(e)})
+    return out
+
+
 def _tagged_tables(page) -> list[dict]:
     """The tables a tagged PDF marks on this page (its structure tree: Table > TR > TH/TD), each
     {"box", "rows": [[(box, header), ...], ...]}, read once a page through MuPDF's structure
     collection. An untagged file costs one catalog lookup."""
-    import pymupdf
-    import xml.etree.ElementTree as ET
     cached = getattr(page, "_regdocs_tag_tables", None)
     if cached is not None:
         return cached
     out = []
     try:
-        doc = page.parent
-        if doc.xref_get_key(doc.pdf_catalog(), "StructTreeRoot")[0] != "null":
-            root = ET.fromstring(page.get_text("xml", flags=pymupdf.TEXT_COLLECT_STRUCTURE))
-            box = lambda e: tuple(float(v) for v in e.get("bbox", "").split()) if e.get("bbox") else None
+        root = _tag_tree(page)
+        box = _tag_box
+        if root is not None:
             for t in root.iter("struct"):
                 if t.get("std") != "Table" or box(t) is None:
                     continue

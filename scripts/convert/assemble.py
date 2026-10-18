@@ -475,6 +475,30 @@ def find_sections(pages: list[dict], words: list[dict], outline: list) -> tuple[
             if m["placed"]:
                 opened.add(key)
         return marks, "bookmarks"
+    # the author's tagged headings (H1-H6): exact where present, and in 15 of 50 tagged filings
+    # sampled; each matched to the words inside its box, in an element that may be split
+    tagged = [(pi, h) for pi, p in enumerate(pages) for h in p.get("tag_headings") or []]
+    if len(tagged) >= 2:
+        where = {}
+        for pi, p in enumerate(pages):
+            for ei, el in enumerate(p["elements"]):
+                if el["label"] not in NO_SPLIT:
+                    for i in el["words"]:
+                        where[i] = (pi, ei)
+        tmarks = []
+        for pi, h in tagged:
+            ids = [i for el in pages[pi]["elements"] if el["label"] not in NO_SPLIT for i in el["words"]
+                   if inside(h["box"], *centre(words[i]["box"]), 1.0)]
+            if not ids:
+                continue
+            pi_, ei = where[ids[0]]
+            ids = [i for i in ids if where.get(i) == (pi_, ei)]
+            text = " ".join(text_of([words[i] for i in ids]).split())
+            if text:
+                tmarks.append({"pi": pi_, "ei": ei, "words": ids, "level": h["level"], "title": text,
+                               "page": pages[pi_]["page"], "source": "tags", "matched": True})
+        if len(tmarks) >= 2:
+            return tmarks, "tags"
     cands = []
     for pi, ei, ln in _first_lines(pages, words):
         if (pages[pi].get("facts") or {}).get("size") == "oversize":
