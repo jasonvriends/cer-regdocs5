@@ -47,7 +47,7 @@ Sources:
 2. **Most of the losses are allowed, not forbidden.** Image-only PDFs are "not recommended";
    nothing checks for them, or for text layers that are wrong, or for files that are not documents.
    A check at upload turns each recommendation into a rule
-   ([filing-guidance.md, section 8](filing-guidance.md#8-check-at-intake)).
+   ([filing-guidance.md, section 11](filing-guidance.md#11-check-at-intake-a-rule-not-advice)).
 3. **Integrity rests on paper.** The signed paper receipt is the only signature; nothing a reader
    can check proves a downloaded file is the one filed. Hashes shown on the record, and digital
    signatures, would make each file verifiable without paper.

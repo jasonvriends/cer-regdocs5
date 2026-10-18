@@ -266,12 +266,65 @@ filed in CSV or Excel format with a data dictionary. Spatial data must be filed 
 the coordinate reference system identified. These files are submitted through electronic filing with
 the document they support."*
 
-**Check at intake.** The data files named in the filing's manifest (section 9) are present, parse, and
+**Check at intake.** The data files named in the filing's manifest (section 10) are present, parse, and
 match their dictionaries.
 
 ---
 
-## 7. Readable pages, whole documents
+## 7. Where AI reading is risky: vision models make up data
+
+**Problem.** Generative vision models - the "read this page" models behind many AI document tools -
+do not fail by leaving a gap. They fail by writing something plausible.
+- **Invented values that look clean** [2026-09 corpus]: asked to read a contact table, a vision model
+  returned the company name with one letter changed, the street number 980 as 680, the postal code
+  V6Z 0C8 as "V5Z OCB", two e-mail addresses replaced by invented ones ("storage@", "motherboard@"),
+  and **a third recipient who does not exist**. Nothing in its output marked any of it as a guess.
+- **Numbers are where they slip** [samples, bench of 150 lines whose answer is known exactly]: the
+  best of five models read 95.7% of words and 95.3% of numbers right - one number in twenty wrong,
+  with no warning. On scans, models agreed with each other on 99% of words but only 73-92% of
+  numbers.
+- **Text where there is none** [samples]: two of five models wrote text on blank strips, every time
+  (6 of 6); earlier pipelines saw the same on blank pages.
+- **Tables and drawings fail worst** [2026-09 corpus]: every model tested kept under 11% of the words
+  of an engineering-drawing table; models asked for one line carried on with table markup, repeated
+  values ("100% 100% 100% ...") until stopped.
+- **Valid is not right** [cer-regdocs3]: output that passed every structural check still listed
+  instruments a page only mentioned, and labelled one form two ways.
+
+**Why it matters for automation.** A missing value is visible and can be checked; an invented one
+looks exactly like a real one. In a regulatory record the values that matter most - a detection
+limit printed `<0.010`, a pressure, a setback, a landowner's address, a date in a condition - are the
+ones a model is likeliest to "correct". The risk is highest where the file gives a machine nothing
+better to read: page images, scans, and tables or drawings printed as pictures.
+
+| content | risk if a vision model reads it from the image | the safer source |
+|---|---|---|
+| numbers in tables: results, limits, volumes, money | **high**: about 1 in 20 numbers wrong, unmarked | the data file (6), or the text layer |
+| names, addresses, e-mails, legal descriptions | **high**: replaced by plausible inventions | the text layer |
+| drawings, maps, alignment sheets | **high**: labels mostly lost or invented | CAD and GIS files (6) |
+| blank, faint or stamped areas | **high**: text written where there is none | none needed |
+| handwriting, signatures | high | digital signature (3) |
+| ordinary prose in a digital document | low - but the text layer already holds it exactly | the text layer |
+
+**Solution.**
+- **For filers:** the remedy is the rest of this guide - a text layer that is the page (1, 2) and data
+  as data (6) leave nothing for a model to guess.
+- **For the CER's own use of AI:** a vision model may *vote* between readings or flag a doubtful
+  line; it must never be the source of a value. Every token a model returns is checked against the
+  text layer or an independent OCR of the same place, and anything absent from both is rejected.
+  Models are tested on blank pages and on known answers before use; model-derived records stay marked
+  unreviewed until a person confirms them. The converter already works this way.
+
+**Guidance text.** *"Values that matter to a decision - measurements, results, limits, quantities,
+names and locations - must be filed in a form a machine can read exactly: as text in the document and,
+for tabular and spatial data, as data files (section 6). The CER does not rely on values recovered
+from images of pages."*
+
+**Check at intake.** Sections 1, 2 and 6's checks: where they pass, no vision model is needed.
+
+---
+
+## 8. Readable pages, whole documents
 
 **Problem.** [census] 25,989 pages in 7,682 documents (2.9%) are over 17.5 inches. [rules] A drawing
 not legible at 11 x 17 inches goes on paper with a placeholder that "cannot be viewed or searched";
@@ -288,7 +341,7 @@ Raise the size limit for born-digital files, which rarely need it; scans are wha
 
 ---
 
-## 8. The file is the document
+## 9. The file is the document
 
 **Problem.** [corpus] Of 860 PDFs downloaded on 2026-10-17, 20 are not documents: 6 REGDOCS serves
 as empty files (0 bytes), 13 are web pages (filing receipts), and one (980558) is a 77-byte desktop
@@ -303,7 +356,7 @@ them, and is not a link. The filer is told at once, while the document still exi
 
 ---
 
-## 9. A filing that describes itself *(proposed)*
+## 10. A filing that describes itself *(proposed)*
 
 A small manifest beside the files - generated by the e-filing form from what the filer uploads -
 listing each file with its SHA-256, type, page count, language, PDF/A level and signature, and each
@@ -328,7 +381,7 @@ one: tamper-evident and machine-readable at once.
 
 ---
 
-## 10. Check at intake: a rule, not advice
+## 11. Check at intake: a rule, not advice
 
 A filer told to "ensure text is extractable" cannot know they failed. These checks run on the file
 alone in about a second a page, at upload, while the correct source still exists:
@@ -341,15 +394,15 @@ alone in about a second a page, at upload, while the correct source still exists
 | signature coverage, hash, timestamp | integrity (3) | file |
 | outline, tags, form fields, PDF/A | structure (5) | catalog |
 | data files present, parse, match dictionary | data as data (6) | files |
-| page dimensions | oversize sheets (7) | page boxes |
-| `%PDF-`, opens, has content, not a link | the file is the document (8) | first bytes |
+| page dimensions | oversize sheets (8) | page boxes |
+| `%PDF-`, opens, has content, not a link | the file is the document (9) | first bytes |
 
 `check.py` already runs most of these on one PDF (`./scripts/convert/convert.sh check filing.pdf`).
 *"Page 47 has no usable text layer"* at upload is actionable; a sentence in a manual is not.
 
 ---
 
-## 11. Not worth requiring
+## 12. Not worth requiring
 
 - **Page rotation** [2026-09 corpus]: rotated pages read as well as upright ones; [survey, by eye] 9 of
   29 scanned pages were sideways and OCR read them.
