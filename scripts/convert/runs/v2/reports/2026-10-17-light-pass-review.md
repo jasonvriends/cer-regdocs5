@@ -77,6 +77,31 @@ the pass is the older material.
 7. **892 documents have under 20 words a page** (`light-pass-sparse.txt`): drawings, photographs
    and forms, mostly; not yet looked at one by one.
 
+## The rest of the pass (60,368 documents, finished 2026-10-17 20:56)
+
+The documents converted after the review above: IDs down to about 90,000, dated 2002-2011
+(a sample of 2,000, 27,987 pages). `done: 58894 converted, 0 failed` for the last launch.
+
+| | |
+|---|---:|
+| pages / words | 803,271 / 244,848,020 |
+| pages by OCR | 181,942 (23%) |
+| documents read entirely by OCR / partly | 20,129 (33%) / 4,724 |
+| seconds a page: median / 95th percentile | 0.60 / 2.36 |
+| partial | 2 (761878, 760858), both from the GPU contention, in `../redo-gpu-contention.txt` |
+| no words | 16, all photographs (434153: three site photos and a meter, no text) |
+| under 20 words a page | 252 |
+
+The same issue kinds as above and no new ones; conservation checks again 100%. Older filings
+have no text layer more often: 18% of sampled pages (11% in 2011-2026), and fewer scans carry
+their own OCR layer (781 pages, 2.8%; 6.9%). Bookmark headings repeat words in 4 of 2,000.
+
+**GPU contention (2026-10-17 ~07:00-07:50):** a game on Windows took ~5 GB of the card; with the
+pass at 22.2 of 24.5 GB, OCR went from 1.4 to 9.9 s a page and 43 documents had pages stall and
+go to pdfium or be left out (none in the 74,800 before). Relaunched once the game closed.
+
+**Whole corpus:** 267,500 documents in the logs, about 3.6 million pages and 1.22 billion words.
+
 ## Script updates, in order (after the pass)
 
 1. `match_readings`: None when the other reader did not run; `report` then averages only
