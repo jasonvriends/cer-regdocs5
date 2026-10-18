@@ -724,8 +724,13 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     issues = doc_issues + [i for p in pages for i in p["issues"]]
     sev = collections.Counter(i["severity"] for i in issues)
     todo = collections.Counter(t for p in pages for t in p["todo"])
+    n_err = sum(1 for p in pages if p.get("error"))
+    status = "failed" if n_err and n_err == len(pages) else "partial" if n_err else "ok"
     ledger = {
-        "doc_id": doc_id, "version": VERSION, "mode": "light" if light else "full", "run": run,
+        # status leads with version and mode: the skip check reads only the ledger's first bytes, and
+        # a ledger with failed pages was taken as done (4477638: 127 of 147 pages lost to a broken
+        # pipe on 2026-10-13, never retried by the corpus pass)
+        "doc_id": doc_id, "version": VERSION, "mode": "light" if light else "full", "status": status, "run": run,
         "code": code_identity(), "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"], "ocr_reused_from": ocr_from,
         "seconds": round(time.perf_counter() - t0, 2), "context": ctx,
         "summary": {"pages": len(pages), "words_evidence": sum(1 for w in all_words if w["evidence"]),
@@ -747,8 +752,6 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     tmp = out / f"{doc_id}.pages.json.part"
     tmp.write_text(json.dumps(ledger, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
     os.replace(tmp, out / f"{doc_id}.pages.json")
-    status = "failed" if any(p.get("error") for p in pages) and len(pages) == sum(1 for p in pages if p.get("error")) \
-        else "partial" if any(p.get("error") for p in pages) else "ok"
     return {"doc_id": doc_id, "status": status, **ledger["summary"], "seconds": ledger["seconds"]}
 
 
@@ -839,7 +842,7 @@ def cmd_run(args) -> int:
         print("nothing to convert: give ids, --sample or --all")
         return 2
     run, run_file = run_identity()
-    todo, skipped = [], collections.Counter()
+    todo, skipped, again = [], collections.Counter(), collections.Counter()
     def ledger_of(led):
         """Only what deciding to skip needs: version and mode lead the ledger, and a complete
         ledger ends with "}". Reading whole ledgers (MBs each, ~70,000 of them) took over an hour
@@ -854,7 +857,7 @@ def cmd_run(args) -> int:
         if not whole:                     # cut off mid-write (a restart): convert it again
             return {}
         out = {}
-        for key in ("version", "mode"):
+        for key in ("version", "mode", "status"):
             m = re.search(rf'"{key}": "([^"]*)"', head)
             if m:
                 out[key] = m.group(1)
@@ -864,6 +867,9 @@ def cmd_run(args) -> int:
         L = ledger_of(led) if led.exists() and not args.force else {}
         if not (SOURCE / f"{d}.pdf").exists():
             skipped["no PDF in source/"] += 1
+        elif L.get("version") == VERSION and L.get("status", "ok") != "ok":
+            again[L["status"]] += 1         # pages failed or were left out last time
+            todo.append(d)
         elif L.get("version") == VERSION:
             # a light pass never replaces a full conversion; a full run redoes a light one
             if args.light or L.get("mode", "full") == "full":
@@ -874,6 +880,8 @@ def cmd_run(args) -> int:
             todo.append(d)
     if skipped:
         print("skipped: " + ", ".join(f"{k} {v}" for k, v in skipped.items()))
+    if again:
+        print("converting again: " + ", ".join(f"{k} {v}" for k, v in again.items()))
     code = code_identity()
     print(f"convert {VERSION}{' (light)' if args.light else ''}: {len(todo)} document(s); run identity {run_file}; "
           f"code {code['sha256'][:12]} at {code['commit']}{' + uncommitted changes' if code['dirty'] else ''}",

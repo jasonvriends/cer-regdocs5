@@ -360,6 +360,12 @@ at the end; 769,463 pages (21.4%) read by OCR, 54,598 documents (20.4%) entirely
   page), about 1 a second in the OCR-heavy middle years, 4,000-7,000 an hour on 2002-2011 (median
   0.60 s a page; 33% of those documents are scans with no text of their own, against 17% after).
 - **A machine shared is a machine that slows down.** See Memory and time: a game on the same GPU.
+- **"Converted" is not "done".** Four documents converted on 2026-10-13 by a run that kept no log
+  had pages fail with `BrokenPipeError` (4477638: 127 of 147 pages); their ledgers were complete,
+  so the skip check took them as done and the corpus pass never tried them again. The catalog's
+  `page_failed` issues found them five days later. A ledger now states its status (ok, partial,
+  failed) beside its version and mode, where the skip check reads, and anything not ok is converted
+  again on the next run. And every run keeps a log, including the quick ones.
 
 ### Open
 
