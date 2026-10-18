@@ -526,6 +526,17 @@ def mark_sections(pages: list[dict], words: list[dict], outline: list) -> dict:
             if not ms:
                 out.append(el)
                 continue
+            if el["label"] in NO_SPLIT:
+                # a bookmark that matches no line is anchored at the page's first element; when that is a
+                # table, rebuilding it through _part dropped its cells and the document failed
+                # (KeyError 'cells': 5 of 625 full conversions, 2026-10-18). The section opens before it;
+                # the element is kept whole.
+                for m in ms:
+                    out.append({"region": None, "label": "section_header", "reader": "bookmarks", "share": None,
+                                "box": el["box"], "words": [],
+                                "section": {k: m[k] for k in ("level", "title", "source", "matched")}})
+                out.append(el)
+                continue
             rest = list(el["words"])
             for m in ms:
                 sec = {k: m[k] for k in ("level", "title", "source", "matched")}
