@@ -74,10 +74,10 @@ the corpus run, and run only when authorized.
 |---|---|---|
 | `pages.json` | the ledger, with the code hash and the PDF's hash | exists |
 | `words.parquet` | every reading of every word | exists |
-| **`elements.parquet`** | one row per element - `<id>:p<page>:e<n>`, type (paragraph, heading, list item, caption, table, figure, form field), text, box, word IDs, section path | **proposed**: the unit of citation for search and language models |
-| `tables.parquet` + **`cells.parquet`** | each table's readings; the chosen grid as cells (row, column, spans, header flag, text, word IDs) | tables exists (full mode); cells proposed |
+| `elements.parquet` | one row per element - `<id>:p<page>:e<n>`, type (paragraph, heading, list item, caption, table, figure, form field), text, box, word IDs, section path | exists (2026-10-18): the unit of citation for search and language models |
+| `tables.parquet` + `cells.parquet` | each table's readings; the chosen grid as cells (row, column, spans, header flag, text, word IDs) | exist (full mode) |
 | `docling.json.gz`, `.md` | structure and text for downstream tools | exist |
-| **`manifest.json`** | every file above with its SHA-256, the PDF's hash, the code hash, the run | **proposed**: closes the chain of custody from the PDF to every derived file |
+| `manifest.json` | every file above with its SHA-256, the PDF's hash, the code hash, the run | exists (2026-10-18): closes the chain of custody from the PDF to every derived file |
 
 ### Per filing (a REGDOCS folder or compound document) - the context
 

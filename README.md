@@ -49,8 +49,10 @@ answers are recorded on the document's record and not retried.
 - **Light mode** reads text and how each page was made; it is what the whole corpus has been through.
   **Full mode** (no `--light`) adds layout, tables and figures, and is much slower; a full run replaces
   a document's light outputs.
-- Outputs go to `output/<id>/convert/`: the ledger (`pages.json`), every word (`words.parquet`), the
-  structure (`docling.json.gz`) and the text (`.md`). Each ledger names the code that wrote it.
+- Outputs go to `output/<id>/convert/`: the ledger (`pages.json`), every word (`words.parquet`), every
+  element and table cell with a stable id (`elements.parquet`, `cells.parquet`: `<id>:p<page>:e<n>`), the
+  structure (`docling.json.gz`), the text (`.md`) and `manifest.json` (each file's SHA-256, the PDF's
+  and the code's). Each ledger names the code that wrote it and says whether it is complete.
 - Finished documents are skipped, so a stopped run resumes. Run long jobs detached and keep their logs:
   `setsid nohup ./scripts/convert/convert.sh run --all --light --workers 8 >> scripts/convert/runs/v2/logs/<name>.log 2>&1 &`
 - The GPU is shared with everything else on the machine: a game or another GPU program slows every

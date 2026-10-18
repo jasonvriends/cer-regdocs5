@@ -886,6 +886,38 @@ def build_document(name: str, pages: list[dict], words: list[dict]):
     return doc, owner
 
 
+def elements(doc_id: str, pages: list[dict], words: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Every element as a row with a stable id, `<doc>:p<page>:e<n>` (n counts the page's elements
+    in reading order, from 1), and every table cell as a row of its own: the unit a search hit, a
+    language model's citation or a table export points at. Text is joined from the element's
+    evidence words, so it holds exactly what the document holds; word ids lead back to each word's
+    box and reader in words.parquet."""
+    rows, cells, path = [], [], []
+    for p in pages:
+        for n, el in enumerate(p["elements"], 1):
+            eid = f"{doc_id}:p{p['page']}:e{n}"
+            ws = [words[i] for i in el["words"]]
+            sec = el.get("section")
+            if sec:                          # a section opens: the path is cut to its level
+                path = path[:max(0, sec["level"] - 1)] + [text_of(ws).replace("\n", " ") or sec["title"]]
+            box = el.get("box") or (None, None, None, None)
+            rows.append({"element_id": eid, "doc_id": doc_id, "page": p["page"], "n": n, "label": el["label"],
+                         "text": text_of(ws), "section_path": " > ".join(path) if path else None,
+                         "heading_level": sec["level"] if sec else None,
+                         "furniture": el["label"] in FURNITURE, "continues": bool(el.get("continues")),
+                         "x0": box[0], "y0": box[1], "x1": box[2], "y1": box[3],
+                         "word_ids": list(el["words"]), "reader": el.get("reader"),
+                         "rows": el.get("rows"), "cols": el.get("cols"),
+                         "figure": (el.get("figure") or {}).get("class")})
+            for c in el.get("cells") or []:
+                cb = c.get("box") or (None, None, None, None)
+                cells.append({"element_id": eid, "doc_id": doc_id, "page": c.get("page", p["page"]),
+                              "r0": c["r0"], "r1": c["r1"], "c0": c["c0"], "c1": c["c1"],
+                              "header": bool(c.get("header")), "text": text_of([words[i] for i in c["words"]]),
+                              "x0": cb[0], "y0": cb[1], "x1": cb[2], "y1": cb[3], "word_ids": list(c["words"])})
+    return rows, cells
+
+
 def markdown(pages: list[dict], words: list[dict]) -> str:
     """Written from the elements, so it holds exactly what the document holds: furniture,
     text under pictures and table cells (a spanning cell once) included."""

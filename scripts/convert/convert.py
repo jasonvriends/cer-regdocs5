@@ -11,7 +11,8 @@ models, every table by four table readers, every picture by the figure classifie
 readings are kept; the choices made from them are recorded with their reasons. See DESIGN.md.
 
 Per document, in output/<id>/convert/: words.parquet, regions.parquet, tables.parquet,
-pages.json (the ledger), docling.json.gz, and <id>.md.
+elements.parquet and cells.parquet (stable ids <doc>:p<page>:e<n>), pages.json (the ledger),
+docling.json.gz, <id>.md, and manifest.json (every output's SHA-256, the PDF's and the code's).
 """
 from __future__ import annotations
 
@@ -54,6 +55,23 @@ def _word_schema():
 
 
 WORD_SCHEMA = _word_schema()
+
+
+def _element_schemas():
+    import pyarrow as pa
+    box = [("x0", pa.float64()), ("y0", pa.float64()), ("x1", pa.float64()), ("y1", pa.float64())]
+    elements = pa.schema([("element_id", pa.string()), ("doc_id", pa.string()), ("page", pa.int64()), ("n", pa.int64()),
+                          ("label", pa.string()), ("text", pa.string()), ("section_path", pa.string()),
+                          ("heading_level", pa.int64()), ("furniture", pa.bool_()), ("continues", pa.bool_()), *box,
+                          ("word_ids", pa.list_(pa.int64())), ("reader", pa.string()), ("rows", pa.int64()),
+                          ("cols", pa.int64()), ("figure", pa.string())])
+    cells = pa.schema([("element_id", pa.string()), ("doc_id", pa.string()), ("page", pa.int64()),
+                       ("r0", pa.int64()), ("r1", pa.int64()), ("c0", pa.int64()), ("c1", pa.int64()),
+                       ("header", pa.bool_()), ("text", pa.string()), *box, ("word_ids", pa.list_(pa.int64()))])
+    return elements, cells
+
+
+ELEMENT_SCHEMA, CELL_SCHEMA = _element_schemas()
 
 
 def now() -> str:
@@ -715,6 +733,16 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         pq.write_table(pa.Table.from_pylist(table_rows), out / f"{doc_id}.tables.parquet", compression="zstd")
     (out / f"{doc_id}.docling.json.gz").write_bytes(doc_json)
     (out / f"{doc_id}.md").write_text(md, encoding="utf-8")
+    # elements and cells with stable ids (<doc>:p<page>:e<n>): what a search hit, a citation or a
+    # table export points at; written by every mode, so a full run carries them without a rebuild
+    el_rows, cell_rows = asm.elements(doc_id, pages, all_words)
+    pq.write_table(pa.Table.from_pylist(el_rows, schema=ELEMENT_SCHEMA), out / f"{doc_id}.elements.parquet",
+                   compression="zstd")
+    if cell_rows:
+        pq.write_table(pa.Table.from_pylist(cell_rows, schema=CELL_SCHEMA), out / f"{doc_id}.cells.parquet",
+                       compression="zstd")
+    else:
+        (out / f"{doc_id}.cells.parquet").unlink(missing_ok=True)    # latest only: no cells, no stale file
 
     mupdf = mupdf_messages(pymupdf.TOOLS.mupdf_warnings(reset=True))
     if mupdf:
@@ -752,6 +780,15 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     tmp = out / f"{doc_id}.pages.json.part"
     tmp.write_text(json.dumps(ledger, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
     os.replace(tmp, out / f"{doc_id}.pages.json")
+    # the manifest after everything else: each output's hash, beside the PDF's and the code's - the chain
+    # from the file REGDOCS served to every derived file (docs/output-and-sidecars.md)
+    files = {f.name: rd.sha256_file(f) for f in sorted(out.iterdir())
+             if f.name.startswith(doc_id) and not f.name.endswith((".part", ".manifest.json"))}
+    manifest = {"doc_id": doc_id, "pdf_sha256": sha, "mode": ledger["mode"], "status": status,
+                "code": ledger["code"], "converted_at": ledger["converted_at"], "files": files}
+    tmp = out / f"{doc_id}.manifest.json.part"
+    tmp.write_text(json.dumps(manifest, indent=1), encoding="utf-8")
+    os.replace(tmp, out / f"{doc_id}.manifest.json")
     return {"doc_id": doc_id, "status": status, **ledger["summary"], "seconds": ledger["seconds"]}
 
 
