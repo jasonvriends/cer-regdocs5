@@ -1,10 +1,15 @@
 # REGDOCS: documents
 
-What this project is for: learning how Canada Energy Regulator filings should be **captured** -
-produced, signed, scanned, redacted, filed - so they arrive as faithful digital documents.
+What this project is for: a verifiable, machine-readable extract of every REGDOCS filing, and learning from it
+how Canada Energy Regulator filings should be **captured** - produced, signed, scanned, redacted, filed - so
+they arrive as faithful digital documents.
 
 | document | what it is |
 |---|---|
+| [ceo-report.md](ceo-report.md) + [ceo-deck/](ceo-deck/) | **the report and deck for the CEO**: what 269,025 filings taught us, and the decisions needed |
+| [lessons-across-pipelines.md](lessons-across-pipelines.md) | six pipelines over REGDOCS side by side, and the lessons common to all |
+| [cer-filing-rules-today.md](cer-filing-rules-today.md) | the CER's current e-filing rules beside what the corpus shows |
+| [output-and-sidecars.md](output-and-sidecars.md) | what to keep in output/, what a full scan adds, which sidecars to make |
 | [filing-guidance.md](filing-guidance.md) | **the findings**: what filers and intake checks should do, each item with its measured evidence |
 | [digital-first-filing.md](digital-first-filing.md) | **the target**: what a digital-first filing looks like, requirement by requirement, each tied to a measured failure |
 | [findings.jsonl](findings.jsonl) + [catalog.md](catalog.md) | every finding as a queryable record, and the DuckDB catalog of everything measured: how to browse and add to them |
