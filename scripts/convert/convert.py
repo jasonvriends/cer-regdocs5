@@ -377,7 +377,8 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
                     ("tableformer_fast", lambda: models.tableformer_cells("fast", page_img, page_scale, page, r["box"], tw)),
                     ("tableformer_accurate", lambda: models.tableformer_cells("accurate", page_img, page_scale, page, r["box"], tw)),
                     ("mupdf_lines", lambda: rd.mupdf_table_cells(pdf_path, pno, r["box"], "lines")),
-                    ("mupdf_text", lambda: rd.mupdf_table_cells(pdf_path, pno, r["box"], "text"))):
+                    ("mupdf_text", lambda: rd.mupdf_table_cells(pdf_path, pno, r["box"], "text")),
+                    ("pdf_tags", lambda: rd.tagged_table_cells(page, r["box"]))):
                 s = time.perf_counter()
                 try:
                     cells = fn()

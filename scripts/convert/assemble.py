@@ -350,7 +350,7 @@ def is_value(t: str) -> bool:
     return bool(VALUE.match(t.strip(".,;:")))
 
 
-PREFERENCE = ["mupdf_lines", "tableformer_fast", "tableformer_accurate", "mupdf_text"]
+PREFERENCE = ["pdf_tags", "mupdf_lines", "tableformer_fast", "tableformer_accurate", "mupdf_text"]   # pdf_tags first: on a tie, the author's own grid
 
 
 def choose_grid(readings: dict[str, dict]) -> tuple[str | None, str]:

@@ -570,6 +570,62 @@ def ink_share(page, dpi: int = 50) -> float:
     return float((a < 128).mean()) if a.size else 0.0
 
 
+def _tagged_tables(page) -> list[dict]:
+    """The tables a tagged PDF marks on this page (its structure tree: Table > TR > TH/TD), each
+    {"box", "rows": [[(box, header), ...], ...]}, read once a page through MuPDF's structure
+    collection. An untagged file costs one catalog lookup."""
+    import pymupdf
+    import xml.etree.ElementTree as ET
+    cached = getattr(page, "_regdocs_tag_tables", None)
+    if cached is not None:
+        return cached
+    out = []
+    try:
+        doc = page.parent
+        if doc.xref_get_key(doc.pdf_catalog(), "StructTreeRoot")[0] != "null":
+            root = ET.fromstring(page.get_text("xml", flags=pymupdf.TEXT_COLLECT_STRUCTURE))
+            box = lambda e: tuple(float(v) for v in e.get("bbox", "").split()) if e.get("bbox") else None
+            for t in root.iter("struct"):
+                if t.get("std") != "Table" or box(t) is None:
+                    continue
+                rows = []
+                for tr in t.iter("struct"):
+                    if tr.get("std") != "TR":
+                        continue
+                    cells = [(box(c), c.get("std") == "TH") for c in tr if c.tag == "struct"
+                             and c.get("std") in ("TD", "TH") and box(c) is not None]
+                    if cells:
+                        rows.append(cells)
+                if rows:
+                    out.append({"box": box(t), "rows": rows})
+    except Exception:
+        out = []
+    try:
+        page._regdocs_tag_tables = out
+    except Exception:
+        pass
+    return out
+
+
+def tagged_table_cells(page, box) -> list[dict]:
+    """The author's own grid for the table in `box`, from the PDF's tags: the tagged table that
+    covers most of the box, a cell per TD/TH in order (a TH is a header). A fifth reading beside
+    the models and the ruling lines, scored like them: tags can be wrong or partial, so they win
+    only by placing the words best. 23 of 50 tagged filings sampled tag their tables
+    [L Tags: the author's own structure]."""
+    best, cover = None, 0.0
+    for t in _tagged_tables(page):
+        tb = t["box"]
+        ix = max(0.0, min(tb[2], box[2]) - max(tb[0], box[0])) * max(0.0, min(tb[3], box[3]) - max(tb[1], box[1]))
+        a = max(1e-6, (box[2] - box[0]) * (box[3] - box[1]))
+        if ix / a > cover:
+            best, cover = t, ix / a
+    if best is None or cover < 0.5:
+        return []
+    return [{"r0": ri, "r1": ri + 1, "c0": ci, "c1": ci + 1, "box": b, "header": h}
+            for ri, row in enumerate(best["rows"]) for ci, (b, h) in enumerate(row)]
+
+
 def mupdf_table_cells(pdf_path: Path, page_no: int, box, strategy: str) -> list[dict]:
     """PyMuPDF's table finder in the box: "lines" (ruling lines) or "text" (alignment).
     It reads its own copy of the file: find_tables() changes the page it reads (3922740 p2's

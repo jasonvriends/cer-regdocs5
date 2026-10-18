@@ -376,6 +376,11 @@ headings (H1 15, H2 8); 28 lists; 22 figures. With 46.2% of the corpus tagged, r
 documents would give their tables' rows and cells exactly and one in seven its headings - a reader to
 add beside the layout and table models, not instead of them (tags can be wrong; they are compared,
 like every reading).
+**Built (2026-10-18): `pdf_tags`, a fifth table reader.** The tagged table covering most of a
+table region gives a cell per TD/TH (TH = header); it is scored like the others and wins a tie.
+20 tagged, table-heavy sample documents in full mode: tags gave a grid for 948 of 2,613 tables
+(36%), at least as good as the best model's on 820 of them (86%), chosen for 338; mean chosen
+score 97.53% to 97.82%, no document worse; 812687 (448 tables) 98.5% to 100%.
 
 ### Open
 
