@@ -53,67 +53,82 @@ def doc_ids(samples) -> list[str]:
             and (Path(e.path) / "convert" / f"{e.name}.pages.json").exists()]
 
 
+def read_one(d: str):
+    """One document's rows -> (document, pages, issues), or None when its ledger cannot be read."""
+    import collections
+    pages, issues = [], []
+    try:
+        L = json.loads((OUT / d / "convert" / f"{d}.pages.json").read_text())
+    except (OSError, ValueError):
+        return None
+    r, c, s = cer(d), L["context"], L["summary"]
+    tool = c["pdf"].get("producer") or c["pdf"].get("creator") or {}
+    facets = r.get("facets") or {}
+    classes = collections.Counter()
+    for p in L["pages"]:
+        cls = page_class(p)
+        classes[cls] += 1
+        f, w, lay = p.get("facts") or {}, p.get("words") or {}, p.get("layout") or {}
+        pages.append({"doc_id": d, "page": p["page"], "text_layer": p.get("text_layer"), "source": p.get("source"),
+                      "capture": cls, "size": f.get("size"), "orientation": f.get("orientation"),
+                      "width_pt": f.get("width_pt"), "height_pt": f.get("height_pt"), "rotation": f.get("rotation"),
+                      "columns": f.get("columns"), "kind": f.get("kind"), "image_cover": f.get("largest_image_cover"),
+                      "paths": f.get("paths"), "words_pdf": w.get("pdf"), "words_ocr": w.get("ocr"),
+                      "words_evidence": w.get("evidence"), "ocr_only_words": w.get("ocr_extra"),
+                      "unclaimed": w.get("unclaimed"), "hidden": w.get("hidden"), "redacted": w.get("redacted"),
+                      "voted_lines": w.get("voted_lines"),
+                      "pdf_found_by_ocr": asm.ocr_agreement(p, L),
+                      "regions": lay.get("kept"), "disputed_regions": lay.get("disputed"),
+                      "tables": len(p.get("tables") or []), "pictures": len(p.get("pictures") or []),
+                      "checkboxes": len(p.get("checkboxes") or []), "seconds": p.get("seconds"),
+                      "todo": list(p.get("todo") or [])})
+        for i in p.get("issues") or []:
+            issues.append({"doc_id": d, "page": p["page"], "kind": i["kind"], "severity": i["severity"],
+                           "evidence": i.get("evidence")})
+    for i in L.get("issues") or []:
+        issues.append({"doc_id": d, "page": None, "kind": i["kind"], "severity": i["severity"],
+                       "evidence": i.get("evidence")})
+    dc = s.get("docling") or {}
+    doc = ({"doc_id": d, "mode": L.get("mode", "full"), "version": L.get("version"),
+                 "converted_at": L.get("converted_at"), "pages": s.get("pages"),
+                 "words_evidence": s.get("words_evidence"), "words_pdf": s.get("words_pdf"),
+                 "words_ocr": s.get("words_ocr"), "pages_text_layer": (s.get("pages_by_source") or {}).get("pdf", 0),
+                 "pages_ocr": (s.get("pages_by_source") or {}).get("ocr", 0), "tables": s.get("tables"),
+                 "pictures": s.get("pictures"), "export_recall": s.get("export_recall"),
+                 "evidence_named_once": dc.get("named_once"), "text_holds_words": dc.get("text_holds_words"),
+                 "errors": (s.get("issues") or {}).get("error", 0), "warnings": (s.get("issues") or {}).get("warning", 0),
+                 "main_capture": classes.most_common(1)[0][0] if classes else None,
+                 "title": r.get("title"), "date": r.get("date"), "year": (r.get("date") or "")[:4] or None,
+                 "document_type": ",".join(facets.get("Document Type") or []) or None,
+                 "commodity": ",".join(facets.get("Commodity") or []) or None,
+                 "company": (r.get("company") or {}).get("name"), "filing": (r.get("filing") or {}).get("number"),
+                 "url": r.get("url"), "producer": tool.get("family"), "producer_kind": tool.get("kind"),
+                 "producer_raw": tool.get("raw"), "sha256": c["pdf"].get("sha256"),
+                 # which code wrote the ledger: older ones name none, and before the page
+                 # boundaries step they have no boundaries summary (review 2026-10-17)
+                 "code_sha256": (L.get("code") or {}).get("sha256"), "code_commit": (L.get("code") or {}).get("commit"),
+                 "has_boundaries": "boundaries" in s,
+                 "mupdf_messages": sum((s.get("mupdf_messages") or {}).values()) if "mupdf_messages" in s else None})
+    return doc, pages, issues
+
+
 def build(args) -> int:
     import collections
     import duckdb
     import pyarrow as pa
     ids = doc_ids(args.sample)
     docs, pages, issues = [], [], []
-    for n, d in enumerate(ids, 1):
-        try:
-            L = json.loads((OUT / d / "convert" / f"{d}.pages.json").read_text())
-        except (OSError, ValueError):
-            continue
-        r, c, s = cer(d), L["context"], L["summary"]
-        tool = c["pdf"].get("producer") or c["pdf"].get("creator") or {}
-        facets = r.get("facets") or {}
-        classes = collections.Counter()
-        for p in L["pages"]:
-            cls = page_class(p)
-            classes[cls] += 1
-            f, w, lay = p.get("facts") or {}, p.get("words") or {}, p.get("layout") or {}
-            pages.append({"doc_id": d, "page": p["page"], "text_layer": p.get("text_layer"), "source": p.get("source"),
-                          "capture": cls, "size": f.get("size"), "orientation": f.get("orientation"),
-                          "width_pt": f.get("width_pt"), "height_pt": f.get("height_pt"), "rotation": f.get("rotation"),
-                          "columns": f.get("columns"), "kind": f.get("kind"), "image_cover": f.get("largest_image_cover"),
-                          "paths": f.get("paths"), "words_pdf": w.get("pdf"), "words_ocr": w.get("ocr"),
-                          "words_evidence": w.get("evidence"), "ocr_only_words": w.get("ocr_extra"),
-                          "unclaimed": w.get("unclaimed"), "hidden": w.get("hidden"), "redacted": w.get("redacted"),
-                          "voted_lines": w.get("voted_lines"),
-                          "pdf_found_by_ocr": asm.ocr_agreement(p, L),
-                          "regions": lay.get("kept"), "disputed_regions": lay.get("disputed"),
-                          "tables": len(p.get("tables") or []), "pictures": len(p.get("pictures") or []),
-                          "checkboxes": len(p.get("checkboxes") or []), "seconds": p.get("seconds"),
-                          "todo": list(p.get("todo") or [])})
-            for i in p.get("issues") or []:
-                issues.append({"doc_id": d, "page": p["page"], "kind": i["kind"], "severity": i["severity"],
-                               "evidence": i.get("evidence")})
-        for i in L.get("issues") or []:
-            issues.append({"doc_id": d, "page": None, "kind": i["kind"], "severity": i["severity"],
-                           "evidence": i.get("evidence")})
-        dc = s.get("docling") or {}
-        docs.append({"doc_id": d, "mode": L.get("mode", "full"), "version": L.get("version"),
-                     "converted_at": L.get("converted_at"), "pages": s.get("pages"),
-                     "words_evidence": s.get("words_evidence"), "words_pdf": s.get("words_pdf"),
-                     "words_ocr": s.get("words_ocr"), "pages_text_layer": (s.get("pages_by_source") or {}).get("pdf", 0),
-                     "pages_ocr": (s.get("pages_by_source") or {}).get("ocr", 0), "tables": s.get("tables"),
-                     "pictures": s.get("pictures"), "export_recall": s.get("export_recall"),
-                     "evidence_named_once": dc.get("named_once"), "text_holds_words": dc.get("text_holds_words"),
-                     "errors": (s.get("issues") or {}).get("error", 0), "warnings": (s.get("issues") or {}).get("warning", 0),
-                     "main_capture": classes.most_common(1)[0][0] if classes else None,
-                     "title": r.get("title"), "date": r.get("date"), "year": (r.get("date") or "")[:4] or None,
-                     "document_type": ",".join(facets.get("Document Type") or []) or None,
-                     "commodity": ",".join(facets.get("Commodity") or []) or None,
-                     "company": (r.get("company") or {}).get("name"), "filing": (r.get("filing") or {}).get("number"),
-                     "url": r.get("url"), "producer": tool.get("family"), "producer_kind": tool.get("kind"),
-                     "producer_raw": tool.get("raw"), "sha256": c["pdf"].get("sha256"),
-                     # which code wrote the ledger: older ones name none, and before the page
-                     # boundaries step they have no boundaries summary (review 2026-10-17)
-                     "code_sha256": (L.get("code") or {}).get("sha256"), "code_commit": (L.get("code") or {}).get("commit"),
-                     "has_boundaries": "boundaries" in s,
-                     "mupdf_messages": sum((s.get("mupdf_messages") or {}).values()) if "mupdf_messages" in s else None})
-        if n % 5000 == 0:
-            print(f"  {n}/{len(ids)} ledgers read", flush=True)
+    from concurrent.futures import ProcessPoolExecutor
+    # ledgers read in parallel: one at a time from the Windows drive is latency, not work
+    # (~70,000 took over an hour), and 12 readers overlap it
+    with ProcessPoolExecutor(max_workers=args.workers) as ex:
+        for n, res in enumerate(ex.map(read_one, ids, chunksize=200), 1):
+            if res:
+                docs.append(res[0])
+                pages.extend(res[1])
+                issues.extend(res[2])
+            if n % 5000 == 0:
+                print(f"  {n}/{len(ids)} ledgers read", flush=True)
 
     tmp = DB.with_suffix(".building")
     tmp.unlink(missing_ok=True)
@@ -183,6 +198,7 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build")
     b.add_argument("--sample", action="append", help="only these documents (default: every converted one)")
+    b.add_argument("--workers", type=int, default=12, help="ledgers read at once")
     sub.add_parser("ui")
     q = sub.add_parser("sql")
     q.add_argument("query")
