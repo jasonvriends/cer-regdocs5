@@ -10,7 +10,7 @@ file to output/integrity.parquet (derived; delete and rebuild at any time):
                     whole file (its ByteRange ends at the last byte); what was saved after the last
                     one: nothing, validation data only (long-term validation), or other changes
   certified         a certification signature (DocMDP /Perms): the author fixed what may change
-  appended_updates  %%EOF markers in the last 8 MB beyond the one a file has (two for a linearized
+  appended_updates  %%EOF markers in the last 1 MB beyond the one a file has (two for a linearized
                     file): saves appended after the file was first written (an approximation)
   encrypted, permissions, needs_password
   pdfa, tagged, outline, form_fields, embedded_files, javascript, pdf_version, bytes, pages
@@ -26,7 +26,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SOURCE, OUT = ROOT / "source", ROOT / "output"
-TAIL = 8 << 20
+TAIL = 1 << 20     # the last 1 MB: 8 MB from the Windows drive made the pass I/O-bound
 
 
 def inspect(doc_id: str) -> dict:
@@ -112,6 +112,7 @@ def inspect(doc_id: str) -> dict:
 
 def main() -> int:
     import pyarrow as pa
+    import pyarrow.compute  # noqa: F401
     import pyarrow.parquet as pq
     from concurrent.futures import ProcessPoolExecutor
     ap = argparse.ArgumentParser()
@@ -123,17 +124,40 @@ def main() -> int:
         ids = list(dict.fromkeys(l.strip() for s in args.sample for l in Path(s).read_text().split() if l.strip()))
     else:
         ids = sorted((n[:-4] for n in os.listdir(SOURCE) if n.endswith(".pdf") and n[:-4].isdigit()), key=int)
-    rows = []
+    # results in parts of 5,000 beside the output, so a stopped pass resumes where it was
+    parts = Path(args.out + ".parts")
+    parts.mkdir(parents=True, exist_ok=True)
+    done = set()
+    for f in parts.glob("part-*.parquet"):
+        done.update(pq.read_table(f, columns=["doc_id"]).column("doc_id").to_pylist())
+    todo = [i for i in ids if i not in done]
+    print(f"{len(ids):,} files, {len(done):,} already inspected, {len(todo):,} to go", flush=True)
+    n_part = len(list(parts.glob("part-*.parquet")))
+    buf = []
+
+    def flush():
+        nonlocal n_part, buf
+        if buf:
+            tmp = parts / f"part-{n_part:05d}.parquet.tmp"
+            pq.write_table(pa.Table.from_pylist(buf), tmp, compression="zstd")
+            os.replace(tmp, parts / f"part-{n_part:05d}.parquet")
+            n_part, buf = n_part + 1, []
+
     with ProcessPoolExecutor(max_workers=args.workers) as ex:
-        for n, r in enumerate(ex.map(inspect, ids, chunksize=100), 1):
-            rows.append(r)
-            if n % 10000 == 0:
-                print(f"  {n}/{len(ids)} files", flush=True)
-    tmp = Path(args.out + ".part")
-    pq.write_table(pa.Table.from_pylist(rows), tmp, compression="zstd")
+        for n, r in enumerate(ex.map(inspect, todo, chunksize=100), 1):
+            buf.append(r)
+            if len(buf) >= 5000:
+                flush()
+                print(f"  {len(done) + n:,}/{len(ids):,} files", flush=True)
+    flush()
+    tables = [pq.read_table(f) for f in sorted(parts.glob("part-*.parquet"))]
+    table = pa.concat_tables(tables, promote_options="default") if tables else pa.table({})
+    table = table.filter(pa.compute.is_in(table["doc_id"], value_set=pa.array(ids))) if args.sample else table
+    tmp = Path(args.out + ".tmp")
+    pq.write_table(table, tmp, compression="zstd")
     os.replace(tmp, args.out)
-    bad = sum(1 for r in rows if r["error"])
-    print(f"{args.out}: {len(rows):,} files, {bad} with an error")
+    bad = sum(1 for e in table["error"].to_pylist() if e)
+    print(f"{args.out}: {table.num_rows:,} files, {bad} with an error")
     return 0
 
 
