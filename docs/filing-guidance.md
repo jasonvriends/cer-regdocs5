@@ -1,267 +1,374 @@
-# Capturing REGDOCS filings as digital documents: what the evidence says
+# Filing for automation: what the CER should ask of electronic filings
 
-The point of this work is not conversion for its own sake. It is to learn **how filings
-should be captured** - produced, signed, scanned, redacted, filed - so that what the Canada
-Energy Regulator receives is a faithful digital document, and nobody has to recover the text
-afterwards. The converter ([scripts/convert/DESIGN.md](../scripts/convert/DESIGN.md)) and the
-intake check ([check.py](../scripts/convert/check.py)) are the measuring instruments: they read
-every page with the text layer *and* with OCR, so they can say, page by page, whether the file
-holds the words the page shows, and what was lost when it does not.
+**The question.** The CER is moving toward AI and automation to speed up its work, including permitting.
+Every automated step - search, an answer from a language model, a table pulled into a model, a check
+against a condition - reads the *file*, not the page a person sees. This guide says what the files in
+REGDOCS are actually like, what that costs, and what to ask filers for instead.
 
-Almost every defect found was introduced by *how the PDF was produced*, usually without the
-filer knowing. The correct text existed in the filer's own software and was lost on the way.
+**The evidence.** The light pass of the converter read **every page of every PDF held - 269,025
+documents, 3,615,229 pages, 1.23 billion words** - and recorded, page by page, how each was captured
+and how far two independent readings of it agree. Unless marked otherwise, every number below is a
+count over the whole corpus, not an estimate.
+
+| source | what | |
+|---|---|---|
+| **[census]** | every page, every document: capture, text-layer health, agreement between readings, redactions, page size | [census](../scripts/convert/runs/v2/reports/2026-10-18-census.md), [catalog](catalog.md) |
+| **[integrity]** | every file's catalog and tail: signatures and what changed after them, PDF/A, tags, bookmarks, form fields, attachments | [integrity.py](../scripts/convert/integrity.py) |
+| **[samples]** | the full converter (layout, tables, figures) on 625 sample documents | [samples](../scripts/convert/samples/) |
+| **[2026-09 corpus]** | earlier pipelines: 4,296 filings compared page by page with a commercial extraction | [lessons_learned.md](lessons_learned.md) |
+| **[rules]** | the CER's current e-filing rules | [cer-filing-rules-today.md](cer-filing-rules-today.md) |
+
+Companies are not named: the causes are practices and tools, and the same practice produces the same
+file whoever uses it.
+
+---
 
 ## The headline
 
-**[survey]** Of 5,000 REGDOCS documents drawn at random, **23.2% (95% CI 22.1-24.4%) are mostly
-not digital documents** - their pages are scans, stub layers, broken layers or text drawn as
-graphics. Pages: 65% digital, 11% digital with text also inside images, 15% page images with no
-text at all, 5% scans with an OCR layer, 2% scans with a stub layer, 0.5% layers that do not decode,
-0.4% text drawn as graphics. It is falling: **28-47% of documents in most years before 2012,
-6-10% in 2021-2026**. (2024 reads 32%, but 81 of its 94 such documents are one filer's
-information request responses, rasterized on the way to filing - 1.4; without them 6%.)
+**62,520 of 269,025 documents (23.2%) are mostly not digital**: their pages are pictures of text, or
+carry text a machine cannot trust. One page in five is affected (740,000 pages, 20.5%). The 5,000-document survey
+estimated 23.2% (95% CI 22.1-24.4%); the census counts the same.
 
-The documents that are not digital are **the signed ones** (affidavits 79%, letters 23%) and
-**the scanned ones** (scanner-made PDFs 98%, PDFs with no producer recorded 75%). What made a
-PDF matters far more than any rule about content: office suites, reporting tools and print
-drivers produce digital documents 93-100% of the time.
+| pages | share | what a machine gets |
+|---|---:|---|
+| digital: the file holds the page's words | 74.6% | the words, exactly |
+| digital, plus text inside images the file lacks | 3.9% | most words; stamps, figures and scanned inserts need OCR |
+| **page image, no text** (scan_no_layer) | **11.2%** | nothing until OCR is run |
+| **scan with the scanner's own OCR layer** | **4.8%** | a reading that differs from an independent one on 67% of these pages |
+| **stub layer**: a scan carrying a few digital words | **3.0%** | a handful of words; the file *tests* as searchable |
+| **text that decodes to nonsense** (suspect) | **1.1%** | wrong characters that look right on screen |
+| **text drawn as vector outlines** | **0.4%** | nothing until OCR is run |
+| blank, other | 1.0% | |
 
-**[corpus]** The light pass over every PDF held (2026-10-17: 267,495 documents, 3.6 million pages)
-agrees: **20.4% of documents are read entirely by OCR** - no usable text of their own - and 8.2%
-partly; 21.4% of pages. By era: 17% of documents dated 2011-2026, **33% of those dated 2002-2011**.
+**It is falling, and it is not only paper.** Mostly-not-digital documents were 20-45% a year in
+2002-2011 and 5-9% in 2022-2026 (2024 aside). Of the 62,520, **32,272 were made by scanners and OCR tools,
+16,254 by digital tools** - documents that were digital and were degraded on the way to filing - and
+13,994 by tools that recorded no name. The 2024 spike (36%) is one filer's publishing system turning
+4,137 digital documents into page images; without it, 2024 reads about 8%.
 
-**Evidence, and how strong it is.** Each item says where its numbers come from:
+**What makes a document not digital is how it was produced, not what it is about.** Reporting tools
+(Crystal Reports, SSRS) 0.0% not digital; office suites 1.7%; print drivers 5.9%; PDF libraries
+11.5%; PDF editors 21.5%; **scanners and copiers 97-100%**.
 
-- **[corpus]** the converter's light pass on all 267,495 documents: every page's text layer, OCR
-  where needed, and its ledger of issues ([review](../scripts/convert/runs/v2/reports/2026-10-17-light-pass-review.md)).
-  Whole-corpus counts come from its run log; issue rates from 5,000 ledgers drawn at random. No
-  layout or table models, so it sees capture and text, not tables.
-- **[survey]** `check.py` on 5,000 documents drawn at random from the 268,185 PDFs held, 3 pages
-  each (first, middle, last), 11,086 pages: rates by producer, tool, year and document type with
-  95% Wilson intervals ([report](../scripts/convert/runs/v2/reports/2026-10-12-survey-5000.md)).
-  It reads the text layer and OCR only, so it sees capture, not structure.
-- **[samples]** the full converter on 625 sample documents (random draws, 55 document types, 59
-  producers, 2002-2014 by year, signed documents 2012-2026): structure it alone sees - checkboxes,
-  tables, drawings ([samples](../scripts/convert/samples/),
-  [capture reports](../scripts/convert/runs/v2/reports/)).
-- **[2026-09 corpus]** the earlier pipelines: 4,296 filings, 16,085 pages, each page compared with
-  an independent commercial extraction ([lessons_learned.md](lessons_learned.md)).
-
-Where a sample-based figure disagreed with the survey, the survey stands and the correction is
-noted: several sample rates had been set by one or two documents.
+**The rules today ask little of the file.** E-filing accepts PDF only; image-only PDFs are "not
+recommended"; nothing is checked at upload; the legal signature is a paper receipt mailed within
+three business days [rules].
 
 ---
 
-## 1. The text layer must be the page
+## 1. Born digital: export, do not print, scan or flatten
 
-### 1.1 Export from the authoring application; do not print, scan or re-distil
+**Problem.** [census] 40,295 documents are mostly page images with no text; 14,275 more carry only a
+scanner's OCR layer. 16,254 of the not-digital documents came from digital tools: a document-management
+or publishing step rasterized pages that were text a moment before (4,137 documents in 2024 from one
+system, 300 dpi colour images of crisp digital pages), or a "print to PDF" of a printout. [survey, by
+eye] about one image-only page in four is a digital page turned into a picture, not paper.
 
-**[survey]** Documents mostly not digital, by what made them: reporting tools (Crystal Reports,
-SSRS) 0%, office suites 1% (Word 1%), print drivers 4%, PostScript/Distiller 7%, PDF libraries 11%,
-PDF editors 21% (Adobe Acrobat 22%), **no producer recorded 75%**, **scanners 98%**.
+**Why it matters for automation.** An image has no words until OCR guesses them. Every guess is a
+place a number, a name or a negation can change, and nothing in the file records which. 4,137
+documents a year of avoidable OCR is a standing cost and a standing risk.
 
-**[2026-09 corpus]** Share of pages whose text layer was worse than OCR of the page: Adobe PDF
-Library 5.1%, Word direct export 5.9%, Chrome/Skia print 13.7%, Microsoft Print To PDF 14.8%, no
-producer recorded 28.1%.
+**Solution.** Save or export the PDF from the application that made the document (Word, Excel, the
+reporting system, the CAD or lab system). Never rasterize, flatten or print-to-image a digital
+document. Where a system must "flatten", it keeps the text layer or files the original.
 
-### 1.2 Do not print text as graphics
+**Guidance text.** *"Electronic documents must be created directly from the application in which they
+were authored. Documents must not be printed and scanned, printed to an image, or converted to
+images by a publishing or document-management system. Scanning is acceptable only for material that
+exists solely on paper (section 2)."*
 
-**[survey]** 0.4% of pages: no text layer, many vector paths, words only OCR can read. Rare, but
-total where it happens. **[samples]** A Microsoft Print to PDF exhibit list (4495825): 3,129 paths
-and no characters a page; OCR read 528 words a page. Drawings and technical sheets printed through a
-PostScript driver or pdfFactory (335411, 524567, 534342): labels as strokes, 5,000-205,000 paths a
-page - CAD stroke fonts (AutoCAD SHX) exported as geometry. Cause: a driver setting ("print text
-as graphics", "convert fonts to outlines") or a CAD export without searchable text.
-
-*Correction:* the samples put this at 35% of Microsoft Print to PDF pages; that was one document.
-The survey: 2% of that tool's pages.
-
-### 1.3 Text must decode to the characters it shows
-
-**[survey]** 0.5% of pages overall, **19% of Bentley MicroStation pages** (CAD fonts without a
-Unicode mapping) and 3% of Ghostscript pages. **[2026-09 corpus]** one filing: 315 of 986 pages
-display correctly and extract as nonsense; silent - the file opens, prints and reads correctly by
-eye. Do not re-distil a finished PDF; do not strip font data; PDF/A "u" conformance rules it out
-(19 of 5,000 documents are PDF/A).
-
-### 1.4 Do not turn a digital document into pictures of its pages
-
-**[survey] Not a scan: digital documents rasterized by the filing process.** 81 of 5,000 random
-documents (1.6%), all Trans Mountain information request responses filed in 2024 and made by an
-iText-based system: each page a 300 dpi colour image (2550 x 3300) of a crisp, born-digital page
-- a Health and Safety Management Plan, tables in colour, page numbers - and no text at all
-(4461679). The text existed and was removed by the system that prepared the filing. It is why
-information request responses read 37% not digital (without this filer: 31 of 222, 14%) and why
-2024 stands out.
-
-**[survey, by eye] About one image-only page in four is not paper.** 40 page-image pages drawn at
-random from the survey and looked at: 29 scanned paper (signed letters and affidavits, faxes,
-hand-filled forms, a handwritten log, stamped drawings, web maps printed and scanned back) and
-**11 digital pages turned into images (28%, 95% CI ~16-43%)** - Trans Mountain's iText pages,
-drawings exported as images, and a Word table rasterized to black out a column (a legitimate way
-to redact: nothing is left underneath). Pixel statistics cannot tell the two apart reliably
-(both can be one-bit and clean); the eye can.
-
-**Recommendation (proposed):** a document-management or publishing step must not rasterize; if a
-system "flattens" documents, it must keep or restore the text layer (or file the original).
-**Check:** a page that is one full-page image with no text, from a digital source - the same
-text-layer-against-OCR check catches it, whatever made it.
+**Check at intake.** Words in the text layer against words OCR finds on a rendered page: a page image
+with no text from a digital tool fails, whatever made it.
 
 ---
 
-## 2. Sign digitally; do not print, sign and scan
+## 2. Text that is the page: no stub layers, no unchecked OCR, no undecodable fonts
 
-**[survey] The documents that are scans are the signed ones.** Mostly not digital, by REGDOCS
-document type: **affidavits 79% (95% CI 64-89%)**, information request responses 37% (32-43%; 14%
-without one filer's rasterized responses - 1.4), written evidence 37% (27-48%), **letters 23% (21-26%)**, letters of comment 20% (15-26%) - against
-orders 3%, notifications 3%, applications to participate 2%, receipts 0%, rulings 0%.
+**Problem.**
+- **Stub layers** [census]: 107,949 pages (3.0%) are scans carrying a few digital words - a "received"
+  stamp, a markup, a page number. The file holds a text layer, so it tests as "searchable", while
+  holding a fraction of the page. Multifunction copiers that stamp (RICOH 28.6% of their pages,
+  Bluebeam 25.2%, Lexmark 12.6%, Canon 11.7%).
+- **Scanner OCR layers** [census]: 172,381 pages carry the filer's or scanner's own invisible OCR
+  text. On **115,560 of them (67%)** an independent OCR finds fewer than 90% of that layer's words at
+  their places - 50-72% of pages whatever the tool. Two readings disagree; nothing in the file says
+  which is right. [2026-09 corpus, samples] vision-model voters sided with the independent reading on
+  most disputed lines and with the scanner's layer on some.
+- **Undecodable text** [census]: 38,596 pages (1.1%) display correctly and extract as nonsense - fonts
+  without a Unicode map. MicroStation 12.0% of its pages, CAD and GIS tools 5.3%. [2026-09 corpus]
+  one filing: 315 of 986 pages, silently.
+- **Text drawn as outlines** [census]: 14,898 pages (0.4%): no characters at all, only strokes - a
+  "print text as graphics" setting or a CAD export (Microsoft Print to PDF 5.9% of its pages,
+  Bluebeam 5.3%, MicroStation 4.9%).
 
-**[samples] Fading for letters, not for affidavits.** 105 signed documents, 7 a year 2012-2026:
-mostly scanned 2012-2016 12 of 35 (34%, 20-51%); 2017-2021 4 of 35 (11%, 5-26%); 2022-2026 4 of 35
-(11%, 5-26%). Many digital letters now carry a pasted signature image, which keeps the text.
-Affidavits stayed scanned (6 of 6). The survey's years agree: 6-10% of all documents in 2021-26.
+**Why it matters for automation.** This is the most dangerous class for AI: the file *answers*. A
+search or a language model reads the hidden layer, not the image a hearing panel reads, so it can
+cite text the page does not say. A page with a stub layer looks searchable and is not.
 
-Documents signed through an e-signature service (Adobe Acrobat Sign, 2 documents in the samples)
-were fully digital.
+**Solution.** Where the source is genuinely paper, the filer runs OCR at 300 dpi or better *and
+checks it*; a layer holding a fraction of the page's words fails. Fonts are embedded with Unicode
+maps; PDF/A-2u or -3u ("u": Unicode) guarantees it. No "print text as graphics"; CAD exported with
+searchable text.
 
-**Recommendation (proposed):** accept and encourage digital signing - e-signature services, a
-signed digital PDF, and a digital process for sworn and commissioned documents, where the paper
-habit remains. Where a wet signature is required, file the digital document with a scanned
-signature page, not a scan of the whole document.
+**Guidance text.** *"Where a document exists only on paper, the filer must apply optical character
+recognition at 300 dpi or better and verify that the text layer reproduces the page. Text in
+electronic documents must be extractable as the characters displayed: fonts must be embedded with
+Unicode mappings (PDF/A-2u or PDF/A-3u conformance satisfies this), and text must not be converted
+to outlines or graphics."*
 
----
-
-## 3. A scan is not searchable just because it has a text layer
-
-### 3.1 Scanner OCR layers are mostly good, and a quarter of pages are not
-
-**[survey]** On scans carrying an invisible OCR layer, the share of the layer's words our OCR also
-reads at the same place: medians 76-96% by producer (Copitrak 96%, Canon 92%, OmniPage 90%,
-Acrobat Paper Capture 86%, Xerox MFP 84%, EPSON Scan 76%), but **19-28% of pages under 60%** for
-Xerox, EPSON, Acrobat and Paper Capture (OmniPage 5%, Canon 6%). The two readers disagree, and
-neither is known right: vision-model voters sided with our OCR on most disputed lines and with the
-scanner's layer on some ([LESSONS.md](../scripts/convert/LESSONS.md), v2).
-
-*Correction:* the samples gave Canon 36%, Xerox 33% and EPSON 51% medians; those were a few poor
-documents. The finding that stands is the tail: a "searchable PDF" is unreliable on a quarter of
-pages for some scanners, and nothing in the file says which.
-
-### 3.2 Stub layers: a stamp makes a scan look digital
-
-**[survey]** 2% of pages: a scanned page carrying a few digital words (a "received" stamp, a
-markup, a page number), so the file has a text layer and tests as "searchable" while holding ~20
-of the page's hundreds of words. RICOH MFP 17% of pages, Canon MFP 14%, Adobe Acrobat 9%, PDF
-editors 8%.
-
-*Correction:* the samples gave RICOH 92% and Bluebeam 59%; each was one filing.
-
-**Recommendation ([2026-09 corpus] A3, strengthened):** where the source is genuinely paper, the
-filer OCRs it at 300 dpi or better *and checks the result*; a layer that holds a fraction of the
-page's words fails, however it was made.
-
-**Check.** Words in the text layer against words OCR finds on one rendered page; the ratio
-catches no layer, a stub layer and a poor scanner layer alike.
+**Check at intake.** The same layer-against-OCR comparison: a stub layer, a poor scanner layer and an
+undecodable layer each fail it; a letter-share test catches mojibake from the file alone.
 
 ---
 
-## 4. Redact by removing, not covering
+## 3. Signatures and integrity: sign digitally, and make every file verifiable
 
-**[2026-09 corpus]** one filing (4710294): blacked-out invoice descriptions - 13,159 words on 36
-pages - still in the text layer, recoverable by copying the page. **[survey]** no other case in
-5,000 documents (3 pages each, so a scattered redaction could be missed). *Correction:* a first
-count gave 7 documents; looked at, every one was a single glyph on a dark box - a ticked checkbox,
-a bullet, a map symbol - not a redaction, and the check now requires covered words. Rare, and a
-privacy failure each time. Use a redaction tool that deletes the text; verify by searching
-for a redacted phrase.
+**Problem.**
+- **Signed documents are the scanned ones** [census]: affidavits **88.2%** not digital, requests to
+  make an oral statement 64.9%, written evidence 36.0%, letters of comment 33.0%, letters 30.6% -
+  against orders 2.5%, rulings 0.2%, hearing transcripts 0.7%. Correspondence and sworn types are
+  **28,592 of the 62,520** not-digital documents (46%). Printing to sign and scanning back is the
+  single largest source.
+- **Digital signatures are rare, and keep documents digital** [integrity]: **1,410 of 269,025
+  documents (0.5%)** carry a signed digital signature - 21 of 2,023 affidavits, 398 of 54,213
+  letters - rising from 40 a year in 2018 to 224 in 2025. Only 73 of the 1,410 are mostly not
+  digital, against 23.2% of all documents; e-signature tools 2.5%. Of the 1,410, 993 are signed
+  over the whole file; 312 were followed only by long-term validation data (certificates and
+  revocation lists an e-signature service adds, e.g. DocuSign); **105 had something else saved
+  after the signature** - from a metadata update to annotations and stamps added on pages (2680051,
+  946380) - which only a signature validator can judge. 346 carry a certification signature.
+- **Nothing proves a copy is the one filed** [rules]: REGDOCS shows no hash; the signature of record
+  is a paper receipt; the filing system says documents "cannot be altered" but gives a reader no way
+  to check. The same file is filed more than once under different IDs: [census] 3,308 files appear
+  under 8,252 REGDOCS IDs - 4,944 extra copies (4656998 = 4657424 = 4657571).
 
-**Say what was removed.** [corpus] Some pages are filed blacked out whole: 4600031 and 4600032
-(appendices, titles marked "Redacted") are pages that are one black rectangle - no text, no image,
-nothing to say whether a page, a table or a paragraph was withheld, or why. A page that states
-what was removed keeps the record readable. (How many pages are filed this way corpus-wide is
-counted from the next conversion, which marks them `page_redacted`.)
+**Why it matters for automation.** Automated decisions need evidence whose integrity can be shown
+later without paper: which file, unaltered, signed by whom, when. A scanned signature proves none of
+that and costs the document's text.
 
----
+**Solution.**
+- **Digital signatures** to the PAdES standard (ETSI EN 319 142), with long-term validation data, for
+  documents that need a signature - including sworn and commissioned ones, through a digital
+  commissioning process.
+- **A SHA-256 hash for every file at receipt**, shown on the REGDOCS record and the filing receipt, so
+  anyone can prove a downloaded copy is the one filed.
+- **A trusted timestamp** (RFC 3161) on the receipt, replacing the paper receipt as the record of
+  filing.
 
-## 5. Keep forms and structure machine-readable
+**Guidance text.** *"Documents requiring a signature should be signed with a digital signature
+conforming to PAdES. A wet-ink signature, where unavoidable, is filed as a scanned signature page
+accompanying the electronic document - not as a scan of the whole document. The CER records a
+SHA-256 hash and a timestamp for every file received and publishes them with the record."*
 
-- **Keep form fields live; do not flatten forms.** [survey] 67 of 5,000 documents have live
-  fields. [samples] 9 documents had live fields and **39 had checkboxes printed flat** (detected on
-  the page, no form fields): their state can only be read from pixels. [2026-09 corpus] 4,057
-  values in 151 documents read exactly from fields.
-- **Add bookmarks to any document over ~20 pages.** [survey] 321 of 641 such documents (50%) have
-  an outline. Outlines give exact headings and attachment boundaries.
-- **Bookmarks must belong to the document.** [corpus] A mail merge can carry every recipient's
-  outline into each letter: 4049986 is a 2-page letter with 136 bookmarks; 3755199 has 443 on 4
-  pages. Of 435 sampled documents with bookmarks, 20 average more than 2 bookmarks a page that
-  match no line. Such an outline misleads any reader that trusts it.
-- **Produce tagged, accessible PDFs.** [survey] 2,331 of 5,000 (47%) are tagged. Tags carry the
-  structure that otherwise has to be inferred, and accessibility is an obligation in its own right.
-- **Prefer PDF/A-2u or -3u.** [survey] 19 of 5,000 (0.4%). Rules out undecodable fonts (1.3);
-  PDF/A-3 can embed the source data (6).
-- **A file must open.** [survey] 1 of 5,000 could not be opened at all (3561022, a format error).
-- **A file must be the document.** [corpus] Of 860 PDFs the scout recorded for 2002-2026 and
-  downloaded on 2026-10-17, 20 are not documents: 6 that REGDOCS serves as empty files (0 bytes,
-  e.g. 4471674), 13 that are web pages (filing receipts), and one, 980558, a 77-byte Linux
-  desktop shortcut pointing to "08BurdReport.pdf" - the filer uploaded a link to the report, not
-  the report. A further 73 recorded PDFs answer "not found".
-
----
-
-## 6. File data as data
-
-- **Data tables as companion files** (CSV, Excel): lab results, monitoring data, schedules.
-  [2026-09 corpus] tables are the weakest part of every extraction. [samples] a lab report's
-  printed grid (2684908) ran its rows together on one reader and placed 97% of values on another:
-  a detection limit printed as `<0.01` is exactly where a misplaced value changes a finding.
-- **Spatial data as GIS files** alongside maps and alignment sheets. [samples] OCR reads about
-  two-thirds of a digital drawing's labels, and reading at more angles barely helps: labels on
-  maps are the hardest text to recover from a picture. [survey] Map documents: 32% mostly not
-  digital (19-47%).
-- **Machine-readable codes are fine, and useful.** [samples] courier waybills carry the address and
-  tracking number as Code 128 and PDF417; decoded exactly.
+**Check at intake.** Signature present and covering the file (or followed only by validation data);
+hash computed and recorded on receipt.
 
 ---
 
-## 7. Pages a readable size
+## 4. Redaction: remove the text, and say what was removed
 
-**[survey]** 113 of 5,000 documents (2.3%) have sheets over 17.5 in. **[2026-09 corpus]** 13 pages
-in 5 documents (182.5 x 34.5 in; 92 x 92 in) could not be processed at all; the current converter
-reads them under a pixel budget. Cap page size, or file large drawings as tiles - and file the GIS
-data (6).
+**Problem.**
+- **Cover-up redactions that leave the words** [census]: 313 documents (1,406 pages) have words in the
+  text layer under dark fills. Of 12 looked at: real redactions leaving the words recoverable -
+  landowners' names and addresses under black boxes (a participant involvement summary), contact
+  names on a page that says "Personal contact information redacted for privacy", invoice
+  descriptions (13,159 words on 36 pages); a table's data rows shaded out (probably intended); and
+  a false alarm (dark legend bars on a map). Every flagged document needs review
+  ([list](../scripts/convert/runs/v2/reports/redaction-review-2026-10-18.csv)).
+- **Pages filed as black rectangles** [corpus]: whole pages that are one black fill, saying nothing
+  about what was withheld or why (4600031, 4600032).
+- [rules] The Filing Manual describes how to *request* confidentiality (section 1.5), not how to
+  produce a public redacted version.
+
+**Why it matters for automation.** A text extractor, a search index and a language model read the
+words under the box as ordinary text: personal information becomes searchable and quotable. A blank
+black page gives an automated reader no way to know that something was withheld.
+
+**Solution.** Redact with a tool that deletes the underlying text and images; verify by searching the
+output for a redacted phrase. Mark each redaction with its reason (a label in the box, or a line on
+the page).
+
+**Guidance text.** *"Public versions must be redacted with a tool that permanently removes the
+redacted content. Drawing shapes over text, or highlighting it in black, is not redaction. Each
+redaction should state the basis for withholding."*
+
+**Check at intake.** Words in the text layer beneath dark fills that render flat (with real words
+beneath, so a ticked checkbox is not a redaction).
 
 ---
 
-## 8. Check at intake
+## 5. Structure travels with the document
 
-A filer told to "ensure text is extractable" has no way to know they failed. These checks run on
-the file alone in about a second a page, while the correct source still exists. `check.py`
-already runs them on one PDF (`./scripts/convert/convert.sh check filing.pdf`):
+**Problem.**
+- **Bookmarks** [rules] are asked for only for documents with a table of contents.
+  [integrity] **15,950 of 33,974 documents over 20 pages (47%)** have an outline. **Bookmarks that belong to another
+  document** [census]: a mail merge carries every recipient's outline into each letter (4049986: a
+  2-page letter with 136 bookmarks; 3755199: 443 on 4 pages); 20 of 435 sampled documents with
+  bookmarks average more than 2 a page that match no line.
+- **Tags** (headings, lists, tables, reading order; accessibility): [integrity] **124,340 of 269,025
+  documents (46.2%)** are tagged - usually because the authoring tool tags by default. Not asked for
+  [rules].
+- **Forms** flattened: [integrity] 3,234 documents (1.2%) have live form fields. [samples] 39 documents had
+  checkboxes printed flat - their state readable only from pixels; [2026-09 corpus] 4,057 values in
+  151 documents read exactly from live fields.
+- **PDF/A**: [integrity] 1,460 documents (0.5%) declare PDF/A - levels 1a, 1b, 2b, 3a, 3b - and **none
+  the "u" level** that guarantees text decodes to Unicode.
+- **Other file properties** [integrity]: 1,872 files restrict permissions (owner-password encryption,
+  which the Filer's Guide asks filers not to set); 138 carry embedded files; 179 carry JavaScript;
+  6 could not be opened (format errors).
 
-| check | catches | reads |
+**Why it matters for automation.** Structure the author already had - headings, a table's header
+row, a form field's value, where an attachment starts - otherwise has to be inferred by a model, and
+inference is where errors come from. A tagged table says which cell is a header; a live form field
+says which box is ticked.
+
+**Solution.** Tagged PDF (PDF/UA, ISO 14289) from the authoring application; bookmarks for every
+section and attachment of documents over 20 pages, belonging to that document; form fields kept
+live; PDF/A-2u or -3u.
+
+**Guidance text.** *"Documents over 20 pages must include bookmarks for each section and attachment.
+Documents should be tagged PDFs conforming to PDF/UA. Forms must be filed with their fields intact,
+not flattened. PDF/A-2u or PDF/A-3u is the preferred format."*
+
+**Check at intake.** Catalog checks from the file alone: outline present and matching page text,
+structure tree, form fields, PDF/A identification.
+
+---
+
+## 6. Data as data: tables, maps and drawings beside the PDF
+
+**Problem.**
+- **Tables are the weakest part of every extraction** [samples, 2026-09 corpus]. Reading a printed
+  table back into rows and columns is reconstruction, and readers fail on different tables: the best
+  combination of four table readers still leaves words in the wrong cell or no cell (14 problem words
+  on a 28-page lab sample after the best choice per page, from 132 with one reader); one reader alone
+  gets 35% of table rows exactly right against 72% for another. One filing's grids produced 34,885
+  misplaced words. A detection limit printed `<0.01` is exactly where a misplaced value changes a
+  finding.
+- **Maps and drawings** [samples]: OCR reads about two-thirds of a drawing's labels; [census] Plans,
+  Profiles and Books of Reference 57.4% not digital, maps 31.9%.
+- **The route** [rules]: e-filing accepts only PDF. GIS data has had a format rule since 2021
+  (shapefile or file geodatabase, named coordinate systems) - but travels by e-mail under 10 MB or
+  on a USB drive by mail, outside the record.
+
+**Why it matters for automation.** A model asked about monitoring results, tolls or crossings needs
+the values, typed and with units, not a picture of a grid. Data filed as data is exact, and every
+downstream use - a dataset, a dashboard, a model - starts from it rather than from an extraction.
+
+**Solution.** File tables of results as CSV (UTF-8) or Excel (.xlsx) beside the PDF, with a data
+dictionary (column, meaning, unit, detection-limit convention); spatial data as GeoPackage (OGC) with
+its coordinate system as an EPSG code; drawings with their DXF or DWG. Accept these files through
+e-filing, linked to the document they support. PDF/A-3 can carry them embedded in the PDF itself.
+
+**Guidance text.** *"Where a document presents tabular data - laboratory and monitoring results,
+schedules, financial tables, crossings or condition-compliance registers - the data must also be
+filed in CSV or Excel format with a data dictionary. Spatial data must be filed as GeoPackage with
+the coordinate reference system identified. These files are submitted through electronic filing with
+the document they support."*
+
+**Check at intake.** The data files named in the filing's manifest (section 9) are present, parse, and
+match their dictionaries.
+
+---
+
+## 7. Readable pages, whole documents
+
+**Problem.** [census] 25,989 pages in 7,682 documents (2.9%) are over 17.5 inches. [rules] A drawing
+not legible at 11 x 17 inches goes on paper with a placeholder that "cannot be viewed or searched";
+files over 20 MB are rejected, so large documents are cut into pieces at section breaks. [2026-09
+corpus] pages of 182.5 x 34.5 inches could not be processed at all by some tools.
+
+**Why it matters for automation.** A placeholder takes the drawing out of the digital record. A
+document cut into files must be stitched back together before anything can read it as one.
+
+**Solution.** Drawings at standard sheet sizes or as tiles, with the CAD and GIS data (section 6).
+Raise the size limit for born-digital files, which rarely need it; scans are what make files large.
+
+**Check at intake.** Page dimensions; document split across files declared in the manifest.
+
+---
+
+## 8. The file is the document
+
+**Problem.** [corpus] Of 860 PDFs downloaded on 2026-10-17, 20 are not documents: 6 REGDOCS serves
+as empty files (0 bytes), 13 are web pages (filing receipts), and one (980558) is a 77-byte desktop
+shortcut to "08BurdReport.pdf" - a link to the report, not the report. 73 recorded PDFs answer "not
+found". [census] 18,615 documents record no producer.
+
+**Why it matters for automation.** A missing document is invisible to a model that answers from
+what it has; it cannot say what it never saw.
+
+**Solution and check.** At upload: the file begins `%PDF-`, opens, has pages and text or images on
+them, and is not a link. The filer is told at once, while the document still exists on their side.
+
+---
+
+## 9. A filing that describes itself *(proposed)*
+
+A small manifest beside the files - generated by the e-filing form from what the filer uploads -
+listing each file with its SHA-256, type, page count, language, PDF/A level and signature, and each
+data file with the document it supports:
+
+```json
+{
+  "filing": "C00000",
+  "filer": "Example Pipelines Ltd.",
+  "documents": [
+    {"file": "C00000-1 Application.pdf", "document_type": "Application", "sha256": "...",
+     "pages": 12, "language": "en", "pdfa": "2u", "signature": "PAdES"},
+    {"file": "C00000-1 Table 3 water quality.csv", "document_type": "Data",
+     "describes": "C00000-1 Application.pdf", "sha256": "...", "rows": 214,
+     "dictionary": "C00000-1 Table 3 dictionary.csv"}
+  ]
+}
+```
+
+Signed and timestamped, it is the filing's chain of custody and its table of contents for machines in
+one: tamper-evident and machine-readable at once.
+
+---
+
+## 10. Check at intake: a rule, not advice
+
+A filer told to "ensure text is extractable" cannot know they failed. These checks run on the file
+alone in about a second a page, at upload, while the correct source still exists:
+
+| check | catches (section) | reads |
 |---|---|---|
-| words in the text layer vs words OCR finds on a rendered page | no layer, stub layer, poor scanner OCR, text as graphics (1, 3) | text layer + one render |
-| letter share and real words | undecodable text (1.3) | text layer |
+| words in the text layer vs OCR of a rendered page | no layer, stub layer, poor scanner OCR, text as outlines, rasterized digital pages (1, 2) | text layer + one render |
+| letter share and real words | undecodable text (2) | text layer |
 | text under dark fills that render flat | cover-up redaction (4) | text layer + render |
-| outline on long documents; PDF/A; tags; form fields | structure (5) | catalog |
+| signature coverage, hash, timestamp | integrity (3) | file |
+| outline, tags, form fields, PDF/A | structure (5) | catalog |
+| data files present, parse, match dictionary | data as data (6) | files |
 | page dimensions | oversize sheets (7) | page boxes |
-| the file is a PDF with pages: not empty, not a web page, not a shortcut | missing documents (5) | first bytes |
+| `%PDF-`, opens, has content, not a link | the file is the document (8) | first bytes |
 
-(Flattened checkboxes need the layout models, so they are in the converter, not yet in `check.py`.)
-
-*"Page 47 has no usable text layer"* at submission is actionable; a sentence in a manual is not.
-**A rule in a manual is advice; a check at intake is a rule.**
+`check.py` already runs most of these on one PDF (`./scripts/convert/convert.sh check filing.pdf`).
+*"Page 47 has no usable text layer"* at upload is actionable; a sentence in a manual is not.
 
 ---
 
-## 9. Not worth requiring
+## 11. Not worth requiring
 
-- **Page rotation** [2026-09 corpus]: rotated pages read as well as upright ones.
+- **Page rotation** [2026-09 corpus]: rotated pages read as well as upright ones; [survey, by eye] 9 of
+  29 scanned pages were sideways and OCR read them.
 - **Document length** [2026-09 corpus]: 986-page filings read as well as 2-page ones.
-- **Table formatting rules**: nobody can yet say what makes a printed table easier to read; file
-  the data instead (6).
-- **A named PDF product**: the path matters more than the product.
-- **Scans filed sideways** [survey, by eye]: 9 of 29 scanned pages were sideways, and OCR read
-  them (185-542 words a page; a sideways reporting form read word for word).
-- **Line-numbered paper** [samples]: written arguments on numbered paper read cleanly and the
-  numbers make lines citable.
-- **Blank backs of duplex scans** [samples]: recognised and skipped (0.3% of pages in the survey).
+- **Table formatting rules**: nobody can say what makes a printed table easier to read; file the data
+  (6).
+- **A named PDF product**: the path matters more than the product (section 1).
+- **Specific fonts** [rules ask for Arial or Times New Roman]: what matters is that fonts are embedded
+  with Unicode maps (2).
+- **Line-numbered paper** [samples]: reads cleanly, and makes lines citable.
+- **Blank backs of duplex scans** [census]: 14,635 pages, recognised and skipped.
+
+---
+
+## What this does not yet measure
+
+- **Tables, figures and forms across the whole corpus.** The light pass reads text and capture, not
+  structure; table and form findings come from samples. A full conversion would count them.
+- **Which reading is right where two disagree.** Scanner layers and independent OCR differ on 67% of
+  scanner-OCR pages; the voters decide line by line, and no hand-transcribed ground truth exists yet
+  (see [lessons-across-pipelines.md](lessons-across-pipelines.md)).
+- **The redaction count.** 313 documents are flagged; only reviewed ones can be called leaks.

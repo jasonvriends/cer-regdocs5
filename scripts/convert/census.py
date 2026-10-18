@@ -28,6 +28,7 @@ def main() -> int:
     ap.add_argument("--min-docs", type=int, default=200, help="smallest group shown in the by-group tables")
     args = ap.parse_args()
     con = duckdb.connect(str(DB), read_only=True)
+    con.execute("SET enable_progress_bar=false")
     out = []
 
     def table(title, sql, note=None):
@@ -98,6 +99,36 @@ def main() -> int:
           "UNION ALL SELECT 'pages with text in images the layer lacks', count(*), count(DISTINCT doc_id) FROM issues WHERE kind = 'ink_not_in_text_layer' "
           "UNION ALL SELECT 'pages where OCR finds under 60% of the text layer', count(*), count(DISTINCT doc_id) FROM issues WHERE kind = 'pdf_ocr_disagree' "
           "UNION ALL SELECT 'pages with no words at all', count(*), count(DISTINCT doc_id) FROM pages WHERE coalesce(words_evidence, 0) = 0")
+
+    integ = DB.parent / "integrity.parquet"
+    if integ.exists():
+        con.execute(f"CREATE TEMP VIEW integrity AS SELECT * FROM read_parquet('{integ}')")
+        table("Integrity: signatures and what was saved after them (integrity.py, every file)",
+              "SELECT count(*) FILTER (WHERE signed > 0) AS \"digitally signed\", "
+              "count(*) FILTER (WHERE signed > 0 AND after_last_signature = 'none') AS \"signature covers the file\", "
+              "count(*) FILTER (WHERE after_last_signature = 'validation_data') AS \"then validation data only\", "
+              "count(*) FILTER (WHERE after_last_signature = 'other_changes') AS \"then something else saved\", "
+              "count(*) FILTER (WHERE certified) AS certified, count(*) AS files FROM integrity",
+              "Signatures are not verified cryptographically. \"Something else saved\" ranges from a metadata "
+              "update to annotations added on pages; a validator judges each.")
+        table("Integrity: digitally signed documents by year",
+              "SELECT d.year, count(*) FILTER (WHERE i.signed > 0) AS signed, count(*) AS documents "
+              "FROM integrity i JOIN documents d USING (doc_id) WHERE d.year >= '2016' GROUP BY 1 ORDER BY 1")
+        table("Integrity: structure and file properties",
+              "SELECT 'tagged (structure tree)' AS property, count(*) FILTER (WHERE tagged) AS documents FROM integrity "
+              "UNION ALL SELECT 'declares PDF/A (any level)', count(*) FILTER (WHERE pdfa IS NOT NULL) FROM integrity "
+              "UNION ALL SELECT 'declares PDF/A at a u (Unicode) level', count(*) FILTER (WHERE pdfa LIKE '%u') FROM integrity "
+              "UNION ALL SELECT 'live form fields', count(*) FILTER (WHERE form_fields > 0) FROM integrity "
+              "UNION ALL SELECT 'over 20 pages', count(*) FILTER (WHERE pages > 20) FROM integrity "
+              "UNION ALL SELECT 'over 20 pages, with an outline', count(*) FILTER (WHERE pages > 20 AND outline > 0) FROM integrity "
+              "UNION ALL SELECT 'restricted permissions (owner password)', count(*) FILTER (WHERE permissions <> -4) FROM integrity "
+              "UNION ALL SELECT 'embedded files', count(*) FILTER (WHERE embedded_files > 0) FROM integrity "
+              "UNION ALL SELECT 'JavaScript', count(*) FILTER (WHERE javascript) FROM integrity "
+              "UNION ALL SELECT 'saves appended after first written (approx.)', count(*) FILTER (WHERE appended_updates > 0) FROM integrity "
+              "UNION ALL SELECT 'could not be opened', count(*) FILTER (WHERE error IS NOT NULL) FROM integrity")
+    table("The same file under several REGDOCS IDs",
+          "SELECT count(*) AS files, sum(n) AS \"REGDOCS IDs\", sum(n - 1) AS \"extra copies\" "
+          "FROM (SELECT sha256, count(*) AS n FROM documents WHERE sha256 IS NOT NULL GROUP BY 1 HAVING count(*) > 1)")
 
     table("What the catalog cannot yet say",
           "SELECT 'documents with no REGDOCS document type' AS gap, count(*) AS documents FROM documents WHERE document_type IS NULL "

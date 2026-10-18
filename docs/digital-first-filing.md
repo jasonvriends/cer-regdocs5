@@ -4,8 +4,8 @@ A filing that arrives as a faithful digital document needs no one to recover its
 can be searched, quoted and checked; every table is data; every signature is verifiable. This is
 what such a filing looks like, requirement by requirement. Each requirement exists because its
 absence was **measured** to lose information in REGDOCS filings - the evidence is in
-[filing-guidance.md](filing-guidance.md), rates from a random survey of 5,000 documents unless
-noted. Requirements marked *proposed* follow from the evidence but their benefit was not measured.
+[filing-guidance.md](filing-guidance.md), rates counted over all 269,025 documents (the census and
+the integrity pass, October 2026) unless noted. Requirements marked *proposed* follow from the evidence but their benefit was not measured.
 
 The checker [check.py](../scripts/convert/check.py) tests a PDF against the requirements a single
 file can show (`./scripts/convert/convert.sh check filing.pdf`).
@@ -16,18 +16,18 @@ file can show (`./scripts/convert/convert.sh check filing.pdf`).
 
 | # | requirement | why (measured) | check |
 |---|---|---|---|
-| D1 | **Export or save as PDF from the application that made it** (Word, Excel, the CAD or lab system), not print-to-PDF of a printout, not a scan, not re-distilled | office suites 1%, reporting tools 0% of documents not digital; scanner-made PDFs 98%, PDFs with no producer recorded 75% | text layer vs OCR |
-| D2 | **Never turn pages into images** - no "flatten", no rasterizing publishing step | 81 of 5,000 documents were digital pages rasterized by one filer's system (2024); about 1 in 4 image-only pages is a digital page, not paper | page image with no text |
-| D3 | **Text stays text** - no "print text as graphics", CAD text exported as text (TrueType, searchable-text export) | 0.4% of pages are text drawn as vector outlines (exhibit lists, CAD drawings: up to 205,000 paths a page, no characters) | no text, many paths |
-| D4 | **Text decodes to the characters shown** - fonts embedded with Unicode maps; no re-distilling, no stripping fonts | 0.5% of pages overall, 19% of MicroStation pages, extract as nonsense while looking right | letter share, real words |
-| D5 | **PDF/A-2u or PDF/A-3u** | 19 of 5,000 documents; "u" rules out D4 by construction; PDF/A-3 can carry the data files (section 4) | XMP `pdfaid` |
-| D6 | **Paper that has to be filed is OCR'd by the filer and checked** (300 dpi or better) | scanner OCR layers miss over 40% of the page on a quarter of pages for some scanners; stub layers ("received" stamps) on 2% of pages look searchable and are not | text layer vs OCR |
+| D1 | **Export or save as PDF from the application that made it** (Word, Excel, the CAD or lab system), not print-to-PDF of a printout, not a scan, not re-distilled | office suites 1.7%, reporting tools 0.0% of documents not digital; scanners and copiers 97-100%, PDFs with no producer recorded 75% | text layer vs OCR |
+| D2 | **Never turn pages into images** - no "flatten", no rasterizing publishing step | 4,137 documents in 2024 were digital pages rasterized by one filer's system; 16,254 not-digital documents came from digital tools | page image with no text |
+| D3 | **Text stays text** - no "print text as graphics", CAD text exported as text (TrueType, searchable-text export) | 14,898 pages (0.4%) are text drawn as vector outlines (exhibit lists, CAD drawings: up to 205,000 paths a page, no characters) | no text, many paths |
+| D4 | **Text decodes to the characters shown** - fonts embedded with Unicode maps; no re-distilling, no stripping fonts | 38,596 pages (1.1%), 12% of MicroStation pages, extract as nonsense while looking right | letter share, real words |
+| D5 | **PDF/A-2u or PDF/A-3u** | 1,460 documents (0.5%) declare PDF/A, none at a "u" level; "u" rules out D4 by construction; PDF/A-3 can carry the data files (section 4) | XMP `pdfaid` |
+| D6 | **Paper that has to be filed is OCR'd by the filer and checked** (300 dpi or better) | scanner OCR layers differ from an independent reading by over 10% on 67% of their 172,381 pages; stub layers ("received" stamps) on 107,949 pages (3.0%) look searchable and are not | text layer vs OCR |
 
 ## 2. Signatures are digital
 
 | # | requirement | why (measured) | check |
 |---|---|---|---|
-| S1 | **Sign digitally** - an e-signature service or a digitally signed PDF | affidavits 79% not digital, letters 23%: the scans are the signed documents; e-signed documents in the samples were fully digital | - |
+| S1 | **Sign digitally** - an e-signature service or a digitally signed PDF | affidavits 88% not digital, letters 31%: the scans are the signed documents; 1,410 documents (0.5%) are digitally signed, and only 73 of those are not digital | - |
 | S2 | **Sworn and commissioned documents too** *(proposed)* - a digital commissioning process | affidavits stayed scanned while letters moved to digital (samples, 2012-2026: 34% to 11% of signed documents) | - |
 | S3 | **If a wet signature is unavoidable, scan the signature page only** and file it with the digital document | a scanned letter replaces the typed text with a picture of it | text layer vs OCR, per page |
 
@@ -35,11 +35,11 @@ file can show (`./scripts/convert/convert.sh check filing.pdf`).
 
 | # | requirement | why (measured) | check |
 |---|---|---|---|
-| T1 | **Tagged PDF** (headings, lists, tables, reading order; PDF/UA) *(proposed for extraction; required for accessibility)* | 47% of documents tagged; reading order on two-column pages is where untagged extraction disagrees most | `StructTreeRoot` |
-| T2 | **Bookmarks on documents over 20 pages**, one per section and attachment *(proposed)* | half of long documents have none | outline |
-| T3 | **Forms keep live fields**; checkboxes are fields, not drawings | 67 of 5,000 documents have live fields; in the samples 39 documents carried checkboxes printed flat, readable only from pixels | form fields |
+| T1 | **Tagged PDF** (headings, lists, tables, reading order; PDF/UA) *(proposed for extraction; required for accessibility)* | 46% of documents tagged (124,340); reading order on two-column pages is where untagged extraction disagrees most | `StructTreeRoot` |
+| T2 | **Bookmarks on documents over 20 pages**, one per section and attachment *(proposed)* | 18,024 of 33,974 documents over 20 pages (53%) have none | outline |
+| T3 | **Forms keep live fields**; checkboxes are fields, not drawings | 3,234 documents (1.2%) have live fields; in the samples 39 documents carried checkboxes printed flat, readable only from pixels | form fields |
 | T4 | **Redact by removing** the text (a true redaction tool), never by drawing a box | one filing's blacked-out invoices: 13,159 words still readable under the boxes | text under dark fills |
-| T5 | **Pages a readable size** - drawings as standard sheets or tiles *(proposed cap: 36 x 48 in)* | 2.3% of documents have sheets over 17.5 in; some over 90 in could not be processed at all | page boxes |
+| T5 | **Pages a readable size** - drawings as standard sheets or tiles *(proposed cap: 36 x 48 in)* | 7,682 documents (2.9%) have sheets over 17.5 in; some over 90 in could not be processed at all | page boxes |
 
 ## 4. Data is filed as data
 
@@ -67,12 +67,12 @@ A small `manifest.json` beside the files, so intake knows what arrived without r
 
 ```json
 {
-  "filing": "C41176",
-  "submitted_by": "Irving Oil Limited",
+  "filing": "C00000",
+  "submitted_by": "Example Pipelines Ltd.",
   "documents": [
-    {"file": "C41176-1 Order application.pdf", "document_type": "Application",
+    {"file": "C00000-1 Order application.pdf", "document_type": "Application",
      "sha256": "...", "pages": 12, "language": "en", "pdfa": "2u", "signed": "digital"},
-    {"file": "C41176-1 Table 3 results.csv", "document_type": "Data", "describes": "C41176-1 Order application.pdf",
+    {"file": "C00000-1 Table 3 results.csv", "document_type": "Data", "describes": "C00000-1 Order application.pdf",
      "sha256": "...", "rows": 214}
   ]
 }
@@ -122,11 +122,11 @@ commissioning process would have kept its text.
 
 ## The order that matters
 
-By what the survey says each would recover:
+By what the census says each would recover:
 
 1. **D1 and S1/S2** - born digital and signed digitally: the bulk of non-digital documents (signed
    letters, affidavits, scanned correspondence).
-2. **D2** - no rasterizing: a single filer's publishing setting produced 1.6% of a random sample.
+2. **D2** - no rasterizing: a single filer's publishing setting produced 4,137 documents in 2024.
 3. **An intake check** that runs D1-D4, D6, T4, T5 automatically and tells the filer which page
    failed, while the source still exists. *A rule in a manual is advice; a check at intake is a rule.*
 4. **A1/A2** - data as data: small in count, large in value for the documents that carry results.
