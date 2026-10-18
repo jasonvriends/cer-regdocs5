@@ -226,6 +226,9 @@ deciding whether it is worth extracting.
 | Same file filed several times (e.g. 4656998 = 4657424 = 4657571) | SHA-256 every download; share extraction by hash |
 | CER titles exceed filesystem name limits | name files by REGDOCS document ID |
 | Redirects to another host | follow redirects |
+| "200 OK", `application/pdf`, 0 bytes (4471674; 6 of 860, 2026-10-17) | an empty body is REGDOCS's answer about that file: recorded as unavailable like a 404, not retried with backoff (five in a row would have stopped the run) |
+| A "PDF" that is a desktop shortcut (980558: 77 bytes, `[Desktop Entry] ... 08BurdReport.pdf`) | check the first bytes are `%PDF-`; the filer uploaded a link, not the report |
+| Fetching a known set means scanning every record | `download <ids or REGDOCS links>` / `--list FILE`: only those, recording any without a record first |
 
 **Storage**: compress extracted JSON (9.4 MB → 0.9 MB gzip), not PDFs (7.4 →
 7.3 MB). Keep metadata files plain text for grepping (~150 KB per 986-page
@@ -594,6 +597,13 @@ separate, versioned policy ranked by consequence.
 - A fixed 1.5 pt margin on 1.5 pt text: 61,882 false issues. Scale margins.
 - Stripping HTML with `<[^>]+>` deleted `\< 0.0050 …` lab values.
 - A grid measure favoured a grid that, drawn on the page, cut "Backgrou | nd".
+- **Conservation is not accuracy.** The light pass's checks (every evidence word in the text,
+  the Markdown and docling exactly once) held on 267,495 of 267,495 documents; they prove no word
+  is lost between steps, not that any word was read right.
+- **A measure not taken stored as zero.** OCR skipped on a sound layer recorded "OCR found 0% of
+  the layer": 87% of sampled text-layer pages, averaged into the report. Store None.
+- A Markdown-to-evidence word ratio above 1 found headings written from a mail merge's bookmarks
+  (4049986: 2.1; 3755199: 6.2) - text in the output that is on no page.
 
 ---
 
@@ -609,6 +619,7 @@ separate, versioned policy ranked by consequence.
 | Machine froze | three large documents converting whole | one page per call: 3–4 GB per worker, 34 GB free |
 | Worker reached 23.8 GB mid-document | cap checked after documents | check memory during the document; free results, empty CUDA cache, `malloc_trim` per page; replace workers over 8 GB; start none below 6 GB free |
 | 0.2% random crashes and host reboots | **a game sharing the GPU**; device check read total VRAM once | check **free** VRAM before each model call; ask what else was running |
+| OCR 1.4 → 9.9 s a page, pages stalling (2026-10-17) | **a game sharing the GPU, again**: WSL's `nvidia-smi` shows only its own processes | Windows' `nvidia-smi.exe` names them; watch seconds a page by reader over time - a step change with no change in the documents is the machine |
 | Two OCR engines deadlocked | two RapidOCR instances on one GPU | one engine per GPU |
 | Stalls with no clue | no per-page logging | log each page's start, finish and memory; 30 s telemetry |
 | Checker timed out, not converter | word-in-box loops (44%) | spatial index; cap review annotations |
@@ -627,6 +638,10 @@ separate, versioned policy ranked by consequence.
 - Name each output by a hash of the code (**syntax tree without docstrings**),
   every package used, settings, inputs, and **every model's weights**.
 - Keep a verbatim copy of the code with each run, plus git commit and dirty flag.
+  *Relearned:* the v2 ledgers said only "v2" until 2026-10-17, and half the corpus pass had been
+  written before a later step existed. Each ledger now carries a hash of the files that convert,
+  the commit and the dirty flag. Lessons recorded here were not carried into the next pipeline's
+  code - read this file before building.
 - Same settings land in the same place; a changed setting lands beside the old
   run. No overwrite flag; delete a run's folder to redo it.
 - Per-item provenance beside the DoclingDocument (reader, version, agreeing and

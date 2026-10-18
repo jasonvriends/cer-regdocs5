@@ -323,6 +323,44 @@ from the survey, with intervals, and every sample rate quoted there now says so 
 - Findings are now records too (docs/findings.jsonl), loaded into the catalog with everything
   else (docs/catalog.md).
 
+### The corpus light pass, finished (2026-10-12 to -17)
+
+Every PDF held, in light mode: 267,495 documents, 3,591,888 pages, 1.22 billion words, 0 failed
+at the end; 769,463 pages (21.4%) read by OCR, 54,598 documents (20.4%) entirely by OCR and
+21,949 (8.2%) partly. Reviewed from the run logs for every document and from 5,000 ledgers
+(`runs/v2/reports/2026-10-17-light-pass-review.md`). Twelve relaunches, each after a fix above
+(stalls, pdfium, GPU memory, crashes, cut-off ledgers, the skip check) or a machine restart.
+
+- **The conservation checks held on every document, and that proves less than it looks.** Text
+  100%, Markdown 100%, every evidence word named once by docling: 267,495 of 267,495. They show
+  the pipeline loses no word between readers and outputs. They say nothing about whether a word
+  was read right; that is only known where two readings are compared (text layer and OCR, our
+  OCR and a scanner's layer, the voters).
+- **A measure that was never taken must not read as zero.** Light mode skips OCR on a sound text
+  layer, and the agreement was then stored as "OCR found 0% of the layer's words": 24,933 of
+  28,530 text-layer pages in the sample, averaged into `report`. Now None, and `report` and the
+  catalog read older ledgers' step timings to tell the two apart.
+- **A ledger that does not name its code cannot be compared with another.** Every ledger said
+  "v2"; 54% of the sample was written before the page boundaries step. Each ledger now carries a
+  hash of the files a conversion loads, the git commit, and whether they differed from it.
+- **Bookmarks are not always the document's structure.** A mail merge keeps every recipient's
+  outline: 4049986 (2 pages, 136 bookmarks, 31 to one line) wrote "Marc Boucher" 31 times, 2.1
+  Markdown words per evidence word; 3755199 (443 on 4 pages) 6.2. But unmatched bookmarks are
+  usually real - attachment names, a scan's sheet labels (806765, 4367062). The tell is density:
+  20 of 435 sampled documents with bookmarks average more than 2 unmatched a page. Now a heading
+  is written once per title and page, and unmatched bookmarks only at 3 or fewer a page: those
+  documents went to 1.00, and 30 with sound bookmarks kept every heading but one duplicate.
+- **MuPDF's messages are evidence, and stderr loses them.** About 60,000 lines (13,479 "zlib
+  error: incorrect header check", 9,922 missing XObjects, 7,809 broken xref entries) came out of
+  eight workers at once, naming no document; one document printed 7,670 in a row. They now go
+  to the document's ledger (`summary.mupdf_messages`, issue `pdf_file_problems`).
+- **A page filed blacked out whole is a fact, not a failed reading.** 4600031 and 4600032: each
+  page one black fill, no text, no image; they reported nothing at all. Now `page_redacted`.
+- **Throughput follows the era.** 2.4 documents a second on 2025-2026 filings (median 0.20 s a
+  page), about 1 a second in the OCR-heavy middle years, 4,000-7,000 an hour on 2002-2011 (median
+  0.60 s a page; 33% of those documents are scans with no text of their own, against 17% after).
+- **A machine shared is a machine that slows down.** See Memory and time: a game on the same GPU.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
@@ -809,6 +847,13 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   next document, and reading its pipe raised `ConnectionResetError`, which the crash handler (it
   caught `EOFError`) did not. The parent now joins a killed worker and treats any `OSError` on
   the pipe as that worker crashing: one document lost, not the run.
+- **The GPU is shared with whatever else runs on Windows.** At 07:00 on 2026-10-17 a game took
+  about 5 GB of the card; the pass reached 22.2 of 24.5 GB, OCR went from 1.4 to 9.9 s a page,
+  and 43 documents had pages stall and go to pdfium or be left out - none in the 74,800 before.
+  WSL shows only its own processes (`nvidia-smi` listed one, memory N/A); Windows'
+  `nvidia-smi.exe` named the game. Stopped and relaunched once it closed; the 43 were redone.
+  Watch seconds a page by reader over time: a step change with no change in the documents is the
+  machine, not the PDFs.
 - **The legacy pipeline did not get through these documents either.** It never reached 4656998 or
   4657424 (the same file), and stopped 4681376 at page 10 of 24 with no progress for 30 minutes, the same place
   convert stalls.

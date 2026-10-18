@@ -26,8 +26,16 @@ The documents that are not digital are **the signed ones** (affidavits 79%, lett
 PDF matters far more than any rule about content: office suites, reporting tools and print
 drivers produce digital documents 93-100% of the time.
 
+**[corpus]** The light pass over every PDF held (2026-10-17: 267,495 documents, 3.6 million pages)
+agrees: **20.4% of documents are read entirely by OCR** - no usable text of their own - and 8.2%
+partly; 21.4% of pages. By era: 17% of documents dated 2011-2026, **33% of those dated 2002-2011**.
+
 **Evidence, and how strong it is.** Each item says where its numbers come from:
 
+- **[corpus]** the converter's light pass on all 267,495 documents: every page's text layer, OCR
+  where needed, and its ledger of issues ([review](../scripts/convert/runs/v2/reports/2026-10-17-light-pass-review.md)).
+  Whole-corpus counts come from its run log; issue rates from 5,000 ledgers drawn at random. No
+  layout or table models, so it sees capture and text, not tables.
 - **[survey]** `check.py` on 5,000 documents drawn at random from the 268,185 PDFs held, 3 pages
   each (first, middle, last), 11,086 pages: rates by producer, tool, year and document type with
   95% Wilson intervals ([report](../scripts/convert/runs/v2/reports/2026-10-12-survey-5000.md)).
@@ -166,6 +174,12 @@ a bullet, a map symbol - not a redaction, and the check now requires covered wor
 privacy failure each time. Use a redaction tool that deletes the text; verify by searching
 for a redacted phrase.
 
+**Say what was removed.** [corpus] Some pages are filed blacked out whole: 4600031 and 4600032
+(appendices, titles marked "Redacted") are pages that are one black rectangle - no text, no image,
+nothing to say whether a page, a table or a paragraph was withheld, or why. A page that states
+what was removed keeps the record readable. (How many pages are filed this way corpus-wide is
+counted from the next conversion, which marks them `page_redacted`.)
+
 ---
 
 ## 5. Keep forms and structure machine-readable
@@ -176,11 +190,20 @@ for a redacted phrase.
   values in 151 documents read exactly from fields.
 - **Add bookmarks to any document over ~20 pages.** [survey] 321 of 641 such documents (50%) have
   an outline. Outlines give exact headings and attachment boundaries.
+- **Bookmarks must belong to the document.** [corpus] A mail merge can carry every recipient's
+  outline into each letter: 4049986 is a 2-page letter with 136 bookmarks; 3755199 has 443 on 4
+  pages. Of 435 sampled documents with bookmarks, 20 average more than 2 bookmarks a page that
+  match no line. Such an outline misleads any reader that trusts it.
 - **Produce tagged, accessible PDFs.** [survey] 2,331 of 5,000 (47%) are tagged. Tags carry the
   structure that otherwise has to be inferred, and accessibility is an obligation in its own right.
 - **Prefer PDF/A-2u or -3u.** [survey] 19 of 5,000 (0.4%). Rules out undecodable fonts (1.3);
   PDF/A-3 can embed the source data (6).
 - **A file must open.** [survey] 1 of 5,000 could not be opened at all (3561022, a format error).
+- **A file must be the document.** [corpus] Of 860 PDFs the scout recorded for 2002-2026 and
+  downloaded on 2026-10-17, 20 are not documents: 6 that REGDOCS serves as empty files (0 bytes,
+  e.g. 4471674), 13 that are web pages (filing receipts), and one, 980558, a 77-byte Linux
+  desktop shortcut pointing to "08BurdReport.pdf" - the filer uploaded a link to the report, not
+  the report. A further 73 recorded PDFs answer "not found".
 
 ---
 
@@ -221,6 +244,7 @@ already runs them on one PDF (`./scripts/convert/convert.sh check filing.pdf`):
 | text under dark fills that render flat | cover-up redaction (4) | text layer + render |
 | outline on long documents; PDF/A; tags; form fields | structure (5) | catalog |
 | page dimensions | oversize sheets (7) | page boxes |
+| the file is a PDF with pages: not empty, not a web page, not a shortcut | missing documents (5) | first bytes |
 
 (Flattened checkboxes need the layout models, so they are in the converter, not yet in `check.py`.)
 

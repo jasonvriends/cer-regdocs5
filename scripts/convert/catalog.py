@@ -106,7 +106,12 @@ def build(args) -> int:
                      "commodity": ",".join(facets.get("Commodity") or []) or None,
                      "company": (r.get("company") or {}).get("name"), "filing": (r.get("filing") or {}).get("number"),
                      "url": r.get("url"), "producer": tool.get("family"), "producer_kind": tool.get("kind"),
-                     "producer_raw": tool.get("raw"), "sha256": c["pdf"].get("sha256")})
+                     "producer_raw": tool.get("raw"), "sha256": c["pdf"].get("sha256"),
+                     # which code wrote the ledger: older ones name none, and before the page
+                     # boundaries step they have no boundaries summary (review 2026-10-17)
+                     "code_sha256": (L.get("code") or {}).get("sha256"), "code_commit": (L.get("code") or {}).get("commit"),
+                     "has_boundaries": "boundaries" in s,
+                     "mupdf_messages": sum((s.get("mupdf_messages") or {}).values()) if "mupdf_messages" in s else None})
         if n % 5000 == 0:
             print(f"  {n}/{len(ids)} ledgers read", flush=True)
 
