@@ -1,0 +1,79 @@
+== catalog build, whole corpus Sat Oct 17 21:47:41 EDT 2026
+  5000/269025 ledgers read
+  10000/269025 ledgers read
+  15000/269025 ledgers read
+  20000/269025 ledgers read
+  25000/269025 ledgers read
+  30000/269025 ledgers read
+  35000/269025 ledgers read
+  40000/269025 ledgers read
+  45000/269025 ledgers read
+  50000/269025 ledgers read
+  55000/269025 ledgers read
+  60000/269025 ledgers read
+  65000/269025 ledgers read
+  70000/269025 ledgers read
+  75000/269025 ledgers read
+  80000/269025 ledgers read
+  85000/269025 ledgers read
+  90000/269025 ledgers read
+  95000/269025 ledgers read
+  100000/269025 ledgers read
+  105000/269025 ledgers read
+  110000/269025 ledgers read
+  115000/269025 ledgers read
+  120000/269025 ledgers read
+  125000/269025 ledgers read
+  130000/269025 ledgers read
+  135000/269025 ledgers read
+  140000/269025 ledgers read
+  145000/269025 ledgers read
+  150000/269025 ledgers read
+  155000/269025 ledgers read
+  160000/269025 ledgers read
+  165000/269025 ledgers read
+  170000/269025 ledgers read
+  175000/269025 ledgers read
+  180000/269025 ledgers read
+  185000/269025 ledgers read
+  190000/269025 ledgers read
+  195000/269025 ledgers read
+  200000/269025 ledgers read
+  205000/269025 ledgers read
+  210000/269025 ledgers read
+  215000/269025 ledgers read
+  220000/269025 ledgers read
+  225000/269025 ledgers read
+  230000/269025 ledgers read
+  235000/269025 ledgers read
+  240000/269025 ledgers read
+  245000/269025 ledgers read
+  250000/269025 ledgers read
+  255000/269025 ledgers read
+  260000/269025 ledgers read
+  265000/269025 ledgers read
+/mnt/e/_REGDOCS_/output/catalog.duckdb: documents 269,025, pages 3,615,229, issues 763,154, findings 49, samples 1,425
+	Command being timed: "./scripts/convert/convert.sh catalog build --workers 12"
+	User time (seconds): 172.53
+	System time (seconds): 71.94
+	Percent of CPU this job got: 5%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:18:03
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 7768200
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2304470
+	Voluntary context switches: 13075913
+	Involuntary context switches: 1032
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+== end Sat Oct 17 23:05:45 EDT 2026
