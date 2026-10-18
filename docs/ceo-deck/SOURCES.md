@@ -6,6 +6,7 @@ the CER's record are counts; the two estimates are named at the end.
 | what the deck uses | source |
 |---|---|
 | Size of the record; 1 in 4 not machine-readable; photos of paper, hidden text, stamps; redactions; signatures and fingerprints; why it happens | Every PDF in REGDOCS read page by page, October 2026: [census](../../scripts/convert/runs/v2/reports/2026-10-18-census.md), [integrity pass](../../scripts/convert/integrity.py), [filing guidance](../filing-guidance.md), [CEO report](../ceo-report.md) |
+| Our biggest filing is a printed spreadsheet (11,563 pages; six documents, 52,246 pages) | [docs/corpus/](../corpus/) and [filing guidance §6](../filing-guidance.md); REGDOCS 2498585, 2498586, 2498371, 2498372, 2498373, 2499030 |
 | AI making things up (the contact list; one number in twenty; blank strips) | [docs/lessons_learned.md](../lessons_learned.md) (cer-regdocs4, September 2026) and [scripts/convert/LESSONS.md](../../scripts/convert/LESSONS.md) (vision models as voters, October 2026) |
 | "AI will not fix unclear processes, weak ownership or poor-quality data…"; "Agentic AI is not primarily a technology challenge"; three tiers; managing AI like an employee; training by level; roles | UK Local Government Association, [A playbook for agentic AI in local government](https://www2.local.gov.uk/publications/playbook-agentic-ai-local-government), 9 October 2026 (led by North Yorkshire Council; three-tier model from North East Derbyshire District Council) |
 | Cyber-security guidance co-written with Canada | Australian Cyber Security Centre, CISA, NSA, Canadian Centre for Cyber Security, NZ NCSC, UK NCSC: [Careful adoption of agentic AI services](https://www.cyber.gov.au/business-government/secure-design/artificial-intelligence/careful-adoption-of-agentic-ai-services), 1 May 2026 |
@@ -18,4 +19,4 @@ the CER's record are counts; the two estimates are named at the end.
 
 **Estimates.** About 75 years of reading: 3.6 million pages at about two minutes a page, 1,600
 working hours a year. About 13,000 novels: 1.23 billion words at about 90,000 words a novel. A stack
-about 360 metres tall: about 0.1 mm a sheet; the Calgary Tower is 191 metres.
+about 360 metres tall: about 0.1 mm a sheet; the Calgary Tower is 191 metres. About a year to read the printed spreadsheet: 52,246 pages at two minutes a page; about two days of computer time at about three seconds a page (full mode, measured).

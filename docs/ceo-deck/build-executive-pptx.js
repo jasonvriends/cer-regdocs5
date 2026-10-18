@@ -173,6 +173,20 @@ async function icon(Comp, color, size = 256) {
   T(s, "Nearly half of the unreadable documents are letters and sworn statements printed just to be signed. Tables and maps are filed as pictures too: our filing system accepts only PDFs, and map data still travels by e-mail or USB stick.", { x: 0.95, y: 4.45, w: 11.4, h: 1.8, fontSize: 18, color: C.text1, valign: "top" });
   s.addNotes("Why does this happen? Mostly habit. A letter or an affidavit is written on a computer, printed only so it can be signed in ink, scanned back, and filed as a picture. Nearly half of the unreadable documents come from exactly this. Data has the same problem: our filing system accepts only PDFs, so tables of test results arrive as pictures inside documents, and map data still travels by e-mail or on a USB stick. None of this is anyone's fault - it is how the paper era taught us to work.");
 
+  // 8b. The largest filing: a printed spreadsheet
+  s = pres.addSlide({ masterName: "Content", sectionTitle: "The problems" });
+  s.addText("Our biggest filing is a printed spreadsheet", { placeholder: "title" });
+  card(s, 0.6, 1.6, 5.9, 3.9, false);
+  s.addImage({ data: await icon(fa.FaPrint, HEX.dk2), x: 0.95, y: 1.95, w: 0.8, h: 0.8 });
+  T(s, "As it was filed", { x: 2.0, y: 2.0, w: 4.2, h: 0.7, fontSize: 24, bold: true, color: C.text2, valign: "middle" });
+  big(s, "11,563 pages", "of weather readings, one reading a minute for over a year", 0.95, 3.0, 5.2, C.text2, 44);
+  card(s, 6.8, 1.6, 5.9, 3.9, true);
+  s.addImage({ data: await icon(fa.FaFileExcel, HEX.accent1), x: 7.15, y: 1.95, w: 0.8, h: 0.8 });
+  T(s, "As it was made", { x: 8.2, y: 2.0, w: 4.2, h: 0.7, fontSize: 24, bold: true, color: C.background1, valign: "middle" });
+  big(s, "1 spreadsheet", "a small file a computer reads exactly, in seconds", 7.15, 3.0, 5.2, C.accent1, 44, C.background2);
+  T(s, "The same readings fill six documents and 52,000 pages — more than 1 in every 100 pages of our whole record. Reading them back takes a person about a year, and a computer about two days, to rebuild a table that was already a table.", { x: 0.6, y: 5.75, w: 12.1, h: 1.1, fontSize: 18, color: C.text1, valign: "top" });
+  s.addNotes("This is the clearest example in the whole record. The single largest document in REGDOCS - 11,563 pages - is not a report at all. It is a spreadsheet of weather readings, one wind reading every minute for over a year, printed out page by page and filed as a PDF. The same readings were filed again in other parts and to other parties: six documents and about 52,000 pages, more than one page in every hundred in our entire record. A person would need about a year just to read those pages. A computer can read them, but it takes about two days to rebuild the table - and the original spreadsheet, had it been filed, is one small file a computer reads exactly in seconds. Nothing was gained by printing it; accuracy and time were lost.");
+
   // 9. Solution 1: filings
   pres.addSection({ title: "The solution" });
   s = pres.addSlide({ masterName: "Content", sectionTitle: "The solution" });
@@ -303,7 +317,7 @@ async function icon(Comp, color, size = 256) {
     T(s, src[i][0], { x: 0.6, y, w: 3.6, h: 0.7, fontSize: 13, bold: true, color: C.text2, valign: "top" });
     T(s, src[i][1], { x: 4.4, y, w: 8.3, h: 0.7, fontSize: 13, color: C.text1, valign: "top" });
   }
-  s.addNotes("Sources for the figures and quotations in this presentation. Figures about the CER's record are counts from reading every PDF in REGDOCS (October 2026). Two figures are estimates: about 75 years assumes two minutes to read a page and 1,600 working hours a year; 13,000 novels assumes about 90,000 words a novel.");
+  s.addNotes("Sources for the figures and quotations in this presentation. Figures about the CER's record are counts from reading every PDF in REGDOCS (October 2026). Two figures are estimates: about 75 years assumes two minutes to read a page and 1,600 working hours a year; 13,000 novels assumes about 90,000 words a novel; the printed spreadsheet's year of reading assumes the same two minutes a page, and its two days of computer time is measured at about three seconds a page.");
 
   await pres.writeFile({ fileName: OUT });
   await applyTheme(OUT, THEME);

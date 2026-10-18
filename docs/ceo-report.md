@@ -53,6 +53,8 @@ The share is falling but not on its own: one publishing system undid years of pr
 
 The CER's own outputs are digital. What is not is what gets signed: correspondence and sworn documents are 46% of all non-digital documents, because they are printed, signed and scanned back.
 
+**The largest filing in REGDOCS is a spreadsheet printed to paper.** One filer printed eighteen months of minute-by-minute wind readings from a spreadsheet to PDF: the biggest single document, 11,563 pages, and the same readings again in other parts and to a second party - six documents and 52,246 pages, 1.4% of every page in the record. A person would need about a year to read them; a computer needs about two days to rebuild a table that was already a table. Filed as the spreadsheet, it is one small file read exactly in seconds. The [corpus index](corpus/) lists every document over 100 pages.
+
 ## Why it matters for AI
 
 **Search tools and language models read the text inside the file, not the page a hearing panel sees - and on a quarter of the record those are not the same thing.**

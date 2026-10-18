@@ -382,6 +382,19 @@ table region gives a cell per TD/TH (TH = header); it is scored like the others 
 (36%), at least as good as the best model's on 820 of them (86%), chosen for 338; mean chosen
 score 97.53% to 97.82%, no document worse; 812687 (448 tables) 98.5% to 100%.
 
+### The largest documents are printed spreadsheets (2026-10-18)
+
+The eight documents over 5,000 pages hold 2.0% of all pages; six of them are one dataset. Eighteen
+months of one-minute wind readings (2013-01-01 to 2014-06-30; the PDF title still names the .xlsx;
+producer PScript5, a print driver, then Distiller) were printed to 7,280 + 7,280 pages and again, from
+mid-April 2013, to 11,563 pages, and the set filed twice (2498371/2498372/2498585 and 2498373/2499030/2498586; 2498585 = 2498586 byte for
+byte): 52,246 pages, 1.4% of the corpus, about 800,000 distinct rows. Every page is 55 rows of four columns
+of digital text - no OCR needed, every word exact - yet full mode spends about 2.5-3 s a page
+rebuilding the table (about 40 worker-hours), and the 11,563-page one is the memory test for the
+pass. A printout of a sheet is recognisable from the file (an .xlsx title, a print-driver producer,
+thousands of pages of one repeating column layout); such a document could be read as one table
+across all its pages instead of page by page. *Open:* measure that route on these six.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.

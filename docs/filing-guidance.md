@@ -289,6 +289,15 @@ structure tree, form fields, PDF/A identification, JavaScript and embedded files
   gets 35% of table rows exactly right against 72% for another. One filing's grids produced 34,885
   misplaced words. A detection limit printed `<0.01` is exactly where a misplaced value changes a
   finding.
+- **The largest filing in REGDOCS is a spreadsheet printed to paper** [corpus]. Eighteen months of
+  one-minute wind readings (January 2013 to June 2014, about 800,000 rows of four columns) were printed
+  from Excel to PDF through a Windows print driver - once as two parts of 7,280 pages, once (from
+  mid-April 2013) as a single 11,563-page document - and the set was filed twice, attached to responses
+  to two parties (2498371, 2498372, 2498585 and 2498373, 2499030, 2498586; the 11,563-page file byte
+  for byte). **Six documents, 52,246 pages: 1.4% of every page in REGDOCS.** Filed as the workbook it
+  is one small file a computer reads exactly in seconds; as printed, reading it back into a table
+  takes about 40 hours of one full-mode worker, and a person about a year. See [corpus/](corpus/) for
+  every document over 100 pages.
 - **Machine-readable codes are welcome** [samples]: courier waybills carry the address and tracking
   number as Code 128 and PDF417, decoded exactly. A code is data a machine reads without guessing.
 - **Maps and drawings** [samples]: OCR reads about two-thirds of a drawing's labels; [census] Plans,
