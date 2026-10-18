@@ -216,7 +216,10 @@ beneath, so a ticked checkbox is not a redaction).
   bookmarks average more than 2 a page that match no line.
 - **Tags** (headings, lists, tables, reading order; accessibility): [integrity] **124,340 of 269,025
   documents (46.2%)** are tagged - usually because the authoring tool tags by default. Not asked for
-  [rules].
+  [rules]. What the tags hold [sample of 50 tagged filings, 2026-10-18]: **23 tag their tables** -
+  rows and cells, 12 with header cells marked - and 15 tag their headings (H1, H2). A tagged table is
+  the author's own grid, read exactly; an untagged one has to be rebuilt by layout and table models,
+  the weakest step of every extraction (6). Tags are also how a screen reader reads the document.
 - **Forms** flattened: [integrity] 3,234 documents (1.2%) have live form fields. [samples] 39 documents had
   checkboxes printed flat - their state readable only from pixels; [2026-09 corpus] 4,057 values in
   151 documents read exactly from live fields. [survey, by eye] Among scanned pages: hand-filled forms
@@ -234,7 +237,8 @@ row, a form field's value, where an attachment starts - otherwise has to be infe
 inference is where errors come from. A tagged table says which cell is a header; a live form field
 says which box is ticked.
 
-**Solution.** Tagged PDF (PDF/UA, ISO 14289) from the authoring application; bookmarks for every
+**Solution.** Tagged PDF (PDF/UA, ISO 14289) from the authoring application - with headings, lists
+and tables tagged as such, which most office software does when accessibility tagging is on; bookmarks for every
 section and attachment of documents over 20 pages, belonging to that document; form fields kept
 live, and forms filled in electronically rather than by hand; PDF/A-2u or -3u, which also rules out
 JavaScript; attachments only as declared data files (section 6); document properties (title, author,

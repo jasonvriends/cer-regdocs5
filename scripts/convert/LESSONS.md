@@ -367,6 +367,16 @@ at the end; 769,463 pages (21.4%) read by OCR, 54,598 documents (20.4%) entirely
   failed) beside its version and mode, where the skip check reads, and anything not ok is converted
   again on the next run. And every run keeps a log, including the quick ones.
 
+### Tags: the author's own structure (2026-10-18)
+
+MuPDF reads a tagged PDF's structure with the text (`get_text("xml", flags=TEXT_COLLECT_STRUCTURE)`:
+each block inside its `<struct std="H1|P|Table|TR|TD|TH|L|LI|Figure ...">`). In 50 tagged filings drawn
+at random (3-60 pages, first 15 pages read): 23 tag tables (TR/TD), 12 with header cells (TH); 15 tag
+headings (H1 15, H2 8); 28 lists; 22 figures. With 46.2% of the corpus tagged, roughly a fifth of all
+documents would give their tables' rows and cells exactly and one in seven its headings - a reader to
+add beside the layout and table models, not instead of them (tags can be wrong; they are compared,
+like every reading).
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.

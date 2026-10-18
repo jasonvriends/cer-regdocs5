@@ -110,7 +110,7 @@ Person-years assume 3 minutes to check a page against its image and 1,600 workin
 | Sign digitally (PAdES), including sworn documents | the largest single source: printed, signed and scanned correspondence and affidavits |
 | Where paper is unavoidable, OCR it at 300 dpi and check it; fonts that decode (PDF/A-2u) | stub layers, poor scanner OCR, text that decodes to nonsense |
 | Redact with a tool that removes the text, and say what was withheld | words left under black boxes; pages blacked out whole |
-| Keep structure: bookmarks on long documents, tags, live forms filled electronically, no JavaScript | half of long documents lack bookmarks; forms read only from pixels |
+| Keep structure: tagged PDF (headings, tables and lists marked as such), bookmarks on long documents, live forms filled electronically, no JavaScript | 46% of documents are tagged, and in a sample of 50 of them almost half tag their tables - rows and cells a machine reads exactly instead of rebuilding them with models; half of long documents lack bookmarks; forms read only from pixels |
 | File data as data: tables as CSV or Excel with a data dictionary, maps as GeoPackage, drawings with CAD files - through e-filing | tables, the weakest part of every extraction; GIS now travels by e-mail or USB |
 | A signed manifest per filing: each file, its fingerprint and the data it supports | integrity and a table of contents for machines in one |
 
