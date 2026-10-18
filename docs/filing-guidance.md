@@ -63,6 +63,10 @@ scanner's OCR layer. 16,254 of the not-digital documents came from digital tools
 or publishing step rasterized pages that were text a moment before (4,137 documents in 2024 from one
 system, 300 dpi colour images of crisp digital pages), or a "print to PDF" of a printout. [survey, by
 eye] about one image-only page in four is a digital page turned into a picture, not paper.
+- **Pictures of text inside digital documents** [census]: on 140,804 digital pages at least 20 words
+  exist only inside images - a table pasted as a screenshot, a scanned letter or certificate inserted
+  into a report, a chart exported as a picture; 272,191 pages carry some words only in images. The
+  document is digital; those words are not.
 
 **Why it matters for automation.** An image has no words until OCR guesses them. Every guess is a
 place a number, a name or a negation can change, and nothing in the file records which. 4,137
@@ -70,12 +74,14 @@ documents a year of avoidable OCR is a standing cost and a standing risk.
 
 **Solution.** Save or export the PDF from the application that made the document (Word, Excel, the
 reporting system, the CAD or lab system). Never rasterize, flatten or print-to-image a digital
-document. Where a system must "flatten", it keeps the text layer or files the original.
+document. Where a system must "flatten", it keeps the text layer or files the original. Insert tables,
+text and charts as objects from their source, not as screenshots; attach a scanned insert as its own
+document rather than as a picture inside a digital one.
 
 **Guidance text.** *"Electronic documents must be created directly from the application in which they
 were authored. Documents must not be printed and scanned, printed to an image, or converted to
-images by a publishing or document-management system. Scanning is acceptable only for material that
-exists solely on paper (section 2)."*
+images by a publishing or document-management system. Tables, text and charts must not be inserted
+as images. Scanning is acceptable only for material that exists solely on paper (section 2)."*
 
 **Check at intake.** Words in the text layer against words OCR finds on a rendered page: a page image
 with no text from a digital tool fails, whatever made it.
@@ -97,6 +103,9 @@ with no text from a digital tool fails, whatever made it.
 - **Undecodable text** [census]: 38,596 pages (1.1%) display correctly and extract as nonsense - fonts
   without a Unicode map. MicroStation 12.0% of its pages, CAD and GIS tools 5.3%. [2026-09 corpus]
   one filing: 315 of 986 pages, silently.
+- **Hidden text that repeats or conflicts** [2026-09 corpus]: a page whose invisible layer holds the
+  text more than once, or text the page does not show - one page held 17,518 characters of repeated
+  passages behind 6,952 visible (4576114). Search and counting tools reward it as "more text".
 - **Text drawn as outlines** [census]: 14,898 pages (0.4%): no characters at all, only strokes - a
   "print text as graphics" setting or a CAD export (Microsoft Print to PDF 5.9% of its pages,
   Bluebeam 5.3%, MicroStation 4.9%).
@@ -210,12 +219,15 @@ beneath, so a ticked checkbox is not a redaction).
   [rules].
 - **Forms** flattened: [integrity] 3,234 documents (1.2%) have live form fields. [samples] 39 documents had
   checkboxes printed flat - their state readable only from pixels; [2026-09 corpus] 4,057 values in
-  151 documents read exactly from live fields.
+  151 documents read exactly from live fields. [survey, by eye] Among scanned pages: hand-filled forms
+  and a handwritten log - handwriting is the hardest text for any reader.
 - **PDF/A**: [integrity] 1,460 documents (0.5%) declare PDF/A - levels 1a, 1b, 2b, 3a, 3b - and **none
   the "u" level** that guarantees text decodes to Unicode.
 - **Other file properties** [integrity]: 1,872 files restrict permissions (owner-password encryption,
-  which the Filer's Guide asks filers not to set); 138 carry embedded files; 179 carry JavaScript;
-  6 could not be opened (format errors).
+  which the Filer's Guide asks filers not to set); 138 carry embedded files (attachments inside the PDF); 179
+  carry JavaScript (code that runs when the file opens; PDF/A forbids it); 6 could not be opened
+  (format errors). [census] 18,615 documents record no producer at all - and 75% of those are not
+  digital: a file that does not say what made it is usually a scan.
 
 **Why it matters for automation.** Structure the author already had - headings, a table's header
 row, a form field's value, where an attachment starts - otherwise has to be inferred by a model, and
@@ -224,14 +236,17 @@ says which box is ticked.
 
 **Solution.** Tagged PDF (PDF/UA, ISO 14289) from the authoring application; bookmarks for every
 section and attachment of documents over 20 pages, belonging to that document; form fields kept
-live; PDF/A-2u or -3u.
+live, and forms filled in electronically rather than by hand; PDF/A-2u or -3u, which also rules out
+JavaScript; attachments only as declared data files (section 6); document properties (title, author,
+producing application) left as the authoring tool writes them.
 
 **Guidance text.** *"Documents over 20 pages must include bookmarks for each section and attachment.
 Documents should be tagged PDFs conforming to PDF/UA. Forms must be filed with their fields intact,
-not flattened. PDF/A-2u or PDF/A-3u is the preferred format."*
+not flattened, and completed electronically. Documents must not contain JavaScript or undeclared
+attachments. PDF/A-2u or PDF/A-3u is the preferred format."*
 
 **Check at intake.** Catalog checks from the file alone: outline present and matching page text,
-structure tree, form fields, PDF/A identification.
+structure tree, form fields, PDF/A identification, JavaScript and embedded files, producer recorded.
 
 ---
 
@@ -245,6 +260,8 @@ structure tree, form fields, PDF/A identification.
   gets 35% of table rows exactly right against 72% for another. One filing's grids produced 34,885
   misplaced words. A detection limit printed `<0.01` is exactly where a misplaced value changes a
   finding.
+- **Machine-readable codes are welcome** [samples]: courier waybills carry the address and tracking
+  number as Code 128 and PDF417, decoded exactly. A code is data a machine reads without guessing.
 - **Maps and drawings** [samples]: OCR reads about two-thirds of a drawing's labels; [census] Plans,
   Profiles and Books of Reference 57.4% not digital, maps 31.9%.
 - **The route** [rules]: e-filing accepts only PDF. GIS data has had a format rule since 2021
@@ -388,11 +405,11 @@ alone in about a second a page, at upload, while the correct source still exists
 
 | check | catches (section) | reads |
 |---|---|---|
-| words in the text layer vs OCR of a rendered page | no layer, stub layer, poor scanner OCR, text as outlines, rasterized digital pages (1, 2) | text layer + one render |
+| words in the text layer vs OCR of a rendered page | no layer, stub layer, poor scanner OCR, text as outlines, rasterized digital pages, pictures of text (1, 2) | text layer + one render |
 | letter share and real words | undecodable text (2) | text layer |
 | text under dark fills that render flat | cover-up redaction (4) | text layer + render |
 | signature coverage, hash, timestamp | integrity (3) | file |
-| outline, tags, form fields, PDF/A | structure (5) | catalog |
+| outline, tags, form fields, PDF/A, JavaScript, undeclared attachments, producer | structure (5) | catalog |
 | data files present, parse, match dictionary | data as data (6) | files |
 | page dimensions | oversize sheets (8) | page boxes |
 | `%PDF-`, opens, has content, not a link | the file is the document (9) | first bytes |
@@ -414,6 +431,24 @@ alone in about a second a page, at upload, while the correct source still exists
   with Unicode maps (2).
 - **Line-numbered paper** [samples]: reads cleanly, and makes lines citable.
 - **Blank backs of duplex scans** [census]: 14,635 pages, recognised and skipped.
+
+---
+
+## 13. What the CER's own systems should fix
+
+Not every problem is the filer's. These were found in REGDOCS itself, while collecting the corpus:
+
+| found | evidence | fix |
+|---|---|---|
+| files served empty | 6 of 860 downloads on 2026-10-17: "200 OK", PDF type, 0 bytes (4471674) | reject an empty upload; repair or mark the record |
+| HTML documents whose images the public cannot fetch | filing receipts and forms reference letterhead and checkbox images held in the content server without public access [cer-regdocs1] | publish them as PDF, or open the images |
+| records that answer "not found" | 73 recorded PDFs return 404 | mark withdrawn documents on the record |
+| no fingerprint of any file | REGDOCS shows no hash; the filer's signature of record is a paper receipt [rules] | publish SHA-256 per file and timestamp the receipt (section 3) |
+| the same file under several IDs | 3,308 files under 8,252 IDs | link copies to one file |
+| placeholders that cannot be searched | paper-only and oversize documents [rules] | accept the drawing and its data electronically (6, 8) |
+| documents cut into 20 MB files | the size limit [rules] | raise the limit for born-digital files |
+| no bulk or programmatic access | the corpus could only be collected by crawling the website, one request a second | a bulk download or an API, with each file's hash and metadata |
+| metadata only on the website | document type, company and filing come from page listings, not the file | publish the record's metadata with the file (the manifest, section 10) |
 
 ---
 

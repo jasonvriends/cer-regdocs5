@@ -26,12 +26,20 @@ Five files a document, about 12-18 KB a page: roughly 50-60 GB for the corpus be
 
 ## What to keep, and why
 
+"Keep" means the kind of file, from **the latest conversion of each document**. A full conversion
+writes the same files (ledger, words, structure, Markdown) with `mode: full` and replaces the light
+ones; nothing of a light conversion needs keeping once its document has been converted in full -
+the outputs people will use come from the full mode. Until then, the light files are that
+document's only extract, so they are replaced, not deleted ahead of the run. (Full mode does not
+reuse the light pass's OCR today; making it do so on pages whose OCR it would repeat is a possible
+saving to measure, not an assumption.)
+
 | file | keep? | why |
 |---|---|---|
 | source PDF | **always, unchanged** | the original; everything else is checkable against its hash |
 | scout record | **always** | the only record of what REGDOCS said and when, including changes and documents REGDOCS later withdrew; facets that classify the document |
-| words.parquet | **always** | the evidence. It holds the OCR, which costs GPU hours to redo (over a day for the corpus); with it, every later assembly - headings, page joins, element IDs, fixes - runs without the GPU (`--reuse-ocr`) |
-| pages.json (ledger) | **always** | the record of every decision and doubt, page by page; the to-do list for better readers; what makes the extract verifiable |
+| words.parquet | **always** (latest mode) | the evidence. It holds the OCR, which costs GPU hours to redo (over a day for the corpus); with it, every later assembly - headings, page joins, element IDs, fixes - runs without the GPU (`--reuse-ocr`) |
+| pages.json (ledger) | **always** (latest mode) | the record of every decision and doubt, page by page; the to-do list for better readers; what makes the extract verifiable |
 | regions / tables .parquet (full mode) | **always** | every reading, not only the winner: when a table is questioned, the alternatives and their scores are there |
 | docling.json.gz | keep the latest | structure for downstream tools; rebuildable from words + ledger |
 | .md | keep the latest | for people and plain-text tools; rebuildable |
