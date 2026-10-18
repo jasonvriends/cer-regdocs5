@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime
+import functools
 import gzip
 import json
 import multiprocessing as mp
@@ -39,6 +40,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SOURCE, OUT = ROOT / "source", ROOT / "output"
 RUNS = HERE / "runs"
+CODE_FILES = ("convert.py", "readers.py", "assemble.py", "tool_families.json")
 FACETS = ["Document Type", "Application Type", "Commodity", "Role", "File Type"]
 
 
@@ -123,17 +125,24 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
     pdf_w, health = cached or timed("pdf_words", lambda: rd.pdf_words(page))
     verdict = rd.text_layer_verdict(health)
     vis_words = [w for w in pdf_w if not w["hidden"] and not w["redacted"]]
+    # light: a sound layer with no image of any size needs no OCR (nothing it could add)
+    skip_ocr = light and verdict == "sound" and facts["largest_image_cover"] < 0.05
+    ocr_ran = not skip_ocr
     try:
-        # light: a sound layer with no image of any size needs no OCR (nothing it could add)
-        skip_ocr = light and verdict == "sound" and facts["largest_image_cover"] < 0.05
         ocr_w = [] if skip_ocr else ocr_cached if ocr_cached is not None else timed("ocr", lambda: models.ocr(page))
     except Exception as e:                  # OCR is one reader: its failure is recorded, not the page's
-        ocr_w = []
+        ocr_w, ocr_ran = [], False
         issues.append({"kind": "ocr_failed", "severity": "warning", "evidence": repr(e)})
-    agreement = timed("agreement", lambda: asm.match_readings(
-        [w for w in pdf_w if not w["hidden"] and not w["redacted"]], ocr_w))
-    hidden_agreement = asm.match_readings([w for w in pdf_w if w["hidden"]], ocr_w) \
-        if any(w["hidden"] for w in pdf_w) else None
+
+    def compare(pdf_part):
+        # without an OCR reading nothing was measured: None, not "OCR found 0%" (a light pass's
+        # sound pages read 0.0 and pulled report's averages down; review 2026-10-17)
+        m = asm.match_readings(pdf_part, ocr_w)
+        if not ocr_ran:
+            m.update(ocr_words=None, pdf_found_by_ocr=None, ocr_found_in_pdf=None)
+        return m
+    agreement = timed("agreement", lambda: compare([w for w in pdf_w if not w["hidden"] and not w["redacted"]]))
+    hidden_agreement = compare([w for w in pdf_w if w["hidden"]]) if any(w["hidden"] for w in pdf_w) else None
     # a stub layer: a mostly-image page whose layer holds a few words (a stamp, a markup) while OCR
     # finds many times more - Sharp, RICOH, EQScan, Bluebeam scans (producers sample) [C §5.2]
     if verdict == "sound" and facts["largest_image_cover"] >= 0.8 and len(vis_words) < 100 \
@@ -178,7 +187,7 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
     # the layer and unreadable at 200 dpi (3283303: 32% "agreement" on a sound layer)
     min_h = 5.0 * 200 / rd.SETTINGS["ocr_dpi"]
     readable = [w for w in pdf_w if not w["hidden"] and not w["redacted"] and w["box"][3] - w["box"][1] >= min_h]
-    agreement["readable"] = asm.match_readings(readable, ocr_w) if readable else None
+    agreement["readable"] = compare(readable) if readable else None
     fa = (agreement["readable"] or {}).get("pdf_found_by_ocr")
     n_extra = sum(1 for w in ev_words if w["extra"])
     if n_extra:
@@ -425,6 +434,12 @@ def convert_page(models: rd.Models, pdf_path: Path, page, pno: int, ctx: dict, t
     if not ev and facts["ink_share"] < 0.002:
         issues.append({"kind": "blank_page", "severity": "info",
                        "evidence": f"{facts['ink_share']:.2%} of the page renders dark: blank (a duplex scan's back, a separator)"})
+    elif not ev and facts["ink_share"] >= 0.95:
+        # a page filed blacked out whole: 4600031 and 4600032 are one black fill over the sheet,
+        # no text, no image - a fact about the filing, not a reading that failed (review 2026-10-17)
+        issues.append({"kind": "page_redacted", "severity": "info",
+                       "evidence": f"{facts['ink_share']:.0%} of the page renders dark and no reader found words: "
+                                   "blacked out whole"})
     elif not ev and (facts["images"] or facts["paths"] > 50):
         photo = pictures and all(p.get("class") == "photograph" for p in pictures)
         issues.append({"kind": "no_text_found", "severity": "info" if photo else "warning",
@@ -509,6 +524,19 @@ def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | No
         return {}, None
 
 
+def mupdf_messages(text: str) -> collections.Counter:
+    """MuPDF's stored messages, counted: "... repeated N times..." adds N to the line before."""
+    out, last = collections.Counter(), None
+    for line in text.splitlines():
+        m = re.fullmatch(r"\.\.\. repeated (\d+) times\.\.\.", line.strip())
+        if m and last:
+            out[last] += int(m.group(1))
+        elif line.strip():
+            last = line.strip()[:200]
+            out[last] += 1
+    return out
+
+
 def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = False, progress=None,
                      reuse_ocr: bool = False, skip: tuple = (), pdfium: tuple = ()) -> dict:
     """`skip`: pages not to read at all - MuPDF did not finish them on an earlier try (an ArcGIS
@@ -522,6 +550,11 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     t0 = time.perf_counter()
     pdf_path = SOURCE / f"{doc_id}.pdf"
     sha = rd.sha256_file(pdf_path)
+    # MuPDF's own complaints about the file (broken streams, missing resources, a damaged xref)
+    # go to this document's ledger instead of stderr, where eight workers' ~60,000 lines in the
+    # light pass named no document (review 2026-10-17)
+    pymupdf.TOOLS.mupdf_display_errors(False)
+    pymupdf.TOOLS.mupdf_warnings(reset=True)
     pdf = pymupdf.open(pdf_path)
     ctx, doc_issues = context(doc_id, pdf, sha)
     # A transcript is known from the document, not one page: its title, or line numbers on most
@@ -683,12 +716,17 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     (out / f"{doc_id}.docling.json.gz").write_bytes(doc_json)
     (out / f"{doc_id}.md").write_text(md, encoding="utf-8")
 
+    mupdf = mupdf_messages(pymupdf.TOOLS.mupdf_warnings(reset=True))
+    if mupdf:
+        doc_issues.append({"kind": "pdf_file_problems", "severity": "info",
+                           "evidence": f"MuPDF reported {sum(mupdf.values())} problem(s) reading the file: "
+                                       + "; ".join(f"{m} (x{n})" for m, n in mupdf.most_common(3))})
     issues = doc_issues + [i for p in pages for i in p["issues"]]
     sev = collections.Counter(i["severity"] for i in issues)
     todo = collections.Counter(t for p in pages for t in p["todo"])
     ledger = {
         "doc_id": doc_id, "version": VERSION, "mode": "light" if light else "full", "run": run,
-        "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"], "ocr_reused_from": ocr_from,
+        "code": code_identity(), "converted_at": now(), "ocr_model": rd.SETTINGS["ocr_model"], "ocr_reused_from": ocr_from,
         "seconds": round(time.perf_counter() - t0, 2), "context": ctx,
         "summary": {"pages": len(pages), "words_evidence": sum(1 for w in all_words if w["evidence"]),
                     "words_pdf": sum(1 for w in all_words if w["reader"] == "pdf"),
@@ -698,7 +736,8 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                     "pictures": sum(len(p.get("pictures") or []) for p in pages),
                     "docling": dcheck, "export_recall": round(recall, 4), "export_word_ratio": round(ratio, 3),
                     "issues": dict(sev), "todo": dict(todo),
-                    "sections": {k: v for k, v in sections.items() if k != "list"}, "boundaries": boundaries},
+                    "sections": {k: v for k, v in sections.items() if k != "list"}, "boundaries": boundaries,
+                    "mupdf_messages": dict(mupdf.most_common(50))},
         "sections": sections.get("list", []),
         "issues": doc_issues,
         "pages": [{k: v for k, v in p.items() if k != "elements"} for p in pages],
@@ -719,6 +758,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
 def worker(conn, run: str, light: bool = False, reuse_ocr: bool = False):
     import logging
     logging.disable(logging.WARNING)
+    code_identity()                       # the files this process loaded, before they can change
     try:
         models = rd.OcrOnly(lazy=reuse_ocr) if light else rd.Models()
     except Exception as e:
@@ -742,6 +782,30 @@ def worker(conn, run: str, light: bool = False, reuse_ocr: bool = False):
         except Exception:
             pass
         conn.send(res)
+
+
+@functools.cache
+def code_identity() -> dict:
+    """The code that converts, once per process: a hash of the files it loads (what makes two
+    ledgers comparable, committed or not) and the git commit, with whether those files differ
+    from it. Every ledger was "v2" whatever code wrote it; half the light pass predated the page
+    boundaries step and nothing said so (review 2026-10-17)."""
+    import hashlib
+    import subprocess
+    h = hashlib.sha256()
+    for name in CODE_FILES:
+        h.update(name.encode() + b"\0" + (HERE / name).read_bytes() + b"\0")
+    out = {"sha256": h.hexdigest(), "commit": None, "dirty": None}
+    try:
+        def git(*a):
+            return subprocess.run(["git", "-C", str(HERE), *a], capture_output=True, text=True, timeout=60)
+        r = git("rev-parse", "--short", "HEAD")
+        if r.returncode == 0:
+            out["commit"] = r.stdout.strip()
+            out["dirty"] = bool(git("status", "--porcelain", "--", *CODE_FILES).stdout.strip())
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+    return out
 
 
 def run_identity() -> tuple[str, Path]:
@@ -810,7 +874,9 @@ def cmd_run(args) -> int:
             todo.append(d)
     if skipped:
         print("skipped: " + ", ".join(f"{k} {v}" for k, v in skipped.items()))
-    print(f"convert {VERSION}{' (light)' if args.light else ''}: {len(todo)} document(s); run identity {run_file}",
+    code = code_identity()
+    print(f"convert {VERSION}{' (light)' if args.light else ''}: {len(todo)} document(s); run identity {run_file}; "
+          f"code {code['sha256'][:12]} at {code['commit']}{' + uncommitted changes' if code['dirty'] else ''}",
           flush=True)
     ctx = mp.get_context("spawn")
     failed = 0
@@ -1003,7 +1069,7 @@ def cmd_report(args) -> int:
                          "producer": ((c["pdf"].get("producer") or c["pdf"].get("creator") or {}).get("family")),
                          "size": f.get("size"), "orientation": f.get("orientation"), "columns": f.get("columns"),
                          "text_layer": p.get("text_layer"), "source": p.get("source"),
-                         "pdf_found_by_ocr": (p.get("agreement") or {}).get("pdf_found_by_ocr"),
+                         "pdf_found_by_ocr": asm.ocr_agreement(p, L),
                          "evidence": (p.get("words") or {}).get("evidence"),
                          "unclaimed": (p.get("words") or {}).get("unclaimed"),
                          "ocr_extra": (p.get("words") or {}).get("ocr_extra"),

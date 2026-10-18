@@ -21,6 +21,7 @@ SETTINGS = {
     "table_text_fallback": 0.6,  # text-alignment grids (built from the words) only below this best score
     "doubtful_table": 0.9,
     "disputed_region": 0.6,      # vote share under which a region's label is disputed
+    "unmatched_bookmarks_per_page": 3,   # more than this, a page on average: a mail merge's outline
 }
 OWNERS = ("table", "document_index", "picture", "form")   # these take the words inside them first
 FURNITURE = ("page_header", "page_footer")
@@ -90,6 +91,17 @@ def match_readings(pdf: list[dict], ocr: list[dict]) -> dict:
     return {"pdf_words": n_pdf, "ocr_words": n_ocr,
             "pdf_found_by_ocr": round(hits_pdf / n_pdf, 4) if n_pdf else None,
             "ocr_found_in_pdf": round(len(used) / n_ocr, 4) if n_ocr else None}
+
+
+def ocr_agreement(page: dict, ledger: dict) -> float | None:
+    """A page's share of text-layer words OCR also found, or None where OCR did not run. Ledgers
+    written before 2026-10-17 store 0.0 for a page whose OCR a light pass skipped; their step
+    timings show whether it ran (OCR words reused from an earlier conversion are not timed)."""
+    v = (page.get("agreement") or {}).get("pdf_found_by_ocr")
+    steps = page.get("step_seconds")
+    if v is not None and steps is not None and "ocr" not in steps and not ledger.get("ocr_reused_from"):
+        return None
+    return v
 
 
 def choose_evidence(verdict: str, pdf: list[dict], ocr: list[dict]) -> tuple[str, list[int], list[int]]:
@@ -447,6 +459,21 @@ def find_sections(pages: list[dict], words: list[dict], outline: list) -> tuple[
                 hit = (pi, ei, [])
             marks.append({"pi": hit[0], "ei": hit[1], "words": hit[2], "level": lvl, "title": title,
                           "page": pg, "source": "bookmarks", "matched": bool(hit[2])})
+        # a heading is written once per title and page, and bookmarks no line matches only when
+        # there are a few of them a page: a scan's sheet labels and attachment names are real
+        # sections (806765, 4367062), a mail merge's outline is every recipient's copy (4049986:
+        # 136 bookmarks on 2 pages, "Marc Boucher" written 31 times, 2.1 Markdown words per
+        # evidence word; 3755199: 443 on 4 pages, 6.2). Of 435 sampled documents with bookmarks,
+        # 20 average more than 2 unmatched a page. The rest stay in the sections list, not written.
+        unmatched = sum(not m["matched"] for m in marks)
+        sparse = unmatched <= SETTINGS["unmatched_bookmarks_per_page"] * max(1, len(pages))
+        matched_keys = {(m["page"], norm(m["title"])) for m in marks if m["matched"]}
+        opened = set()
+        for m in marks:
+            key = (m["page"], norm(m["title"]))
+            m["placed"] = key not in opened and (m["matched"] or (sparse and key not in matched_keys))
+            if m["placed"]:
+                opened.add(key)
         return marks, "bookmarks"
     cands = []
     for pi, ei, ln in _first_lines(pages, words):
@@ -490,7 +517,8 @@ def mark_sections(pages: list[dict], words: list[dict], outline: list) -> dict:
     marks, source = find_sections(pages, words, outline)
     by_el = collections.defaultdict(list)
     for m in marks:
-        by_el[(m["pi"], m["ei"])].append(m)
+        if m.get("placed", True):
+            by_el[(m["pi"], m["ei"])].append(m)
     for pi, p in enumerate(pages):
         out = []
         for ei, el in enumerate(p["elements"]):
@@ -518,8 +546,10 @@ def mark_sections(pages: list[dict], words: list[dict], outline: list) -> dict:
         p["elements"] = out
     levels = [m["level"] for m in marks]
     return {"source": source, "headings": len(marks), "matched": sum(m["matched"] for m in marks),
+            "not_written": sum(not m.get("placed", True) for m in marks),
             "depth": max(levels) if levels else 0, "bookmarks": len(outline or []),
-            "list": [{k: m[k] for k in ("page", "level", "title", "source", "matched")} for m in marks[:2000]]}
+            "list": [{**{k: m[k] for k in ("page", "level", "title", "source", "matched")},
+                      "written": m.get("placed", True)} for m in marks[:2000]]}
 
 
 def _part(el: dict, ids: list[int], words: list[dict]) -> dict:

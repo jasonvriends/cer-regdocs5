@@ -32,6 +32,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import assemble as asm  # noqa: E402
 from capture import page_class  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
@@ -79,7 +80,7 @@ def build(args) -> int:
                           "words_evidence": w.get("evidence"), "ocr_only_words": w.get("ocr_extra"),
                           "unclaimed": w.get("unclaimed"), "hidden": w.get("hidden"), "redacted": w.get("redacted"),
                           "voted_lines": w.get("voted_lines"),
-                          "pdf_found_by_ocr": (p.get("agreement") or {}).get("pdf_found_by_ocr"),
+                          "pdf_found_by_ocr": asm.ocr_agreement(p, L),
                           "regions": lay.get("kept"), "disputed_regions": lay.get("disputed"),
                           "tables": len(p.get("tables") or []), "pictures": len(p.get("pictures") or []),
                           "checkboxes": len(p.get("checkboxes") or []), "seconds": p.get("seconds"),
