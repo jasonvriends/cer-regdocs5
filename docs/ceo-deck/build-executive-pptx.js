@@ -285,6 +285,26 @@ async function icon(Comp, color, size = 256) {
   T(s, "“Agentic AI is not primarily a technology challenge.”  — UK Local Government Association, 2026", { x: 0.6, y: 6.85, w: 11.4, h: 0.4, fontSize: 12, italic: true, color: C.background2 });
   s.addNotes("These lessons apply well beyond filings. AI is only as good as its data, so fix data where it is created. Failures are silent - a system can look finished and still be wrong, so ask for proof. Rules beat advice - build checks into systems rather than writing more guidance. And small habits add up - printing documents just to sign them created nearly half of this problem. What we are asking for: stand up an AI build team and a cloud strategy with an executive sponsor; change our filing rules and portal through the Rules of Practice review that is already under way; and start now with two quick wins - the automatic upload check, and a privacy review of the documents whose redactions do not hide anything. Others have reached the same conclusion: the UK Local Government Association's playbook for agentic AI (October 2026) says agentic AI is not primarily a technology challenge, and that adoption depends on data maturity, process clarity and leadership discipline as much as on technical capability.");
 
+  // 14. Sources
+  pres.addSection({ title: "Sources" });
+  s = pres.addSlide({ masterName: "Content", sectionTitle: "Sources" });
+  s.addText("Sources", { placeholder: "title" });
+  const src = [
+    ["Our record", "Every PDF in REGDOCS read page by page, October 2026: 269,025 documents. Reports and code in the cer-regdocs5 project (census, integrity pass, filing guidance)."],
+    ["UK Local Government Association", "A playbook for agentic AI in local government, 9 October 2026. local.gov.uk/publications/playbook-agentic-ai-local-government"],
+    ["Cyber security agencies incl. the Canadian Centre for Cyber Security", "Careful adoption of agentic AI services, 1 May 2026. cyber.gov.au (secure design: artificial intelligence)"],
+    ["Government of Canada", "AI Strategy for the Federal Public Service 2025–2027. canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai"],
+    ["BC Energy Regulator", "AI enhancement services for permit automation, CanadaBuys tender BC231865, July 2026."],
+    ["Alberta Energy Regulator", "OneStop results as reported by IT World Canada (itbusiness.ca), citing the AER 2017/18 annual report."],
+    ["Canada Energy Regulator", "Filer’s Guide to Electronic Submission (June 2025); Filing Manual, chapter 1 (July 2025); Strategic Plan 2024–2027; Rules of Practice and Procedure review (2024–)."],
+  ];
+  for (let i = 0; i < src.length; i++) {
+    const y = 1.5 + i * 0.75;
+    T(s, src[i][0], { x: 0.6, y, w: 3.6, h: 0.7, fontSize: 13, bold: true, color: C.text2, valign: "top" });
+    T(s, src[i][1], { x: 4.4, y, w: 8.3, h: 0.7, fontSize: 13, color: C.text1, valign: "top" });
+  }
+  s.addNotes("Sources for the figures and quotations in this presentation. Figures about the CER's record are counts from reading every PDF in REGDOCS (October 2026). Two figures are estimates: about 75 years assumes two minutes to read a page and 1,600 working hours a year; 13,000 novels assumes about 90,000 words a novel.");
+
   await pres.writeFile({ fileName: OUT });
   await applyTheme(OUT, THEME);
   console.log("wrote", OUT);
