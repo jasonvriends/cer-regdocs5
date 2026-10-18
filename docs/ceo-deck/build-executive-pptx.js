@@ -113,8 +113,10 @@ async function icon(Comp, color, size = 256) {
   s.addText("What we found", { placeholder: "title" });
   T(s, "1 in 4", { x: 0.6, y: 1.9, w: 5.6, h: 2.2, fontFace: THEME.headFontFace, fontSize: 108, bold: true, color: C.accent1 });
   T(s, "documents cannot be read reliably by a computer", { x: 6.4, y: 2.2, w: 6.3, h: 1.6, fontSize: 32, bold: true, color: C.background1, valign: "middle" });
-  T(s, "AI can only be as good as what it reads. Today, a quarter of our record would give it pictures to guess at, or text that is wrong.", { x: 0.6, y: 4.7, w: 12.1, h: 1.2, fontSize: 22, color: C.background2, valign: "top" });
-  s.addNotes("Here is the headline. About one document in four in our record cannot be read reliably by a computer. Any AI tool we put on top of this record - search, summaries, assistants for reviewers - can only be as good as what it reads. For a quarter of the record, it would be guessing at pictures of pages, or reading text that is simply wrong.");
+  T(s, "AI can only be as good as what it reads. Today, a quarter of our record would give it pictures to guess at, or text that is wrong.", { x: 0.6, y: 4.5, w: 12.1, h: 1.2, fontSize: 22, color: C.background2, valign: "top" });
+  T(s, "“AI will not fix unclear processes, weak ownership or poor-quality data. In many cases, it will make those weaknesses more visible.”", { x: 0.6, y: 5.85, w: 12.1, h: 0.75, fontSize: 16, italic: true, color: C.background2, valign: "top" });
+  T(s, "— UK Local Government Association, A playbook for agentic AI (2026)", { x: 0.6, y: 6.6, w: 11.0, h: 0.35, fontSize: 12, color: C.accent5 });
+  s.addNotes("Here is the headline. About one document in four in our record cannot be read reliably by a computer. Any AI tool we put on top of this record - search, summaries, assistants for reviewers - can only be as good as what it reads. For a quarter of the record, it would be guessing at pictures of pages, or reading text that is simply wrong. The UK Local Government Association put it well in its October 2026 playbook for agentic AI: AI will not fix unclear processes, weak ownership or poor-quality data - in many cases it will make those weaknesses more visible.");
 
   // 5. Problems 1-2
   s = pres.addSlide({ masterName: "Content", sectionTitle: "The problems" });
@@ -227,6 +229,36 @@ async function icon(Comp, color, size = 256) {
     { text: "Government of Canada", options: { bold: true } }, { text: " AI Strategy 2025–27: an AI Centre of Expertise and responsible-AI rules." },
   ], { x: 0.6, y: 5.75, w: 12.1, h: 1.0, fontSize: 13, color: C.text1, valign: "top" });
   s.addNotes("The third part is the capability to do this well. AI is a team effort, not a tool you buy. A typical AI program needs a business owner who sets priorities and measures value; regulatory experts who define what a right answer looks like; data engineers who turn the record into reliable data; AI engineers who build, test and monitor the tools; a cloud and security team for a secure, scalable platform; information management for records and fingerprints; privacy, legal and ethics under the federal rules on automated decision-making; and change and training to bring staff and filers along. Others are already moving. The BC Energy Regulator is expanding an AI permit assistant on its cloud platform (CanadaBuys tender, July 2026). The Alberta Energy Regulator's OneStop portal approved about 70 per cent of reclamation, pipeline and water applications automatically (AER 2017/18 annual report, as reported by IT World Canada). The federal AI Strategy for the Public Service 2025-2027 creates an AI Centre of Expertise, sets responsible-AI expectations, and notes a 30 per cent vacancy rate in digital roles - so talent is the constraint to plan for.");
+
+  // 11b. Start small, scale with care
+  s = pres.addSlide({ masterName: "Content", sectionTitle: "The solution" });
+  s.addText("Start small, scale with care", { placeholder: "title" });
+  const tiers = [
+    ["1", "Personal", "Drafting, summarising", "Low risk: staff guidance"],
+    ["2", "Team", "Knowledge assistants, triage", "Medium: a service owner, central oversight"],
+    ["3", "Organisation", "Public-facing tools, decision support", "High: formal approval and assurance"],
+  ];
+  for (let i = 0; i < 3; i++) {
+    const y = 1.6 + i * 1.6, x = 0.6 + i * 0.45;
+    card(s, x, y, 6.6 - i * 0.45, 1.4, i === 2);
+    T(s, tiers[i][0], { x: x + 0.25, y: y + 0.2, w: 0.6, h: 1.0, fontFace: THEME.headFontFace, fontSize: 40, bold: true, color: C.accent1, valign: "middle" });
+    T(s, tiers[i][1], { x: x + 1.0, y: y + 0.15, w: 4.9 - i * 0.45, h: 0.5, fontSize: 20, bold: true, color: i === 2 ? C.background1 : C.text2 });
+    T(s, tiers[i][2], { x: x + 1.0, y: y + 0.62, w: 5.3 - i * 0.45, h: 0.35, fontSize: 15, color: i === 2 ? C.background2 : C.text1 });
+    T(s, tiers[i][3], { x: x + 1.0, y: y + 0.95, w: 5.3 - i * 0.45, h: 0.35, fontSize: 13, italic: true, color: i === 2 ? C.accent5 : C.accent3 });
+  }
+  T(s, "Manage AI like a new employee", { x: 7.9, y: 1.6, w: 4.8, h: 0.5, fontSize: 20, bold: true, color: C.text2 });
+  const hr = [[fa.FaIdBadge, "A job description", "a clear task, data and limits"], [fa.FaHourglassHalf, "A trial period", "a limited roll-out first"],
+              [fa.FaChartLine, "Performance reviews", "measured and monitored"], [fa.FaPowerOff, "Can be switched off", "a person stays accountable"]];
+  for (let i = 0; i < hr.length; i++) {
+    const y = 2.25 + i * 0.95;
+    s.addShape(pres.shapes.OVAL, { x: 7.9, y, w: 0.65, h: 0.65, fill: { color: C.text2 }, line: { type: "none" } });
+    s.addImage({ data: await icon(hr[i][0], HEX.lt1), x: 8.06, y: y + 0.16, w: 0.33, h: 0.33 });
+    T(s, hr[i][1], { x: 8.75, y: y - 0.05, w: 4.0, h: 0.4, fontSize: 16, bold: true, color: C.text2 });
+    T(s, hr[i][2], { x: 8.75, y: y + 0.32, w: 4.0, h: 0.35, fontSize: 14, color: C.text1 });
+  }
+  T(s, "Train every level: all staff to use AI safely, team leads to build it into their work, executives to weigh risk and value.", { x: 7.9, y: 6.1, w: 4.8, h: 0.75, fontSize: 13, italic: true, color: C.accent3, valign: "top" });
+  T(s, "Adapted from the UK Local Government Association’s playbook for agentic AI (2026).", { x: 0.6, y: 6.55, w: 7.0, h: 0.35, fontSize: 11, color: C.accent3 });
+  s.addNotes("How to start safely, drawing on the UK Local Government Association's playbook for agentic AI (October 2026), written with councils and endorsed by the LGA. Scale governance with risk, in three tiers. Tier one is personal use - drafting and summarising - low risk, covered by staff guidance. Tier two is team use - knowledge assistants and triage within a service - with a named service owner and central oversight. Tier three is organisation-wide, public-facing or decision support, which needs formal approval and assurance. And manage each AI tool like a new employee: a job description that sets its task, data and limits; a trial period before full roll-out; performance reviews; and the ability to switch it off, with a person always accountable. Train every level - all staff to use AI safely, team leads to build it into their work, and executives to weigh risk and value. The playbook's cyber-security guidance was co-written with the Canadian Centre for Cyber Security.");
 
   // 12. Lessons + decisions
   pres.addSection({ title: "Making change happen" });
