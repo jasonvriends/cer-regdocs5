@@ -74,6 +74,50 @@ def _element_schemas():
 ELEMENT_SCHEMA, CELL_SCHEMA = _element_schemas()
 
 
+GPU_LIMIT = 0.88        # share of the card in use above which a worker waits (a game took it to 0.906)
+_GPU = {"checked": 0.0}
+
+
+def gpu_memory() -> tuple[float | None, float | None]:
+    """(used, total) MiB of the card, as nvidia-smi sees it - every process's, other programs' too."""
+    import subprocess
+    try:
+        r = subprocess.run(["nvidia-smi", "--query-gpu=memory.used,memory.total", "--format=csv,noheader,nounits"],
+                           capture_output=True, text=True, timeout=10)
+        used, total = (float(x) for x in r.stdout.splitlines()[0].split(","))
+        return used, total
+    except Exception:
+        return None, None
+
+
+def gpu_room(progress, pno: int, every: float = 30, max_wait: float = 1800) -> float:
+    """Wait while the card is crowded; seconds waited. On WSL a full card does not fail, it spills to
+    system memory and every page crawls: a game on Windows took the card to 22.2 of 24.5 GB and OCR
+    from 1.4 to 9.9 s a page, and pages stalled (2026-10-17) - the same lesson the earlier pipelines
+    wrote down. The worker hands back its own cache first; what is left is someone else's. Waiting
+    reports progress, so the parent's stall limit does not stop the document."""
+    t = time.monotonic()
+    if t - _GPU["checked"] < every:
+        return 0.0
+    _GPU["checked"] = t
+    used, total = gpu_memory()
+    if used is None or used / total <= GPU_LIMIT:
+        return 0.0
+    rd.release_gpu(0)
+    said = False
+    while time.monotonic() - t < max_wait:
+        used, total = gpu_memory()
+        if used is None or used / total <= GPU_LIMIT:
+            break
+        if not said:
+            print(f"GPU {used / 1024:.1f} of {total / 1024:.1f} GB in use: a worker waits (another program on the card?)",
+                  flush=True)
+            said = True
+        progress("gpu wait", pno)
+        time.sleep(15)
+    return time.monotonic() - t
+
+
 def now() -> str:
     return datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
 
@@ -629,6 +673,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
             continue
         if pno in pdfium:
             page.regdocs_render = "pdfium"
+        waited = gpu_room(progress, pno)
         try:
             p = convert_page(models, pdf_path, page, pno, ctx, transcript_doc, votes.get(pno, []), len(all_words), light,
                              layer.pop(pno, None), ocr_saved.get(pno))
@@ -638,6 +683,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                                     "evidence": "MuPDF crashed or hung on this page on an earlier try: read and drawn by pdfium"})
             if pno in ocr_saved:
                 p["ocr_reused"] = True
+            if waited:
+                p["issues"].append({"page": pno, "kind": "gpu_wait", "severity": "info",
+                                    "evidence": f"waited {waited:.0f}s for room on the GPU (another program using it)"})
             progress("page", pno)
         except Exception as e:
             p = {"page": pno, "error": repr(e), "trace": traceback.format_exc(), "elements": [], "todo": ["page_failed"],

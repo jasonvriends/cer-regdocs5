@@ -860,6 +860,10 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
   `nvidia-smi.exe` named the game. Stopped and relaunched once it closed; the 43 were redone.
   Watch seconds a page by reader over time: a step change with no change in the documents is the
   machine, not the PDFs.
+  **Now built in:** before a page, at most every 30 s, a worker reads the card's memory
+  (`nvidia-smi`, every process's); above 88% it hands back its own cache, and if the card is still
+  crowded it waits, reporting progress so the stall limit does not stop the document, for up to
+  30 minutes. The page records `gpu_wait` with the seconds waited.
 - **The legacy pipeline did not get through these documents either.** It never reached 4656998 or
   4657424 (the same file), and stopped 4681376 at page 10 of 24 with no progress for 30 minutes, the same place
   convert stalls.
