@@ -74,6 +74,7 @@ def _element_schemas():
 ELEMENT_SCHEMA, CELL_SCHEMA = _element_schemas()
 
 
+CHECKPOINT_PAGES = 100  # a document longer than this saves its pages every this many, and resumes there
 GPU_LIMIT = 0.88        # share of the card in use above which a worker waits (a game took it to 0.906)
 _GPU = {"checked": 0.0}
 
@@ -586,6 +587,48 @@ def saved_ocr(doc_id: str, light: bool) -> tuple[dict[int, list[dict]], str | No
         return {}, None
 
 
+class checkpoint:
+    """A long document's finished pages, saved range by range beside its outputs
+    (`<id>.partial/pages-<from>-<to>.pkl.gz`), each written whole or not at all. Ranges are
+    reused only by the same code, mode and file, in order from page 1; anything else is cleared."""
+
+    def __init__(self, doc_id: str, pdf_sha: str, light: bool):
+        self.dir = out_dir(doc_id) / f"{doc_id}.partial"
+        self.key = {"code": code_identity()["sha256"], "mode": "light" if light else "full", "pdf": pdf_sha}
+
+    def load(self) -> list[dict]:
+        import pickle
+        parts, nxt = [], 1
+        for f in sorted(self.dir.glob("pages-*.pkl.gz")) if self.dir.is_dir() else []:
+            try:
+                part = pickle.loads(gzip.decompress(f.read_bytes()))
+            except Exception:
+                break
+            if part.get("key") != self.key or part.get("from") != nxt:
+                break
+            parts.append(part)
+            nxt = part["to"] + 1
+        if not parts:
+            self.clear()
+        return parts
+
+    def save(self, pages: list, words: list, regions: list, tables: list) -> None:
+        import pickle
+        if not pages:
+            return
+        self.dir.mkdir(parents=True, exist_ok=True)
+        a, b = pages[0]["page"], pages[-1]["page"]
+        f = self.dir / f"pages-{a:06d}-{b:06d}.pkl.gz"
+        tmp = f.with_name(f.name + ".part")
+        tmp.write_bytes(gzip.compress(pickle.dumps({"key": self.key, "from": a, "to": b, "pages": pages, "words": words,
+                                                    "regions": regions, "tables": tables}), compresslevel=3))
+        os.replace(tmp, f)
+
+    def clear(self) -> None:
+        import shutil
+        shutil.rmtree(self.dir, ignore_errors=True)
+
+
 def mupdf_messages(text: str) -> collections.Counter:
     """MuPDF's stored messages, counted: "... repeated N times..." adds N to the line before."""
     out, last = collections.Counter(), None
@@ -659,7 +702,20 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         doc_issues.append({"kind": "votes_stale", "severity": "info",
                            "evidence": f"{stale} vote(s) were cast on another OCR model's words; not applied, vote again"})
     pages, all_words, region_rows, table_rows = [], [], [], []
-    for pno in range(1, pdf.page_count + 1):
+    # long documents in ranges: each range's pages saved as it finishes, so a crash, a restart or a
+    # stall costs at most one range, not hours (the largest document is 11,563 pages; full mode reads
+    # about 2.4 s a page). Ranges are reused only by the same code, mode and file.
+    ck = checkpoint(doc_id, sha, light) if pdf.page_count > CHECKPOINT_PAGES else None
+    start = 1
+    if ck:
+        for part in ck.load():
+            pages += part["pages"]; all_words += part["words"]
+            region_rows += part["regions"]; table_rows += part["tables"]
+        start = len(pages) + 1
+        if start > 1:
+            progress("resumed at page", start)
+    mark = (len(pages), len(all_words), len(region_rows), len(table_rows))
+    for pno in range(start, pdf.page_count + 1):
         page = pdf[pno - 1]
         if pno in skip:
             r = page.rect
@@ -718,6 +774,9 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
                                    "cells": rdg.get("cells") if isinstance(rdg.get("cells"), int) else None,
                                    "grid": json.dumps(t["grids"].get(reader))})
         pages.append(p)
+        if ck and (pno % CHECKPOINT_PAGES == 0 or pno == pdf.page_count):
+            ck.save(pages[mark[0]:], all_words[mark[1]:], region_rows[mark[2]:], table_rows[mark[3]:])
+            mark = (len(pages), len(all_words), len(region_rows), len(table_rows))
 
     out = out_dir(doc_id)
     out.mkdir(parents=True, exist_ok=True)
@@ -822,7 +881,7 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
         "sections": sections.get("list", []),
         "issues": doc_issues,
         "pages": [{k: v for k, v in p.items() if k != "elements"} for p in pages],
-        "files": sorted(f.name for f in out.iterdir() if f.name.startswith(doc_id)),
+        "files": sorted(f.name for f in out.iterdir() if f.name.startswith(doc_id) and f.is_file()),
     }
     # the ledger last, and whole or not at all: a restart mid-write left nothing half-written to trip on
     tmp = out / f"{doc_id}.pages.json.part"
@@ -831,12 +890,14 @@ def convert_document(models: rd.Models, doc_id: str, run: str, light: bool = Fal
     # the manifest after everything else: each output's hash, beside the PDF's and the code's - the chain
     # from the file REGDOCS served to every derived file (docs/output-and-sidecars.md)
     files = {f.name: rd.sha256_file(f) for f in sorted(out.iterdir())
-             if f.name.startswith(doc_id) and not f.name.endswith((".part", ".manifest.json"))}
+             if f.is_file() and f.name.startswith(doc_id) and not f.name.endswith((".part", ".manifest.json"))}
     manifest = {"doc_id": doc_id, "pdf_sha256": sha, "mode": ledger["mode"], "status": status,
                 "code": ledger["code"], "converted_at": ledger["converted_at"], "files": files}
     tmp = out / f"{doc_id}.manifest.json.part"
     tmp.write_text(json.dumps(manifest, indent=1), encoding="utf-8")
     os.replace(tmp, out / f"{doc_id}.manifest.json")
+    if ck:
+        ck.clear()                        # the document is whole: its ranges are no longer needed
     return {"doc_id": doc_id, "status": status, **ledger["summary"], "seconds": ledger["seconds"]}
 
 
