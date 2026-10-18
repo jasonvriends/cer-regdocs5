@@ -7,6 +7,7 @@ learning from them how filings should be made in future.
   [docs/filing-guidance.md](docs/filing-guidance.md) (the guidance, area by area, with its evidence).
 - **What we learned building it:** [docs/lessons-across-pipelines.md](docs/lessons-across-pipelines.md),
   [docs/lessons_learned.md](docs/lessons_learned.md), [scripts/convert/LESSONS.md](scripts/convert/LESSONS.md).
+- **How big the record is:** [docs/corpus/](docs/corpus/) - the largest documents, every one over 500 pages, a spreadsheet of every one over 100.
 - **Every document:** [docs/README.md](docs/README.md).
 
 ## From REGDOCS to evidence, step by step

@@ -7,6 +7,7 @@ they arrive as faithful digital documents.
 | document | what it is |
 |---|---|
 | [ceo-report.md](ceo-report.md) + [ceo-deck/](ceo-deck/) | **the report and deck for the CEO**: what 269,025 filings taught us, and the decisions needed |
+| [corpus/](corpus/) | **how big the record is**: documents and pages by size, the 25 largest, every document over 500 pages, and a spreadsheet of every one over 100 |
 | [lessons-across-pipelines.md](lessons-across-pipelines.md) | six pipelines over REGDOCS side by side, and the lessons common to all |
 | [cer-filing-rules-today.md](cer-filing-rules-today.md) | the CER's current e-filing rules beside what the corpus shows |
 | [output-and-sidecars.md](output-and-sidecars.md) | what to keep in output/, what a full scan adds, which sidecars to make |
