@@ -1,5 +1,12 @@
 # CER REGDOCS document extraction: lessons learned
 
+> **A September 2026 snapshot.** This page is what the earlier pipelines (cer-regdocs1-4 and v1 of
+> this one) learned, from samples of about 8,000 documents, most of them filed in 2026. It is not
+> updated any more. What the whole corpus showed in October 2026 - all 269,025 documents, 2002 to
+> 2026 - is in [filing-guidance.md](filing-guidance.md) and [ceo-report.md](ceo-report.md); what
+> the current converter measured and fixed is in
+> [scripts/convert/LESSONS.md](../scripts/convert/LESSONS.md).
+
 What has been learned about turning Canada Energy Regulator REGDOCS filings into
 trustworthy, machine-readable evidence. Lessons are grouped by pipeline stage:
 
@@ -57,15 +64,20 @@ reversed are recorded with their corrections.
 
 ## The corpus
 
+**These lessons rest on a sample, not the whole record.** The first table counts what REGDOCS listed
+in September 2026; only the 8,210 sample documents were downloaded and read, nearly all from 2016-2026.
+(The October 2026 pass read all 269,025: see [corpus/](corpus/) and the
+[census](../scripts/convert/runs/v2/reports/2026-10-18-census.md).)
+
 | | |
 |---|---:|
-| documents in REGDOCS, 2002 to Sept 2026 | **265,239** |
+| documents listed in REGDOCS, 2002 to Sept 2026 | **265,239** |
 | companies named on a filing | 1,774 |
-| PDFs downloaded (sample) | 8,210 |
+| PDFs downloaded (the sample) | 8,210 |
 | PDFs converted | 8,153 (51 pending, 6 could not be) |
 | pages converted and checked | 83,456 |
 
-Documents filed per year (2026 to 24 September):
+Documents listed per year in REGDOCS - all filings, not the sample (2026 to 24 September):
 
 | year | docs | year | docs | year | docs |
 |---|---:|---|---:|---|---:|
