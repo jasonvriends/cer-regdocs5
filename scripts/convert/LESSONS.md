@@ -395,6 +395,14 @@ pass. A printout of a sheet is recognisable from the file (an .xlsx title, a pri
 thousands of pages of one repeating column layout); such a document could be read as one table
 across all its pages instead of page by page. *Open:* measure that route on these six.
 
+### Large documents: memory follows words, not pages (2026-10-19)
+
+Rehearsal B (`runs/v2/reports/2026-10-19-rehearsal-large.md`): 986, 11,563 and 2,759 pages, all ok,
+checkpoints resumed after a relaunch. Pages cost about 40 MB per 100 in a worker, so the 11,563-page
+document ended its pages at 11.1 GB and assembled with no jump. The 2,759-page one holds 7.1 M words -
+the most in REGDOCS - and jumped from 12.7 GB to 34.2 GB at assembly (43 GB of 47 for the machine).
+Size the risk by words: documents over 2 M words (7 of them) run last, alone.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
