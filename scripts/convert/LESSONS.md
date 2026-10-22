@@ -403,6 +403,24 @@ document ended its pages at 11.1 GB and assembled with no jump. The 2,759-page o
 the most in REGDOCS - and jumped from 12.7 GB to 34.2 GB at assembly (43 GB of 47 for the machine).
 Size the risk by words: documents over 2 M words (7 of them) run last, alone.
 
+### The full pass, first three days (2026-10-19 to -22)
+
+37,585 documents, 485,461 pages (2026 back to mid-2023), 5 workers: 0 GPU waits, every document
+docling x = y, text 100%, md 100%. 2.76 worker-seconds a page; pages with a table on every page cost
+4.4 s against 2.0 s with none, and the slowest 1% of documents take 37% of the time (4656932: 389
+tables in 23 pages, 48 s a page). OCR supplied the text of 20.0% of pages, matching the census (20.5%).
+
+**MuPDF aborts on certain pages (`free(): double free detected in tcache 2`), and the retry gives up
+too early.** 5 documents of 37,585: 3 failed (4642786, 4473998, 4449303), 2 partial with pages left
+out (4537539 page 130; 4458299 pages 4, 7, 10). Probing every page in its own process shows the
+crashes are page-bound and clustered: 4642786 has 11 such pages (21-23, 28, 29, 31, 81-85), 4473998
+6, 4449303 9. pdfium renders and reads every one of them. Two faults in the retry: a page sent to
+pdfium still crashes, because other MuPDF calls on that page remain (the page is then skipped); and
+each retry adds one page at a cost of a worker restart (about 45 s), with at most 3 pages skipped -
+so a document with 6-11 bad pages fails. *Fix after the pass, not during it:* on the first crash, probe
+every page in a throwaway process and send all crashing pages to pdfium at once, with no MuPDF call
+on them; then convert the 5 again.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
