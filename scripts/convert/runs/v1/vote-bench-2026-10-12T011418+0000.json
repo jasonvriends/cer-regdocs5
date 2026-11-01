@@ -1,0 +1,32 @@
+{
+ "at": "2026-10-12T01:14:18+00:00",
+ "samples": [
+  "scripts/convert/samples/random-100-a.txt"
+ ],
+ "results": {
+  "glm-ocr:latest": {
+   "model": "glm-ocr:latest",
+   "digest": "6effedd0dc8aec66ad86c94b8099395376e212f22c87a9d7147c422f7e447be4",
+   "lines": 20,
+   "words_right": 0.973,
+   "numbers_right": 1.0,
+   "made_up_per_100_read": 85.2,
+   "blanks_with_text": "3/3",
+   "seconds_per_crop": 0.57,
+   "misreads": [
+    {
+     "truth": "U V 49 # # EDMONTON",
+     "read": "49 EDMONTON",
+     "doc": "3768464",
+     "page": 18
+    },
+    {
+     "truth": "O’Chiese First Nation",
+     "read": "100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%",
+     "doc": "3768464",
+     "page": 48
+    }
+   ]
+  }
+ }
+}

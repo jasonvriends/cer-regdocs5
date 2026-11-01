@@ -1,0 +1,6676 @@
+{
+ "summary": {
+  "documents": 274,
+  "band_lines": {
+   "single+layout_body": 17729,
+   "repeated+layout_body": 8002,
+   "single+layout_furniture": 1812,
+   "repeated+layout_furniture": 5320
+  },
+  "repeated_lines_layout_calls_furniture": 0.39933943852274434,
+  "layout_furniture_lines_that_repeat": 0.7459338194054963,
+  "documents_with_repeated_lines": 195
+ },
+ "documents": [
+  {
+   "doc_id": "1006569",
+   "pages": 9,
+   "counts": {
+    "single+layout_body": 43,
+    "repeated+layout_body": 41,
+    "single+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: notes",
+     "p1 top: p # p pit tp # # dual into plate disc check valve with #\u00b0 ho",
+     "p1 top: #-sscv-# #s"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: #v# d-#-#.#-reg-#-#lhl",
+     "p2 top: #-swgr-# vfd-# notes",
+     "p2 top: into disc"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: eava k:/enbridge/cez-do/b# - piping_mech/regulatory applicat",
+     "p1 bottom: j",
+     "p2 bottom: save k:/enbrioge/ce#-dd/#- piping_hech/regulatory applicatio"
+    ]
+   },
+   "furniture_regions": 56
+  },
+  {
+   "doc_id": "1035241",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 10
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: appendix a",
+     "p1 bottom: transmission ltd system and foothills pipe lines south b.# l",
+     "p2 top: canada/u.s border for export at kingsgate with respect to ga"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "1036748",
+   "pages": 40,
+   "counts": {
+    "single+layout_body": 73,
+    "single+layout_furniture": 3,
+    "repeated+layout_body": 32,
+    "repeated+layout_furniture": 52
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p3 bottom: date september #",
+     "p4 top: table of contents"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: september # #",
+     "p20 bottom: september # #",
+     "p33 bottom: t#_#from#_#_index_as_rev#_pcmp.mxd"
+    ],
+    "repeated+layout_body": [
+     "p5 top: nova gas transmission ltd post construction monitoring repor",
+     "p5 top: final report doe creek lateral loop project",
+     "p6 top: nova gas transmission ltd post construction monitoring repor"
+    ],
+    "repeated+layout_furniture": [
+     "p5 top: page # of #",
+     "p6 top: page # of #",
+     "p7 top: page # of #"
+    ]
+   },
+   "furniture_regions": 199
+  },
+  {
+   "doc_id": "1043011",
+   "pages": 10,
+   "counts": {
+    "single+layout_body": 19,
+    "single+layout_furniture": 2
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: trevor christopher ryan ference",
+     "p1 bottom: a commissioner for oaths / notary public",
+     "p1 bottom: in and for the province of alberta"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: #.#.tcf.#.#",
+     "p2 bottom: lawson lundell llp is a brltish columbia limited liability p"
+    ]
+   },
+   "furniture_regions": 85
+  },
+  {
+   "doc_id": "154133",
+   "pages": 9,
+   "counts": {
+    "single+layout_body": 19,
+    "single+layout_furniture": 2,
+    "repeated+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: ave o mson cobgle hill",
+     "p1 top: # january #",
+     "p1 top: #:# ard"
+    ],
+    "single+layout_furniture": [
+     "p2 top: pipeline vipla landowners association phone president secret",
+     "p7 top: jan #.#"
+    ],
+    "repeated+layout_furniture": [
+     "p6 top: page # of #",
+     "p6 top: jan #,#",
+     "p7 top: page # of #"
+    ]
+   },
+   "furniture_regions": 17
+  },
+  {
+   "doc_id": "155587",
+   "pages": 59,
+   "counts": {
+    "single+layout_body": 227
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: les revendications fonci\u00e8res des autochtones elle \u00e9tait d'av",
+     "p1 top: qu'une d\u00e9cision n\u00e9gative concernant le pipeline ne ferait pa",
+     "p1 top: avancer les n\u00e9gociations en vue de parvenir \u00e0 un accord just"
+    ]
+   },
+   "furniture_regions": 59
+  },
+  {
+   "doc_id": "156404",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 4,
+    "single+layout_body": 9,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: #/#/# #:# fax # # # northern #",
+     "p2 top: #/#/# #:# fax # # # northern #",
+     "p3 top: #/#/# #:# fax # # # northern #"
+    ],
+    "single+layout_body": [
+     "p1 top: mar # ndg",
+     "p1 top: transcanada",
+     "p1 top: in business to deliver"
+    ],
+    "single+layout_furniture": [
+     "p3 top: cooperation plan comments",
+     "p3 top: march # #",
+     "p4 top: cooperation plan comments"
+    ]
+   },
+   "furniture_regions": 37
+  },
+  {
+   "doc_id": "172001",
+   "pages": 25,
+   "counts": {
+    "single+layout_body": 37,
+    "repeated+layout_body": 24,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: cassels brock & blackwell llp",
+     "p1 top: cassels barristers & solicitors \u2022 trade mark agents",
+     "p1 top: brock scotia tel www.casselsbrock.com # plaza #-# suite # # "
+    ],
+    "repeated+layout_body": [
+     "p2 top: cassels page #",
+     "p2 top: brock",
+     "p3 top: cassels page #"
+    ],
+    "single+layout_furniture": [
+     "p15 top: m&np files application with neb for phase # expansion page #",
+     "p16 top: page # of #",
+     "p23 top: appendix b"
+    ]
+   },
+   "furniture_regions": 79
+  },
+  {
+   "doc_id": "226745",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 4,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p2 bottom: lines # & # anodes",
+     "p5 bottom: not subject to environmental assessment under ceaa"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: page #",
+     "p2 top: july # #",
+     "p2 top: mr michel m mantha"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "237209",
+   "pages": 24,
+   "counts": {
+    "repeated+layout_body": 35,
+    "single+layout_body": 15,
+    "repeated+layout_furniture": 22,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p2 top: transcanada",
+     "p3 top: transcanada",
+     "p3 top: in business to delivertm # tolls and tariff application"
+    ],
+    "single+layout_body": [
+     "p2 top: in business to deliver tm",
+     "p3 bottom: # clear how to balance cost saving efforts for the benefit o",
+     "p4 top: transcanada #"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: written evidence on incentives",
+     "p4 top: written evidence on incentives",
+     "p5 top: written evidence on incentives"
+    ],
+    "single+layout_furniture": [
+     "p3 top: page # of #"
+    ]
+   },
+   "furniture_regions": 97
+  },
+  {
+   "doc_id": "2385431",
+   "pages": 22,
+   "counts": {
+    "single+layout_body": 19,
+    "single+layout_furniture": 2,
+    "repeated+layout_furniture": 17
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: # le tarif d\u00e9signe le tarif de transport p\u00e9trolier no # - r\u00e8"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: vigueur le # juillet # de trans mountain pipeline ulc",
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ],
+    "repeated+layout_furniture": [
+     "p5 bottom: rhw-#-#",
+     "p6 bottom: rhw-#-#",
+     "p7 bottom: rhw-#-#"
+    ]
+   },
+   "furniture_regions": 66
+  },
+  {
+   "doc_id": "2392812",
+   "pages": 26,
+   "counts": {
+    "repeated+layout_body": 49,
+    "repeated+layout_furniture": 26,
+    "single+layout_body": 6
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: trans mountain expansion project appendix # nonfish-bearing ",
+     "p1 bottom: environmental consultants ltd transmountain utm zone # # e #",
+     "p2 top: trans mountain expansion project appendix # nonfish-bearing "
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: bc-#",
+     "p2 bottom: bc-#",
+     "p3 bottom: bc-#"
+    ],
+    "single+layout_body": [
+     "p5 bottom: triton tmep site id bc-# rk #.#",
+     "p22 bottom: tmep site id bc-# rk #.#",
+     "p22 bottom: trito n"
+    ]
+   },
+   "furniture_regions": 78
+  },
+  {
+   "doc_id": "2411900",
+   "pages": 24,
+   "counts": {
+    "single+layout_body": 33,
+    "repeated+layout_furniture": 24,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: total deliveries on tmpl",
+     "p2 top: jan-#",
+     "p2 bottom: oct-#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page # of #",
+     "p2 bottom: page # of #",
+     "p3 bottom: page # of #"
+    ],
+    "single+layout_furniture": [
+     "p9 top: total de",
+     "p13 top: total de",
+     "p17 top: total de"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "2414081",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: salutation ms"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # seventh avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#p #x# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary septi\u00e8me alberta avenue t#p #x# s.-o canada http:/"
+    ]
+   },
+   "furniture_regions": 66
+  },
+  {
+   "doc_id": "2432140",
+   "pages": 52,
+   "counts": {
+    "repeated+layout_furniture": 65,
+    "repeated+layout_body": 142,
+    "single+layout_body": 30,
+    "single+layout_furniture": 11
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: pdf page # of #",
+     "p2 top: pdf page # of #",
+     "p3 top: pdf page # of #"
+    ],
+    "repeated+layout_body": [
+     "p1 top: north montney project",
+     "p1 top: environmental and socio-economic assessment",
+     "p1 top: atmospheric environment"
+    ],
+    "single+layout_body": [
+     "p4 bottom: facilities including compressor stations # #",
+     "p5 bottom: and ghgs and the rationale for their selection are provided ",
+     "p6 bottom: shifted in recent years from an emphasis on tsp to the colle"
+    ],
+    "single+layout_furniture": [
+     "p32 bottom: datum checked by",
+     "p32 bottom: stantec transcanada in buelnes to deliver compressor station",
+     "p33 bottom: stantec transcanada receptor grid - saturn projection datum "
+    ]
+   },
+   "furniture_regions": 169
+  },
+  {
+   "doc_id": "2445615",
+   "pages": 19,
+   "counts": {
+    "single+layout_body": 35,
+    "repeated+layout_body": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: canada"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: hearing order oh-#-# page  #",
+     "p3 bottom: hearing order oh-#-# page  #",
+     "p4 bottom: hearing order oh-#-# page  #"
+    ]
+   },
+   "furniture_regions": 36
+  },
+  {
+   "doc_id": "2451800",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 4,
+    "repeated+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: city of vancouver law department canada's best",
+     "p1 bottom: tel mailing delivery #.#.# address address #-# # fax west #.",
+     "p2 bottom: # # scc #"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: page # of #",
+     "p2 bottom: #v#",
+     "p3 bottom: page # of #"
+    ]
+   },
+   "furniture_regions": 26
+  },
+  {
+   "doc_id": "2453090",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 13,
+    "single+layout_furniture": 5,
+    "repeated+layout_body": 28
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: golder",
+     "p1 top: associates technical memorandum",
+     "p2 top: habitat quality recorded snow conditions and evidence of wil"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: golder associates ltd",
+     "p1 bottom: # # avenue edmonton alberta canada t#p #c#",
+     "p1 bottom: tel +# # # # fax +# # # # www.golder.com"
+    ],
+    "repeated+layout_body": [
+     "p2 top: ryan leier #-#-#",
+     "p2 top: kinder morgan canada march # #",
+     "p2 bottom: golder"
+    ]
+   },
+   "furniture_regions": 72
+  },
+  {
+   "doc_id": "2453565",
+   "pages": 98,
+   "counts": {
+    "repeated+layout_furniture": 89,
+    "single+layout_body": 90,
+    "repeated+layout_body": 1
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: appendices tsawwassen first nation final agreement",
+     "p2 top: appendices tsawwassen first nation final agreement",
+     "p4 top: appendices tsawwassen first nation final agreement"
+    ],
+    "single+layout_body": [
+     "p1 top: appendix j",
+     "p3 bottom: north",
+     "p3 bottom: #-# pender saturna"
+    ],
+    "repeated+layout_body": [
+     "p97 top: appendices tsawwassen first nation final agreement"
+    ]
+   },
+   "furniture_regions": 182
+  },
+  {
+   "doc_id": "2453778",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 19,
+    "single+layout_furniture": 8,
+    "repeated+layout_furniture": 5,
+    "repeated+layout_body": 14
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p1 bottom: fabricated assemblies plus crossings contingencies and could",
+     "p1 bottom: in time for construction ngtl therefore reallocated to cross"
+    ],
+    "single+layout_furniture": [
+     "p2 top: may # #",
+     "p2 top: ms s young",
+     "p3 top: may # #"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: page # of #",
+     "p3 top: page # of #",
+     "p4 top: nova gas transmission ltd attachment a"
+    ],
+    "repeated+layout_body": [
+     "p4 top: sunday creek lateral loop # request for review & variance",
+     "p4 bottom: may # # page # of #",
+     "p5 top: nova gas transmission ltd attachment a"
+    ]
+   },
+   "furniture_regions": 60
+  },
+  {
+   "doc_id": "2462598",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 11,
+    "single+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: to    #"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca",
+     "p3 top: attachment to board letter",
+     "p3 top: dated # may #"
+    ]
+   },
+   "furniture_regions": 39
+  },
+  {
+   "doc_id": "2477876",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 1,
+    "repeated+layout_furniture": 12
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 bottom: # # fourth ave sw calgary alberta canada t#p ov# \u2022 ph #-#-# "
+    ],
+    "single+layout_body": [
+     "p2 top: western export group"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: neb hearing order gh-#-#",
+     "p3 top: weg ir to ngtl",
+     "p3 top: may # #"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "2484633",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 13,
+    "single+layout_furniture": 6,
+    "repeated+layout_furniture": 4,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: pouce coup\u00e9",
+     "p2 top: application filed with the neb",
+     "p2 top: pouce coup\u00e9 filed an application for the project with the ne"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: pouce coup\u00e9 pipe line ltd",
+     "p1 bottom: # # - #th avenue s.w calgary alberta canada t#p #g#",
+     "p1 bottom: telephone # #-# fax # #-#"
+    ],
+    "repeated+layout_furniture": [
+     "p4 bottom: page # of #",
+     "p5 bottom: page # of #",
+     "p6 bottom: page # of #"
+    ],
+    "repeated+layout_body": [
+     "p5 top: pouce coup\u00e9 northern pipeline diversion project",
+     "p6 top: pouce coup\u00e9 northern pipeline diversion project",
+     "p7 top: pouce coup\u00e9 northern pipeline diversion project"
+    ]
+   },
+   "furniture_regions": 24
+  },
+  {
+   "doc_id": "2491051",
+   "pages": 16,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 117
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: title #",
+     "p12 top: dishonesty or fraud or involves moral turpitude or"
+    ],
+    "single+layout_body": [
+     "p1 top: delcode.delaware.gov/title#/c#/sc#/index.shtml",
+     "p1 bottom: #) \"limited partner means a person who is admitted to a limi",
+     "p1 bottom: provided in \u00a7 #-# of this title or in the case of a foreign "
+    ]
+   },
+   "furniture_regions": 2
+  },
+  {
+   "doc_id": "2523887",
+   "pages": 52,
+   "counts": {
+    "repeated+layout_furniture": 131,
+    "single+layout_body": 79,
+    "single+layout_furniture": 10,
+    "repeated+layout_body": 17
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: burrardview neighbourhood assn # vancouver city # scc # # ca",
+     "p1 top: # scc # # carswellbc # # carswellbc # # # s.#.r #",
+     "p1 bottom: westlawnext canada copyright \u00a9 thomson reuters canada limite"
+    ],
+    "single+layout_body": [
+     "p1 bottom: authority federal crown agency - port authority approved pro",
+     "p1 bottom: relief claiming there was no constitutional basis on which p",
+     "p2 bottom: contemplated by s #(#a of constitution act # - chambers judg"
+    ],
+    "single+layout_furniture": [
+     "p8 bottom: westlawnextcanadacopyright copyright \u00a9 thomson reuters canad",
+     "p9 bottom: westlawnextcanada copyright \u00a9 thomson reuters canada limited",
+     "p14 bottom: westlawne copyright \u00a9 thomson reuters canada limited or its "
+    ],
+    "repeated+layout_body": [
+     "p10 top: # scc # # carswellbc # # carswellbc # # # s.#.r #",
+     "p11 top: # scc # # carswellbc # # carswellbc # # # s.#.r #",
+     "p12 top: # scc # # carswellbc # # carswellbc # # # s.#.r #"
+    ]
+   },
+   "furniture_regions": 232
+  },
+  {
+   "doc_id": "2545761",
+   "pages": 10,
+   "counts": {
+    "repeated+layout_furniture": 20,
+    "repeated+layout_body": 82,
+    "single+layout_body": 12
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: application submitted to the neb",
+     "p1 top: appendix #",
+     "p2 top: application submitted to the neb"
+    ],
+    "repeated+layout_body": [
+     "p1 top: # n #",
+     "p1 bottom: ab",
+     "p1 bottom: prepared for"
+    ],
+    "single+layout_body": [
+     "p1 bottom: interest maximum predicted one-hour ground-level h#s concent",
+     "p2 bottom: interest maximum predicted #-hour ground-level h#s concentra",
+     "p3 bottom: interest maximum predicted annual ground-level h#s concentra"
+    ]
+   },
+   "furniture_regions": 47
+  },
+  {
+   "doc_id": "257176",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: responses to neb information request no # to gsx #",
+     "p2 top: by r.h woronuk of gasenergy strategies inc",
+     "p2 bottom: for the georgia strait crossing natural gas pipeline"
+    ]
+   },
+   "furniture_regions": 12
+  },
+  {
+   "doc_id": "2672093",
+   "pages": 59,
+   "counts": {
+    "single+layout_body": 34,
+    "repeated+layout_body": 33,
+    "repeated+layout_furniture": 56,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: environmental consultants ltd",
+     "p3 bottom: environmental consultants ltd transmountain utm zone # # e #",
+     "p6 bottom: environmental consultants ltd"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: transmountain utm zone # # e # n nad #",
+     "p6 bottom: transmountain utm zone # # e # n nad #",
+     "p7 bottom: transmountain utm zone # # e # n nad #"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: bc-#",
+     "p2 bottom: bc-#",
+     "p3 bottom: bc-#"
+    ],
+    "single+layout_furniture": [
+     "p14 bottom: bc-#a",
+     "p35 bottom: bc-#a",
+     "p45 bottom: bc-#d"
+    ]
+   },
+   "furniture_regions": 59
+  },
+  {
+   "doc_id": "2679733",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 12,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: # wish to participate as a"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 66
+  },
+  {
+   "doc_id": "2684908",
+   "pages": 60,
+   "counts": {
+    "single+layout_furniture": 59,
+    "single+layout_body": 185,
+    "repeated+layout_furniture": 41,
+    "repeated+layout_body": 19
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: golder associates ltd",
+     "p1 top: telephone #-#-#",
+     "p1 bottom: offices across north america south america europe africa asi"
+    ],
+    "single+layout_body": [
+     "p1 top: # north pemberton vancouver avenue british columbia canada v",
+     "p1 bottom: best",
+     "p1 bottom: in employers canada best"
+    ],
+    "repeated+layout_furniture": [
+     "p20 top: l# contd",
+     "p20 top: page # of #",
+     "p21 top: l# contd"
+    ],
+    "repeated+layout_body": [
+     "p20 top: description",
+     "p21 top: description",
+     "p22 top: description"
+    ]
+   },
+   "furniture_regions": 284
+  },
+  {
+   "doc_id": "2695098",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 12,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: # wish to participate as a"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 67
+  },
+  {
+   "doc_id": "2696528",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p2 top: formule de salutation  m"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 67
+  },
+  {
+   "doc_id": "2697354",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 12,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: # wish to participate as a"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 65
+  },
+  {
+   "doc_id": "2704811",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p2 top: formule de salutation  m"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 68
+  },
+  {
+   "doc_id": "272066",
+   "pages": 11,
+   "counts": {
+    "single+layout_body": 3,
+    "single+layout_furniture": 3,
+    "repeated+layout_furniture": 30
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # calgary septi\u00e8me alberta avenue t#p #x# s.-o canada facsim"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw",
+     "p1 bottom: calgary alberta t#p #x#",
+     "p1 bottom: telephone/t\u00e9l\u00e9phone  # #-#"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: attachment to neb letter",
+     "p2 top: dated # april #",
+     "p2 bottom: page # of #"
+    ]
+   },
+   "furniture_regions": 52
+  },
+  {
+   "doc_id": "2765703",
+   "pages": 7,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 16
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: file of-fac-gas-t#-#-# #",
+     "p1 top: hearing order ghw-#-#"
+    ],
+    "single+layout_body": [
+     "p1 bottom: calgary ab t#r #a#",
+     "p2 top: final sub missions",
+     "p2 top: of"
+    ]
+   },
+   "furniture_regions": 15
+  },
+  {
+   "doc_id": "2784935",
+   "pages": 102,
+   "counts": {
+    "single+layout_body": 10
+   },
+   "examples": {
+    "single+layout_body": [
+     "p11 bottom: to",
+     "p23 bottom: is",
+     "p31 bottom: an"
+    ]
+   },
+   "furniture_regions": 230
+  },
+  {
+   "doc_id": "2785444",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 15,
+    "repeated+layout_furniture": 4,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: stike ma n elliott",
+     "p1 top: stikeman elliott llp barristers & solicitors",
+     "p1 top: # bankers hall west #-#rd street s.w calgary canada t#p #c#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: # v#",
+     "p2 bottom: # v#",
+     "p3 bottom: # v#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: stikeman elliott",
+     "p3 top: stikeman elliott",
+     "p4 top: stikeman elliott"
+    ]
+   },
+   "furniture_regions": 7
+  },
+  {
+   "doc_id": "2785485",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_furniture": 8
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: hearing order oh-#-#",
+     "p1 top: trans mountain pipeline ulc trans mountain",
+     "p2 bottom: # several fronts that are readily identified in the"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page #",
+     "p2 bottom: page #",
+     "p3 bottom: page #"
+    ]
+   },
+   "furniture_regions": 16
+  },
+  {
+   "doc_id": "2791636",
+   "pages": 29,
+   "counts": {
+    "single+layout_body": 63,
+    "repeated+layout_furniture": 21,
+    "repeated+layout_body": 16,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: attachment #",
+     "p2 bottom: date june # # sheet no.#",
+     "p3 top: whereas transcanada and shipper recognize that taking into a"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: precedent agreement",
+     "p3 top: precedent agreement",
+     "p4 top: precedent agreement"
+    ],
+    "repeated+layout_body": [
+     "p2 top: precedent agreement",
+     "p4 bottom: date june # # sheet no #",
+     "p5 bottom: date june # # sheet no #"
+    ],
+    "single+layout_furniture": [
+     "p22 top: exhibit a",
+     "p23 top: exhibit a",
+     "p24 top: exhibit a"
+    ]
+   },
+   "furniture_regions": 134
+  },
+  {
+   "doc_id": "2810974",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 5
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transmountain pipeline expansion",
+     "p2 top: proceeds from the sale would allow bc ferries to construct a",
+     "p2 bottom: for chevron or a competitor to replace the small marginally-"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "2811659",
+   "pages": 62,
+   "counts": {
+    "repeated+layout_furniture": 32,
+    "single+layout_body": 17
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: squamish traditional use and occupancy study final report #",
+     "p2 bottom: squamish traditional use and occupancy study final report #",
+     "p3 bottom: squamish traditional use and occupancy study final report #"
+    ],
+    "single+layout_body": [
+     "p3 top: overview of squamish occupation and use of southern howe sou",
+     "p11 top: figure # contemporary rock weir fishing on the xwmelchstn ca",
+     "p15 bottom: # sqkm_# interview #"
+    ]
+   },
+   "furniture_regions": 66
+  },
+  {
+   "doc_id": "2813773",
+   "pages": 39,
+   "counts": {
+    "repeated+layout_body": 7,
+    "single+layout_body": 145,
+    "single+layout_furniture": 6,
+    "repeated+layout_furniture": 42
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p2 top: phase # environmental site assessment",
+     "p4 top: phase # environmental site assessment",
+     "p4 top: alberta energy regulator - march #"
+    ],
+    "single+layout_body": [
+     "p2 bottom: responsibility of that party we are not responsible for dama",
+     "p2 bottom: taken based on this report",
+     "p3 top: executive summary"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: #-# ab ph# #-#-# final.docx # matrix solutions inc",
+     "p3 bottom: #-# ab ph# #-#-# final.docx # matrix solutions inc",
+     "p19 top: search results for legal description s-t-r-m #-#-#-# page # "
+    ],
+    "repeated+layout_furniture": [
+     "p4 bottom: version #.# march # # page # of #",
+     "p5 bottom: version #.# march # # page # of #",
+     "p6 bottom: version #.# march # # page # of #"
+    ]
+   },
+   "furniture_regions": 99
+  },
+  {
+   "doc_id": "285112",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 6,
+    "repeated+layout_furniture": 42
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: response to neb information request #",
+     "p1 top: for terasen capital projects numbered",
+     "p1 bottom: window august #-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: responses to neb information request #",
+     "p2 top: terasen capital projects",
+     "p2 top: # # # # and #"
+    ]
+   },
+   "furniture_regions": 61
+  },
+  {
+   "doc_id": "285999",
+   "pages": 26,
+   "counts": {
+    "single+layout_body": 23,
+    "single+layout_furniture": 2,
+    "repeated+layout_body": 23,
+    "repeated+layout_furniture": 22
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: # # section # interested party list",
+     "p3 bottom: # for additional information please refer to transcanada's r",
+     "p3 bottom: items #.# and #.# transcanada section # application dated # "
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: transcanada pipelines limited",
+     "p16 bottom: projects # # and # - # cp program no # - manitoba and ontari"
+    ],
+    "repeated+layout_body": [
+     "p2 top: transcanada",
+     "p3 top: transcanada",
+     "p4 top: transcanada"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: projects # # # - # cp program no # - manitoba and ontario",
+     "p3 bottom: projects # # # - # cp program no # - manitoba and ontario",
+     "p4 bottom: projects # # # - # cp program no # - manitoba and ontario"
+    ]
+   },
+   "furniture_regions": 55
+  },
+  {
+   "doc_id": "2902736",
+   "pages": 9,
+   "counts": {
+    "single+layout_body": 39,
+    "repeated+layout_body": 9,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: application pursuant to section # of neb act",
+     "p1 top: printed on dd/mm/yyyy #/#/#",
+     "p1 bottom: bypass as sponsored by the saskatchewan ministry of highways"
+    ],
+    "repeated+layout_body": [
+     "p1 top: alliance pipeline ltd project name regina south bypass mainl",
+     "p1 top: upgrade project",
+     "p2 top: alliance pipeline ltd project name regina south bypass mainl"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page # of #",
+     "p2 top: upgrade project",
+     "p2 bottom: page # of #"
+    ]
+   },
+   "furniture_regions": 51
+  },
+  {
+   "doc_id": "2905206",
+   "pages": 58,
+   "counts": {
+    "single+layout_body": 162,
+    "repeated+layout_furniture": 58
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: hearing order oh-#-#",
+     "p1 bottom: # # oil spill risk mitigation possible with shipping lane ch",
+     "p2 top: # #.#.# information request # board of fer request to transp"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page #",
+     "p2 bottom: page #",
+     "p3 bottom: page #"
+    ]
+   },
+   "furniture_regions": 89
+  },
+  {
+   "doc_id": "2908355",
+   "pages": 142,
+   "counts": {
+    "single+layout_body": 93,
+    "repeated+layout_body": 244,
+    "single+layout_furniture": 38,
+    "repeated+layout_furniture": 117
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p2 top: nova gas transmission ltd neb #.#",
+     "p2 top: # meter stations and laterals abandonment response to inform"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: january # # page # of #",
+     "p3 bottom: january # # page # of #",
+     "p6 top: nova gas transmission ltd response to information request"
+    ],
+    "single+layout_furniture": [
+     "p4 top: nova gas transmission ltd neb #.#",
+     "p4 top: # meter stations and laterals abandonment response to inform",
+     "p4 top: application mhw-#-#"
+    ],
+    "repeated+layout_furniture": [
+     "p4 bottom: january # # page # of #",
+     "p5 bottom: january # # page # of #",
+     "p6 top: attachment neb #.#-#"
+    ]
+   },
+   "furniture_regions": 1082
+  },
+  {
+   "doc_id": "2931125",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 7,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: # dixi\u00e8me avenue s.-o t\u00e9l\u00e9phone/telephone #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: pi\u00e8ce jointe \u00e0 la lettre de #'office",
+     "p3 top: dat\u00e9e du # f\u00e9vrier #",
+     "p3 top: page # sur #"
+    ]
+   },
+   "furniture_regions": 47
+  },
+  {
+   "doc_id": "2931455",
+   "pages": 11,
+   "counts": {
+    "repeated+layout_furniture": 10,
+    "repeated+layout_body": 4,
+    "single+layout_body": 123,
+    "single+layout_furniture": 6
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: nova gas transmission ltd order xg-n#-#-#",
+     "p1 top: grey owl creek receipt meter station expansion application f",
+     "p2 top: nova gas transmission ltd order xg-n#-#-#"
+    ],
+    "repeated+layout_body": [
+     "p4 top: nova gas transmission ltd order xg-n#-#-#",
+     "p4 top: grey owl creek receipt meter station expansion application f",
+     "p5 top: nova gas transmission ltd order xg-n#-#-#"
+    ],
+    "single+layout_body": [
+     "p6 top: p oray oted oees r\u00e9ceil ltd heter sratico edosnsico # # # # ",
+     "p6 top: #-# m-# m-# #-#",
+     "p6 top: vertical separator orifice flow meter orifice flow meter dum"
+    ],
+    "single+layout_furniture": [
+     "p6 bottom: february # #\u03b5# cadd draming do not make manual revisions pag",
+     "p7 bottom: fobruary # # cadd drawing do not make manual revisions page ",
+     "p8 bottom: februsry # #- cadd drawing do not make manual revisions pags"
+    ]
+   },
+   "furniture_regions": 63
+  },
+  {
+   "doc_id": "2937960",
+   "pages": 7,
+   "counts": {
+    "repeated+layout_furniture": 8,
+    "repeated+layout_body": 12,
+    "single+layout_body": 7
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: nova gas transmission ltd order xg-n#-#-#",
+     "p1 top: grey owl creek north receipt meter station application for l",
+     "p2 bottom: march # c#-# page # of #"
+    ],
+    "repeated+layout_body": [
+     "p2 top: nova gas transmission ltd order xg-n#-#-#",
+     "p2 top: grey owl creek north receipt meter station application for l",
+     "p3 top: nova gas transmission ltd order xg-n#-#-#"
+    ],
+    "single+layout_body": [
+     "p2 top: # # # # # # # g # #",
+     "p2 bottom: cado uraning do not vake manual rivisions",
+     "p3 bottom: cado eraming do not make manual kevsions"
+    ]
+   },
+   "furniture_regions": 63
+  },
+  {
+   "doc_id": "2938298",
+   "pages": 18,
+   "counts": {
+    "single+layout_furniture": 18,
+    "single+layout_body": 61
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: transcanada pipelines limited order xg-t#-#-#",
+     "p1 top: prairie tie-in project application for leave to open",
+     "p2 top: cf-q-f-# rev #"
+    ],
+    "single+layout_body": [
+     "p2 top: strike hydrostatic pressure test plan &",
+     "p2 top: checklist",
+     "p2 bottom: pag # # # # # # hour tf"
+    ]
+   },
+   "furniture_regions": 61
+  },
+  {
+   "doc_id": "2957503",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 8,
+    "repeated+layout_body": 19,
+    "single+layout_body": 31
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: ca pdf page # of #",
+     "p1 top: path \\\\golder.gds\\gal\\edmonton\\active\\purview\\#\\#_energyeast",
+     "p2 top: ca pdf page # of #"
+    ],
+    "repeated+layout_body": [
+     "p1 top: #+# bathurst",
+     "p1 top: new brunswick",
+     "p1 bottom: associates reviewed do"
+    ],
+    "single+layout_body": [
+     "p1 top: t h o r n on t br o ok miramichi",
+     "p1 top: fredenton",
+     "p1 bottom: # < #-# m #m m # b reference(s # # # rev watercourse railway"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "2957555",
+   "pages": 24,
+   "counts": {
+    "repeated+layout_furniture": 28,
+    "repeated+layout_body": 68,
+    "single+layout_body": 21
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: ca pdf page # of #",
+     "p2 top: ca pdf page # of #",
+     "p3 top: ca pdf page # of #"
+    ],
+    "repeated+layout_body": [
+     "p1 top: energy east pipeline ltd section #",
+     "p1 top: consolidated application emergency preparedness and response",
+     "p1 bottom: may # page #-#"
+    ],
+    "single+layout_body": [
+     "p3 bottom: \uf0b7 emergency status",
+     "p4 bottom: philosophy contributes to ensuring that the necessary equipm",
+     "p5 bottom: \uf0b7 safety"
+    ]
+   },
+   "furniture_regions": 193
+  },
+  {
+   "doc_id": "2958132",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 8,
+    "single+layout_furniture": 4,
+    "repeated+layout_body": 4,
+    "single+layout_body": 28
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: nova gas transmission ltd",
+     "p1 top: section # application attachment #",
+     "p1 top: boulder creek south lateral aerial overview maps"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: may #",
+     "p2 bottom: may #",
+     "p3 bottom: r:\\#pa\\pa-#-#\\cadd\\boulder creek south lateral\\sec_#_mapping"
+    ],
+    "repeated+layout_body": [
+     "p3 top: section # application attachment #",
+     "p3 top: boulder creek south lateral aerial overview maps",
+     "p4 top: section # application attachment #"
+    ],
+    "single+layout_body": [
+     "p3 top: nps #",
+     "p3 top: calais",
+     "p3 top: extension"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "2968109",
+   "pages": 5,
+   "counts": {
+    "repeated+layout_furniture": 10,
+    "single+layout_furniture": 6,
+    "single+layout_body": 10
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: ca pdf page # of #",
+     "p1 top: energy east pipeline ltd",
+     "p2 top: ca pdf page # of #"
+    ],
+    "single+layout_furniture": [
+     "p1 top: energy east project",
+     "p1 top: consolidated application volume # aboriginal engagement",
+     "p1 bottom: may #"
+    ],
+    "single+layout_body": [
+     "p2 top: consolidated application appendix #-#a",
+     "p2 top: volume # aboriginal engagement wolf lake first nation commun",
+     "p2 bottom: # aboriginal affairs and northern development canada website"
+    ]
+   },
+   "furniture_regions": 51
+  },
+  {
+   "doc_id": "3006468",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 9,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 bottom: #.# tous les intervenants",
+     "p1 bottom: # dixi\u00e8me avenue s.-o t\u00e9l\u00e9phone/telephone:#-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: pi\u00e8ce jointe \u00e0 la lettre de #'office",
+     "p2 top: dat\u00e9e du # juillet #",
+     "p2 top: page # of #"
+    ]
+   },
+   "furniture_regions": 35
+  },
+  {
+   "doc_id": "3025356",
+   "pages": 103,
+   "counts": {
+    "repeated+layout_body": 181,
+    "repeated+layout_furniture": 111,
+    "single+layout_body": 83
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p3 top: review of the state of knowledge for the waterloo and paris/",
+     "p4 top: review of the state of knowledge for the waterloo and paris/",
+     "p5 top: review of the state of knowledge for the waterloo and paris/"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: moraines",
+     "p4 top: moraines",
+     "p4 bottom: february # final report #"
+    ],
+    "single+layout_body": [
+     "p3 bottom: #.#.# water quantity #",
+     "p3 bottom: february # final report",
+     "p4 bottom: #.#.# region of waterloo tier # water budget #"
+    ]
+   },
+   "furniture_regions": 340
+  },
+  {
+   "doc_id": "3027567",
+   "pages": 11,
+   "counts": {
+    "repeated+layout_furniture": 11
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: page # sur #",
+     "p2 bottom: page # sur #",
+     "p3 bottom: page # sur #"
+    ]
+   },
+   "furniture_regions": 11
+  },
+  {
+   "doc_id": "306923",
+   "pages": 11,
+   "counts": {
+    "repeated+layout_furniture": 22,
+    "single+layout_body": 17
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: express capacity expansion",
+     "p1 top: part # - application",
+     "p2 top: express capacity expansion"
+    ],
+    "single+layout_body": [
+     "p1 top: national energy board",
+     "p1 bottom: existing canadian portion of the express pipeline system",
+     "p2 top: b background"
+    ]
+   },
+   "furniture_regions": 30
+  },
+  {
+   "doc_id": "312277",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 24,
+    "repeated+layout_furniture": 5,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: stikeman elliott",
+     "p1 top: stikeman elliott llp barristers & solicitors",
+     "p1 bottom: parties on the list of interested parties in the rh-#-# proc"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: yatesk\\#\\#",
+     "p2 bottom: yatesk\\#\\#",
+     "p3 bottom: yatesk\\#\\#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: stikeman elliott #",
+     "p3 top: stikeman elliott #",
+     "p4 top: stikeman elliott #"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "3179223",
+   "pages": 4,
+   "counts": {
+    "single+layout_furniture": 5,
+    "single+layout_body": 11
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: nova gas transmission ltd",
+     "p1 top: # ngtl system expansion project application for partial leav",
+     "p1 top: kettle river lateral loop - christina river section gh-#-#"
+    ],
+    "single+layout_body": [
+     "p2 top: transcanada",
+     "p2 top: in business to deliver",
+     "p2 top: leave to open document"
+    ]
+   },
+   "furniture_regions": 23
+  },
+  {
+   "doc_id": "3179545",
+   "pages": 36,
+   "counts": {
+    "repeated+layout_body": 269,
+    "single+layout_body": 28,
+    "repeated+layout_furniture": 27
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: enbridge pipelines inc attachment # - pcem alignment sheet p",
+     "p1 top: edmonton to hardisty pipeline project filed january # #",
+     "p1 top: certificate oc-# - condition # page # of #"
+    ],
+    "single+layout_body": [
+     "p1 top: seed mix n/a seed mix # and # n/a seed mix # and # n/a",
+     "p3 top: seed mix n/a seed mix # n/a",
+     "p5 bottom: feature lo pipeline = concern/issue crossing method raised b"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: enbridge pipelines inc attachment # - pcem alignment sheet p",
+     "p6 top: enbridge pipelines inc attachment # - pcem alignment sheet p",
+     "p7 top: enbridge pipelines inc attachment # - pcem alignment sheet p"
+    ]
+   },
+   "furniture_regions": 421
+  },
+  {
+   "doc_id": "3213111",
+   "pages": 23,
+   "counts": {
+    "single+layout_furniture": 34,
+    "single+layout_body": 128,
+    "repeated+layout_body": 4,
+    "repeated+layout_furniture": 24
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: a # received # o n test package #-#",
+     "p3 top: received",
+     "p4 top: a e # o n"
+    ],
+    "single+layout_body": [
+     "p1 top: at # #",
+     "p1 top: proect trans icms tr#-#-aec-# u# exhibit #.#",
+     "p1 top: o #"
+    ],
+    "repeated+layout_body": [
+     "p2 top: a # # o n",
+     "p18 top: a",
+     "p22 top: a # # o n"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: a # # o n",
+     "p5 top: a # # o n",
+     "p6 top: a # # o n"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "3225681",
+   "pages": 14,
+   "counts": {
+    "single+layout_body": 36,
+    "repeated+layout_body": 39,
+    "repeated+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: ph mountview way datn dr fem st doowod cres southdown n",
+     "p1 top: redwood ave swanson st blackwood ln safflower",
+     "p1 bottom: # kp - variance kilometre post # m regional boundary s sumas"
+    ],
+    "repeated+layout_body": [
+     "p2 top: book of reference - trans mountain expansion project",
+     "p2 bottom: # hectare ha = #.# acres ac document number page rev descrip",
+     "p2 bottom: # metre m = #.# feet ft m#-pi# # # issued for information #/"
+    ],
+    "repeated+layout_furniture": [
+     "p8 bottom: # kilometre km = #.# miles mi"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "3225708",
+   "pages": 45,
+   "counts": {
+    "single+layout_body": 85,
+    "repeated+layout_body": 42,
+    "repeated+layout_furniture": 27,
+    "single+layout_furniture": 17
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p2 top: nova gas transmission ltd gc-#",
+     "p2 top: towerbirch expansion project condition # watercourse crossin"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: march # page # of #",
+     "p4 bottom: march # page # of #",
+     "p6 bottom: march # page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p9 top: nova gas transmission ltd",
+     "p9 top: towerbirch expansion project",
+     "p15 top: nova gas transmission ltd"
+    ],
+    "single+layout_furniture": [
+     "p9 top: condition # watercourse crossing inventory attachment #",
+     "p9 bottom: march #",
+     "p15 bottom: march #"
+    ]
+   },
+   "furniture_regions": 259
+  },
+  {
+   "doc_id": "323608",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 6,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # calgary septi\u00e8me alberta avenue t#p #x# s.-o canada facsim"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw",
+     "p1 bottom: calgary alberta t#p #x#",
+     "p1 bottom: telephone/t\u00e9l\u00e9phone  # #-#"
+    ]
+   },
+   "furniture_regions": 20
+  },
+  {
+   "doc_id": "323724",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 11,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # calgary septi\u00e8me alberta avenue t#p #x# s.-o canada facsim"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw",
+     "p1 bottom: calgary alberta t#p #x#",
+     "p1 bottom: telephone/t\u00e9l\u00e9phone  # #-#"
+    ]
+   },
+   "furniture_regions": 24
+  },
+  {
+   "doc_id": "3257627",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 4,
+    "single+layout_furniture": 1,
+    "repeated+layout_body": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: attachment neb-pembina #.#",
+     "p2 top: # year projection based on mg matwichuk table #",
+     "p3 top: # year projection based on mg matwichuk table # a"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: #_#|natdocs"
+    ],
+    "repeated+layout_body": [
+     "p2 top: neb-pembina ir #.# a attachment #",
+     "p3 top: neb-pembina ir #.# a attachment #",
+     "p4 top: neb-pembina ir #.# a attachment #"
+    ]
+   },
+   "furniture_regions": 2
+  },
+  {
+   "doc_id": "327418",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_furniture": 24
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: # national energy board rh-#-#",
+     "p1 top: # transcanada pipelines limited",
+     "p2 bottom: # on change since the last decision the rh-#-# decision goes"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: rh-#-#",
+     "p2 top: capp notice of motion",
+     "p2 top: june # #"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "3283303",
+   "pages": 10,
+   "counts": {
+    "single+layout_body": 33,
+    "repeated+layout_body": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: # m o o s e # transmountain",
+     "p1 top: j kl#b j - isolation - kl#a check - r e isolation # # r - bl",
+     "p1 bottom: #_map_ch#m_ax_#_rev#.mxd # # # # # # # # # # # scale drawn #"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: date april # ch#m ref # revision #",
+     "p2 top: transmountain",
+     "p3 top: transmountain"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "3284072",
+   "pages": 14,
+   "counts": {
+    "repeated+layout_furniture": 46,
+    "repeated+layout_body": 24,
+    "single+layout_body": 13,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: old growth management areas",
+     "p1 top: trans mountain pipeline ulc mitigation and replacement plan",
+     "p1 top: trans mountain expansion project june #"
+    ],
+    "repeated+layout_body": [
+     "p2 top: trans mountain pipeline ulc mitigation and replacement plan",
+     "p2 top: trans mountain expansion project june #",
+     "p3 top: trans mountain pipeline ulc mitigation and replacement plan"
+    ],
+    "single+layout_body": [
+     "p2 top: prince george resource district",
+     "p2 bottom: # species codes follow the symbology used by the bc mflnro w",
+     "p2 bottom: species composition it is indicated in brackets"
+    ],
+    "single+layout_furniture": [
+     "p6 bottom: figure # ogma kam_tka_#",
+     "p9 bottom: figure # ogma kam_tka_#",
+     "p12 bottom: figure # ogma kam_tka_#"
+    ]
+   },
+   "furniture_regions": 166
+  },
+  {
+   "doc_id": "3296431",
+   "pages": 61,
+   "counts": {
+    "repeated+layout_body": 159,
+    "single+layout_body": 108,
+    "single+layout_furniture": 52
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: nova gas transmission ltd tab #",
+     "p1 top: towerbirch expansion project dawson creek east receipt meter",
+     "p2 top: nova gas transmission ltd tab #"
+    ],
+    "single+layout_body": [
+     "p1 top: jfe jfe steel corporation inspection certificate west japan ",
+     "p1 top: \u9700 \u8981 \u5bb6 # \u8bc1 \u660e \u5bc6 \u53f7 # e r t # r # # a t e n o   u e - # # - # # ",
+     "p1 bottom: padloorad napection nspoction"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: july # tnspector tu n m dsi \u4e0a \u8a18 \u5546 and we \u54c1 \u306f hereby tested \u691c",
+     "p2 bottom: ceg aa= #+f(mn/#+si/#+cu/#+ni/#+(cr+mo+#+nb)/#+#b",
+     "p3 bottom: july # pcm = #+si/#+(mn+cu+cr)/#+ni/#+mo/#+#/#+#b page # of "
+    ]
+   },
+   "furniture_regions": 619
+  },
+  {
+   "doc_id": "3328583",
+   "pages": 13,
+   "counts": {
+    "single+layout_body": 23,
+    "repeated+layout_furniture": 21,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: fisheries and oceans p\u00eaches et oc\u00e9ans dfo file no #-hpac-#",
+     "p1 top: canada canada authorization no #-hpac-#",
+     "p1 top: paragraph #(#)(b fisheries act authorization"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: - # - dfo file no #-hpac-#",
+     "p2 top: authorization no #-hpac-#",
+     "p3 top: - # - dfo file no #-hpac-#"
+    ],
+    "single+layout_furniture": [
+     "p10 top: -#- dfo file no #-hpac-#",
+     "p12 top: dfo file no #-hpac-#",
+     "p13 top: dfo file no #-hpac-#"
+    ]
+   },
+   "furniture_regions": 73
+  },
+  {
+   "doc_id": "3330816",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 12,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: \u2022 if you apply as individual the contact information is for "
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 68
+  },
+  {
+   "doc_id": "3338141",
+   "pages": 214,
+   "counts": {
+    "single+layout_furniture": 46,
+    "single+layout_body": 508
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: leave to open application",
+     "p3 bottom: the image you are viewing has been authorized and it is a co",
+     "p3 bottom: page # of #"
+    ],
+    "single+layout_body": [
+     "p1 top: attachment #",
+     "p1 top: meter station facilities hydrotest data",
+     "p3 top: section #"
+    ]
+   },
+   "furniture_regions": 51
+  },
+  {
+   "doc_id": "3390073",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: donovan & company",
+     "p1 top: barristers and solicitors",
+     "p2 top: katzie first nation letter of comment"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "3390264",
+   "pages": 4,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 9
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: appendix # - oral history and impact analysis"
+    ],
+    "single+layout_body": [
+     "p1 bottom: archives in chilliwack bc",
+     "p2 top: chilliwack river we fished at sardis pond big springs we had",
+     "p2 top: pond grand chief frank malloway #"
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "3392027",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 6,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.neb-one.gc.ca",
+     "p3 top: attachment to board letter",
+     "p3 top: dated # november #"
+    ]
+   },
+   "furniture_regions": 30
+  },
+  {
+   "doc_id": "3404901",
+   "pages": 44,
+   "counts": {
+    "single+layout_body": 52,
+    "repeated+layout_body": 75,
+    "single+layout_furniture": 2,
+    "repeated+layout_furniture": 2
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: \u800c transmountain years # celebrating of service # to # kinder",
+     "p3 top: # rationale for strain-based design transmountain \u5e01",
+     "p4 top: # rationale for strain-based design transmountain"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: kinderzmorgan",
+     "p2 bottom: canada ino",
+     "p3 bottom: kinder morgan"
+    ],
+    "single+layout_furniture": [
+     "p8 bottom: not in gha scope",
+     "p31 bottom: tensile strain capacity %"
+    ],
+    "repeated+layout_furniture": [
+     "p33 bottom: kinder morgan",
+     "p33 bottom: canada ino"
+    ]
+   },
+   "furniture_regions": 40
+  },
+  {
+   "doc_id": "3463345",
+   "pages": 10,
+   "counts": {
+    "single+layout_body": 20
+   },
+   "examples": {
+    "single+layout_body": [
+     "p3 top: # description of interveners and the lands affected",
+     "p3 bottom: mountain application for approval of the plan profile and bo",
+     "p4 top: ppbor for segment # and segment # of the proposed trans moun"
+    ]
+   },
+   "furniture_regions": 11
+  },
+  {
+   "doc_id": "3464084",
+   "pages": 174,
+   "counts": {
+    "single+layout_body": 237,
+    "repeated+layout_furniture": 242,
+    "repeated+layout_body": 156,
+    "single+layout_furniture": 105
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p4 top: appearances/comparutions",
+     "p4 bottom: - mr evan w dixon"
+    ],
+    "repeated+layout_furniture": [
+     "p3 bottom: transcript mh-#-#",
+     "p6 bottom: transcript mh-#-#",
+     "p7 bottom: transcript mh-#-#"
+    ],
+    "repeated+layout_body": [
+     "p4 bottom: transcript mh-#-#",
+     "p5 bottom: transcript mh-#-#",
+     "p9 bottom: transcript mh-#-#"
+    ],
+    "single+layout_furniture": [
+     "p9 top: examination by mr smellie",
+     "p10 top: examination by mr smellie",
+     "p11 top: examination by mr smellie"
+    ]
+   },
+   "furniture_regions": 826
+  },
+  {
+   "doc_id": "346591",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 3,
+    "single+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # calgary septi\u00e8me alberta avenue t#p #x# s.-o canada facsim"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw",
+     "p1 bottom: calgary alberta t#p #x#",
+     "p1 bottom: telephone/t\u00e9l\u00e9phone  # #-#"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "3491154",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 4,
+    "single+layout_furniture": 10
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: the board will make funding available for eligible hearing p"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  #-#-#",
+     "p1 bottom: www.neb-one.gc.ca"
+    ]
+   },
+   "furniture_regions": 34
+  },
+  {
+   "doc_id": "3509190",
+   "pages": 10,
+   "counts": {
+    "single+layout_body": 96,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 3,
+    "repeated+layout_body": 11
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: general legend",
+     "p1 top: existing proposed description",
+     "p1 top: ron property pin"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: mjl eng project no # city file no #-# not for construction"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: trigg road",
+     "p4 top: trigg road",
+     "p5 top: trigg road"
+    ],
+    "repeated+layout_body": [
+     "p3 bottom: #-# west railway abbotsford bc v#s #e# as por client us #/#/",
+     "p5 bottom: #-# west railway abbotsford bc v#s #e# as por client us #/#/",
+     "p6 top: an"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "3516573",
+   "pages": 37,
+   "counts": {
+    "single+layout_body": 161,
+    "single+layout_furniture": 71
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tt tetra tech",
+     "p4 bottom: squirrel mountain receipt ms #-#-frm-v#-# phase # esa - fina",
+     "p6 bottom: # tetra tech"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: tetra tech canada inc",
+     "p1 bottom: riverbend atrium one # # rivercrest drive se",
+     "p1 bottom: calgary ab t#c #x# canada"
+    ]
+   },
+   "furniture_regions": 148
+  },
+  {
+   "doc_id": "3516771",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 6,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.neb-one.gc.ca",
+     "p3 top: attachment to board letter",
+     "p3 top: dated # march #"
+    ]
+   },
+   "furniture_regions": 29
+  },
+  {
+   "doc_id": "3559563",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 9,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.neb-one.gc.ca",
+     "p3 top: attachment to board letter",
+     "p3 top: dated # april #"
+    ]
+   },
+   "furniture_regions": 29
+  },
+  {
+   "doc_id": "356779",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 41,
+    "repeated+layout_furniture": 38,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: husky oil limited",
+     "p2 top: ms pat larsen",
+     "p2 top: # #a street"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: husky oil limited schedule update distribution list",
+     "p1 bottom: lloydminster border pipeline expansion - # -",
+     "p3 bottom: husky oil limited schedule update distribution list"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: husky oil limited schedule update distribution list",
+     "p2 bottom: lloydminster border pipeline expansion - # -",
+     "p15 bottom: husky oil limited schedule update distribution list"
+    ]
+   },
+   "furniture_regions": 130
+  },
+  {
+   "doc_id": "3577775",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 5,
+    "single+layout_furniture": 10
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: concerns considered if you still have project-related views "
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  #-#-#",
+     "p1 bottom: www.neb-one.gc.ca"
+    ]
+   },
+   "furniture_regions": 38
+  },
+  {
+   "doc_id": "3579771",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 5,
+    "repeated+layout_body": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: #-#-# #:# fr#m- t-# p#/# f-#",
+     "p1 top: cm greenfield power corp",
+     "p1 top: urier"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: jul-#-# #:# #% p.#",
+     "p2 bottom: jul-#-# #:# #% p.#",
+     "p3 top: #-#-'# #:# from- t-# p#/# f-#"
+    ]
+   },
+   "furniture_regions": 40
+  },
+  {
+   "doc_id": "3579887",
+   "pages": 42,
+   "counts": {
+    "repeated+layout_body": 97,
+    "repeated+layout_furniture": 14,
+    "single+layout_body": 71,
+    "single+layout_furniture": 8
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p3 top: pipestone creek crossing replacement project",
+     "p3 top: environmental protection plan",
+     "p5 top: pipestone creek crossing replacement project"
+    ],
+    "repeated+layout_furniture": [
+     "p3 bottom: stantec",
+     "p11 top: pipestone creek crossing replacement project",
+     "p11 top: environmental protection plan"
+    ],
+    "single+layout_body": [
+     "p5 top: introduction",
+     "p6 top: introduction",
+     "p7 top: enbridge terminal cromer  $ \u0304 $"
+    ],
+    "single+layout_furniture": [
+     "p30 bottom: a.#",
+     "p32 bottom: b.#",
+     "p33 bottom: # august # drawing #-#"
+    ]
+   },
+   "furniture_regions": 56
+  },
+  {
+   "doc_id": "358567",
+   "pages": 18,
+   "counts": {
+    "repeated+layout_furniture": 25,
+    "single+layout_body": 32,
+    "repeated+layout_body": 11
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: office national de #'\u00e9nergie page #",
+     "p1 bottom: document de travail",
+     "p2 bottom: office national de #'\u00e9nergie page #"
+    ],
+    "single+layout_body": [
+     "p2 top: table des mati\u00e8res",
+     "p3 top: #.# buts",
+     "p3 bottom: #'exclusion des \u00e9gouts ou canalisations de distribution d'ea"
+    ],
+    "repeated+layout_body": [
+     "p3 bottom: office national de #'\u00e9nergie page #",
+     "p4 bottom: office national de #'\u00e9nergie page #",
+     "p5 bottom: office national de #'\u00e9nergie page #"
+    ]
+   },
+   "furniture_regions": 76
+  },
+  {
+   "doc_id": "359205",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 6,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada",
+     "p1 bottom: # b.# system shippers",
+     "p2 top: attachments"
+    ],
+    "single+layout_furniture": [
+     "p4 top: march # #",
+     "p4 top: page #",
+     "p4 top: mr w vienneau"
+    ]
+   },
+   "furniture_regions": 7
+  },
+  {
+   "doc_id": "3609912",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 8,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: # dixi\u00e8me avenue s.-o bureau # t\u00e9l\u00e9phone/telephone #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: annexe # - pi\u00e8ce jointe \u00e0 la lettre de #'office",
+     "p3 top: dat\u00e9e du # ao\u00fbt #",
+     "p3 top: page # sur #"
+    ]
+   },
+   "furniture_regions": 42
+  },
+  {
+   "doc_id": "3610501",
+   "pages": 4,
+   "counts": {
+    "single+layout_furniture": 4,
+    "single+layout_body": 8
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: natural resources ressources naturelles",
+     "p1 top: canada canada",
+     "p3 top: natural resources ressources naturelles"
+    ],
+    "single+layout_body": [
+     "p1 bottom: for input into processes led by the cnsopb should you have q",
+     "p1 bottom: the cnsopb please contact stacy o'rourke director of communi",
+     "p1 bottom: email at sorourke@cnsopb.ns.ca"
+    ]
+   },
+   "furniture_regions": 10
+  },
+  {
+   "doc_id": "3611012",
+   "pages": 326,
+   "counts": {
+    "single+layout_furniture": 78,
+    "single+layout_body": 390,
+    "repeated+layout_body": 1027,
+    "repeated+layout_furniture": 138
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: transcanada keystone pipeline limited partnership environmen",
+     "p1 top: keystone # pipeline project august #",
+     "p1 bottom: page #h-#"
+    ],
+    "single+layout_body": [
+     "p1 top: appendix #h",
+     "p7 bottom: stantec #",
+     "p8 bottom: stantec #"
+    ],
+    "repeated+layout_body": [
+     "p5 top: keystone # pipeline project",
+     "p5 top: weed management plan condition #",
+     "p7 top: keystone # pipeline project"
+    ],
+    "repeated+layout_furniture": [
+     "p6 top: keystone # pipeline project",
+     "p6 top: weed management plan condition #",
+     "p7 top: weed management plan condition #"
+    ]
+   },
+   "furniture_regions": 839
+  },
+  {
+   "doc_id": "3612653",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 21,
+    "repeated+layout_body": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: \u2022 if you apply as individual the contact information is for "
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 105
+  },
+  {
+   "doc_id": "3613333",
+   "pages": 32,
+   "counts": {
+    "single+layout_body": 35,
+    "repeated+layout_furniture": 31
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy board hearing order gh-#-#",
+     "p1 top: nova gas transmission ltd ngtl - west path delivery project",
+     "p2 top: g what difference would using a discount factor of #.#% make"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: caepla-wpapg information request no # to ngtl - september # ",
+     "p3 top: caepla-wpapg information request no # to ngtl - september # ",
+     "p4 top: caepla-wpapg information request no # to ngtl - september # "
+    ]
+   },
+   "furniture_regions": 62
+  },
+  {
+   "doc_id": "3636681",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 9,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.neb-one.gc.ca",
+     "p3 top: attachment to board letter",
+     "p3 top: dated # october #"
+    ]
+   },
+   "furniture_regions": 31
+  },
+  {
+   "doc_id": "363829",
+   "pages": 108,
+   "counts": {
+    "single+layout_furniture": 16,
+    "single+layout_body": 113,
+    "repeated+layout_body": 189,
+    "repeated+layout_furniture": 190
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: esso imperial oil",
+     "p26 bottom: coltk br #-#-# #",
+     "p38 bottom: coltk br #-#-# #"
+    ],
+    "single+layout_body": [
+     "p1 top: memorandum mackenzie gas project",
+     "p2 bottom: issued for g hacke j vivian d krenz a braun j harvey a marti",
+     "p2 bottom: # july # # implementation ack ab forjh a martin lo"
+    ],
+    "repeated+layout_body": [
+     "p3 top: transportation and logistics plan issued july # #",
+     "p3 top: mackenzie gas project revision #",
+     "p4 top: transportation and logistics plan issued july # #"
+    ],
+    "repeated+layout_furniture": [
+     "p3 bottom: coltkbr #-#-# #",
+     "p3 bottom: wp-#-d#",
+     "p4 bottom: coltkbr #-#-# #"
+    ]
+   },
+   "furniture_regions": 929
+  },
+  {
+   "doc_id": "364510",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 7,
+    "repeated+layout_furniture": 2,
+    "repeated+layout_body": 11
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 bottom: e-mail  boucherville@groupetechnisol.com",
+     "p2 bottom: www.groupetechnisol.com",
+     "p3 top: table des mati\u00e8res"
+    ],
+    "repeated+layout_furniture": [
+     "p3 bottom: technisol inc n/dossier  ci#/#",
+     "p9 bottom: technisol inc n/dossier  ci#/#"
+    ],
+    "repeated+layout_body": [
+     "p4 bottom: technisol inc n/dossier  ci#/#",
+     "p5 bottom: technisol inc n/dossier  ci#/#",
+     "p6 bottom: technisol inc n/dossier  ci#/#"
+    ]
+   },
+   "furniture_regions": 55
+  },
+  {
+   "doc_id": "3692280",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 16,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: donovan & company",
+     "p1 top: barristers and solicitors",
+     "p1 bottom: if you do not receive all of the pages please call our firm "
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: box # chetwynd bc v#c#j# t #.#.# f#.#.# info@saulteau.com ww"
+    ]
+   },
+   "furniture_regions": 9
+  },
+  {
+   "doc_id": "3700525",
+   "pages": 572,
+   "counts": {
+    "repeated+layout_body": 1722,
+    "repeated+layout_furniture": 457,
+    "single+layout_body": 381,
+    "single+layout_furniture": 53
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: #-nov-# #:# +# p.#",
+     "p1 top: fax the neb to stop trans mountain and protect orcas",
+     "p1 top: national energy board"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: nov-#-# #:# +# #% p.#",
+     "p2 bottom: nov-#-# #:# +# #% p.#",
+     "p3 bottom: nov-#-# #:# +# #% p.#"
+    ],
+    "single+layout_body": [
+     "p15 bottom: of coastal first natlons of the salish sea as a slynatory to",
+     "p16 top: #-nov-#-#:# +# p.#",
+     "p16 top: end rights ipformed of indigenous conseptpf peoples ndigenan"
+    ],
+    "single+layout_furniture": [
+     "p15 bottom: nov-#-#b #:# +# p.#",
+     "p17 bottom: nov-#-# #:# +# p.#",
+     "p19 bottom: nov-#-# #:# +# p.#"
+    ]
+   },
+   "furniture_regions": 5876
+  },
+  {
+   "doc_id": "3718411",
+   "pages": 9,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 60,
+    "repeated+layout_body": 7
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: chemosphere # # #e#",
+     "p1 bottom: http://dx.doi.org/#.#/j.chemosphere.#.#.#",
+     "p1 bottom: #-#/\u00a9 # elsevier ltd all rights reserved"
+    ],
+    "single+layout_body": [
+     "p1 top: contents lists available at sciencedirect",
+     "p1 top: chemosphere",
+     "p1 bottom: corresponding author oil spilled onto the water spreads init"
+    ],
+    "repeated+layout_body": [
+     "p2 top: z pan et al / chemosphere # # #e# #",
+     "p3 top: # z pan et al / chemosphere # # #e#",
+     "p4 top: z pan et al / chemosphere # # #e# #"
+    ]
+   },
+   "furniture_regions": 22
+  },
+  {
+   "doc_id": "3737148",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 11
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: trans mountain pipeline ulc trans mountain",
+     "p2 top: table of contents",
+     "p3 top: #.# indigenous coast guard auxiliary"
+    ]
+   },
+   "furniture_regions": 9
+  },
+  {
+   "doc_id": "3767841",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 14,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p2 top: \u2022 if you apply as individual the contact information is for "
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # tenth avenue sw telephone/t\u00e9l\u00e9phone  # #-#",
+     "p1 bottom: calgary alberta t#r #a# facsimile/t\u00e9l\u00e9copieur  # #-#",
+     "p1 bottom: # calgary dixi\u00e8me alberta avenue t#r s.-o #a# canada http://"
+    ]
+   },
+   "furniture_regions": 69
+  },
+  {
+   "doc_id": "3768464",
+   "pages": 141,
+   "counts": {
+    "repeated+layout_body": 11,
+    "repeated+layout_furniture": 76,
+    "single+layout_body": 612,
+    "single+layout_furniture": 6
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: o'chiese first nation",
+     "p2 top: o'chiese first nation",
+     "p5 top: o'chiese first nation"
+    ],
+    "repeated+layout_furniture": [
+     "p4 top: o'chiese first nation",
+     "p6 top: o'chiese first nation",
+     "p7 top: o'chiese first nation"
+    ],
+    "single+layout_body": [
+     "p4 top: in the spirit of brotherhood and peace we come to honour the",
+     "p6 top: table of contents",
+     "p6 bottom: #.#.# creation of the maps - lands that do not meet the requ"
+    ],
+    "single+layout_furniture": [
+     "p17 bottom: \u00fc # kilometers # - scale # #:#,#,# # coordinate nad# #n syst",
+     "p133 top: cerd/#/can/co/#-#",
+     "p135 top: cerd/#/can/co/#-#"
+    ]
+   },
+   "furniture_regions": 237
+  },
+  {
+   "doc_id": "3777380",
+   "pages": 14,
+   "counts": {
+    "single+layout_body": 7,
+    "repeated+layout_furniture": 14,
+    "repeated+layout_body": 8
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: pipeline e bubble",
+     "p3 top: global",
+     "p3 top: energy"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: pipeline bubble",
+     "p2 bottom: global energy monitor report  april #  #",
+     "p3 bottom: global energy monitor report  april #  #"
+    ],
+    "repeated+layout_body": [
+     "p4 bottom: global energy monitor report  april #  #",
+     "p5 bottom: global energy monitor report  april #  #",
+     "p6 bottom: global energy monitor report  april #  #"
+    ]
+   },
+   "furniture_regions": 78
+  },
+  {
+   "doc_id": "3779370",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 11,
+    "single+layout_furniture": 14
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tc energy",
+     "p2 top: national energy board",
+     "p3 bottom: # neb filing id a#-#"
+    ],
+    "single+layout_furniture": [
+     "p3 top: nova gas transmission ltd additional written evidence",
+     "p3 top: ngtl system rate design and services application rh-#-#",
+     "p4 top: additional written evidence nova gas transmission ltd"
+    ]
+   },
+   "furniture_regions": 50
+  },
+  {
+   "doc_id": "3785572",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: nova gas transmission ltd ngtl",
+     "p2 bottom: adjacent to the edge to avoid changes in soil moisture",
+     "p3 top: - incorporate methods of vegetation disposal that would bene"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "3785685",
+   "pages": 36,
+   "counts": {
+    "single+layout_body": 82
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: environment climate change and canada environnement changeme",
+     "p2 top: national energy board neb information requests",
+     "p2 bottom: in the framework the choice of ratio is case-specific and is"
+    ]
+   },
+   "furniture_regions": 37
+  },
+  {
+   "doc_id": "3803354",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 14,
+    "single+layout_furniture": 4,
+    "repeated+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: suite # # tenth avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.neb-one.gc.ca",
+     "p4 top: page # of #",
+     "p5 top: page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p4 top: attachment to board letter",
+     "p4 top: dated # june #",
+     "p5 top: attachment to board letter"
+    ]
+   },
+   "furniture_regions": 44
+  },
+  {
+   "doc_id": "3811740",
+   "pages": 16,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 51
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: gugust #,#",
+     "p9 top: may # #"
+    ],
+    "single+layout_body": [
+     "p1 top: secutary of the board",
+     "p1 bottom: apprs to be uritten fr toe pi st",
+     "p2 top: whre the bourd made decisions prire"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "3813160",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 4,
+    "single+layout_furniture": 2,
+    "repeated+layout_body": 12,
+    "single+layout_body": 18
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: nova gas transmission ltd",
+     "p2 top: nova gas transmission ltd",
+     "p3 top: nova gas transmission ltd"
+    ],
+    "single+layout_furniture": [
+     "p1 top: section # application",
+     "p1 top: saddle lake lateral loop cold lake section project attachmen"
+    ],
+    "repeated+layout_body": [
+     "p2 top: section # application attachment #",
+     "p2 top: saddle lake lateral loop cold lake section project global an",
+     "p2 bottom: reviewer lh #-#-#"
+    ],
+    "single+layout_body": [
+     "p2 top: northwest territories",
+     "p2 bottom: city / town location revision b issued #-#-# date",
+     "p2 bottom: global ew #-#-# nad coordinate # system utm zone #n issue if"
+    ]
+   },
+   "furniture_regions": 31
+  },
+  {
+   "doc_id": "3902082",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 9,
+    "single+layout_furniture": 6,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: b a y t e #",
+     "p1 top: ene rg y # td",
+     "p1 bottom: e e ir"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: suite #oo centennial place telephone #.#.#",
+     "p1 bottom: # - #rd avenue s.w facsimile #.#.#",
+     "p1 bottom: calgary alberta t#p or# canada www.baytexenergy.com"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: b a y t e #",
+     "p3 bottom: b a y t e #",
+     "p4 bottom: b a y t e #"
+    ]
+   },
+   "furniture_regions": 10
+  },
+  {
+   "doc_id": "3903990",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 11,
+    "repeated+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie"
+    ],
+    "single+layout_body": [
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o",
+     "p1 top: # tenth avenue sw bureau #"
+    ],
+    "repeated+layout_furniture": [
+     "p4 top: attachment to commission letter",
+     "p4 top: dated # february #",
+     "p4 top: page # of #"
+    ]
+   },
+   "furniture_regions": 16
+  },
+  {
+   "doc_id": "3905627",
+   "pages": 356,
+   "counts": {
+    "single+layout_furniture": 4,
+    "single+layout_body": 659
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator",
+     "p2 top: r\u00e9gie de #'\u00e9nergie canada energy"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p3 top: autorisation de reproduction",
+     "p4 top: table des mati\u00e8res"
+    ]
+   },
+   "furniture_regions": 299
+  },
+  {
+   "doc_id": "3913197",
+   "pages": 26,
+   "counts": {
+    "single+layout_furniture": 14,
+    "repeated+layout_body": 61,
+    "single+layout_body": 77
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: nova gas transmission ltd",
+     "p1 top: north montney project certificate gc-#",
+     "p1 top: kahta section application for leave to open"
+    ],
+    "repeated+layout_body": [
+     "p3 top: nova gas transmission ltd tab c#",
+     "p3 top: north montney project - kahta section #s-#",
+     "p4 top: nova gas transmission ltd tab c#"
+    ],
+    "single+layout_body": [
+     "p3 top: transcanada engineering form",
+     "p3 top: tef-hydro-secondary-shop fabricator/contractor affidavit tra",
+     "p3 top: in lusiness to deliver"
+    ]
+   },
+   "furniture_regions": 232
+  },
+  {
+   "doc_id": "3935357",
+   "pages": 267,
+   "counts": {
+    "single+layout_body": 1429,
+    "single+layout_furniture": 20,
+    "repeated+layout_furniture": 333,
+    "repeated+layout_body": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: sunoco pipeline",
+     "p1 top: an energy transfer partmership",
+     "p1 bottom: filing no a#x#t# letter to cer re pipeline financial require"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: sunoco pipeline #.p # main st houston texas # #-#-#",
+     "p2 bottom: sunoco pipeline #.p # main st houston texas # #-#-#",
+     "p3 bottom: sunoco pipeline #.p # main st houston texas # #-#-#"
+    ],
+    "repeated+layout_furniture": [
+     "p8 top: table of contents",
+     "p10 top: table of contents",
+     "p11 top: table of contents"
+    ],
+    "repeated+layout_body": [
+     "p9 top: table of contents",
+     "p9 top: table of contents",
+     "p12 top: table of contents"
+    ]
+   },
+   "furniture_regions": 578
+  },
+  {
+   "doc_id": "3962356",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 16,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: res jupiter o urces jupiter resources inc # # - #th avenue s"
+    ],
+    "single+layout_body": [
+     "p1 top: #.#.# calgary ab t#p #g#",
+     "p2 top: re s o ur ce s",
+     "p2 bottom: # ngtl application for approval of tariff - temporary servic"
+    ],
+    "repeated+layout_body": [
+     "p2 top: jupiter",
+     "p3 top: jupiter",
+     "p4 top: jupiter"
+    ]
+   },
+   "furniture_regions": 10
+  },
+  {
+   "doc_id": "397153",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 5,
+    "repeated+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: file no att-atc-ttm # #-to#-#-#",
+     "p2 top: #.# references # written evidence of kinder morgan attachmen",
+     "p3 top: #.# references # written evidence of kinder morgan a# page #"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: # v#",
+     "p2 bottom: # v#",
+     "p3 bottom: # v#"
+    ]
+   },
+   "furniture_regions": 7
+  },
+  {
+   "doc_id": "397499",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 19,
+    "repeated+layout_body": 24
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: cottontl",
+     "p1 top: # # bingley peak",
+     "p2 top: #.# -#- railway"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: aquatic approved by calum bonnington",
+     "p1 bottom: research ltd terasen tmx - anchor loop project drawn by ashl",
+     "p1 bottom: pipelines date issued #/#/#"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "4003840",
+   "pages": 31,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 24,
+    "repeated+layout_furniture": 25
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p3 bottom: programs mitigation measures recommendations procedures and ",
+     "p4 bottom: b the criteria for where those measures will be taken"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: gc-#",
+     "p3 bottom: gc-#",
+     "p4 bottom: gc-#"
+    ]
+   },
+   "furniture_regions": 54
+  },
+  {
+   "doc_id": "4012820",
+   "pages": 10,
+   "counts": {
+    "single+layout_furniture": 10,
+    "single+layout_body": 19
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o"
+    ],
+    "single+layout_body": [
+     "p1 bottom: regulator the national energy board's adjudicative work has ",
+     "p1 bottom: regulator",
+     "p1 bottom: canada"
+    ]
+   },
+   "furniture_regions": 13
+  },
+  {
+   "doc_id": "401378",
+   "pages": 38,
+   "counts": {
+    "single+layout_body": 60,
+    "repeated+layout_body": 38,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: precedent agreement # transcanada in business to deliver",
+     "p2 top: precedent agreement in business to deliver",
+     "p3 top: precedent agreement in business to deliver"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: date july # # sheet no #",
+     "p2 top: transcanada",
+     "p2 bottom: date july # # sheet no #"
+    ],
+    "single+layout_furniture": [
+     "p7 top: precedent agreement",
+     "p14 top: precedent agreement",
+     "p16 top: precedent agreement"
+    ]
+   },
+   "furniture_regions": 158
+  },
+  {
+   "doc_id": "4034412",
+   "pages": 148,
+   "counts": {
+    "repeated+layout_furniture": 22,
+    "single+layout_body": 189,
+    "repeated+layout_body": 253,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p2 top: final offset measures plan for caribou habitat",
+     "p3 top: final offset measures plan for caribou habitat",
+     "p8 top: final offset measures plan for caribou habitat"
+    ],
+    "single+layout_body": [
+     "p2 bottom: enbridge",
+     "p3 bottom: # enbridge",
+     "p4 bottom: # enbridge"
+    ],
+    "repeated+layout_body": [
+     "p4 top: final offset measures plan for caribou habitat",
+     "p5 top: final offset measures plan for caribou habitat",
+     "p6 top: final offset measures plan for caribou habitat"
+    ],
+    "single+layout_furniture": [
+     "p25 top: government and indigenous engagement",
+     "p25 top: january # #",
+     "p129 bottom: figure #-# decision framework for determining and implementi"
+    ]
+   },
+   "furniture_regions": 864
+  },
+  {
+   "doc_id": "4041560",
+   "pages": 35,
+   "counts": {
+    "repeated+layout_body": 69,
+    "repeated+layout_furniture": 65,
+    "single+layout_body": 39,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: westccoast energy inc application for leave to open cs-#a",
+     "p1 top: t-south expansion & reliability project appendix # - u#-#-#",
+     "p2 top: westccoast energy inc application for leave to open cs-#a"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: order xg-#-#",
+     "p1 bottom: page # of #",
+     "p2 top: order xg-#-#"
+    ],
+    "single+layout_body": [
+     "p2 top: enbridge pressure test form enb-cfcs-proc-#f#",
+     "p2 bottom: pressure gauge # psi # psi # psi # psi # psi",
+     "p2 bottom: version #.# revised #-#-# internal document page # of #"
+    ],
+    "single+layout_furniture": [
+     "p4 bottom: version #.# revised #-#-# internal document page # of #",
+     "p5 top: application for leave to open cs-#a",
+     "p6 top: application for leave to open cs-#a"
+    ]
+   },
+   "furniture_regions": 365
+  },
+  {
+   "doc_id": "4088479",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 38,
+    "repeated+layout_furniture": 20,
+    "repeated+layout_body": 34
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: \u800c transmountain trans expansion mountain project specificati",
+     "p3 top: he transmountain trans mountain expansion project specificat",
+     "p4 bottom: that each segment falls within two concentric volumes in spa"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: #-tu-#-s#-#",
+     "p2 bottom: #-tu-#-s#-#",
+     "p3 bottom: #-tu-#-s#-#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: \u800c transmountain trans mountain expansion project specificati",
+     "p2 top: tmep-tu-# revision # #-#-# page # of #",
+     "p3 top: tmep-tu-# revision # #-#-# page # of #"
+    ]
+   },
+   "furniture_regions": 21
+  },
+  {
+   "doc_id": "4091431",
+   "pages": 9,
+   "counts": {
+    "single+layout_furniture": 7,
+    "single+layout_body": 17
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dix\u00e8me avenue s.-o"
+    ],
+    "single+layout_body": [
+     "p1 top: calgary alberta calgary alberta",
+     "p1 bottom: canada",
+     "p2 top: on # march # the commission of the canada energy regulator t"
+    ]
+   },
+   "furniture_regions": 15
+  },
+  {
+   "doc_id": "4094341",
+   "pages": 5,
+   "counts": {
+    "single+layout_furniture": 9,
+    "single+layout_body": 7
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o"
+    ],
+    "single+layout_body": [
+     "p1 top: # tenth avenue sw bureau #",
+     "p1 top: calgary alberta calgary alberta",
+     "p1 bottom: canada"
+    ]
+   },
+   "furniture_regions": 16
+  },
+  {
+   "doc_id": "4099837",
+   "pages": 5,
+   "counts": {
+    "repeated+layout_body": 10,
+    "repeated+layout_furniture": 5,
+    "single+layout_body": 25
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: enbridge pipelines inc enbridge transcript corrections - vol",
+     "p1 top: application for canadian mainline contracting page # of #",
+     "p2 top: enbridge pipelines inc enbridge transcript corrections - vol"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: rh-#-# file no of-tolls-group-e#-#-# #",
+     "p2 top: rh-#-# file no of-tolls-group-e#-#-# #",
+     "p3 top: rh-#-# file no of-tolls-group-e#-#-# #"
+    ],
+    "single+layout_body": [
+     "p1 top: enbridge pipelines inc enbridge",
+     "p1 top: canadian mainline contracting application application",
+     "p1 top: hearing order rh-#-#"
+    ]
+   },
+   "furniture_regions": 55
+  },
+  {
+   "doc_id": "4104907",
+   "pages": 4,
+   "counts": {},
+   "examples": {},
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "4105608",
+   "pages": 11,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 14,
+    "repeated+layout_body": 8
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator",
+     "p2 bottom: ordonnance op-#-#"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: attendu que la commission dispose de tous les renseignements",
+     "p3 top: appendice"
+    ],
+    "repeated+layout_body": [
+     "p7 top: annexe b",
+     "p7 top: dessins des croisements",
+     "p8 top: annexe b"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "4105899",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 37,
+    "repeated+layout_furniture": 15
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: # july #",
+     "p1 top: filed electronically",
+     "p2 top: background and statement of facts"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page # of #",
+     "p2 bottom: page # of #",
+     "p3 bottom: page # of #"
+    ]
+   },
+   "furniture_regions": 15
+  },
+  {
+   "doc_id": "4160320",
+   "pages": 5,
+   "counts": {
+    "single+layout_furniture": 1,
+    "repeated+layout_body": 6,
+    "single+layout_body": 21
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: steel reef file no"
+    ],
+    "repeated+layout_body": [
+     "p1 top: province of manitoba",
+     "p3 bottom: or being a solicitor",
+     "p4 top: province of manitoba"
+    ],
+    "single+layout_body": [
+     "p1 bottom: to pay the rental hereinbefore reserved in each and every ye",
+     "p1 bottom: renewal thereof",
+     "p1 bottom: initial"
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "4200433",
+   "pages": 35,
+   "counts": {
+    "single+layout_body": 47,
+    "repeated+layout_furniture": 21,
+    "repeated+layout_body": 61,
+    "single+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tc energy",
+     "p3 bottom: january # page #",
+     "p5 bottom: across the row topsoil was placed over the row with care tak"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: transcanada pipelines limited",
+     "p4 top: transcanada pipelines limited",
+     "p5 top: transcanada pipelines limited"
+    ],
+    "repeated+layout_body": [
+     "p3 top: king's north connection pipeline project fifth year post-con",
+     "p4 top: king's north connection pipeline project fifth year post-con",
+     "p4 bottom: january # page # of #"
+    ],
+    "single+layout_furniture": [
+     "p14 top: transcanada pipelines limited appendix a",
+     "p15 top: appendix a",
+     "p15 top: king's north connection pipeline project"
+    ]
+   },
+   "furniture_regions": 202
+  },
+  {
+   "doc_id": "4202048",
+   "pages": 13,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 38,
+    "repeated+layout_furniture": 24
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: fisheries and oceans p\u00eaches et oc\u00e9ans",
+     "p1 top: canada canada path no #-hcaa-#"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: alford creek section",
+     "p3 top: \u2022 the installation of a new #,# mm outside diameter pipeline"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: path no #-hcaa-#",
+     "p2 bottom: # of #",
+     "p3 top: path no #-hcaa-#"
+    ]
+   },
+   "furniture_regions": 47
+  },
+  {
+   "doc_id": "422327",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 11
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: exhibit no.ore#-#",
+     "p1 top: pi\u00e8ce",
+     "p1 top: n.e.b./o.n.e"
+    ],
+    "single+layout_body": [
+     "p1 top: date # july #",
+     "p1 top: indian and northern affaires indiennes",
+     "p1 top: northwest territories affairs canada et du nord canada"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "422775",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 2,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: gazoduc",
+     "p1 top: tqm"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # avenue auteuil bureau # brossard qu\u00e9bec j#z #p# t\u00e9l\u00e9phone "
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "4230560",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 4,
+    "repeated+layout_furniture": 10,
+    "repeated+layout_body": 12,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: mlt aikins mlt aikins llp",
+     "p1 top: western canada's law firm suite # - # west hastings street",
+     "p1 top: vancouver bc v#e #x#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: mlt aikins llp  mltaikins.com",
+     "p1 bottom: #v#",
+     "p2 bottom: mlt aikins llp  mltaikins.com"
+    ],
+    "repeated+layout_body": [
+     "p2 top: mltaikins",
+     "p2 top: western canada's law firm",
+     "p3 top: mlt aikins"
+    ],
+    "single+layout_furniture": [
+     "p4 bottom: mlt aikins llp|mltaikins.com",
+     "p5 bottom: mlt aikins llp|mltaikins.com",
+     "p6 bottom: mlt aikins llp mltaikins.com"
+    ]
+   },
+   "furniture_regions": 34
+  },
+  {
+   "doc_id": "4243289",
+   "pages": 15,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 31,
+    "repeated+layout_furniture": 36
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie"
+    ],
+    "single+layout_body": [
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o",
+     "p1 top: # tenth avenue sw bureau #"
+    ],
+    "repeated+layout_furniture": [
+     "p4 top: appendix # - attachment to commission letter",
+     "p4 top: dated # april #",
+     "p4 top: page # of #"
+    ]
+   },
+   "furniture_regions": 68
+  },
+  {
+   "doc_id": "4244189",
+   "pages": 61,
+   "counts": {
+    "repeated+layout_furniture": 13,
+    "single+layout_furniture": 12,
+    "repeated+layout_body": 182,
+    "single+layout_body": 257
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: transcanada pipelines limited order xg-#-#",
+     "p3 bottom: april # page # of #",
+     "p5 top: transcanada pipelines limited order xg-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 top: station # e# unit addition leave to open update",
+     "p3 top: station # e# unit addition tc energy engineering form leave ",
+     "p17 bottom: item id #- rev #"
+    ],
+    "repeated+layout_body": [
+     "p2 top: transcanada pipelines limited order xg-#-#",
+     "p2 top: station # e# unit addition leave to open update - c#",
+     "p2 bottom: april # page # of #"
+    ],
+    "single+layout_body": [
+     "p2 top: tc energy engineering form",
+     "p2 top: tef-me-sec-gl pipeline and facility secondary pressure testi",
+     "p2 top: secondary pressure test - fabricator/contractor affidavit r "
+    ]
+   },
+   "furniture_regions": 761
+  },
+  {
+   "doc_id": "4247414",
+   "pages": 293,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 601
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie"
+    ],
+    "single+layout_body": [
+     "p1 top: regulator du canada",
+     "p1 bottom: canad\u0103",
+     "p3 top: materials may be reproduced for personal educational and/or "
+    ]
+   },
+   "furniture_regions": 302
+  },
+  {
+   "doc_id": "4251350",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 54,
+    "repeated+layout_body": 15
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: general notes trans-northern pipelines inc t n trans-norther",
+     "p1 top: the field survey of the topographical features shown on this",
+     "p1 top: completed on"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: rev date by revision / issued",
+     "p2 top: trans-northern pipelines inc t n trans-northern trans-nord",
+     "p2 top: dig site and temporary access road at"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "4252170",
+   "pages": 7,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 9
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: via cer registry"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada warbler cardellina canadensis threatened #",
+     "p1 bottom: environment climate change and canada environnement changeme",
+     "p2 top: caribou boreal population rangifer tarandus threatened #"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "4253282",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 3,
+    "single+layout_furniture": 1,
+    "single+layout_body": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: \u800c transmountain",
+     "p2 top: \u800c transmountain",
+     "p3 top: \u800c transmountain"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: suite # # - # avenue sw calgary ab t#p #j# canada"
+    ],
+    "single+layout_body": [
+     "p4 top: transmountain"
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "4281268",
+   "pages": 10,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 17,
+    "repeated+layout_furniture": 24
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator"
+    ],
+    "single+layout_body": [
+     "p1 top: # dixi\u00e8me avenue s.-o suite #",
+     "p1 top: bureau # # tenth avenue sw",
+     "p1 top: calgary alberta calgary alberta"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: annexe # - pi\u00e8ce jointe \u00e0 la lettre de la commission",
+     "p3 top: dat\u00e9e du # octobre #",
+     "p3 top: page # sur #"
+    ]
+   },
+   "furniture_regions": 37
+  },
+  {
+   "doc_id": "4295926",
+   "pages": 81,
+   "counts": {
+    "single+layout_body": 138,
+    "single+layout_furniture": 49,
+    "repeated+layout_body": 121,
+    "repeated+layout_furniture": 133
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tc energy",
+     "p1 bottom: # achieving a state with no open ditch no unburied pipe and ",
+     "p2 bottom: # see attachment # figures # and #"
+    ],
+    "single+layout_furniture": [
+     "p2 top: december # #",
+     "p2 top: ms sladic",
+     "p2 top: page # of #"
+    ],
+    "repeated+layout_body": [
+     "p5 bottom: december # page # of #",
+     "p6 bottom: december # page # of #",
+     "p7 bottom: december # page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p16 bottom: december # page # of #",
+     "p26 top: # ngtl system expansion project caribou environmental assess",
+     "p26 bottom: december # page # of #"
+    ]
+   },
+   "furniture_regions": 897
+  },
+  {
+   "doc_id": "4327690",
+   "pages": 7,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 30,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: trans mountain expansion project - facilities transmountain",
+     "p1 top: leave to open application",
+     "p1 bottom: trans mountain pipeline #.p"
+    ],
+    "single+layout_body": [
+     "p2 top: notes",
+     "p2 top: # provide removable insulation jacket",
+     "p2 bottom: gecscertines rev e albata # only a a # #/#/# issued for cons"
+    ],
+    "repeated+layout_body": [
+     "p3 bottom: no reference drawing title reference drawing no no date revi",
+     "p4 bottom: no reference drawing title reference drawing no no date revi",
+     "p6 bottom: no reference drawing title reference drawing no no date revi"
+    ]
+   },
+   "furniture_regions": 6
+  },
+  {
+   "doc_id": "4328131",
+   "pages": 25,
+   "counts": {
+    "single+layout_body": 45,
+    "repeated+layout_furniture": 25
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: mlt aikins",
+     "p1 top: western canada's law firm mlt aikins llp",
+     "p1 top: suite # - # west hastings street"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: #v#",
+     "p2 bottom: #v#",
+     "p3 bottom: #v#"
+    ]
+   },
+   "furniture_regions": 49
+  },
+  {
+   "doc_id": "4367092",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: financial resources plan of twin rivers paper company inc",
+     "p1 bottom: $#,#,# liability limit the insurance coverage available to t",
+     "p2 top: recoveries of monies it would have to pay for legal liabilit"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "4392984",
+   "pages": 9,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 17,
+    "repeated+layout_furniture": 8
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: # est ordonn\u00e9 en vertu de #'article # de la lrce que hydro-q",
+     "p2 top: par les pr\u00e9sentes \u00e0 construire et \u00e0 exploiter le projet sous"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: ep-#",
+     "p3 bottom: ep-#",
+     "p4 bottom: ep-#"
+    ]
+   },
+   "furniture_regions": 20
+  },
+  {
+   "doc_id": "4403444",
+   "pages": 7,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 10,
+    "repeated+layout_furniture": 15
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada"
+    ],
+    "single+layout_body": [
+     "p1 top: suite # # dixi\u00e8me avenue s.-o",
+     "p1 top: # tenth avenue sw bureau #",
+     "p1 top: calgary alberta calgary alberta"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: appendix # - attachment to cer letter",
+     "p3 top: dated # september #",
+     "p3 top: page # of #"
+    ]
+   },
+   "furniture_regions": 34
+  },
+  {
+   "doc_id": "4415563",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 10,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tc energy",
+     "p1 top: # tel #-#-# - #st street sw fax calgary #-#-# alberta canada",
+     "p1 top: roselyn_chou@tcenergy.com"
+    ],
+    "single+layout_furniture": [
+     "p3 top: cer tariff no # page # of # ferc no #.#.#"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "4422791",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 22
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: \u0242ehdzo got'\u0131\u0328n\u0119 gots'\u0119\u0301 n\u00e1ked\u0131",
+     "p1 top: n\u00e1kedi p o box # phone tulita # eas@srrb.nt.ca nt #-# x#e #k",
+     "p1 bottom: concerns about imperial's efforts to extend the life of the "
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "442581",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 5
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: maritimes & northeast pipeline m&np",
+     "p2 top: # deferral accounts",
+     "p3 top: #.# income and large corporation taxes this deferral account"
+    ]
+   },
+   "furniture_regions": 3
+  },
+  {
+   "doc_id": "4429506",
+   "pages": 8,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 16,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator"
+    ],
+    "single+layout_body": [
+     "p1 top: # dixi\u00e8me avenue s.-o suite #",
+     "p1 top: bureau # # tenth avenue sw",
+     "p1 top: calgary alberta calgary alberta"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: pi\u00e8ce jointe \u00e0 la lettre de la commission",
+     "p3 top: dat\u00e9e du # janvier #",
+     "p3 top: page # sur #"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "4434404",
+   "pages": 11,
+   "counts": {
+    "single+layout_body": 23,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o",
+     "p1 top: # tenth avenue sw bureau #"
+    ],
+    "single+layout_furniture": [
+     "p1 top: regulator du canada"
+    ],
+    "repeated+layout_furniture": [
+     "p6 top: attachment to commission letter",
+     "p6 top: dated # february #",
+     "p6 top: page # of #"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "4439953",
+   "pages": 10,
+   "counts": {
+    "repeated+layout_body": 35,
+    "single+layout_body": 33,
+    "repeated+layout_furniture": 10
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: motion chart trans mountain pipeline ulc",
+     "p1 top: the shippers information request no # rh-#-# - file #",
+     "p1 top: ir  information request response to information request movi"
+    ],
+    "single+layout_body": [
+     "p1 top: #.# escalator",
+     "p2 top: claims and the request is limited to moc to the intervenor i",
+     "p2 top: documentation related to uncapped costs given covering submi"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: legal_cal:#.#",
+     "p2 bottom: legal_cal:#.#",
+     "p3 bottom: legal_cal:#.#"
+    ]
+   },
+   "furniture_regions": 72
+  },
+  {
+   "doc_id": "444475",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 7
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: twa",
+     "p4 bottom: phone #)#-# fax #)#-#",
+     "p4 bottom: city hall # - #th avenue south lethbridge alberta canada t#j"
+    ],
+    "single+layout_body": [
+     "p1 top: r jim twa",
+     "p1 bottom: canadians",
+     "p3 top: plate #"
+    ]
+   },
+   "furniture_regions": 13
+  },
+  {
+   "doc_id": "4448962",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 18,
+    "single+layout_furniture": 9,
+    "repeated+layout_body": 19,
+    "repeated+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: bakertilly",
+     "p3 top: bakertilly",
+     "p3 top: independent auditor's report - continued"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: audit \u2022 tax \u2022 advisory",
+     "p2 bottom: baker tilly windsor llp is a member of baker tilly canada co",
+     "p2 bottom: of baker tilly international limited all members of baker ti"
+    ],
+    "repeated+layout_body": [
+     "p5 top: centra transmission holdings inc",
+     "p7 top: centra transmission holdings inc",
+     "p8 top: centra transmission holdings inc"
+    ],
+    "repeated+layout_furniture": [
+     "p6 top: centra transmission holdings inc",
+     "p11 top: centra transmission holdings inc",
+     "p11 top: notes to financial statements"
+    ]
+   },
+   "furniture_regions": 31
+  },
+  {
+   "doc_id": "4462377",
+   "pages": 14,
+   "counts": {
+    "repeated+layout_body": 39,
+    "single+layout_body": 23
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p2 top: kinderzmorgan trans mountain pipeline #.p",
+     "p2 top: canada inc expansion project specification",
+     "p2 top: tmep-civ# revision # november # # page # of #"
+    ],
+    "single+layout_body": [
+     "p2 bottom: #.# safety inductions #",
+     "p2 bottom: #.# environmental requirements #",
+     "p4 bottom: eg un"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "4469907",
+   "pages": 8,
+   "counts": {
+    "single+layout_furniture": 5,
+    "single+layout_body": 19
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: r\u00e9gie de #'\u00e9nergie canada energy",
+     "p1 top: du canada regulator",
+     "p8 top: annexe # - pi\u00e8ce jointe \u00e0 la lettre de la commission"
+    ],
+    "single+layout_body": [
+     "p1 top: # dixi\u00e8me avenue s.-o suite #",
+     "p1 top: bureau # # tenth avenue sw",
+     "p1 top: calgary alberta calgary alberta"
+    ]
+   },
+   "furniture_regions": 11
+  },
+  {
+   "doc_id": "4482062",
+   "pages": 16,
+   "counts": {
+    "single+layout_furniture": 12,
+    "single+layout_body": 40
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p1 top: suite # # dixi\u00e8me avenue s.-o"
+    ],
+    "single+layout_body": [
+     "p1 top: # tenth avenue sw bureau #",
+     "p1 top: calgary alberta calgary alberta",
+     "p1 bottom: canada"
+    ]
+   },
+   "furniture_regions": 29
+  },
+  {
+   "doc_id": "4482124",
+   "pages": 12,
+   "counts": {
+    "repeated+layout_body": 29,
+    "repeated+layout_furniture": 33,
+    "single+layout_body": 20
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: westcoast energy inc westcoast response to cer ir no #",
+     "p1 top: aspen point program attachment # to westcoast response to ce",
+     "p1 top: wood canada limited"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: filed september # #",
+     "p1 bottom: page # of #",
+     "p2 top: westcoast energy inc westcoast response to cer ir no #"
+    ],
+    "single+layout_body": [
+     "p1 top: pls-cadd version #.#x# #:#:# pm tuesday june # #",
+     "p1 top: project name #:\\users\\mubassir.swapnil\\onedrive - wood plc\\s",
+     "p2 top: analysis results"
+    ]
+   },
+   "furniture_regions": 146
+  },
+  {
+   "doc_id": "4482135",
+   "pages": 19,
+   "counts": {
+    "single+layout_body": 43,
+    "repeated+layout_body": 14
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: canada energy regulator",
+     "p2 top: table of contents",
+     "p3 top: part # introduction and background"
+    ],
+    "repeated+layout_body": [
+     "p5 bottom: # written argument of imperial para #",
+     "p5 bottom: # written argument of imperial para #",
+     "p6 bottom: # written argument of imperial para #"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "4493251",
+   "pages": 13,
+   "counts": {
+    "repeated+layout_body": 25,
+    "repeated+layout_furniture": 5,
+    "single+layout_body": 27
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p2 top: ngtl gp ltd cer project notification",
+     "p2 top: leming lake sales lateral loop sand section section # applic",
+     "p2 bottom: october # page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: ngtl gp ltd cer project notification",
+     "p3 top: leming lake sales lateral loop sand section section # applic",
+     "p8 top: ngtl gp ltd cer project notification"
+    ],
+    "single+layout_body": [
+     "p11 top: ngtl gp ltd attachment #",
+     "p11 top: leming lake sales lateral loop sand section global and regio",
+     "p11 bottom: global city / town location revision # issued #-#-# date"
+    ]
+   },
+   "furniture_regions": 92
+  },
+  {
+   "doc_id": "4495825",
+   "pages": 23,
+   "counts": {
+    "repeated+layout_body": 79,
+    "repeated+layout_furniture": 10
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: canada energy regulator / la r\u00e9gie de #'\u00e9nergie du canada",
+     "p1 top: rh-#-# compliance filing ao-#-rh-#-# /",
+     "p1 bottom: #/#/# page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p5 bottom: #/#/# page # of #",
+     "p6 bottom: #/#/# page # of #",
+     "p8 bottom: #/#/# page # of #"
+    ]
+   },
+   "furniture_regions": 54
+  },
+  {
+   "doc_id": "4496619",
+   "pages": 51,
+   "counts": {
+    "repeated+layout_body": 243,
+    "single+layout_body": 137,
+    "repeated+layout_furniture": 51,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: project no #-#-#a #_# record of borehole bh#-# sheet # of #",
+     "p1 top: location fraser river drilling date july #-# # datum geodeti",
+     "p1 top: drilling contractor mud bay/boart longyear"
+    ],
+    "single+layout_body": [
+     "p1 top: n #.# e #.# ground utm coordinates drill rig sonic tracked",
+     "p1 bottom: #:# associates checked",
+     "p2 top: n #.# e #.# ground utm coordinates drill rig sonic tracked"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: ps_cpm_#.#a_#",
+     "p2 bottom: ps_cpm_#.#a_#",
+     "p3 bottom: ps_cpm_#.#a_#"
+    ],
+    "single+layout_furniture": [
+     "p51 top: trans mountain pipeline ulc february # #",
+     "p51 top: preliminary geotechnical hdd feasibility assessment project ",
+     "p51 bottom: #-#-# hdd geotechnical feasibility report - fraser river por"
+    ]
+   },
+   "furniture_regions": 57
+  },
+  {
+   "doc_id": "4498336",
+   "pages": 6,
+   "counts": {
+    "repeated+layout_body": 12,
+    "single+layout_body": 6,
+    "repeated+layout_furniture": 3
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: trans-northern pipelines inc",
+     "p2 top: trans-northern pipelines inc",
+     "p2 top: for the nine months ended september # #"
+    ],
+    "single+layout_body": [
+     "p1 top: cer quarterly surveillance report",
+     "p2 top: income summary",
+     "p3 top: average rate base"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: schedule #",
+     "p3 top: schedule #",
+     "p4 top: schedule #"
+    ]
+   },
+   "furniture_regions": 3
+  },
+  {
+   "doc_id": "4507529",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 9,
+    "repeated+layout_furniture": 6,
+    "repeated+layout_body": 7,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: mltaikins mlt aikins llp",
+     "p1 top: suite # - # #rd avenue s",
+     "p1 bottom: # sc # # # s #(# cer act"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: mlt aikins llp  mltaikins.com",
+     "p2 bottom: mlt aikins llp  mltaikins.com",
+     "p3 bottom: mlt aikins llp  mltaikins.com"
+    ],
+    "repeated+layout_body": [
+     "p2 top: mltaikins",
+     "p3 top: mltaikins",
+     "p3 top: western canada's law firm"
+    ],
+    "single+layout_furniture": [
+     "p7 bottom: adobe acrobat sign"
+    ]
+   },
+   "furniture_regions": 30
+  },
+  {
+   "doc_id": "4509955",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 8,
+    "single+layout_body": 3,
+    "repeated+layout_furniture": 4
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: spread #b - april # cumulative incurred",
+     "p1 top: scope april # cumulative incurred",
+     "p2 top: spread #b - april # cumulative incurred"
+    ],
+    "single+layout_body": [
+     "p1 bottom: freight - general $#,#",
+     "p2 bottom: specialized service #.e tank cleaning/medics $#,#,#",
+     "p3 bottom: trench breakers and sub drains $#,#,#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: ps_aa_#.#c_#",
+     "p2 bottom: ps_aa_#.#c_#",
+     "p3 bottom: ps_aa_#.#c_#"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "4518895",
+   "pages": 16,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 80,
+    "repeated+layout_body": 41
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: trans mountain pipeline ulc post-construction environmental ",
+     "p1 top: trans mountain expansion project year # report - january #",
+     "p1 bottom: page f-#"
+    ],
+    "single+layout_body": [
+     "p2 top: \u0304 b-# trans year trans mountain # pcem mountain transmountai",
+     "p2 bottom: # b-# b-# b-# scale date january # reference page sseid#.#.#",
+     "p2 bottom: note wells gray caribou gbpu matrix kp #.# range to protecti"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: #:#,# #x# rp",
+     "p2 bottom: columbia-shuswap gbpu kp #.# to kp#.# m",
+     "p2 bottom: # # # # # # # # # all locations approximate"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "4518954",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 16,
+    "repeated+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: species at risk critical habitat - additional information",
+     "p1 bottom: mean bankfull width and depth were # meters and #.# meters r",
+     "p2 top: predominantly cobbles although other substrates such as boul"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page # of #",
+     "p2 bottom: page # of #",
+     "p3 bottom: page # of #"
+    ]
+   },
+   "furniture_regions": 6
+  },
+  {
+   "doc_id": "4539772",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 21,
+    "repeated+layout_body": 34,
+    "single+layout_furniture": 15,
+    "repeated+layout_furniture": 34
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: # filing ids c# and c#",
+     "p2 bottom: # see ngtl gp's detailed responses in cer ir #.# and #.#",
+     "p2 bottom: # see ngtl gp's detailed responses in cer ir #.#"
+    ],
+    "repeated+layout_body": [
+     "p1 bottom: # filing id c#",
+     "p7 bottom: # filing id c#",
+     "p7 bottom: # filing id c#"
+    ],
+    "single+layout_furniture": [
+     "p2 top: february # #",
+     "p2 top: ramona sladic",
+     "p2 top: page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p6 top: cer #.#",
+     "p6 top: ngtl gp ltd response to cer information request no #",
+     "p6 bottom: february # # page # of #"
+    ]
+   },
+   "furniture_regions": 186
+  },
+  {
+   "doc_id": "454775",
+   "pages": 5,
+   "counts": {
+    "repeated+layout_furniture": 5,
+    "single+layout_body": 17
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: received #/#/# #:# # secretariat",
+     "p2 top: received #/#/# #:# # secretariat",
+     "p3 top: received #/#/# #:# # secretariat"
+    ],
+    "single+layout_body": [
+     "p1 top: myles and associates",
+     "p1 top: p.o box #",
+     "p1 top: margaree forks n.s"
+    ]
+   },
+   "furniture_regions": 33
+  },
+  {
+   "doc_id": "4549531",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 33
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: thank you for reporting this event om#-# to the canada energ",
+     "p1 top: that you have completed your submission to the cer of all in",
+     "p1 top: contact at the cer will review all of the material if any cl"
+    ]
+   },
+   "furniture_regions": 2
+  },
+  {
+   "doc_id": "4553560",
+   "pages": 39,
+   "counts": {
+    "repeated+layout_furniture": 35,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: ps_cpm_#.#a_#",
+     "p2 bottom: ps_cpm_#.#a_#",
+     "p4 bottom: ps_cpm_#.#a_#"
+    ],
+    "repeated+layout_body": [
+     "p3 bottom: ps_cpm_#.#a_#",
+     "p16 bottom: ps_cpm_#.#a_#",
+     "p34 bottom: ps_cpm_#.#a_#"
+    ]
+   },
+   "furniture_regions": 111
+  },
+  {
+   "doc_id": "4554312",
+   "pages": 198,
+   "counts": {
+    "single+layout_body": 646,
+    "repeated+layout_furniture": 214,
+    "repeated+layout_body": 60,
+    "single+layout_furniture": 51
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tcenergy",
+     "p1 bottom: # filing id c#",
+     "p1 bottom: # ibid pdf page # of #"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: ngtl gp ltd rev # environmental protection plan",
+     "p3 bottom: page #",
+     "p4 top: ngtl gp ltd rev # environmental protection plan"
+    ],
+    "repeated+layout_body": [
+     "p4 top: # abandonment program march #",
+     "p5 top: # abandonment program march #",
+     "p8 top: # abandonment program march #"
+    ],
+    "single+layout_furniture": [
+     "p62 bottom: tc_a#_ee.dwg #x# cadd drawing do not make manual revisions",
+     "p64 bottom: tc_a#_ee.dwg #x# cadd drawing do not make manual revisions",
+     "p65 bottom: tc_a#_ee.dwg #x# cadd drawing do not make manual revisions"
+    ]
+   },
+   "furniture_regions": 990
+  },
+  {
+   "doc_id": "4555472",
+   "pages": 9,
+   "counts": {
+    "single+layout_body": 11,
+    "repeated+layout_furniture": 22
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: imperial",
+     "p3 top: table of contents",
+     "p4 top: #.# introduction"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: page # of #",
+     "p3 top: norman wells operations",
+     "p3 top: # annual safety report"
+    ]
+   },
+   "furniture_regions": 29
+  },
+  {
+   "doc_id": "4567964",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 17,
+    "single+layout_furniture": 3,
+    "repeated+layout_furniture": 25
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: kpmg",
+     "p2 bottom: opinion",
+     "p3 top: kp mg"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: kpmg llp an ontario limited liability partnership and member",
+     "p2 bottom: organization of independent member firms affiliated with kpm",
+     "p2 bottom: english company limited by guarantee kpmg canada provides se"
+    ],
+    "repeated+layout_furniture": [
+     "p5 top: cochin pipeline abandonment trust",
+     "p6 top: cochin pipeline abandonment trust",
+     "p7 top: cochin pipeline abandonment trust"
+    ]
+   },
+   "furniture_regions": 38
+  },
+  {
+   "doc_id": "4571834",
+   "pages": 25,
+   "counts": {
+    "single+layout_body": 47,
+    "repeated+layout_body": 25,
+    "repeated+layout_furniture": 23
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: attachment tm #.#(a - figure #",
+     "p2 bottom: june # trans mountain pipeline ulc trans mountain burnaby #.",
+     "p2 bottom: june # trans mountain pipeline ulc trans mountain burnaby #."
+    ],
+    "repeated+layout_body": [
+     "p2 top: source cer attachment #.# revised trans mountain throughput ",
+     "p3 top: source cer attachment #.# revised trans mountain throughput ",
+     "p4 top: source cer attachment #.# revised trans mountain throughput "
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: # of #",
+     "p3 bottom: # of #",
+     "p4 bottom: # of #"
+    ]
+   },
+   "furniture_regions": 23
+  },
+  {
+   "doc_id": "4572337",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 30,
+    "single+layout_furniture": 5
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: thank you for reporting this event om#-# to the canada energ",
+     "p1 top: that you have completed your submission to the cer of all in",
+     "p1 top: contact at the cer will review all of the material if any cl"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: # # # #:# mountain",
+     "p3 top: #-#-# #:# mountain",
+     "p4 top: transcanada pipelines limited"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "4573090",
+   "pages": 4,
+   "counts": {
+    "single+layout_furniture": 4,
+    "single+layout_body": 14
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p4 bottom: powered by"
+    ],
+    "single+layout_body": [
+     "p1 bottom: commission on # march # the regdocs document number and link",
+     "p1 bottom: top of the commission's letter #.e it is not #",
+     "p1 bottom: canada"
+    ]
+   },
+   "furniture_regions": 3
+  },
+  {
+   "doc_id": "4581753",
+   "pages": 9,
+   "counts": {
+    "repeated+layout_body": 39,
+    "repeated+layout_furniture": 18,
+    "single+layout_body": 6
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: westcoast energy gp inc on behalf of westcoast energy limite",
+     "p1 top: sunrise expansion program attachment # - westcoast response ",
+     "p1 bottom: # filing id c#-# pdf pages #-#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: filed july # #",
+     "p1 bottom: page # of #",
+     "p2 top: filed july # #"
+    ],
+    "single+layout_body": [
+     "p1 top: westcoast response to kelly lake cree nation written evidenc",
+     "p3 bottom: # filing ids c#-# pdf page #",
+     "p4 bottom: # filing ids c#-# pdf page #-#"
+    ]
+   },
+   "furniture_regions": 52
+  },
+  {
+   "doc_id": "4593741",
+   "pages": 6,
+   "counts": {
+    "repeated+layout_furniture": 12,
+    "single+layout_body": 6
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p2 top: canada energy r\u00e9gie de #'\u00e9nergie"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: statement of concern",
+     "p3 top: part # - explain your interest"
+    ]
+   },
+   "furniture_regions": 24
+  },
+  {
+   "doc_id": "4646424",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 11,
+    "single+layout_furniture": 2,
+    "repeated+layout_body": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: colm boyle borden ladner gervais llp",
+     "p1 top: t cboyle@blg.com briggs #-#-# a larguinho bay # toronto cana",
+     "p1 bottom: # requesting relevant and material documents in a litigation"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: lawyers  patent & trademark agents",
+     "p4 bottom: # filing id c#-#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: blg",
+     "p2 top: borden ladner gervais",
+     "p3 top: blg"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "4652840",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 4,
+    "repeated+layout_body": 3,
+    "repeated+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: # annual safety report",
+     "p2 top: table of contents",
+     "p4 top: # overview of production operations activities for"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: february # # #",
+     "p3 bottom: february # # #",
+     "p5 bottom: february # # #"
+    ],
+    "repeated+layout_furniture": [
+     "p4 bottom: february # # #"
+    ]
+   },
+   "furniture_regions": 9
+  },
+  {
+   "doc_id": "4657051",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 4,
+    "repeated+layout_furniture": 3,
+    "single+layout_body": 15,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: \u25a0 innovation economic development science and canada innovat",
+     "p2 top: innovation science and innovation sciences et",
+     "p2 top: economic development canada d\u00e9veloppement \u00e9conomique canada"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: corporations canada corporations canada",
+     "p2 top: corporations canada corporations canada",
+     "p6 top: corporations canada corporations canada"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: form # formulaire #",
+     "p2 top: articles of incorporation statuts constitutifs"
+    ],
+    "repeated+layout_body": [
+     "p3 top: schedule / annexe",
+     "p4 top: schedule / annexe",
+     "p5 top: schedule / annexe"
+    ]
+   },
+   "furniture_regions": 21
+  },
+  {
+   "doc_id": "4662897",
+   "pages": 14,
+   "counts": {
+    "repeated+layout_body": 6,
+    "single+layout_body": 42,
+    "single+layout_furniture": 2
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p2 top: kinder morgan utopia holdco # and subsidiaries",
+     "p5 top: kinder morgan utopia holdco # and subsidiaries",
+     "p6 top: kinder morgan utopia holdco # and subsidiaries"
+    ],
+    "single+layout_body": [
+     "p2 top: table of contents",
+     "p2 top: page",
+     "p3 top: pwc"
+    ],
+    "single+layout_furniture": [
+     "p3 bottom: pricewaterhousecoopers llp # louisiana street suite # housto",
+     "p3 bottom: t # # # www.pwc.com/us"
+    ]
+   },
+   "furniture_regions": 15
+  },
+  {
+   "doc_id": "4664942",
+   "pages": 7,
+   "counts": {
+    "repeated+layout_body": 6,
+    "single+layout_body": 13,
+    "repeated+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: enbridge pipelines inc cromer terminal upgrades",
+     "p2 top: enbridge pipelines inc cromer terminal upgrades",
+     "p4 top: enbridge pipelines inc cromer terminal upgrades"
+    ],
+    "single+layout_body": [
+     "p1 top: avis de projet d'installations",
+     "p2 top: fournir les renseignements sur les questions fonci\u00e8res",
+     "p2 top: \u2022 #'emplacement du projet et la d\u00e9marche employ\u00e9e pour chois"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: enbridge pipelines inc cromer terminal upgrades"
+    ]
+   },
+   "furniture_regions": 23
+  },
+  {
+   "doc_id": "4665000",
+   "pages": 9,
+   "counts": {
+    "repeated+layout_furniture": 25,
+    "repeated+layout_body": 24,
+    "single+layout_body": 2
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: westcoast energy gp inc on behalf of westcoast energy limite",
+     "p1 top: quarterly surveillance report filed may # #",
+     "p1 bottom: page # of #"
+    ],
+    "repeated+layout_body": [
+     "p1 top: westcoast energy gp inc on behalf of westcoast energy limite",
+     "p2 top: schedule #",
+     "p2 top: westcoast energy gp inc on behalf of westcoast energy limite"
+    ],
+    "single+layout_body": [
+     "p2 top: quarterly surveillance report",
+     "p2 top: for three months ended march # #"
+    ]
+   },
+   "furniture_regions": 50
+  },
+  {
+   "doc_id": "4665382",
+   "pages": 160,
+   "counts": {
+    "single+layout_body": 455,
+    "single+layout_furniture": 64,
+    "repeated+layout_furniture": 149,
+    "repeated+layout_body": 15
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: jacobs",
+     "p2 top: jacobs",
+     "p2 bottom: jacobs the jacobs logo and all other jacobs group trademarks"
+    ],
+    "single+layout_furniture": [
+     "p3 top: phase # environmental site assessment",
+     "p5 top: phase # environmental site assessment",
+     "p6 top: phase # environmental site assessment"
+    ],
+    "repeated+layout_furniture": [
+     "p23 bottom: # erisinfo.com  environmental risk information services orde",
+     "p24 bottom: # erisinfo.com  environmental risk information services orde",
+     "p25 bottom: # erisinfo.com  environmental risk information services orde"
+    ],
+    "repeated+layout_body": [
+     "p36 top: map key number of direction/ elev/diff site db",
+     "p37 top: map key number of direction/ elev/diff site db",
+     "p41 top: map key number of direction/ elev/diff site db"
+    ]
+   },
+   "furniture_regions": 1111
+  },
+  {
+   "doc_id": "4665400",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 8,
+    "single+layout_body": 11,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: unclassified - non class\u00e9",
+     "p1 bottom: page # of #",
+     "p2 top: unclassified - non class\u00e9"
+    ],
+    "single+layout_body": [
+     "p1 top: statement of concern",
+     "p1 bottom: territory the lac ste anne m\u00e9tis district council is the dul",
+     "p2 top: body to represent the rights and interests of the #,# februa"
+    ],
+    "single+layout_furniture": [
+     "p3 bottom: reason for late submission"
+    ]
+   },
+   "furniture_regions": 9
+  },
+  {
+   "doc_id": "4665635",
+   "pages": 9,
+   "counts": {
+    "repeated+layout_furniture": 10,
+    "single+layout_body": 34,
+    "repeated+layout_body": 1,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: tabloid",
+     "p2 top: tabloid",
+     "p3 top: tabloid"
+    ],
+    "single+layout_body": [
+     "p1 top: = #:# town of coleman",
+     "p1 top: plot high a r t a r ek highway-# ro n ve tc energy e montros",
+     "p1 bottom: photo # taken at the upstream end of the erosion area downst"
+    ],
+    "repeated+layout_body": [
+     "p8 top: tabloid"
+    ],
+    "single+layout_furniture": [
+     "p9 top: pot #"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "4692504",
+   "pages": 4,
+   "counts": {
+    "single+layout_furniture": 5,
+    "single+layout_body": 6
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: canada energy r\u00e9gie de #'\u00e9nergie",
+     "p1 top: regulator du canada",
+     "p2 bottom: xg-#-#"
+    ],
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: it is ordered that",
+     "p3 top: # within # days of the date that the approved project is pla"
+    ]
+   },
+   "furniture_regions": 10
+  },
+  {
+   "doc_id": "4724902",
+   "pages": 24,
+   "counts": {
+    "repeated+layout_furniture": 48,
+    "repeated+layout_body": 23,
+    "single+layout_body": 105
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: trans mountain pipeline ulc attachment #.# \u2666 august #",
+     "p1 top: mainline optimization project project",
+     "p2 top: mainline optimization project project"
+    ],
+    "repeated+layout_body": [
+     "p2 top: trans mountain pipeline ulc attachment #.# \u2666 august #",
+     "p3 top: trans mountain pipeline ulc attachment #.# \u2666 august #",
+     "p4 top: trans mountain pipeline ulc attachment #.# \u2666 august #"
+    ],
+    "single+layout_body": [
+     "p2 top: technical description",
+     "p2 bottom: required",
+     "p2 bottom: \u2022 upgrades and/or modifications are also proposed within the"
+    ]
+   },
+   "furniture_regions": 93
+  },
+  {
+   "doc_id": "4738416",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 35
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: thank you for reporting this event om#-# to the canada energ",
+     "p1 top: you have completed your submission to the cer of all informa",
+     "p1 top: the cer will review all of the material if any clarification"
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "4738482",
+   "pages": 18,
+   "counts": {
+    "single+layout_furniture": 4,
+    "single+layout_body": 46,
+    "repeated+layout_furniture": 28
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: trans mountain pipeline ulc attachment # \u2666 october #",
+     "p1 top: salmon river replacement project",
+     "p2 top: unclassified - non-classifi\u00e9"
+    ],
+    "single+layout_body": [
+     "p2 top: fisheries and oceans p\u00eaches et oc\u00e9ans",
+     "p2 top: canada canada",
+     "p2 top: pacific region r\u00e9gion du pacifique"
+    ],
+    "repeated+layout_furniture": [
+     "p5 top: path no #-hpac-#",
+     "p5 bottom: page # of #",
+     "p6 top: path no #-hpac-#"
+    ]
+   },
+   "furniture_regions": 73
+  },
+  {
+   "doc_id": "4738487",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 3,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: nancy j mckenzie",
+     "p2 top: before the canada energy regulator",
+     "p3 bottom: requirements monitored by fisheries and oceans canada dfo"
+    ],
+    "single+layout_furniture": [
+     "p3 top: ed#bc comments on prei application for # year export licence",
+     "p3 top: draft licence eh-#-# page #",
+     "p4 top: ed#bc comments on prei application for # year export licence"
+    ]
+   },
+   "furniture_regions": 18
+  },
+  {
+   "doc_id": "475131",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 11,
+    "single+layout_body": 3
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: canada"
+    ],
+    "single+layout_body": [
+     "p1 bottom: acting secretary",
+     "p3 bottom: acting secretary",
+     "p4 bottom: acting secretary canada"
+    ]
+   },
+   "furniture_regions": 1
+  },
+  {
+   "doc_id": "475629",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 10,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 24
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # seventh avenue sw telephone/t\u00e9l\u00e9phone:#-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: information request no #",
+     "p2 top: attachment to neb letter dated",
+     "p2 top: # august #"
+    ]
+   },
+   "furniture_regions": 38
+  },
+  {
+   "doc_id": "478143",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 4,
+    "single+layout_body": 7,
+    "single+layout_furniture": 2
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: #/#/# #:# # mcinnes cooper page #/#",
+     "p2 top: #/#/# #:# # mcinnes cooper page #/#",
+     "p3 top: #/#/# #:# # mcinnes cooper page #/#"
+    ],
+    "single+layout_body": [
+     "p1 top: mcinnes barker # queen house street suite #",
+     "p1 top: cooper fredericton post office box new # brunswick stn a",
+     "p1 bottom: confidential information intended only for the person(s name"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: www.mcinnescooper.com charlottetown fredericton halifax monc",
+     "p2 bottom: www.mcinnescooper.com  charlottetown fredericton halifax mon"
+    ]
+   },
+   "furniture_regions": 51
+  },
+  {
+   "doc_id": "481226",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 4,
+    "single+layout_body": 1
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: proposed draft conditions re esl line # reversal page # of #",
+     "p2 top: proposed draft conditions re esl line # reversal page # of #",
+     "p3 top: proposed draft conditions re esl line # reversal page # of #"
+    ],
+    "single+layout_body": [
+     "p1 bottom: a the date the complaint was received from the landowner"
+    ]
+   },
+   "furniture_regions": 11
+  },
+  {
+   "doc_id": "490481",
+   "pages": 14,
+   "counts": {
+    "single+layout_body": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p5 bottom: # #:# engineers ase date john"
+    ]
+   },
+   "furniture_regions": 21
+  },
+  {
+   "doc_id": "490823",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 3,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p5 bottom: ao-#-gc-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw telephone/t\u00e9l\u00e9phone #-#-#",
+     "p1 bottom: calgary alberta t#p #x# facsimile/t\u00e9l\u00e9copieur #-#-#",
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "491641",
+   "pages": 10,
+   "counts": {
+    "single+layout_body": 2
+   },
+   "examples": {
+    "single+layout_body": [
+     "p6 top: n",
+     "p10 top: pid pid kenneth audrey #/o #/#/# date gas atlantic #:# sys #"
+    ]
+   },
+   "furniture_regions": 17
+  },
+  {
+   "doc_id": "495125",
+   "pages": 16,
+   "counts": {
+    "single+layout_body": 38,
+    "single+layout_furniture": 1,
+    "repeated+layout_body": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: barry",
+     "p1 bottom: # in essence irving oil seeks to cre\u00e1te its own private cont",
+     "p1 bottom: regulatory regime for construction and operation of the pipe"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: saint john \u00b7 moneton"
+    ],
+    "repeated+layout_body": [
+     "p2 top: barry spalding lawyers avocats page #",
+     "p3 top: barry spalding lawyers avocats page #",
+     "p5 top: barry spalding lawyers avocats page #"
+    ]
+   },
+   "furniture_regions": 43
+  },
+  {
+   "doc_id": "500271",
+   "pages": 13,
+   "counts": {
+    "repeated+layout_body": 34,
+    "repeated+layout_furniture": 29,
+    "single+layout_body": 6,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: n orth tmx anchor loop project",
+     "p1 top: construction group #+# to #+#",
+     "p2 top: n orth tmx anchor loop project"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: a merican winter hydrostatic test plan issued feb # #",
+     "p1 bottom: winter hydrostatic test plan - rev # page  # of #",
+     "p1 bottom: since # \u2022 earthworks \u2022 mining \u2022 pilings/caissons \u2022 pipeline "
+    ],
+    "single+layout_body": [
+     "p6 top: north tmx anchor loop project",
+     "p6 top: a m erican winter hydrostatic test plan issued feb # #",
+     "p11 top: north tmx anchor loop project"
+    ],
+    "single+layout_furniture": [
+     "p12 bottom: confidential & proprietary february # # - revision # page # "
+    ]
+   },
+   "furniture_regions": 150
+  },
+  {
+   "doc_id": "518760",
+   "pages": 38,
+   "counts": {
+    "single+layout_body": 75
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: except as detailed in appendix # to the consolidated financi",
+     "p1 top: board of directors have ownership interests or hold particip",
+     "p2 top: senior management personnel are covered by the same # liabil"
+    ]
+   },
+   "furniture_regions": 39
+  },
+  {
+   "doc_id": "522248",
+   "pages": 11,
+   "counts": {
+    "single+layout_body": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: table neb #.#(a m#/d all volumes ex-edmonton",
+     "p2 top: # april may june july august",
+     "p2 bottom: barge crude types moved # # # # # # # # # # # # # #"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "527142",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 8,
+    "single+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: # seventh avenue sw telephone/t\u00e9l\u00e9phone  #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca",
+     "p5 bottom: epe-#",
+     "p6 bottom: epe-#"
+    ]
+   },
+   "furniture_regions": 27
+  },
+  {
+   "doc_id": "529947",
+   "pages": 42,
+   "counts": {
+    "single+layout_body": 80,
+    "single+layout_furniture": 2,
+    "repeated+layout_body": 27,
+    "repeated+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p2 top: national energy office national",
+     "p2 top: board de #'\u00e9nergie"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: http://www.neb-one.gc.ca",
+     "p5 top: office national de #'\u00e9nergie"
+    ],
+    "repeated+layout_body": [
+     "p13 bottom: gh-#-# #",
+     "p14 bottom: # gh-#-#",
+     "p15 bottom: gh-#-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p28 bottom: # gh-#-#",
+     "p39 bottom: gh-#-# #",
+     "p42 bottom: # gh-#-#"
+    ]
+   },
+   "furniture_regions": 86
+  },
+  {
+   "doc_id": "530286",
+   "pages": 11,
+   "counts": {
+    "single+layout_body": 1,
+    "single+layout_furniture": 2,
+    "repeated+layout_furniture": 10,
+    "repeated+layout_body": 18
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: transcanada"
+    ],
+    "single+layout_furniture": [
+     "p2 top: september # #",
+     "p2 top: ms # dutil-berry"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: page # of #",
+     "p3 top: page # of #",
+     "p4 top: page # of #"
+    ],
+    "repeated+layout_body": [
+     "p3 top: transcanada keystone pipeline gp ltd",
+     "p3 top: book of reference for the alberta-saskatchewan segment of th",
+     "p4 top: transcanada keystone pipeline gp ltd"
+    ]
+   },
+   "furniture_regions": 13
+  },
+  {
+   "doc_id": "545490",
+   "pages": 11,
+   "counts": {
+    "repeated+layout_furniture": 33,
+    "single+layout_body": 4
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: attachment to neb letter",
+     "p1 top: dated # january #",
+     "p1 top: # of #"
+    ],
+    "single+layout_body": [
+     "p1 bottom: after the long seam failures occurred and after the girth we",
+     "p1 bottom: cracking were identified",
+     "p4 bottom: intended purpose the engineering assessment must"
+    ]
+   },
+   "furniture_regions": 45
+  },
+  {
+   "doc_id": "552663",
+   "pages": 164,
+   "counts": {
+    "single+layout_body": 772,
+    "single+layout_furniture": 231
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: scotiabank",
+     "p2 top: scotiabank is one of north america's premier financial",
+     "p2 top: institutions and canada's most international bank through"
+    ],
+    "single+layout_furniture": [
+     "p3 bottom: # # # # s # o t # a b a n k a n n u a # r e p o r t #",
+     "p4 bottom: # # # # # s # o t # a b a n k a n n u a # r e p o r t",
+     "p5 top: letter"
+    ]
+   },
+   "furniture_regions": 586
+  },
+  {
+   "doc_id": "555153",
+   "pages": 12,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 25,
+    "repeated+layout_body": 86
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: nova gas transmission limited environmental and socio-econom",
+     "p1 top: groundbirch pipeline project april # / #",
+     "p2 bottom: page #"
+    ],
+    "single+layout_body": [
+     "p2 top: nova gas transmission limited environmental alignment sheets",
+     "p2 top: groundbirch pipeline project april # / #",
+     "p2 top: environmental notes"
+    ],
+    "repeated+layout_body": [
+     "p3 top: hydrology",
+     "p3 bottom: existing pipeline ! # highway \u00a9 # cnes licensed by iunctus",
+     "p3 bottom: transcanada for see index notes sheet # - # soils ! kilometr"
+    ]
+   },
+   "furniture_regions": 15
+  },
+  {
+   "doc_id": "556846",
+   "pages": 28,
+   "counts": {
+    "single+layout_body": 46,
+    "single+layout_furniture": 1,
+    "repeated+layout_body": 20
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: canada",
+     "p3 top: permission to reproduce",
+     "p3 bottom: printed in canada imprim\u00e9 au canada"
+    ],
+    "single+layout_furniture": [
+     "p2 top: national energy board"
+    ],
+    "repeated+layout_body": [
+     "p9 bottom: mh-#-# #",
+     "p10 bottom: # mh-#-#",
+     "p11 bottom: mh-#-# #"
+    ]
+   },
+   "furniture_regions": 46
+  },
+  {
+   "doc_id": "558047",
+   "pages": 16,
+   "counts": {
+    "single+layout_body": 33,
+    "repeated+layout_body": 17
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: initiative de consultation relative",
+     "p1 bottom: office national national energy",
+     "p1 bottom: de #'\u00e9nergie board"
+    ],
+    "repeated+layout_body": [
+     "p5 top: question commentaire de #'on\u00e9",
+     "p6 top: question commentaire de #'on\u00e9",
+     "p7 top: question commentaire de #'on\u00e9"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "558694",
+   "pages": 9,
+   "counts": {
+    "repeated+layout_furniture": 9,
+    "single+layout_body": 1,
+    "repeated+layout_body": 10
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: filed on june # #",
+     "p2 bottom: filed on june # #",
+     "p3 bottom: filed on june # #"
+    ],
+    "single+layout_body": [
+     "p2 top: neb surveillance report"
+    ],
+    "repeated+layout_body": [
+     "p3 top: schedule #",
+     "p3 top: part #",
+     "p4 top: schedule #"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "559572",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 15,
+    "repeated+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: stike man elliott",
+     "p1 top: stikeman elliott llp barristers & solicitors",
+     "p1 bottom: london"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: # v#",
+     "p2 bottom: # v#",
+     "p3 bottom: # v#"
+    ]
+   },
+   "furniture_regions": 11
+  },
+  {
+   "doc_id": "575161",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 245
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 bottom: # # notes contractor to promide high point vents and low poi",
+     "p2 bottom: # all coordinates refer\u00e9nced to datum in sout-mest corner of",
+     "p2 bottom: s # # assuned refer to crade dwg pl-tm-#/# elevation at #.#m"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "576267",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 14,
+    "single+layout_furniture": 2
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: keystone pipeline canadian new build - manitoba section",
+     "p2 top: legend",
+     "p2 top: ball valve cathodic protection"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: f# pg #",
+     "p4 bottom: f# pg #"
+    ]
+   },
+   "furniture_regions": 9
+  },
+  {
+   "doc_id": "610380",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 6,
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 1,
+    "single+layout_body": 5
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: # mar # #:#pm hp laserjet fax p.#",
+     "p1 bottom: mar-#-# #:# #% p.#",
+     "p2 bottom: mar-#-# #:# #% p.#"
+    ],
+    "single+layout_furniture": [
+     "p2 top: # mar # #:#pm hp laserjet fax"
+    ],
+    "repeated+layout_furniture": [
+     "p3 top: # mar # #:#pm hp laserjet fax p.#"
+    ],
+    "single+layout_body": [
+     "p4 top: wood ward & co mpany",
+     "p4 top: lawvers llp",
+     "p4 bottom: of the person to whom it is addressed any distribution copyi"
+    ]
+   },
+   "furniture_regions": 38
+  },
+  {
+   "doc_id": "619625",
+   "pages": 11,
+   "counts": {
+    "single+layout_body": 22,
+    "repeated+layout_body": 16,
+    "repeated+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: application notice letter sent by courier on may # # to the ",
+     "p2 top: transalta energy marketing corp",
+     "p2 top: # - #th avenue s.w"
+    ],
+    "repeated+layout_body": [
+     "p5 top: fedex ship manager - print your label(s page # of #",
+     "p5 top: from rob warner origin id yycb # #-# fedex ship actwgt date ",
+     "p5 top: transalta corporation cad #/inca#"
+    ],
+    "repeated+layout_furniture": [
+     "p5 bottom: https://www.fedex.com/shipping/confirmaction.handle?method=d",
+     "p6 bottom: https://www.fedex.com/shipping/confirmaction.handle?method=d",
+     "p7 bottom: https://www.fedex.com/shipping/confirmaction.handle?method=d"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "633381",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 18,
+    "repeated+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: code postal  l#l#c# pays  canada"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: date de d\u00e9p\u00f4t de la demande #/#/#",
+     "p3 top: date de d\u00e9p\u00f4t de la demande #/#/#",
+     "p4 top: date de d\u00e9p\u00f4t de la demande #/#/#"
+    ]
+   },
+   "furniture_regions": 16
+  },
+  {
+   "doc_id": "633577",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 13,
+    "repeated+layout_furniture": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p1 bottom: email dedwards@southwest-energy.com"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: application submission date #/#/#",
+     "p3 top: application submission date #/#/#",
+     "p4 top: application submission date #/#/#"
+    ]
+   },
+   "furniture_regions": 10
+  },
+  {
+   "doc_id": "634987",
+   "pages": 21,
+   "counts": {
+    "repeated+layout_furniture": 28,
+    "single+layout_furniture": 3,
+    "repeated+layout_body": 21,
+    "single+layout_body": 39
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: nova gas transmission ltd hria - permit #-#",
+     "p1 bottom: page #",
+     "p2 bottom: page #"
+    ],
+    "single+layout_furniture": [
+     "p1 top: watino crossover pipeline august #/#",
+     "p5 top: watino crossover pipeline august #/#",
+     "p9 top: calais extension pipeline august #/#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: nova gas transmission ltd hria - permit #-#",
+     "p3 top: nova gas transmission ltd hria - permit #-#",
+     "p4 top: nova gas transmission ltd hria - permit #-#"
+    ],
+    "single+layout_body": [
+     "p2 top: watino crossover pipeline august #/#",
+     "p2 bottom: right-of-way illustrating creek valley vegetation characteri",
+     "p3 top: watino crossover pipeline august #/#"
+    ]
+   },
+   "furniture_regions": 157
+  },
+  {
+   "doc_id": "654935",
+   "pages": 33,
+   "counts": {
+    "repeated+layout_furniture": 70,
+    "single+layout_body": 57,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: joe acorn m.a.sc p.eng p.o box # yellowknife nt x#a #n#",
+     "p1 top: tel # #-#",
+     "p1 top: environmental and regulatory consultant fax # #-#"
+    ],
+    "single+layout_body": [
+     "p2 bottom: is it therefore our conclusion that there was no requirement",
+     "p2 bottom: filed with the neb under either the mvrma or the ceaa despit",
+     "p3 bottom: neb's proceedings has been subverted by allowing the goc to "
+    ],
+    "single+layout_furniture": [
+     "p8 bottom: government of denendeh",
+     "p9 bottom: government of denendeh",
+     "p10 bottom: government of denendeh"
+    ]
+   },
+   "furniture_regions": 218
+  },
+  {
+   "doc_id": "659694",
+   "pages": 9,
+   "counts": {
+    "single+layout_furniture": 3,
+    "single+layout_body": 31
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: neb file no of-ei-elec-m#-#-# #",
+     "p2 top: neb file no of-ei-elec-m#-#-# #",
+     "p9 bottom: # supra no.#"
+    ],
+    "single+layout_body": [
+     "p1 top: national energy board",
+     "p1 bottom: kjmoroz@hydro.mb.ca",
+     "p2 top: national energy board"
+    ]
+   },
+   "furniture_regions": 12
+  },
+  {
+   "doc_id": "722290",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_furniture": 3,
+    "single+layout_body": 3
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: p.#",
+     "p2 top: p.#",
+     "p3 top: p.#"
+    ],
+    "single+layout_body": [
+     "p1 bottom: #:#pm privleged thank authorzation you for cnidemial your lf",
+     "p2 bottom: #:#pm #:#",
+     "p4 bottom: no.# oct # # #:#pm"
+    ]
+   },
+   "furniture_regions": 45
+  },
+  {
+   "doc_id": "748936",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 8,
+    "single+layout_furniture": 5
+   },
+   "examples": {
+    "single+layout_body": [
+     "p9 top: feb-#-# #:# neb one # # # p.#",
+     "p10 top: ercb facility information page # of #",
+     "p10 top: ercb facility information options"
+    ],
+    "single+layout_furniture": [
+     "p9 bottom: total p.#",
+     "p10 bottom: http://www.abacusdatagraphics.com/abadata/mgfacilityflareinf",
+     "p12 bottom: http://www.abacusdatagraphics.com/mgdemo/mountwest/mountwest"
+    ]
+   },
+   "furniture_regions": 32
+  },
+  {
+   "doc_id": "761157",
+   "pages": 5,
+   "counts": {
+    "repeated+layout_furniture": 5,
+    "single+layout_body": 8
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 bottom: # v#",
+     "p2 bottom: # v#",
+     "p3 bottom: # v#"
+    ],
+    "single+layout_body": [
+     "p2 top: # references part # business and services restructuring prop",
+     "p2 top: appendix c# direct evidence of john j reed",
+     "p2 bottom: wcsb?"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "772868",
+   "pages": 16,
+   "counts": {
+    "single+layout_body": 27,
+    "single+layout_furniture": 3,
+    "repeated+layout_furniture": 15,
+    "repeated+layout_body": 26
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: # grand total any type fishing vessel bound for all destinal",
+     "p1 bottom: note fishing vessels and factory fishing vessels/fish proces",
+     "p1 bottom: page # enm-#-# page #"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: page #",
+     "p4 top: washington state department of transportation",
+     "p16 bottom: department of transportation"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: enm-#-# page #",
+     "p3 bottom: enm-#-# page #",
+     "p4 bottom: enm-#-# page #"
+    ],
+    "repeated+layout_body": [
+     "p4 bottom: draft wtp update december # #",
+     "p4 bottom: freight page #",
+     "p5 bottom: draft wtp update december # #"
+    ]
+   },
+   "furniture_regions": 92
+  },
+  {
+   "doc_id": "774658",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 10
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: in the matter of",
+     "p1 top: enbridge northern gateway project joint review panel",
+     "p2 top: # boreal retreats emerged as an exclusive all-season enclave"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "774943",
+   "pages": 30,
+   "counts": {
+    "single+layout_furniture": 8,
+    "single+layout_body": 64,
+    "repeated+layout_body": 13
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: hsgr#",
+     "p4 top: hsgr#",
+     "p11 top: vancouver"
+    ],
+    "single+layout_body": [
+     "p1 top: haisla gr # colonial correspondence",
+     "p1 bottom: days when # returned # found the vessel wrecked and learnt t",
+     "p2 top: hsgr# #"
+    ],
+    "repeated+layout_body": [
+     "p14 top: vancouver #",
+     "p18 top: vancouver #",
+     "p19 top: vancouver #"
+    ]
+   },
+   "furniture_regions": 78
+  },
+  {
+   "doc_id": "775403",
+   "pages": 34,
+   "counts": {
+    "single+layout_body": 71,
+    "single+layout_furniture": 12
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: indian and northern affairs affaires indiennes et du nord",
+     "p1 top: referred to purpose-objet initial p.a date b.f date initial ",
+     "p1 top: destinataire date"
+    ],
+    "single+layout_furniture": [
+     "p10 top: #/t #",
+     "p10 top: jams s robinso",
+     "p17 bottom: m #-(#"
+    ]
+   },
+   "furniture_regions": 43
+  },
+  {
+   "doc_id": "776270",
+   "pages": 7,
+   "counts": {
+    "single+layout_body": 11
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: state of wisconsin circuit court dane county",
+     "p1 top: branch",
+     "p2 top: for the #% penalty surcharge under wis stat #.#(# $#,#.# for"
+    ]
+   },
+   "furniture_regions": 7
+  },
+  {
+   "doc_id": "777308",
+   "pages": 23,
+   "counts": {
+    "single+layout_body": 46,
+    "repeated+layout_furniture": 22
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: table of contents",
+     "p2 bottom: #.#.# occasional services permitted  #",
+     "p3 top: #.#.# emergency services permitted  #"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: mackenzie gathering system project - code of conduct #",
+     "p3 bottom: mackenzie gathering system project - code of conduct #",
+     "p4 bottom: mackenzie gathering system project - code of conduct #"
+    ]
+   },
+   "furniture_regions": 46
+  },
+  {
+   "doc_id": "783160",
+   "pages": 8,
+   "counts": {
+    "single+layout_body": 16
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: several items",
+     "p3 top: procedural and substantive mitigation and accommodation in o",
+     "p3 top: what remains of our cultural ecological and economic inherit"
+    ]
+   },
+   "furniture_regions": 8
+  },
+  {
+   "doc_id": "789060",
+   "pages": 53,
+   "counts": {
+    "single+layout_body": 70,
+    "single+layout_furniture": 7,
+    "repeated+layout_furniture": 42,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: # septi\u00e8me avenue s.-o t\u00e9l\u00e9phone/telephone #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca",
+     "p3 top: document annex\u00e9 \u00e0 la lettre de #'office",
+     "p3 top: dat\u00e9e du # f\u00e9vrier #"
+    ],
+    "repeated+layout_furniture": [
+     "p6 bottom: mh-#-#",
+     "p7 bottom: mh-#-#",
+     "p8 bottom: mh-#-#"
+    ],
+    "repeated+layout_body": [
+     "p31 bottom: mh-#-#",
+     "p37 bottom: mh-#-#",
+     "p48 bottom: mh-#-#"
+    ]
+   },
+   "furniture_regions": 155
+  },
+  {
+   "doc_id": "791609",
+   "pages": 9,
+   "counts": {
+    "single+layout_body": 39
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: information request",
+     "p1 top: to dfo's submitted evidence of december # #",
+     "p1 top: from josette wier- intervenor"
+    ]
+   },
+   "furniture_regions": 0
+  },
+  {
+   "doc_id": "796389",
+   "pages": 12,
+   "counts": {
+    "single+layout_body": 5,
+    "repeated+layout_furniture": 9
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: canada"
+    ],
+    "repeated+layout_furniture": [
+     "p2 bottom: oc-#",
+     "p4 bottom: oc-#",
+     "p5 bottom: oc-#"
+    ]
+   },
+   "furniture_regions": 23
+  },
+  {
+   "doc_id": "797813",
+   "pages": 15,
+   "counts": {
+    "single+layout_body": 1,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p3 top: dnos"
+    ],
+    "single+layout_furniture": [
+     "p13 top: jame srove"
+    ]
+   },
+   "furniture_regions": 2
+  },
+  {
+   "doc_id": "801324",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 9,
+    "single+layout_furniture": 2
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: office national national energy",
+     "p1 top: de #'\u00e9nergie board",
+     "p1 bottom: # septi\u00e8me avenue s.-o t\u00e9l\u00e9phone/telephone #-#-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: http://www.neb-one.gc.ca",
+     "p4 bottom: xo-c#-#-#"
+    ]
+   },
+   "furniture_regions": 26
+  },
+  {
+   "doc_id": "812687",
+   "pages": 186,
+   "counts": {
+    "single+layout_furniture": 200,
+    "single+layout_body": 450,
+    "repeated+layout_body": 227,
+    "repeated+layout_furniture": 15
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: attachment b",
+     "p2 top: attachment b",
+     "p2 top: page # of #"
+    ],
+    "single+layout_body": [
+     "p1 top: transcanada pipelines limited rh-#-# page # of #",
+     "p1 top: impact of appro proposal on mainline rates",
+     "p1 top: for the test year ending december # #"
+    ],
+    "repeated+layout_body": [
+     "p58 top: business and services restructuring and",
+     "p58 top: mainline #-# tolls application",
+     "p59 top: business and services restructuring and"
+    ],
+    "repeated+layout_furniture": [
+     "p86 top: business and services restructuring and",
+     "p87 top: business and services restructuring and",
+     "p88 top: business and services restructuring and"
+    ]
+   },
+   "furniture_regions": 256
+  },
+  {
+   "doc_id": "822492",
+   "pages": 110,
+   "counts": {
+    "single+layout_body": 314,
+    "single+layout_furniture": 23
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: pembina",
+     "p1 top: june # #",
+     "p2 top: page #"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: pembina pipeline corporation",
+     "p1 bottom: # # - # avenue sw",
+     "p1 bottom: calgary ab t#p #g#"
+    ]
+   },
+   "furniture_regions": 193
+  },
+  {
+   "doc_id": "825917",
+   "pages": 20,
+   "counts": {
+    "single+layout_furniture": 1,
+    "single+layout_body": 40,
+    "repeated+layout_furniture": 37,
+    "repeated+layout_body": 1
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: analysis of northern gateway termpol final report"
+    ],
+    "single+layout_body": [
+     "p1 top: attachment # to jrp ir #.#",
+     "p2 top: contents",
+     "p3 top: introduction"
+    ],
+    "repeated+layout_furniture": [
+     "p2 top: analysis of northern gateway termpol issues",
+     "p2 bottom: june # page # of #",
+     "p3 top: analysis of northern gateway termpol issues"
+    ],
+    "repeated+layout_body": [
+     "p12 bottom: june # page # of #"
+    ]
+   },
+   "furniture_regions": 76
+  },
+  {
+   "doc_id": "834804",
+   "pages": 12,
+   "counts": {
+    "single+layout_body": 162,
+    "repeated+layout_body": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: # g h m n # f # r s",
+     "p1 top: dhantnc num  pp-#-#-d-#/#",
+     "p1 top: # dew point in-line heater & notes"
+    ],
+    "repeated+layout_body": [
+     "p1 top: # all instrument tag numbers on this sheet",
+     "p2 top: # all instrument tag numbers on this sheet",
+     "p7 top: # all instrument tag numbers on this sheet"
+    ]
+   },
+   "furniture_regions": 6
+  },
+  {
+   "doc_id": "847022",
+   "pages": 4,
+   "counts": {
+    "repeated+layout_body": 12,
+    "repeated+layout_furniture": 4,
+    "single+layout_body": 20
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: nova gas transmission ltd application for leave to open",
+     "p1 top: berland river compressor station unit b# addition tab #",
+     "p1 top: proc"
+    ],
+    "repeated+layout_furniture": [
+     "p1 top: page #",
+     "p2 top: page #",
+     "p3 top: page #"
+    ],
+    "single+layout_body": [
+     "p1 top: # weld #%",
+     "p1 top: revisions csnew-#-assy visual #% mt #% sw",
+     "p1 bottom: # # #r# #/ #/# # # # # # # # #r# # #/# rt xf #"
+    ]
+   },
+   "furniture_regions": 21
+  },
+  {
+   "doc_id": "847645",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 2,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: white # surrey canada upper british v#s #r# beach columbia r",
+     "p1 top: raven info@whiteravenlaw.ca t # # # f # # # bertha rick pesk"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: innovation integrity truth",
+     "p1 bottom: collaboration compassion results",
+     "p2 bottom: collaboration compassion results"
+    ]
+   },
+   "furniture_regions": 16
+  },
+  {
+   "doc_id": "851597",
+   "pages": 4,
+   "counts": {
+    "single+layout_body": 2,
+    "single+layout_furniture": 6,
+    "repeated+layout_body": 3
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: spectra bc fifth suite pipeline avenue # energy # and place ",
+     "p1 top: calgary alberta t#p #l# gjohnson@spectraenergy.com"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: westcoast energy inc a spectra energy company www.spectraene",
+     "p2 top: issue date august # #",
+     "p3 top: page #.#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: westcoast energy inc",
+     "p3 top: westcoast energy inc",
+     "p4 top: westcoast energy inc"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "892228",
+   "pages": 6,
+   "counts": {
+    "single+layout_body": 5,
+    "single+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy office national",
+     "p1 top: board de #'\u00e9nergie",
+     "p3 bottom: # westcoast energy inc gh-#-# transcript pages #-#"
+    ],
+    "single+layout_furniture": [
+     "p1 bottom: # seventh avenue sw telephone/t\u00e9l\u00e9phone:#-#-#",
+     "p1 bottom: calgary alberta t#p #x# facsimile/t\u00e9l\u00e9copieur #-#-#",
+     "p1 bottom: http://www.neb-one.gc.ca"
+    ]
+   },
+   "furniture_regions": 31
+  },
+  {
+   "doc_id": "894583",
+   "pages": 7,
+   "counts": {
+    "single+layout_furniture": 1,
+    "repeated+layout_furniture": 13,
+    "single+layout_body": 14
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: file no of-tolls-group#-t#-#-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: #_#|caldocs",
+     "p2 top: page # of #",
+     "p2 bottom: #_#|caldocs"
+    ],
+    "single+layout_body": [
+     "p2 top: submission of",
+     "p2 top: bp canada energy group ulc",
+     "p2 bottom: additional written evidence a#"
+    ]
+   },
+   "furniture_regions": 14
+  },
+  {
+   "doc_id": "902026",
+   "pages": 16,
+   "counts": {
+    "single+layout_body": 55,
+    "repeated+layout_furniture": 18,
+    "repeated+layout_body": 14
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: tariff no \u2022",
+     "p2 top: # definitions",
+     "p2 top: the following words and terms when used in this tariff or in"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: tmpl rules & regulations confidential",
+     "p1 bottom: revised january # #march # #",
+     "p2 bottom: revised january # #march # #"
+    ],
+    "repeated+layout_body": [
+     "p2 bottom: tmpl rules & regulations confidential",
+     "p3 bottom: tmpl rules & regulations confidential",
+     "p4 bottom: tmpl rules & regulations confidential"
+    ]
+   },
+   "furniture_regions": 81
+  },
+  {
+   "doc_id": "90476",
+   "pages": 59,
+   "counts": {
+    "single+layout_body": 113,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: minister of supply and services canada #",
+     "p3 bottom: addressed the price demand and supply reactions to a large h",
+     "p4 top: paper was not presented as a board conclusion about the acce"
+    ],
+    "single+layout_furniture": [
+     "p45 top: production +# +# +#"
+    ]
+   },
+   "furniture_regions": 5
+  },
+  {
+   "doc_id": "90482",
+   "pages": 46,
+   "counts": {
+    "single+layout_body": 58,
+    "repeated+layout_furniture": 41,
+    "single+layout_furniture": 7
+   },
+   "examples": {
+    "single+layout_body": [
+     "p2 top: mars #",
+     "p4 top: #.#.# incidences sur le facteur de risque des compagnies pip",
+     "p6 top: introduction"
+    ],
+    "repeated+layout_furniture": [
+     "p6 bottom: atelier sur les mesures de r\u00e9glementation incitatives #",
+     "p7 bottom: # atelier sur les mesures de r\u00e9glementation incitatives",
+     "p8 bottom: atelier sur les mesures de r\u00e9glementation incitatives #"
+    ],
+    "single+layout_furniture": [
+     "p14 top: chapitre #",
+     "p27 top: chapitre #",
+     "p30 top: chapitre #"
+    ]
+   },
+   "furniture_regions": 114
+  },
+  {
+   "doc_id": "90488",
+   "pages": 45,
+   "counts": {
+    "single+layout_body": 83,
+    "repeated+layout_body": 23,
+    "repeated+layout_furniture": 9,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p3 bottom: printed in canada imprim\u00e9 au canada",
+     "p4 top: table of contents",
+     "p5 top: list of figures"
+    ],
+    "repeated+layout_body": [
+     "p14 bottom: intervenor funding options #",
+     "p16 bottom: intervenor funding options #",
+     "p17 bottom: # intervenor funding options"
+    ],
+    "repeated+layout_furniture": [
+     "p15 bottom: # intervenor funding options",
+     "p18 bottom: intervenor funding options #",
+     "p19 bottom: # intervenor funding options"
+    ],
+    "single+layout_furniture": [
+     "p35 top: appendix #"
+    ]
+   },
+   "furniture_regions": 85
+  },
+  {
+   "doc_id": "90495",
+   "pages": 72,
+   "counts": {
+    "single+layout_body": 133
+   },
+   "examples": {
+    "single+layout_body": [
+     "p3 top: table of contents",
+     "p4 bottom: ministry of energy for ontario",
+     "p5 top: ministry of energy mines and petroleum resources british col"
+    ]
+   },
+   "furniture_regions": 4
+  },
+  {
+   "doc_id": "90502",
+   "pages": 61,
+   "counts": {
+    "single+layout_furniture": 2,
+    "single+layout_body": 142,
+    "repeated+layout_body": 40,
+    "repeated+layout_furniture": 11
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 bottom: market-based procedure",
+     "p39 top: chapter #"
+    ],
+    "single+layout_body": [
+     "p4 top: table of contents",
+     "p5 top: appendices",
+     "p6 top: abbreviations"
+    ],
+    "repeated+layout_body": [
+     "p11 bottom: ghw-#-# #",
+     "p12 bottom: # ghw-#-#",
+     "p13 bottom: ghw-#-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p39 bottom: ghw-#-# #",
+     "p46 bottom: # ghw-#-#",
+     "p47 bottom: ghw-#-# #"
+    ]
+   },
+   "furniture_regions": 124
+  },
+  {
+   "doc_id": "90509",
+   "pages": 96,
+   "counts": {
+    "single+layout_body": 222,
+    "repeated+layout_body": 54,
+    "repeated+layout_furniture": 34,
+    "single+layout_furniture": 4
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 bottom: determination procedures",
+     "p4 top: table of contents",
+     "p4 bottom: # evolution of the board's natural gas surplus determination"
+    ],
+    "repeated+layout_body": [
+     "p9 bottom: ghr-#-# #",
+     "p10 bottom: # ghr-#-#",
+     "p11 bottom: ghr-#-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p13 bottom: ghr-#-# #",
+     "p25 bottom: ghr-#-# #",
+     "p29 bottom: ghr-#-# #"
+    ],
+    "single+layout_furniture": [
+     "p49 top: chapter #",
+     "p51 top: file no #-#",
+     "p51 top: # february #"
+    ]
+   },
+   "furniture_regions": 223
+  },
+  {
+   "doc_id": "90517",
+   "pages": 103,
+   "counts": {
+    "repeated+layout_furniture": 206,
+    "single+layout_body": 468
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: neb/on\u00e9-hearing transcript-transcription d'audience-mh-#-#-v",
+     "p1 bottom: # of #",
+     "p2 top: neb/on\u00e9-hearing transcript-transcription d'audience-mh-#-#-v"
+    ],
+    "single+layout_body": [
+     "p1 top: mh-#-# - volume #",
+     "p1 top: index for all transcripts / indice des transcriptions d'audi",
+     "p1 top: index for this transcript / indice de la pr\u00e9sente transcript"
+    ]
+   },
+   "furniture_regions": 383
+  },
+  {
+   "doc_id": "90535",
+   "pages": 194,
+   "counts": {
+    "single+layout_body": 512,
+    "repeated+layout_body": 179,
+    "repeated+layout_furniture": 8
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: fissuration fcct # par corrosion o sous t tension",
+     "p1 bottom: d\u00e9cembre # mh-#-# fissuration fcst par corrosion sous tensio",
+     "p3 bottom: imprim\u00e9 sur du papier contenant des fibres recycl\u00e9es"
+    ],
+    "repeated+layout_body": [
+     "p4 bottom: fissuration par corrosion sous tension #",
+     "p5 bottom: # rapport de #'enqu\u00eate",
+     "p6 bottom: fissuration par corrosion sous tension #"
+    ],
+    "repeated+layout_furniture": [
+     "p9 bottom: # rapport de #'enqu\u00eate",
+     "p24 bottom: # rapport de #'enqu\u00eate",
+     "p135 bottom: fissuration par corrosion sous tension #"
+    ]
+   },
+   "furniture_regions": 389
+  },
+  {
+   "doc_id": "90560",
+   "pages": 85,
+   "counts": {
+    "single+layout_body": 105,
+    "repeated+layout_furniture": 8,
+    "repeated+layout_body": 75
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: national energy board",
+     "p1 bottom: canada",
+     "p3 top: hearing order/ordonnance d'audience"
+    ],
+    "repeated+layout_furniture": [
+     "p3 bottom: transcript order eh-#-#",
+     "p4 bottom: order eh-#-# transcript",
+     "p5 bottom: transcript order eh-#-#"
+    ],
+    "repeated+layout_body": [
+     "p6 bottom: order eh-#-# transcript",
+     "p7 bottom: transcript order eh-#-#",
+     "p8 bottom: order eh-#-# transcript"
+    ]
+   },
+   "furniture_regions": 183
+  },
+  {
+   "doc_id": "90691",
+   "pages": 21,
+   "counts": {
+    "single+layout_body": 33,
+    "single+layout_furniture": 1,
+    "repeated+layout_body": 9,
+    "repeated+layout_furniture": 6
+   },
+   "examples": {
+    "single+layout_body": [
+     "p3 bottom: imprim\u00e9 au canada printed in canada",
+     "p4 top: table des mati\u00e8res",
+     "p5 top: abr\u00e9viations"
+    ],
+    "single+layout_furniture": [
+     "p7 top: chapitre #"
+    ],
+    "repeated+layout_body": [
+     "p7 bottom: eh-#-# #",
+     "p9 bottom: eh-#-# #",
+     "p10 bottom: # eh-#-#"
+    ],
+    "repeated+layout_furniture": [
+     "p8 bottom: # eh-#-#",
+     "p11 bottom: eh-#-# #",
+     "p13 bottom: eh-#-# #"
+    ]
+   },
+   "furniture_regions": 40
+  },
+  {
+   "doc_id": "90991",
+   "pages": 96,
+   "counts": {
+    "repeated+layout_furniture": 192,
+    "single+layout_body": 422
+   },
+   "examples": {
+    "repeated+layout_furniture": [
+     "p1 top: neb/on\u00e9-hearing transcript-transcription d'audience-gh-#-#-v",
+     "p1 bottom: # of #",
+     "p2 top: neb/on\u00e9-hearing transcript-transcription d'audience-gh-#-#-v"
+    ],
+    "single+layout_body": [
+     "p1 top: gh-#-# - volume #",
+     "p1 top: index for all transcripts / indice des transcriptions d'audi",
+     "p1 top: index for this transcript / indice de la pr\u00e9sente transcript"
+    ]
+   },
+   "furniture_regions": 255
+  },
+  {
+   "doc_id": "92493",
+   "pages": 38,
+   "counts": {
+    "single+layout_body": 62,
+    "repeated+layout_body": 20,
+    "repeated+layout_furniture": 8,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "single+layout_body": [
+     "p4 top: table of contents",
+     "p4 bottom: #.# environmental inspection and monitoring                 ",
+     "p5 top: # decision                                                  "
+    ],
+    "repeated+layout_body": [
+     "p9 bottom: oh-#-# #",
+     "p11 bottom: oh-#-# #",
+     "p14 bottom: oh-#-# #"
+    ],
+    "repeated+layout_furniture": [
+     "p12 bottom: # oh-#-#",
+     "p27 bottom: # oh-#-#",
+     "p32 bottom: oh-#-# #"
+    ],
+    "single+layout_furniture": [
+     "p37 top: appendix #"
+    ]
+   },
+   "furniture_regions": 70
+  },
+  {
+   "doc_id": "927693",
+   "pages": 6,
+   "counts": {
+    "single+layout_furniture": 4,
+    "single+layout_body": 3
+   },
+   "examples": {
+    "single+layout_furniture": [
+     "p1 top: berja meter & controls ltd berja telephone # #-#",
+     "p1 top: #-#th avenue facsimile # #-#",
+     "p1 bottom: bk-# mechanical dead weight calibration"
+    ],
+    "single+layout_body": [
+     "p1 top: edmonton ab",
+     "p1 top: canada t#p #s# e-mail shop@berjagroup.com",
+     "p1 bottom: om uroroy"
+    ]
+   },
+   "furniture_regions": 3
+  },
+  {
+   "doc_id": "938349",
+   "pages": 18,
+   "counts": {
+    "repeated+layout_body": 34,
+    "single+layout_body": 20,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: #-#-'# #:# de- equiterre t-# p#/# f-#",
+     "p1 bottom: mar-#-# #:# #% p.#",
+     "p2 top: #-#-'# #:# de- equiterre t-# p#/# f-#"
+    ],
+    "single+layout_body": [
+     "p2 top: office national national",
+     "p2 top: de #'\u00e9nergle energy board canada",
+     "p3 top: march # # mail room"
+    ],
+    "single+layout_furniture": [
+     "p2 bottom: http://www.neb-one.gc.ca/efile/submissionerror.aspx?aspxerro"
+    ]
+   },
+   "furniture_regions": 184
+  },
+  {
+   "doc_id": "940189",
+   "pages": 6,
+   "counts": {
+    "repeated+layout_body": 18,
+    "repeated+layout_furniture": 6
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: line # reversal phase # project reporting period february # ",
+     "p1 top: condition #",
+     "p1 top: order xo-e#-#-#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: # of #",
+     "p2 bottom: # of #",
+     "p3 bottom: # of #"
+    ]
+   },
+   "furniture_regions": 12
+  },
+  {
+   "doc_id": "944671",
+   "pages": 5,
+   "counts": {
+    "single+layout_body": 14,
+    "repeated+layout_furniture": 13
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: \u00e9n bridge",
+     "p1 top: enbridge pipelines inc robert bourne",
+     "p1 top: #{th floor regulatory counsel"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: enb # #",
+     "p2 top: page #",
+     "p2 top: april # #"
+    ]
+   },
+   "furniture_regions": 17
+  },
+  {
+   "doc_id": "945438",
+   "pages": 12,
+   "counts": {
+    "repeated+layout_body": 19,
+    "single+layout_body": 6,
+    "repeated+layout_furniture": 13,
+    "single+layout_furniture": 1
+   },
+   "examples": {
+    "repeated+layout_body": [
+     "p1 top: #-#-# #:#:# a.m #-#-# #/#",
+     "p2 top: #-#-# #:#:# a.m #-#-# #/#",
+     "p3 top: #-#-# #:#:# a.m #-#-# #/#"
+    ],
+    "single+layout_body": [
+     "p1 top: fax cover sheet",
+     "p3 top: mail room",
+     "p3 top: salle de courier"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: apr-#-# #:# # # # #% p.#",
+     "p2 bottom: apr-#-# #:# # # # #% p.#",
+     "p3 bottom: apr-#-# #:# # # # #% p.#"
+    ],
+    "single+layout_furniture": [
+     "p8 top: #:#:# a.m #-#-# #/#"
+    ]
+   },
+   "furniture_regions": 125
+  },
+  {
+   "doc_id": "995751",
+   "pages": 48,
+   "counts": {
+    "single+layout_body": 123,
+    "repeated+layout_furniture": 40,
+    "repeated+layout_body": 83,
+    "single+layout_furniture": 22
+   },
+   "examples": {
+    "single+layout_body": [
+     "p1 top: enbridge pipelines inc wetland evalu ation",
+     "p1 top: line # replacement project august #/# #",
+     "p1 top: \u2022 kp start #.# kp end #.#"
+    ],
+    "repeated+layout_furniture": [
+     "p1 bottom: page a-#",
+     "p2 bottom: page a-#",
+     "p3 bottom: page a-#"
+    ],
+    "repeated+layout_body": [
+     "p2 top: line # replacement project august #/#",
+     "p2 top: kp start #.# kp end #.#",
+     "p2 top: wetland class #"
+    ],
+    "single+layout_furniture": [
+     "p23 top: enbridge pipelines inc supplemental wetland evaluation",
+     "p23 bottom: page b-#",
+     "p24 bottom: page b-#"
+    ]
+   },
+   "furniture_regions": 337
+  }
+ ]
+}

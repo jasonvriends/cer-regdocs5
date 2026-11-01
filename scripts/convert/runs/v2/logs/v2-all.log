@@ -1,0 +1,24 @@
+== convert v2 Mon Oct 12 00:15:41 EDT 2026
+done: 16 converted, 0 failed, 557s
+== vote glm-ocr:latest Mon Oct 12 00:24:59 EDT 2026
+votes: ours 1235, neither 498, theirs 413, both 384, abstain 76, error 23
+== vote qwen3-vl:8b-instruct Mon Oct 12 00:31:26 EDT 2026
+votes: ours 1431, both 486, theirs 397, neither 279, abstain 13, error 2
+== apply votes Mon Oct 12 01:04:40 EDT 2026
+ok       619625       11p    18.7s  words 8629 (ocr:11)  tables 0 pictures 65  docling 8629/8629 text 100.0%  md 100.0%  issues warning:21 info:27
+ok       782362        1p     1.4s  words 395 (ocr:1)  tables 0 pictures 1  docling 395/395 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       4251350       6p    31.0s  words 2592 (ocr:6)  tables 1 pictures 24  docling 2592/2592 text 100.0%  md 100.0%  issues warning:12 info:5
+ok       154133        9p     7.0s  words 1688 (ocr:9)  tables 0 pictures 12  docling 1688/1688 text 100.0%  md 100.0%  issues info:5 warning:14
+ok       895667        1p     1.1s  words 268 (ocr:1)  tables 0 pictures 4  docling 268/268 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       938349       18p    12.7s  words 4502 (ocr:18)  tables 0 pictures 8  docling 4502/4502 text 100.0%  md 100.0%  issues info:10 warning:30
+ok       945438       12p     7.4s  words 2368 (ocr:12)  tables 1 pictures 7  docling 2368/2368 text 100.0%  md 100.0%  issues info:9 warning:24
+ok       1044322       1p     1.1s  words 285 (ocr:1)  tables 0 pictures 4  docling 285/285 text 100.0%  md 100.0%  issues info:2 warning:2
+ok       3004277       1p     0.7s  words 173 (ocr:1)  tables 0 pictures 6  docling 173/173 text 100.0%  md 100.0%  issues info:2 warning:2
+ok       4041560      35p    94.0s  words 13135 (ocr:34/pdf:1)  tables 40 pictures 157  docling 13135/13135 text 100.0%  md 100.0%  issues info:30 warning:70
+ok       4665635       9p    33.8s  words 4028 (pdf:9)  tables 5 pictures 87  docling 4028/4028 text 100.0%  md 100.0%  issues info:15 warning:8
+ok       155587       59p    42.0s  words 12133 (ocr:59)  tables 0 pictures 0  docling 12133/12133 text 100.0%  md 100.0%  issues info:3 warning:109
+ok       159641        1p     1.1s  words 241 (ocr:1)  tables 0 pictures 3  docling 241/241 text 100.0%  md 100.0%  issues info:2 warning:2
+ok       3579771       5p     2.6s  words 443 (ocr:5)  tables 0 pictures 11  docling 443/443 text 100.0%  md 100.0%  issues info:3 warning:10
+ok       4553560      39p    46.3s  words 9487 (ocr:39)  tables 20 pictures 92  docling 9487/9487 text 100.0%  md 100.0%  issues info:25 warning:45
+done: 15 converted, 0 failed, 312s
+== finished Mon Oct 12 01:09:53 EDT 2026

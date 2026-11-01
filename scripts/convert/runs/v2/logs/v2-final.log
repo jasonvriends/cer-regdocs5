@@ -1,0 +1,406 @@
+convert v2: 320 document(s); run identity /mnt/e/_REGDOCS_/scripts/convert/runs/v2/run.json
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  36%|███▋      | 281/770 [00:00<00:00, 2796.20it/s]Loading weights:  73%|███████▎  | 561/770 [00:00<00:00, 2018.85it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 2482.80it/s]
+Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 277/1025 [00:00<00:00, 2745.64it/s]Loading weights:  54%|█████▍    | 552/1025 [00:00<00:00, 2536.52it/s]Loading weights:  79%|███████▊  | 807/1025 [00:00<00:00, 1976.22it/s]Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 2441.93it/s]
+Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 392/1197 [00:00<00:00, 3913.76it/s]Loading weights:  65%|██████▌   | 784/1197 [00:00<00:00, 2842.19it/s]Loading weights:  99%|█████████▉| 1188/1197 [00:00<00:00, 3290.73it/s]Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3266.04it/s]
+Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 377/1465 [00:00<00:00, 3754.55it/s]Loading weights:  51%|█████▏    | 753/1465 [00:00<00:00, 3292.86it/s]Loading weights:  74%|███████▍  | 1086/1465 [00:00<00:00, 3247.15it/s]Loading weights:  98%|█████████▊| 1442/1465 [00:00<00:00, 3360.41it/s]Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 3378.05it/s]
+Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights:  97%|█████████▋| 350/360 [00:00<00:00, 3494.55it/s]Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3546.40it/s]
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+ok       376407        1p     2.2s  words 408 (pdf:1)  tables 0 pictures 1  docling 408/408 text 100.0%  md 100.0%  issues info:2
+ok       619625       11p    18.0s  words 8629 (ocr:11)  tables 0 pictures 65  docling 8629/8629 text 100.0%  md 100.0%  issues warning:21 info:27
+ok       782362        1p     1.5s  words 395 (ocr:1)  tables 0 pictures 1  docling 395/395 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       783160        8p     6.5s  words 3214 (pdf:8)  tables 0 pictures 2  docling 3214/3214 text 100.0%  md 100.0%  issues info:3
+ok       789060       53p    52.4s  words 15361 (pdf:53)  tables 21 pictures 28  docling 15361/15361 text 100.0%  md 100.0%  issues info:64 warning:3
+ok       792285        2p     1.3s  words 429 (pdf:2)  tables 0 pictures 9  docling 429/429 text 100.0%  md 100.0%  issues info:3
+ok       796389       12p     7.8s  words 3434 (pdf:12)  tables 1 pictures 4  docling 3434/3434 text 100.0%  md 100.0%  issues info:7
+ok       818948        3p     1.9s  words 553 (pdf:3)  tables 1 pictures 3  docling 553/553 text 100.0%  md 100.0%  issues info:2
+ok       825917       20p    15.2s  words 6997 (pdf:20)  tables 1 pictures 3  docling 6997/6997 text 100.0%  md 100.0%  issues info:7
+ok       831238        1p     5.0s  words 322 (pdf:1)  tables 0 pictures 1  docling 322/322 text 100.0%  md 100.0%  issues info:1
+ok       837148        1p     1.1s  words 224 (pdf:1)  tables 0 pictures 6  docling 224/224 text 100.0%  md 100.0%  issues info:2
+ok       849018        3p     1.7s  words 534 (pdf:3)  tables 0 pictures 1  docling 534/534 text 100.0%  md 100.0%  issues info:1
+ok       869640        1p     7.6s  words 316 (ocr:1)  tables 1 pictures 1  docling 316/316 text 100.0%  md 100.0%  issues info:1
+ok       892228        6p     4.7s  words 1666 (pdf:6)  tables 1 pictures 8  docling 1666/1666 text 100.0%  md 100.0%  issues info:5
+ok       995751       48p    77.4s  words 19026 (pdf:48)  tables 33 pictures 179  docling 19026/19026 text 100.0%  md 100.0%  issues info:52 warning:1
+ok       1006614       3p     2.0s  words 633 (pdf:3)  tables 0 pictures 1  docling 633/633 text 100.0%  md 100.0%  issues info:2
+ok       1036748      40p    40.2s  words 11480 (pdf:40)  tables 10 pictures 24  docling 11480/11480 text 100.0%  md 100.0%  issues info:24
+ok       2411900      24p    16.2s  words 1524 (pdf:24)  tables 16 pictures 4  docling 1524/1524 text 100.0%  md 100.0%  issues info:24 warning:6
+ok       2414747       2p     1.3s  words 414 (pdf:2)  tables 0 pictures 4  docling 414/414 text 100.0%  md 100.0%  issues info:4
+ok       2431124       2p     4.1s  words 1061 (pdf:2)  tables 0 pictures 4  docling 1061/1061 text 100.0%  md 100.0%  issues info:2
+ok       2445615      19p    18.1s  words 6011 (pdf:19)  tables 8 pictures 2  docling 6011/6011 text 100.0%  md 100.0%  issues info:2
+ok       2445966       1p     3.5s  words 517 (pdf:1)  tables 0 pictures 1  docling 517/517 text 100.0%  md 100.0%  issues info:2
+ok       2498399       3p     2.4s  words 956 (pdf:3)  tables 0 pictures 8  docling 956/956 text 100.0%  md 100.0%  issues info:5
+ok       2504091       3p     4.9s  words 779 (pdf:3)  tables 3 pictures 49  docling 779/779 text 100.0%  md 100.0%  issues info:2
+ok       2672093      59p   108.2s  words 8803 (pdf:59)  tables 285 pictures 402  docling 8803/8803 text 100.0%  md 100.0%  issues info:100
+ok       2765703       7p     4.4s  words 1561 (ocr:7)  tables 0 pictures 1  docling 1561/1561 text 100.0%  md 100.0%  issues info:3
+ok       2784935     102p    74.7s  words 11366 (ocr:102)  tables 10 pictures 145  docling 11366/11366 text 100.0%  md 100.0%  issues info:108 warning:2
+ok       2797913       1p     0.7s  words 1 (ocr:1)  tables 0 pictures 1  docling 1/1 text 100.0%  md 100.0%  issues none
+ok       2809654       1p     0.7s  words 182 (ocr:1)  tables 0 pictures 2  docling 182/182 text 100.0%  md 100.0%  issues info:1
+ok       2811952       1p     0.9s  words 191 (pdf:1)  tables 1 pictures 0  docling 191/191 text 100.0%  md 100.0%  issues info:1
+ok       2812378       2p     1.6s  words 284 (ocr:2)  tables 1 pictures 3  docling 284/284 text 100.0%  md 100.0%  issues info:2
+ok       2813773      39p    43.1s  words 8759 (pdf:24/ocr:15)  tables 15 pictures 77  docling 8759/8759 text 100.0%  md 100.0%  issues info:28
+ok       2856403       3p     2.8s  words 469 (pdf:3)  tables 4 pictures 0  docling 469/469 text 100.0%  md 100.0%  issues info:1
+ok       2931125       8p     5.8s  words 2347 (pdf:8)  tables 1 pictures 3  docling 2347/2347 text 100.0%  md 100.0%  issues info:4
+ok       2968109       5p     3.5s  words 1558 (pdf:5)  tables 0 pictures 0  docling 1558/1558 text 100.0%  md 100.0%  issues info:5
+ok       3006468       4p     3.2s  words 1154 (pdf:4)  tables 2 pictures 3  docling 1154/1154 text 100.0%  md 100.0%  issues info:3
+ok       3027567      11p     8.2s  words 3489 (pdf:11)  tables 0 pictures 4  docling 3489/3489 text 100.0%  md 100.0%  issues info:5
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 4 is outside page bounds: value=-107.24312046729028 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+ok       3296431      61p   187.4s  words 16587 (pdf:61)  tables 89 pictures 228  docling 16587/16587 text 100.0%  md 100.0%  issues info:125 warning:8
+ok       3336533       1p     0.9s  words 241 (pdf:1)  tables 0 pictures 3  docling 241/241 text 100.0%  md 100.0%  issues info:2
+ok       3346853       3p     3.3s  words 612 (pdf:3)  tables 4 pictures 7  docling 612/612 text 100.0%  md 100.0%  issues info:5
+ok       3408089       2p     2.1s  words 528 (pdf:2)  tables 3 pictures 2  docling 528/528 text 100.0%  md 100.0%  issues info:3
+ok       3464084     174p   156.2s  words 55283 (pdf:174)  tables 80 pictures 2  docling 55283/55283 text 100.0%  md 100.0%  issues info:110
+ok       3491154       4p     3.0s  words 1020 (pdf:4)  tables 0 pictures 5  docling 1020/1020 text 100.0%  md 100.0%  issues info:4
+ok       3516573      37p    53.9s  words 9711 (pdf:32/ocr:5)  tables 24 pictures 79  docling 9711/9711 text 100.0%  md 100.0%  issues info:49 warning:1
+ok       3579887      42p    42.5s  words 10111 (pdf:36/ocr:6)  tables 31 pictures 73  docling 10111/10111 text 100.0%  md 100.0%  issues info:65
+ok       3609912       8p     5.8s  words 2452 (pdf:8)  tables 1 pictures 3  docling 2452/2452 text 100.0%  md 100.0%  issues info:3
+ok       3611012     326p  1046.0s  words 127018 (pdf:321/ocr:5)  tables 268 pictures 434  docling 127018/127018 text 100.0%  md 100.0%  issues info:533
+ok       3718411       9p    18.9s  words 7828 (pdf:9)  tables 1 pictures 14  docling 7828/7828 text 100.0%  md 100.0%  issues info:10
+ok       3746033       1p     0.7s  words 188 (pdf:1)  tables 0 pictures 2  docling 188/188 text 100.0%  md 100.0%  issues info:2
+ok       3779370       8p     8.1s  words 2226 (pdf:8)  tables 6 pictures 1  docling 2226/2226 text 100.0%  md 100.0%  issues info:7
+ok       3783785       1p     0.9s  words 73 (pdf:1)  tables 2 pictures 0  docling 73/73 text 100.0%  md 100.0%  issues info:1
+ok       3802873       2p     1.3s  words 426 (pdf:2)  tables 0 pictures 3  docling 426/426 text 100.0%  md 100.0%  issues info:2
+ok       3813160       4p    11.0s  words 1150 (pdf:4)  tables 0 pictures 3  docling 1150/1150 text 100.0%  md 100.0%  issues info:4
+ok       3905627     356p   386.1s  words 153699 (pdf:356)  tables 131 pictures 16  docling 153699/153699 text 100.0%  md 100.0%  issues info:71
+ok       3913002       2p     2.3s  words 662 (pdf:2)  tables 2 pictures 0  docling 662/662 text 100.0%  md 100.0%  issues info:1
+ok       3923221       2p     1.2s  words 417 (ocr:2)  tables 0 pictures 6  docling 417/417 text 100.0%  md 100.0%  issues info:2
+ok       3954197       1p     0.6s  words 113 (pdf:1)  tables 0 pictures 2  docling 113/113 text 100.0%  md 100.0%  issues info:2
+ok       4003840      31p    24.4s  words 9899 (pdf:31)  tables 8 pictures 4  docling 9899/9899 text 100.0%  md 100.0%  issues info:8
+ok       4012820      10p     8.0s  words 3585 (pdf:10)  tables 0 pictures 10  docling 3585/3585 text 100.0%  md 100.0%  issues info:9
+ok       4036188       2p     1.3s  words 363 (ocr:2)  tables 0 pictures 7  docling 363/363 text 100.0%  md 100.0%  issues info:2
+ok       4040068       1p     0.9s  words 281 (pdf:1)  tables 0 pictures 3  docling 281/281 text 100.0%  md 100.0%  issues info:2
+ok       4088479      21p    26.0s  words 5872 (pdf:21)  tables 42 pictures 24  docling 5872/5872 text 100.0%  md 100.0%  issues info:36
+ok       4091431       9p     8.2s  words 3927 (pdf:9)  tables 0 pictures 4  docling 3927/3927 text 100.0%  md 100.0%  issues info:4
+ok       4094341       5p     4.1s  words 1046 (pdf:5)  tables 2 pictures 6  docling 1046/1046 text 100.0%  md 100.0%  issues info:2
+ok       4099837       5p     8.6s  words 2806 (pdf:5)  tables 5 pictures 8  docling 2806/2806 text 100.0%  md 100.0%  issues info:5
+ok       4165334       1p     4.3s  words 1790 (pdf:1)  tables 0 pictures 15  docling 1790/1790 text 100.0%  md 100.0%  issues info:2 warning:1
+ok       4168155       1p     0.8s  words 254 (pdf:1)  tables 0 pictures 4  docling 254/254 text 100.0%  md 100.0%  issues info:2
+ok       4200433      35p    48.9s  words 14506 (pdf:34/ocr:1)  tables 18 pictures 11  docling 14506/14506 text 100.0%  md 100.0%  issues info:24 warning:1
+ok       4202048      13p    12.7s  words 6533 (pdf:13)  tables 1 pictures 5  docling 6533/6533 text 100.0%  md 100.0%  issues info:7
+ok       4228316       2p     1.4s  words 622 (pdf:2)  tables 0 pictures 5  docling 622/622 text 100.0%  md 100.0%  issues info:2
+ok       4246665       1p     1.6s  words 163 (pdf:1)  tables 4 pictures 0  docling 163/163 text 100.0%  md 100.0%  issues info:1
+ok       4247414     293p   268.5s  words 114094 (pdf:293)  tables 96 pictures 13  docling 114094/114094 text 100.0%  md 100.0%  issues info:30
+ok       4251350       6p    31.2s  words 2592 (ocr:6)  tables 1 pictures 24  docling 2592/2592 text 100.0%  md 100.0%  issues warning:12 info:5
+ok       4302448       1p     1.0s  words 115 (pdf:1)  tables 1 pictures 0  docling 115/115 text 100.0%  md 100.0%  issues info:1
+ok       4303211       1p     1.0s  words 167 (pdf:1)  tables 1 pictures 0  docling 167/167 text 100.0%  md 100.0%  issues none
+ok       4305358       1p     0.8s  words 321 (pdf:1)  tables 0 pictures 6  docling 321/321 text 100.0%  md 100.0%  issues info:2
+ok       4367082       2p     1.2s  words 240 (pdf:1/ocr:1)  tables 0 pictures 6  docling 240/240 text 100.0%  md 100.0%  issues info:3
+ok       4370790       1p     1.4s  words 211 (ocr:1)  tables 0 pictures 1  docling 211/211 text 100.0%  md 100.0%  issues none
+ok       4392984       9p     7.1s  words 3148 (pdf:9)  tables 0 pictures 4  docling 3148/3148 text 100.0%  md 100.0%  issues info:6
+ok       4417907       3p     6.7s  words 758 (pdf:3)  tables 5 pictures 0  docling 758/758 text 100.0%  md 100.0%  issues info:1
+ok       4448962      21p    18.8s  words 4237 (pdf:21)  tables 23 pictures 6  docling 4237/4237 text 100.0%  md 100.0%  issues info:17
+ok       4467335       3p     3.0s  words 534 (ocr:3)  tables 4 pictures 12  docling 534/534 text 100.0%  md 100.0%  issues info:3
+ok       4468801       1p     1.0s  words 320 (pdf:1)  tables 0 pictures 3  docling 320/320 text 100.0%  md 100.0%  issues info:2
+ok       4482135      19p    16.7s  words 8095 (pdf:19)  tables 1 pictures 1  docling 8095/8095 text 100.0%  md 100.0%  issues info:2
+ok       4493251      13p    15.8s  words 3897 (pdf:13)  tables 8 pictures 4  docling 3897/3897 text 100.0%  md 100.0%  issues info:10
+ok       4495825      23p    91.3s  words 9241 (ocr:23)  tables 26 pictures 249  docling 9241/9241 text 100.0%  md 100.0%  issues info:11
+ok       4518954       6p     6.3s  words 2952 (pdf:6)  tables 2 pictures 0  docling 2952/2952 text 100.0%  md 100.0%  issues info:1
+ok       4555472       9p    12.2s  words 2285 (pdf:5/ocr:4)  tables 5 pictures 4  docling 2285/2285 text 100.0%  md 100.0%  issues info:7 warning:4
+ok       4652840       5p     3.2s  words 678 (pdf:5)  tables 2 pictures 2  docling 678/678 text 100.0%  md 100.0%  issues info:3
+ok       4659931       1p     0.7s  words 162 (pdf:1)  tables 0 pictures 3  docling 162/162 text 100.0%  md 100.0%  issues info:2
+ok       4662281       1p     0.7s  words 211 (pdf:1)  tables 0 pictures 0  docling 211/211 text 100.0%  md 100.0%  issues none
+ok       4664834       1p     0.8s  words 115 (pdf:1)  tables 0 pictures 2  docling 115/115 text 100.0%  md 100.0%  issues info:2
+ok       4664942       7p     4.3s  words 1062 (pdf:7)  tables 5 pictures 0  docling 1062/1062 text 100.0%  md 100.0%  issues info:3
+ok       4665385       1p     0.7s  words 160 (pdf:1)  tables 0 pictures 5  docling 160/160 text 100.0%  md 100.0%  issues info:2
+ok       4665400       4p     3.0s  words 1254 (pdf:4)  tables 1 pictures 0  docling 1254/1254 text 100.0%  md 100.0%  issues info:1
+ok       4681674       2p    19.1s  words 2771 (pdf:2)  tables 15 pictures 8  docling 2771/2771 text 100.0%  md 100.0%  issues info:4
+ok       4681693       2p     2.3s  words 624 (pdf:2)  tables 1 pictures 0  docling 624/624 text 100.0%  md 100.0%  issues info:1
+ok       4699159       1p     0.8s  words 160 (pdf:1)  tables 0 pictures 4  docling 160/160 text 100.0%  md 100.0%  issues info:1
+ok       4724117       2p     1.2s  words 224 (pdf:2)  tables 2 pictures 0  docling 224/224 text 100.0%  md 100.0%  issues none
+ok       4724902      24p    26.2s  words 11649 (pdf:24)  tables 8 pictures 0  docling 11649/11649 text 100.0%  md 100.0%  issues info:9
+ok       154133        9p     6.7s  words 1821 (ocr:9)  tables 0 pictures 12  docling 1821/1821 text 100.0%  md 100.0%  issues warning:14 info:8
+ok       235830        1p     0.8s  words 199 (ocr:1)  tables 0 pictures 6  docling 199/199 text 100.0%  md 100.0%  issues warning:1 info:1
+ok       249221        1p     0.7s  words 167 (ocr:1)  tables 0 pictures 5  docling 167/167 text 100.0%  md 100.0%  issues info:1
+ok       411367        1p     0.7s  words 218 (pdf:1)  tables 0 pictures 2  docling 218/218 text 100.0%  md 100.0%  issues info:2
+ok       440959        3p     2.3s  words 1259 (ocr:3)  tables 0 pictures 0  docling 1259/1259 text 100.0%  md 100.0%  issues none
+ok       454775        5p     5.5s  words 1468 (ocr:5)  tables 1 pictures 4  docling 1468/1468 text 100.0%  md 100.0%  issues info:5
+ok       459903        1p     0.5s  words 0 (ocr:1)  tables 0 pictures 2  docling 0/0 text 100.0%  md 100.0%  issues info:1
+ok       464892        2p     1.2s  words 377 (pdf:2)  tables 0 pictures 6  docling 377/377 text 100.0%  md 100.0%  issues info:2
+ok       490481       14p    17.5s  words 2757 (ocr:14)  tables 4 pictures 4  docling 2757/2757 text 100.0%  md 100.0%  issues info:18
+ok       545490       11p     7.2s  words 3156 (pdf:11)  tables 0 pictures 0  docling 3156/3156 text 100.0%  md 100.0%  issues info:8
+ok       555153       12p    23.1s  words 6807 (pdf:12)  tables 0 pictures 18  docling 6807/6807 text 100.0%  md 100.0%  issues info:12
+ok       558047       16p    19.1s  words 5527 (pdf:16)  tables 16 pictures 3  docling 5527/5527 text 100.0%  md 100.0%  issues info:11
+ok       575446        1p     0.9s  words 280 (pdf:1)  tables 0 pictures 7  docling 280/280 text 100.0%  md 100.0%  issues info:2
+ok       628523        1p     0.8s  words 228 (pdf:1)  tables 0 pictures 5  docling 228/228 text 100.0%  md 100.0%  issues info:2
+ok       634987       21p    18.8s  words 5768 (pdf:21)  tables 2 pictures 13  docling 5768/5768 text 100.0%  md 100.0%  issues info:10
+ok       724670        2p     1.4s  words 496 (pdf:2)  tables 0 pictures 6  docling 496/496 text 100.0%  md 100.0%  issues info:2
+ok       747202        1p     0.7s  words 143 (ocr:1)  tables 0 pictures 2  docling 143/143 text 100.0%  md 100.0%  issues info:1
+ok       759178        1p     1.9s  words 534 (pdf:1)  tables 1 pictures 0  docling 534/534 text 100.0%  md 100.0%  issues none
+ok       761157        5p     4.2s  words 1446 (pdf:5)  tables 2 pictures 0  docling 1446/1446 text 100.0%  md 100.0%  issues info:5
+ok       774658        6p     5.4s  words 1945 (pdf:6)  tables 0 pictures 6  docling 1945/1945 text 100.0%  md 100.0%  issues info:5
+ok       774943       30p    28.0s  words 16236 (ocr:30)  tables 0 pictures 15  docling 16236/16236 text 100.0%  md 100.0%  issues info:12
+ok       777308       23p    17.2s  words 6473 (pdf:23)  tables 3 pictures 0  docling 6473/6473 text 100.0%  md 100.0%  issues info:3
+ok       801324        5p     3.8s  words 1167 (pdf:5)  tables 1 pictures 6  docling 1167/1167 text 100.0%  md 100.0%  issues info:6
+ok       831328        2p     1.7s  words 376 (pdf:2)  tables 2 pictures 0  docling 376/376 text 100.0%  md 100.0%  issues none
+ok       834804       12p    41.3s  words 8285 (ocr:12)  tables 0 pictures 12  docling 8285/8285 text 100.0%  md 100.0%  issues none
+ok       835125        2p     1.7s  words 465 (pdf:2)  tables 0 pictures 8  docling 465/465 text 100.0%  md 100.0%  issues info:4
+ok       847022        4p     6.2s  words 1189 (pdf:4)  tables 0 pictures 4  docling 1189/1189 text 100.0%  md 100.0%  issues info:4
+ok       851597        4p     3.7s  words 832 (pdf:4)  tables 5 pictures 1  docling 832/832 text 100.0%  md 100.0%  issues info:4
+ok       894583        7p     5.5s  words 2750 (ocr:7)  tables 0 pictures 1  docling 2750/2750 text 100.0%  md 100.0%  issues info:1
+ok       895667        1p     1.2s  words 268 (ocr:1)  tables 0 pictures 4  docling 268/268 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       919596        2p     3.0s  words 1183 (pdf:1/ocr:1)  tables 0 pictures 1  docling 1183/1183 text 100.0%  md 100.0%  issues info:1
+ok       938349       18p    13.5s  words 4630 (ocr:18)  tables 0 pictures 8  docling 4630/4630 text 100.0%  md 100.0%  issues warning:30 info:20
+ok       945438       12p     8.3s  words 2368 (ocr:12)  tables 1 pictures 7  docling 2368/2368 text 100.0%  md 100.0%  issues warning:24 info:8
+ok       984753        3p    13.7s  words 1824 (ocr:3)  tables 0 pictures 3  docling 1824/1824 text 100.0%  md 100.0%  issues none
+ok       1044322       1p     1.3s  words 284 (ocr:1)  tables 0 pictures 4  docling 284/284 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       2393328       1p     2.5s  words 777 (pdf:1)  tables 0 pictures 2  docling 777/777 text 100.0%  md 100.0%  issues info:1
+ok       2396007       1p     0.9s  words 204 (pdf:1)  tables 0 pictures 8  docling 204/204 text 100.0%  md 100.0%  issues info:2
+ok       2398275       1p     0.8s  words 202 (pdf:1)  tables 0 pictures 7  docling 202/202 text 100.0%  md 100.0%  issues info:2
+ok       2451800       4p     2.8s  words 1169 (ocr:4)  tables 0 pictures 11  docling 1169/1169 text 100.0%  md 100.0%  issues info:2
+ok       2480847       2p     1.3s  words 374 (pdf:2)  tables 0 pictures 5  docling 374/374 text 100.0%  md 100.0%  issues info:3
+ok       2482214       1p     2.3s  words 418 (pdf:1)  tables 0 pictures 1  docling 418/418 text 100.0%  md 100.0%  issues info:2
+ok       2522918       3p     2.0s  words 480 (pdf:3)  tables 1 pictures 7  docling 480/480 text 100.0%  md 100.0%  issues info:4
+ok       2564753       2p     2.6s  words 358 (pdf:2)  tables 2 pictures 0  docling 358/358 text 100.0%  md 100.0%  issues info:1
+ok       2684908      60p   158.5s  words 16149 (pdf:54/ocr:6)  tables 62 pictures 45  docling 16149/16149 text 100.0%  md 100.0%  issues info:61 warning:1
+ok       2785444       4p     3.2s  words 1166 (pdf:4)  tables 0 pictures 2  docling 1166/1166 text 100.0%  md 100.0%  issues info:5
+ok       2809132       1p     1.0s  words 539 (pdf:1)  tables 0 pictures 0  docling 539/539 text 100.0%  md 100.0%  issues none
+ok       2810590       2p     1.6s  words 255 (pdf:2)  tables 2 pictures 4  docling 255/255 text 100.0%  md 100.0%  issues info:4
+ok       2957503       4p     6.4s  words 870 (pdf:4)  tables 0 pictures 11  docling 870/870 text 100.0%  md 100.0%  issues info:8
+ok       3004277       1p     0.8s  words 173 (ocr:1)  tables 0 pictures 6  docling 173/173 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       3066155       3p     2.7s  words 577 (pdf:3)  tables 4 pictures 5  docling 577/577 text 100.0%  md 100.0%  issues info:5
+ok       3210153       1p     0.9s  words 241 (pdf:1)  tables 0 pictures 4  docling 241/241 text 100.0%  md 100.0%  issues info:2
+ok       3225708      45p    64.4s  words 15378 (pdf:36/ocr:9)  tables 17 pictures 42  docling 15378/15378 text 100.0%  md 100.0%  issues info:39 warning:2
+ok       3284072      14p    15.1s  words 2616 (pdf:14)  tables 5 pictures 20  docling 2616/2616 text 100.0%  md 100.0%  issues info:12
+ok       3338141     214p   326.4s  words 51950 (pdf:28/ocr:186)  tables 115 pictures 539  docling 51950/51950 text 100.0%  md 100.0%  issues info:110 warning:24
+ok       3422749       1p     3.9s  words 361 (ocr:1)  tables 0 pictures 1  docling 361/361 text 100.0%  md 100.0%  issues info:1
+ok       3463345      10p     7.0s  words 2112 (pdf:10)  tables 1 pictures 9  docling 2112/2112 text 100.0%  md 100.0%  issues info:6
+ok       3559563       4p     2.8s  words 974 (pdf:4)  tables 0 pictures 4  docling 974/974 text 100.0%  md 100.0%  issues info:5
+ok       3691960       2p     1.8s  words 231 (pdf:2)  tables 0 pictures 1  docling 231/231 text 100.0%  md 100.0%  issues info:1
+ok       3705807       3p     2.6s  words 998 (pdf:3)  tables 1 pictures 4  docling 998/998 text 100.0%  md 100.0%  issues info:5
+ok       3767841       4p     2.5s  words 817 (pdf:4)  tables 0 pictures 6  docling 817/817 text 100.0%  md 100.0%  issues info:6
+ok       3768464     141p   218.2s  words 45914 (pdf:141)  tables 77 pictures 166  docling 45914/45914 text 100.0%  md 100.0%  issues info:99
+ok       3777260       1p     0.9s  words 231 (pdf:1)  tables 0 pictures 2  docling 231/231 text 100.0%  md 100.0%  issues info:2
+ok       3806203       3p     2.2s  words 688 (pdf:3)  tables 0 pictures 8  docling 688/688 text 100.0%  md 100.0%  issues info:5
+ok       3872675       1p     0.8s  words 261 (pdf:1)  tables 0 pictures 5  docling 261/261 text 100.0%  md 100.0%  issues info:1
+ok       3898889       2p     1.1s  words 266 (pdf:2)  tables 0 pictures 1  docling 266/266 text 100.0%  md 100.0%  issues info:2
+ok       3899840       1p     0.5s  words 113 (pdf:1)  tables 0 pictures 0  docling 113/113 text 100.0%  md 100.0%  issues info:1
+ok       3905827       2p     2.0s  words 633 (pdf:2)  tables 1 pictures 2  docling 633/633 text 100.0%  md 100.0%  issues info:3
+ok       3912616       1p     0.9s  words 98 (pdf:1)  tables 1 pictures 0  docling 98/98 text 100.0%  md 100.0%  issues none
+ok       3913342       2p     1.9s  words 347 (pdf:2)  tables 1 pictures 9  docling 347/347 text 100.0%  md 100.0%  issues info:4
+ok       3956820       3p     1.7s  words 475 (pdf:3)  tables 0 pictures 1  docling 475/475 text 100.0%  md 100.0%  issues info:1
+ok       3956884       2p     2.1s  words 455 (pdf:2)  tables 0 pictures 1  docling 455/455 text 100.0%  md 100.0%  issues info:3
+ok       4034412     148p   250.6s  words 56009 (pdf:148)  tables 60 pictures 176  docling 56009/56009 text 100.0%  md 100.0%  issues info:182 warning:3
+ok       4041560      35p    95.1s  words 12979 (ocr:34/pdf:1)  tables 40 pictures 157  docling 12979/12979 text 100.0%  md 100.0%  issues warning:70 info:40
+ok       4160320       5p     4.6s  words 2351 (pdf:5)  tables 0 pictures 0  docling 2351/2351 text 100.0%  md 100.0%  issues info:6
+ok       4166493       1p     0.8s  words 247 (pdf:1)  tables 0 pictures 5  docling 247/247 text 100.0%  md 100.0%  issues info:2
+ok       4205653       1p     0.8s  words 248 (pdf:1)  tables 0 pictures 4  docling 248/248 text 100.0%  md 100.0%  issues info:1
+ok       4253282       4p     3.0s  words 1203 (pdf:4)  tables 0 pictures 4  docling 1203/1203 text 100.0%  md 100.0%  issues info:5
+ok       4276685       1p     0.8s  words 270 (pdf:1)  tables 0 pictures 4  docling 270/270 text 100.0%  md 100.0%  issues info:1
+ok       4295926      81p   101.4s  words 32856 (pdf:81)  tables 33 pictures 90  docling 32856/32856 text 100.0%  md 100.0%  issues info:72 warning:1
+ok       4328131      25p    19.3s  words 9332 (pdf:25)  tables 0 pictures 3  docling 9332/9332 text 100.0%  md 100.0%  issues info:18
+ok       4387907       1p     0.8s  words 276 (pdf:1)  tables 0 pictures 4  docling 276/276 text 100.0%  md 100.0%  issues info:1
+ok       4402225       1p     1.2s  words 348 (pdf:1)  tables 1 pictures 2  docling 348/348 text 100.0%  md 100.0%  issues info:2
+ok       4427679       2p     1.3s  words 327 (pdf:2)  tables 0 pictures 5  docling 327/327 text 100.0%  md 100.0%  issues info:3
+ok       4439603       3p     2.6s  words 1115 (pdf:3)  tables 0 pictures 4  docling 1115/1115 text 100.0%  md 100.0%  issues info:2
+ok       4461717       1p     0.7s  words 199 (pdf:1)  tables 0 pictures 3  docling 199/199 text 100.0%  md 100.0%  issues info:2
+ok       4465288       1p     0.9s  words 273 (ocr:1)  tables 0 pictures 4  docling 273/273 text 100.0%  md 100.0%  issues info:1
+ok       4479926       2p     2.3s  words 818 (pdf:2)  tables 1 pictures 8  docling 818/818 text 100.0%  md 100.0%  issues info:3
+ok       4498336       6p     6.0s  words 567 (pdf:6)  tables 6 pictures 0  docling 567/567 text 100.0%  md 100.0%  issues info:6
+ok       4507555       1p     4.9s  words 1411 (pdf:1)  tables 0 pictures 15  docling 1411/1411 text 100.0%  md 100.0%  issues info:2
+ok       4509955       4p     6.4s  words 712 (ocr:4)  tables 4 pictures 0  docling 712/712 text 100.0%  md 100.0%  issues warning:4
+ok       4539772      21p    20.1s  words 7296 (pdf:21)  tables 7 pictures 3  docling 7296/7296 text 100.0%  md 100.0%  issues info:10
+ok       4567914       2p     1.4s  words 360 (pdf:2)  tables 1 pictures 0  docling 360/360 text 100.0%  md 100.0%  issues info:2
+ok       4571834      25p    61.5s  words 19890 (pdf:25)  tables 1 pictures 0  docling 19890/19890 text 100.0%  md 100.0%  issues info:22
+ok       4572454       2p     1.3s  words 226 (pdf:2)  tables 0 pictures 6  docling 226/226 text 100.0%  md 100.0%  issues info:3
+ok       4581753       9p    19.7s  words 5795 (pdf:9)  tables 9 pictures 0  docling 5795/5795 text 100.0%  md 100.0%  issues info:1
+ok       4590860       1p     0.7s  words 36 (pdf:1)  tables 0 pictures 1  docling 36/36 text 100.0%  md 100.0%  issues info:1
+ok       4605313       2p     1.4s  words 390 (pdf:2)  tables 0 pictures 8  docling 390/390 text 100.0%  md 100.0%  issues info:3
+ok       4657051       6p     4.1s  words 1462 (pdf:6)  tables 0 pictures 11  docling 1462/1462 text 100.0%  md 100.0%  issues info:7
+ok       4665635       9p    34.4s  words 4028 (pdf:9)  tables 5 pictures 87  docling 4028/4028 text 100.0%  md 100.0%  issues info:14 warning:8
+ok       4665705       3p     2.2s  words 549 (pdf:3)  tables 2 pictures 8  docling 549/549 text 100.0%  md 100.0%  issues info:5
+ok       155587       59p    44.4s  words 13632 (ocr:59)  tables 0 pictures 0  docling 13632/13632 text 100.0%  md 100.0%  issues warning:109 info:53
+ok       159641        1p     1.3s  words 249 (ocr:1)  tables 0 pictures 3  docling 249/249 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       238407        3p     2.4s  words 1055 (pdf:3)  tables 0 pictures 0  docling 1055/1055 text 100.0%  md 100.0%  issues info:1
+ok       253410        1p     0.6s  words 219 (ocr:1)  tables 0 pictures 0  docling 219/219 text 100.0%  md 100.0%  issues info:1
+ok       271220        1p     1.0s  words 374 (pdf:1)  tables 0 pictures 6  docling 374/374 text 100.0%  md 100.0%  issues info:2
+ok       285112        8p     5.0s  words 2096 (pdf:8)  tables 0 pictures 0  docling 2096/2096 text 100.0%  md 100.0%  issues info:2
+ok       334644        2p     1.4s  words 409 (pdf:2)  tables 1 pictures 4  docling 409/409 text 100.0%  md 100.0%  issues info:3
+ok       346242        1p     1.6s  words 473 (ocr:1)  tables 0 pictures 1  docling 473/473 text 100.0%  md 100.0%  issues none
+ok       359205        5p     2.8s  words 885 (pdf:5)  tables 0 pictures 6  docling 885/885 text 100.0%  md 100.0%  issues info:8
+ok       396050        2p     2.7s  words 501 (ocr:2)  tables 0 pictures 19  docling 501/501 text 100.0%  md 100.0%  issues none
+ok       432650        1p     0.7s  words 155 (ocr:1)  tables 0 pictures 3  docling 155/155 text 100.0%  md 100.0%  issues info:1
+ok       444475        6p     3.9s  words 1322 (ocr:6)  tables 0 pictures 12  docling 1322/1322 text 100.0%  md 100.0%  issues info:2
+ok       490823        5p     3.6s  words 1651 (pdf:5)  tables 0 pictures 5  docling 1651/1651 text 100.0%  md 100.0%  issues info:5
+ok       517658        2p     1.1s  words 271 (ocr:2)  tables 0 pictures 7  docling 271/271 text 100.0%  md 100.0%  issues info:2
+ok       527142        6p     3.8s  words 1565 (pdf:6)  tables 0 pictures 8  docling 1565/1565 text 100.0%  md 100.0%  issues info:9
+ok       552663      164p   385.4s  words 106954 (pdf:160/ocr:4)  tables 181 pictures 381  docling 106954/106954 text 100.0%  md 100.0%  issues info:97 warning:7
+ok       569340        1p     1.1s  words 155 (pdf:1)  tables 0 pictures 6  docling 155/155 text 100.0%  md 100.0%  issues info:2
+ok       573635        3p     2.1s  words 491 (pdf:3)  tables 1 pictures 9  docling 491/491 text 100.0%  md 100.0%  issues info:4
+ok       575161       21p    39.0s  words 9492 (ocr:21)  tables 0 pictures 28  docling 9492/9492 text 100.0%  md 100.0%  issues warning:11
+ok       587853        2p     1.5s  words 432 (ocr:2)  tables 0 pictures 1  docling 432/432 text 100.0%  md 100.0%  issues none
+ok       600640        3p    16.3s  words 1721 (pdf:3)  tables 33 pictures 27  docling 1721/1721 text 100.0%  md 100.0%  issues info:6
+ok       654935       33p    28.8s  words 14038 (pdf:33)  tables 1 pictures 8  docling 14038/14038 text 100.0%  md 100.0%  issues info:18
+ok       661552        3p     2.0s  words 730 (pdf:3)  tables 0 pictures 5  docling 730/730 text 100.0%  md 100.0%  issues info:3
+ok       685684        2p     1.5s  words 424 (ocr:2)  tables 0 pictures 3  docling 424/424 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       709953        2p     1.3s  words 457 (ocr:2)  tables 0 pictures 6  docling 457/457 text 100.0%  md 100.0%  issues info:1
+ok       760673        1p     0.7s  words 230 (pdf:1)  tables 0 pictures 1  docling 230/230 text 100.0%  md 100.0%  issues info:1
+ok       772868       16p    15.0s  words 4390 (ocr:16)  tables 6 pictures 22  docling 4390/4390 text 100.0%  md 100.0%  issues info:8
+ok       783942        2p     1.5s  words 398 (pdf:2)  tables 0 pictures 7  docling 398/398 text 100.0%  md 100.0%  issues info:2
+ok       797813       15p     8.7s  words 140 (ocr:15)  tables 0 pictures 18  docling 140/140 text 100.0%  md 100.0%  issues info:10 warning:2
+ok       815796        2p     1.6s  words 464 (pdf:2)  tables 0 pictures 7  docling 464/464 text 100.0%  md 100.0%  issues info:3
+ok       829100        1p     0.8s  words 174 (pdf:1)  tables 0 pictures 6  docling 174/174 text 100.0%  md 100.0%  issues info:2
+ok       847645        4p     2.8s  words 1065 (ocr:4)  tables 0 pictures 8  docling 1065/1065 text 100.0%  md 100.0%  issues info:3
+ok       859215        1p    10.4s  words 289 (pdf:1)  tables 4 pictures 3  docling 289/289 text 100.0%  md 100.0%  issues info:2 warning:2
+ok       865278        1p     1.7s  words 218 (ocr:1)  tables 0 pictures 1  docling 218/218 text 100.0%  md 100.0%  issues warning:1
+ok       927678        2p     1.2s  words 271 (ocr:2)  tables 0 pictures 2  docling 271/271 text 100.0%  md 100.0%  issues info:2
+ok       947546        2p     5.1s  words 713 (pdf:2)  tables 3 pictures 0  docling 713/713 text 100.0%  md 100.0%  issues none
+ok       1032420       1p     0.7s  words 201 (pdf:1)  tables 0 pictures 0  docling 201/201 text 100.0%  md 100.0%  issues info:1
+ok       1059204       1p     1.3s  words 148 (ocr:1)  tables 0 pictures 8  docling 148/148 text 100.0%  md 100.0%  issues info:1
+ok       2398223       1p     0.9s  words 205 (pdf:1)  tables 0 pictures 7  docling 205/205 text 100.0%  md 100.0%  issues info:2
+ok       2432140      52p    71.5s  words 14322 (pdf:52)  tables 35 pictures 109  docling 14322/14322 text 100.0%  md 100.0%  issues info:74
+ok       2453090       8p     7.7s  words 2594 (pdf:8)  tables 1 pictures 21  docling 2594/2594 text 100.0%  md 100.0%  issues info:10
+ok       2480958       2p     1.4s  words 362 (pdf:2)  tables 0 pictures 4  docling 362/362 text 100.0%  md 100.0%  issues info:3
+ok       2484633       7p     6.7s  words 1915 (ocr:7)  tables 4 pictures 4  docling 1915/1915 text 100.0%  md 100.0%  issues info:3
+ok       2523367       2p     1.1s  words 366 (pdf:2)  tables 0 pictures 0  docling 366/366 text 100.0%  md 100.0%  issues info:1
+ok       2523887      52p    75.9s  words 36097 (pdf:52)  tables 2 pictures 0  docling 36097/36097 text 100.0%  md 100.0%  issues info:95 warning:1
+ok       2585484       1p     1.2s  words 485 (pdf:1)  tables 0 pictures 0  docling 485/485 text 100.0%  md 100.0%  issues info:1
+ok       2585801       2p     1.5s  words 398 (pdf:2)  tables 0 pictures 7  docling 398/398 text 100.0%  md 100.0%  issues info:4
+ok       2695098       4p     2.5s  words 830 (pdf:4)  tables 0 pictures 5  docling 830/830 text 100.0%  md 100.0%  issues info:6
+ok       2697354       4p     2.7s  words 905 (pdf:4)  tables 0 pictures 6  docling 905/905 text 100.0%  md 100.0%  issues info:7
+ok       2785485       8p     6.8s  words 2320 (pdf:8)  tables 1 pictures 7  docling 2320/2320 text 100.0%  md 100.0%  issues info:11
+ok       2796685       3p     1.9s  words 564 (pdf:3)  tables 0 pictures 5  docling 564/564 text 100.0%  md 100.0%  issues info:5
+ok       2810612       2p     1.2s  words 275 (pdf:2)  tables 0 pictures 9  docling 275/275 text 100.0%  md 100.0%  issues info:4
+ok       2810974       5p     4.3s  words 1599 (pdf:5)  tables 0 pictures 1  docling 1599/1599 text 100.0%  md 100.0%  issues info:1
+ok       2825490       3p     2.0s  words 687 (pdf:3)  tables 0 pictures 6  docling 687/687 text 100.0%  md 100.0%  issues info:4
+ok       2857545       1p     1.0s  words 340 (pdf:1)  tables 0 pictures 4  docling 340/340 text 100.0%  md 100.0%  issues info:2
+ok       2902736       9p    12.2s  words 2992 (pdf:9)  tables 14 pictures 63  docling 2992/2992 text 100.0%  md 100.0%  issues info:8
+ok       2908355     142p   144.4s  words 35490 (pdf:142)  tables 114 pictures 2  docling 35490/35490 text 100.0%  md 100.0%  issues info:25 warning:1
+ok       2935769       1p     0.9s  words 63 (pdf:1)  tables 0 pictures 1  docling 63/63 text 100.0%  md 100.0%  issues info:2
+ok       2957555      24p    19.4s  words 7119 (pdf:24)  tables 4 pictures 3  docling 7119/7119 text 100.0%  md 100.0%  issues info:16
+ok       3063635       2p     1.3s  words 412 (ocr:2)  tables 0 pictures 2  docling 412/412 text 100.0%  md 100.0%  issues info:2
+ok       3179223       4p     4.9s  words 839 (pdf:2/ocr:2)  tables 1 pictures 8  docling 839/839 text 100.0%  md 100.0%  issues info:1
+ok       3179545      36p    81.0s  words 23508 (pdf:36)  tables 0 pictures 104  docling 23508/23508 text 100.0%  md 100.0%  issues info:51
+ok       3280533       3p     3.4s  words 1331 (pdf:3)  tables 0 pictures 3  docling 1331/1331 text 100.0%  md 100.0%  issues info:6
+ok       3283303      10p    40.4s  words 6620 (pdf:10)  tables 0 pictures 10  docling 6620/6620 text 100.0%  md 100.0%  issues info:27
+ok       3328583      13p    12.1s  words 5187 (pdf:12/ocr:1)  tables 0 pictures 7  docling 5187/5187 text 100.0%  md 100.0%  issues info:4 warning:1
+ok       3464850       3p     2.4s  words 669 (pdf:3)  tables 2 pictures 6  docling 669/669 text 100.0%  md 100.0%  issues info:3
+ok       3574419       3p     3.0s  words 1094 (pdf:3)  tables 1 pictures 6  docling 1094/1094 text 100.0%  md 100.0%  issues info:4
+ok       3579771       5p     2.4s  words 443 (ocr:5)  tables 0 pictures 11  docling 443/443 text 100.0%  md 100.0%  issues warning:10 info:4
+ok       3610501       4p     2.7s  words 817 (ocr:4)  tables 0 pictures 10  docling 817/817 text 100.0%  md 100.0%  issues info:3
+ok       3613333      32p    22.6s  words 6561 (pdf:32)  tables 17 pictures 0  docling 6561/6561 text 100.0%  md 100.0%  issues info:17
+ok       3700525     572p   370.5s  words 159758 (ocr:572)  tables 0 pictures 0  docling 159758/159758 text 100.0%  md 100.0%  issues info:195
+ok       3737148       8p     5.1s  words 1586 (pdf:8)  tables 2 pictures 0  docling 1586/1586 text 100.0%  md 100.0%  issues info:5
+ok       3754920       1p     0.7s  words 141 (pdf:1)  tables 0 pictures 3  docling 141/141 text 100.0%  md 100.0%  issues info:2
+ok       3762661       1p     0.9s  words 238 (pdf:1)  tables 1 pictures 0  docling 238/238 text 100.0%  md 100.0%  issues info:1
+ok       3785572       5p     5.8s  words 1679 (pdf:5)  tables 2 pictures 0  docling 1679/1679 text 100.0%  md 100.0%  issues info:4
+ok       3785685      36p    40.9s  words 11676 (pdf:36)  tables 32 pictures 6  docling 11676/11676 text 100.0%  md 100.0%  issues info:29
+ok       3914207       3p     3.2s  words 778 (pdf:2/ocr:1)  tables 1 pictures 4  docling 778/778 text 100.0%  md 100.0%  issues info:1
+ok       3916896       1p     0.8s  words 150 (pdf:1)  tables 0 pictures 2  docling 150/150 text 100.0%  md 100.0%  issues info:2
+ok       3932376       2p     1.2s  words 258 (pdf:2)  tables 1 pictures 3  docling 258/258 text 100.0%  md 100.0%  issues info:2
+ok       3935357     267p   428.4s  words 160416 (ocr:9/pdf:258)  tables 174 pictures 19  docling 160416/160416 text 100.0%  md 100.0%  issues info:68 warning:2
+ok       3956573       1p     1.0s  words 300 (pdf:1)  tables 0 pictures 4  docling 300/300 text 100.0%  md 100.0%  issues info:1
+ok       3962356       6p     5.5s  words 2224 (pdf:6)  tables 0 pictures 10  docling 2224/2224 text 100.0%  md 100.0%  issues info:6
+ok       3970813       1p     0.9s  words 259 (pdf:1)  tables 0 pictures 4  docling 259/259 text 100.0%  md 100.0%  issues info:1
+ok       4099305       3p     1.8s  words 587 (pdf:3)  tables 0 pictures 0  docling 587/587 text 100.0%  md 100.0%  issues none
+ok       4104907       4p    24.2s  words 467 (ocr:4)  tables 1 pictures 17  docling 467/467 text 100.0%  md 100.0%  issues info:2
+ok       4105608      11p    12.8s  words 4692 (pdf:11)  tables 1 pictures 17  docling 4692/4692 text 100.0%  md 100.0%  issues info:9
+ok       4166474       1p     0.9s  words 304 (pdf:1)  tables 0 pictures 5  docling 304/304 text 100.0%  md 100.0%  issues info:2
+ok       4247330       1p     0.9s  words 328 (pdf:1)  tables 0 pictures 4  docling 328/328 text 100.0%  md 100.0%  issues info:1
+ok       4305827       2p     1.5s  words 462 (pdf:2)  tables 0 pictures 5  docling 462/462 text 100.0%  md 100.0%  issues info:2
+ok       4327690       7p    21.5s  words 4209 (ocr:1/pdf:6)  tables 0 pictures 12  docling 4209/4209 text 100.0%  md 100.0%  issues warning:1 info:9
+ok       4334668       3p     2.1s  words 742 (pdf:3)  tables 0 pictures 0  docling 742/742 text 100.0%  md 100.0%  issues info:1
+ok       4427426       1p     1.1s  words 429 (pdf:1)  tables 0 pictures 2  docling 429/429 text 100.0%  md 100.0%  issues info:2
+ok       4449218       1p     1.2s  words 308 (pdf:1)  tables 1 pictures 4  docling 308/308 text 100.0%  md 100.0%  issues info:2
+ok       4462308       1p     2.5s  words 989 (ocr:1)  tables 0 pictures 1  docling 989/989 text 100.0%  md 100.0%  issues none
+ok       4462377      14p    15.4s  words 3722 (ocr:14)  tables 12 pictures 16  docling 3722/3722 text 100.0%  md 100.0%  issues info:13
+ok       4506197       3p     2.0s  words 462 (pdf:3)  tables 1 pictures 4  docling 462/462 text 100.0%  md 100.0%  issues info:2
+ok       4553560      39p    48.6s  words 9520 (ocr:39)  tables 20 pictures 92  docling 9520/9520 text 100.0%  md 100.0%  issues warning:45 info:28
+ok       4554312     198p   242.3s  words 55866 (pdf:117/ocr:81)  tables 95 pictures 269  docling 55866/55866 text 100.0%  md 100.0%  issues info:93 warning:1
+ok       4639866       1p     1.2s  words 287 (ocr:1)  tables 0 pictures 2  docling 287/287 text 100.0%  md 100.0%  issues info:1
+ok       4657556       1p     0.8s  words 128 (pdf:1)  tables 0 pictures 1  docling 128/128 text 100.0%  md 100.0%  issues info:2
+ok       90476        59p    46.7s  words 13652 (pdf:36/ocr:23)  tables 22 pictures 29  docling 13652/13652 text 100.0%  md 100.0%  issues info:16 warning:2
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:209: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+ok       90482        46p    40.2s  words 15270 (pdf:45/ocr:1)  tables 17 pictures 0  docling 15270/15270 text 100.0%  md 100.0%  issues info:23 warning:1
+ok       90488        45p    34.2s  words 15735 (pdf:45)  tables 5 pictures 4  docling 15735/15735 text 100.0%  md 100.0%  issues info:13
+ok       90495        72p    49.1s  words 22985 (ocr:4/pdf:68)  tables 9 pictures 2  docling 22985/22985 text 100.0%  md 100.0%  issues info:32
+ok       90502        61p    43.2s  words 22827 (pdf:61)  tables 3 pictures 2  docling 22827/22827 text 100.0%  md 100.0%  issues info:12
+ok       90509        96p    67.9s  words 31428 (pdf:96)  tables 21 pictures 2  docling 31428/31428 text 100.0%  md 100.0%  issues info:26
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:209: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+ok       90517       103p    83.2s  words 41690 (pdf:103)  tables 8 pictures 4  docling 41690/41690 text 100.0%  md 100.0%  issues info:70
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate l on page 51 is outside page bounds: value=-377.7877197265625 < lo=0.0; clamping to 0.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 51 is outside page bounds: value=962.40771484375 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate t on page 51 is outside page bounds: value=-453.8466796875 < lo=0.0; clamping to 0.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate b on page 51 is outside page bounds: value=938.3187255859375 > hi=792.0; clamping to 792.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate l on page 62 is outside page bounds: value=-542.8297119140625 < lo=0.0; clamping to 0.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 62 is outside page bounds: value=797.7296142578125 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate t on page 62 is outside page bounds: value=-50.12689208984375 < lo=0.0; clamping to 0.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate b on page 62 is outside page bounds: value=1316.941650390625 > hi=792.0; clamping to 792.0
+  prov.bbox = cls._clamp_bbox_to_page(
+ok       90535       194p   168.3s  words 71864 (ocr:2/pdf:192)  tables 34 pictures 92  docling 71864/71864 text 100.0%  md 100.0%  issues warning:2 info:63
+ok       90560        85p    62.7s  words 31138 (pdf:85)  tables 4 pictures 2  docling 31138/31138 text 100.0%  md 100.0%  issues info:42
+ok       90691        21p    15.9s  words 6463 (pdf:21)  tables 3 pictures 3  docling 6463/6463 text 100.0%  md 100.0%  issues info:4
+ok       4738416       5p     3.2s  words 1157 (pdf:4/ocr:1)  tables 0 pictures 0  docling 1157/1157 text 100.0%  md 100.0%  issues info:6
+ok       4738417       2p     1.2s  words 393 (pdf:2)  tables 1 pictures 0  docling 393/393 text 100.0%  md 100.0%  issues info:2
+ok       4738464       1p     0.8s  words 151 (pdf:1)  tables 0 pictures 4  docling 151/151 text 100.0%  md 100.0%  issues info:1
+ok       4738467       2p     1.3s  words 450 (pdf:2)  tables 0 pictures 4  docling 450/450 text 100.0%  md 100.0%  issues info:3
+ok       4738471       2p     7.6s  words 1078 (pdf:2)  tables 5 pictures 21  docling 1078/1078 text 100.0%  md 100.0%  issues info:4
+ok       4738475       1p     1.0s  words 267 (pdf:1)  tables 0 pictures 4  docling 267/267 text 100.0%  md 100.0%  issues info:1
+ok       4738476       1p     0.9s  words 308 (pdf:1)  tables 0 pictures 4  docling 308/308 text 100.0%  md 100.0%  issues info:2
+ok       4738482      18p    15.3s  words 7445 (pdf:18)  tables 0 pictures 12  docling 7445/7445 text 100.0%  md 100.0%  issues info:6
+ok       4738487       4p     3.0s  words 1067 (pdf:4)  tables 1 pictures 3  docling 1067/1067 text 100.0%  md 100.0%  issues info:4
+ok       4738490       2p     5.8s  words 364 (pdf:2)  tables 1 pictures 11  docling 364/364 text 100.0%  md 100.0%  issues info:3
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+done: 320 converted, 0 failed, 8020s
+== apply votes again Mon Oct 12 03:23:48 EDT 2026
+ok       619625       11p    20.0s  words 8629 (ocr:11)  tables 0 pictures 65  docling 8629/8629 text 100.0%  md 100.0%  issues warning:21 info:27
+ok       782362        1p     1.4s  words 395 (ocr:1)  tables 0 pictures 1  docling 395/395 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       4251350       6p    31.9s  words 2592 (ocr:6)  tables 1 pictures 24  docling 2592/2592 text 100.0%  md 100.0%  issues warning:12 info:5
+ok       154133        9p     6.9s  words 1821 (ocr:9)  tables 0 pictures 12  docling 1821/1821 text 100.0%  md 100.0%  issues warning:14 info:8
+ok       895667        1p     1.1s  words 268 (ocr:1)  tables 0 pictures 4  docling 268/268 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       938349       18p    13.6s  words 4630 (ocr:18)  tables 0 pictures 8  docling 4630/4630 text 100.0%  md 100.0%  issues warning:30 info:20
+ok       945438       12p     7.6s  words 2368 (ocr:12)  tables 1 pictures 7  docling 2368/2368 text 100.0%  md 100.0%  issues warning:24 info:8
+ok       1044322       1p     1.1s  words 284 (ocr:1)  tables 0 pictures 4  docling 284/284 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       3004277       1p     0.7s  words 173 (ocr:1)  tables 0 pictures 6  docling 173/173 text 100.0%  md 100.0%  issues warning:2 info:1
+ok       4041560      35p    97.2s  words 12979 (ocr:34/pdf:1)  tables 40 pictures 157  docling 12979/12979 text 100.0%  md 100.0%  issues warning:70 info:40
+ok       4665635       9p    34.9s  words 4028 (pdf:9)  tables 5 pictures 87  docling 4028/4028 text 100.0%  md 100.0%  issues info:14 warning:8
+ok       155587       59p    42.0s  words 13632 (ocr:59)  tables 0 pictures 0  docling 13632/13632 text 100.0%  md 100.0%  issues warning:109 info:53
+ok       159641        1p     1.0s  words 249 (ocr:1)  tables 0 pictures 3  docling 249/249 text 100.0%  md 100.0%  issues warning:2 info:2
+ok       3579771       5p     2.4s  words 443 (ocr:5)  tables 0 pictures 11  docling 443/443 text 100.0%  md 100.0%  issues warning:10 info:4
+ok       4553560      39p    49.1s  words 9520 (ocr:39)  tables 20 pictures 92  docling 9520/9520 text 100.0%  md 100.0%  issues warning:45 info:28
+done: 15 converted, 0 failed, 323s
+== all done Mon Oct 12 03:29:11 EDT 2026

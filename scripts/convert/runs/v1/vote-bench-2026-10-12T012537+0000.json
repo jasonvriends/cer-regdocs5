@@ -1,0 +1,314 @@
+{
+ "at": "2026-10-12T01:25:37+00:00",
+ "samples": [
+  "scripts/convert/samples/random-100-a.txt",
+  "scripts/convert/samples/random-100-b.txt"
+ ],
+ "results": {
+  "glm-ocr:latest": {
+   "model": "glm-ocr:latest",
+   "digest": "6effedd0dc8aec66ad86c94b8099395376e212f22c87a9d7147c422f7e447be4",
+   "lines": 150,
+   "words_right": 0.9288,
+   "numbers_right": 0.9186,
+   "made_up_per_100_read": 12.23,
+   "blanks_with_text": "0/6",
+   "loops": 0,
+   "seconds_per_crop": 0.1,
+   "misreads": [
+    {
+     "truth": "NGTL’s 2021 Application: Baseline Conditions- Harvesting ............................................... 47",
+     "read": "NGTL's 2021 Application: Baseline Conditions- Harvesting.....47",
+     "doc": "3768464",
+     "page": 7
+    },
+    {
+     "truth": "TOPSOIL PROCEDURE FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14",
+     "read": "SEED MIX N/A",
+     "doc": "3179545",
+     "page": 26
+    },
+    {
+     "truth": "SE 36-80-18 W6M dry/frozen to bottom(k) native fill material(g)",
+     "read": "Watercourses",
+     "doc": "3225708",
+     "page": 13
+    },
+    {
+     "truth": "2008 A n n u a l R e p o r t",
+     "read": "2008 Annual Report",
+     "doc": "552663",
+     "page": 1
+    },
+    {
+     "truth": "TOPSOIL PROCEDURE FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14",
+     "read": "SEED MIX N/A",
+     "doc": "3179545",
+     "page": 28
+    },
+    {
+     "truth": "U V 40 Simonette LSA Crossing River",
+     "read": "40 Simonette River LSA Crossing",
+     "doc": "3768464",
+     "page": 92
+    },
+    {
+     "truth": "4. References ............................................................................................................................................................ 11",
+     "read": "4. References.....11",
+     "doc": "4554312",
+     "page": 178
+    },
+    {
+     "truth": "F - 19",
+     "read": "F-19",
+     "doc": "3935357",
+     "page": 192
+    }
+   ]
+  },
+  "richardyoung/olmocr2:7b-q8": {
+   "model": "richardyoung/olmocr2:7b-q8",
+   "digest": "66e48f629e5e7c976fbef3f464d2eb3dbcbf97b5c86d2d744149bcc656662d47",
+   "lines": 150,
+   "words_right": 0.907,
+   "numbers_right": 0.9128,
+   "made_up_per_100_read": 12.49,
+   "blanks_with_text": "6/6",
+   "loops": 0,
+   "seconds_per_crop": 0.66,
+   "misreads": [
+    {
+     "truth": "Abandonment Application MHW-004-2015",
+     "read": "Abandonment Application",
+     "doc": "2908355",
+     "page": 126
+    },
+    {
+     "truth": "C2 sub’d phenanthrene/anth. (mg/kg) <0.04 <0.04 <0.04 <0.04 <0.04",
+     "read": "C2 sub'd phenanthrene/anth. (mg/kg) <0.04 <0.04 <0.04 <0.04",
+     "doc": "2684908",
+     "page": 50
+    },
+    {
+     "truth": "TOPSOIL PROCEDURE FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14",
+     "read": "SEED MIX N/A",
+     "doc": "3179545",
+     "page": 26
+    },
+    {
+     "truth": "SE 36-80-18 W6M dry/frozen to bottom(k) native fill material(g)",
+     "read": "Water source: SE 36-80-18 W6M",
+     "doc": "3225708",
+     "page": 13
+    },
+    {
+     "truth": "2008 A n n u a l R e p o r t",
+     "read": "2008 Annual Report",
+     "doc": "552663",
+     "page": 1
+    },
+    {
+     "truth": "TOPSOIL PROCEDURE FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14",
+     "read": "SEED MIX N/A",
+     "doc": "3179545",
+     "page": 28
+    },
+    {
+     "truth": "U V 40 Simonette LSA Crossing River",
+     "read": "40",
+     "doc": "3768464",
+     "page": 92
+    },
+    {
+     "truth": "!. April 2017 687945 0",
+     "read": "KP 532",
+     "doc": "3283303",
+     "page": 7
+    }
+   ]
+  },
+  "qwen3-vl:8b-instruct": {
+   "model": "qwen3-vl:8b-instruct",
+   "digest": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+   "lines": 150,
+   "words_right": 0.9574,
+   "numbers_right": 0.9535,
+   "made_up_per_100_read": 16.07,
+   "blanks_with_text": "0/6",
+   "loops": 0,
+   "seconds_per_crop": 0.7,
+   "misreads": [
+    {
+     "truth": "NGTL’s 2021 Application: Baseline Conditions- Harvesting ............................................... 47",
+     "read": "NGTL's 2021 Application: Baseline Conditions- Harvesting........................................................................47",
+     "doc": "3768464",
+     "page": 7
+    },
+    {
+     "truth": "2008 A n n u a l R e p o r t",
+     "read": "2008 Annual Report",
+     "doc": "552663",
+     "page": 1
+    },
+    {
+     "truth": "U V 40 Simonette LSA Crossing River",
+     "read": "Simonette River",
+     "doc": "3768464",
+     "page": 92
+    },
+    {
+     "truth": "1.3 EXTENT AND LIMITATIONS OF THE EPP ....................................................................... 2",
+     "read": "1.3 EXTENT AND LIMITATIONS OF THE EPP.............................................................................2",
+     "doc": "4554312",
+     "page": 3
+    },
+    {
+     "truth": "!. April 2017 687945 0",
+     "read": "KP 532",
+     "doc": "3283303",
+     "page": 7
+    },
+    {
+     "truth": "U V 16 LSA Crossing",
+     "read": "16",
+     "doc": "3768464",
+     "page": 93
+    },
+    {
+     "truth": "City / Town Boundary 6 4",
+     "read": "Enbridge Facility",
+     "doc": "3179545",
+     "page": 33
+    },
+    {
+     "truth": "Craigend North Meter Power Line Projects that Do Not Involve a Hearing",
+     "read": "Craigend North Meter",
+     "doc": "2908355",
+     "page": 117
+    }
+   ]
+  },
+  "deepseek-ocr:3b": {
+   "model": "deepseek-ocr:3b",
+   "digest": "0e7b018b8a22373167ee79c9a852821235488cbd2a2a5a93495558627423278c",
+   "lines": 150,
+   "words_right": 0.7805,
+   "numbers_right": 0.7126,
+   "made_up_per_100_read": 10.2,
+   "blanks_with_text": "6/6",
+   "loops": 2,
+   "seconds_per_crop": 0.52,
+   "misreads": [
+    {
+     "truth": "Lipid Content 1.0 1.1 J % 0.0 2 11-DEC-07",
+     "read": "Lipid Content",
+     "doc": "2684908",
+     "page": 35
+    },
+    {
+     "truth": "NOVA Gas Transmission Ltd. Attachment 5",
+     "read": "NOVA Gas Transmission Ltd.",
+     "doc": "3225708",
+     "page": 41
+    },
+    {
+     "truth": "and 10 km radius from proposed fence centerline and 10 km radius from proposed",
+     "read": "and 10 km radius from proposed fence line of commuter station unit",
+     "doc": "3768464",
+     "page": 25
+    },
+    {
+     "truth": "C3-4 There are no potentially affected Municipalities.",
+     "read": "C3-4",
+     "doc": "2902736",
+     "page": 4
+    },
+    {
+     "truth": "TOPSOIL PROCEDURE FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14",
+     "read": "| PROCEDURE | FULL RIGHT-OF-WAY; REDUCE AS APPROPRIATE; EN-3 AND EN-14 |",
+     "doc": "3179545",
+     "page": 26
+    },
+    {
+     "truth": "SE 36-80-18 W6M dry/frozen to bottom(k) native fill material(g)",
+     "read": "SE 36-80-18 W6M",
+     "doc": "3225708",
+     "page": 13
+    },
+    {
+     "truth": "2008 A n n u a l R e p o r t",
+     "read": "2008",
+     "doc": "552663",
+     "page": 1
+    },
+    {
+     "truth": "% Clay (<4um) (%) 4 2 3 4 3",
+     "read": "% Clay (<4um) (%)",
+     "doc": "2684908",
+     "page": 52
+    }
+   ]
+  },
+  "granite3.2-vision:2b": {
+   "model": "granite3.2-vision:2b",
+   "digest": "3be41a661804ad72cd08269816c5a145f1df6479ad07e2b3a7e29dba575d2669",
+   "lines": 150,
+   "words_right": 0.5673,
+   "numbers_right": 0.4477,
+   "made_up_per_100_read": 30.9,
+   "blanks_with_text": "0/6",
+   "loops": 0,
+   "seconds_per_crop": 0.4,
+   "misreads": [
+    {
+     "truth": "None 0 0 n/a Technique EF MT",
+     "read": "None 0 n/a",
+     "doc": "600640",
+     "page": 2
+    },
+    {
+     "truth": "January 7, 2021",
+     "read": "ONSD",
+     "doc": "4034412",
+     "page": 51
+    },
+    {
+     "truth": "Abandonment Application MHW-004-2015",
+     "read": "Abandonment Application",
+     "doc": "2908355",
+     "page": 126
+    },
+    {
+     "truth": "Lipid Content 1.0 1.1 J % 0.0 2 11-DEC-07",
+     "read": "Lipid Content",
+     "doc": "2684908",
+     "page": 35
+    },
+    {
+     "truth": "NOVA Gas Transmission Ltd. Attachment 5",
+     "read": "NOVA Gas Transmission Ltd.",
+     "doc": "3225708",
+     "page": 41
+    },
+    {
+     "truth": "and 10 km radius from proposed fence centerline and 10 km radius from proposed",
+     "read": "and 10 km radius from the proposed fence station unit to km orther side centerline and 10 km",
+     "doc": "3768464",
+     "page": 25
+    },
+    {
+     "truth": "C2 sub’d phenanthrene/anth. (mg/kg) <0.04 <0.04 <0.04 <0.04 <0.04",
+     "read": "C2 sub'd phenanthrene/anth. (<0.04 ng/kg) <0.04",
+     "doc": "2684908",
+     "page": 50
+    },
+    {
+     "truth": "Third Target Distribution $0.546875 to $0.656250 75% 25%",
+     "read": "Third Target Distribution",
+     "doc": "3935357",
+     "page": 220
+    }
+   ]
+  }
+ }
+}

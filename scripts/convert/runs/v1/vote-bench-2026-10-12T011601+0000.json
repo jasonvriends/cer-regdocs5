@@ -1,0 +1,94 @@
+{
+ "at": "2026-10-12T01:16:01+00:00",
+ "samples": [
+  "scripts/convert/samples/random-100-a.txt"
+ ],
+ "results": {
+  "glm-ocr:latest": {
+   "model": "glm-ocr:latest",
+   "digest": "6effedd0dc8aec66ad86c94b8099395376e212f22c87a9d7147c422f7e447be4",
+   "lines": 20,
+   "words_right": 0.973,
+   "numbers_right": 1.0,
+   "made_up_per_100_read": 14.69,
+   "blanks_with_text": "0/3",
+   "loops": 0,
+   "seconds_per_crop": 0.08,
+   "misreads": [
+    {
+     "truth": "U V 49 # # EDMONTON",
+     "read": "49 EDMONTON",
+     "doc": "3768464",
+     "page": 18
+    },
+    {
+     "truth": "O’Chiese First Nation",
+     "read": "```markdown",
+     "doc": "3768464",
+     "page": 48
+    }
+   ]
+  },
+  "richardyoung/unlimited-ocr:latest": {
+   "model": "richardyoung/unlimited-ocr:latest",
+   "digest": "77337ff300f39ccd73e8e73624c1baf9b6f166cbb51e859cf13a7f32fbbd09ca",
+   "lines": 20,
+   "words_right": 0.0,
+   "numbers_right": 0.0,
+   "made_up_per_100_read": 100.0,
+   "blanks_with_text": "0/3",
+   "loops": 0,
+   "seconds_per_crop": 0.99,
+   "misreads": [
+    {
+     "truth": "8. The construction activity and traffic, including noise, air, and environmental",
+     "read": "",
+     "doc": "3463345",
+     "page": 5
+    },
+    {
+     "truth": "Acenaphthylene (mg/kg) <0.01 <0.01 <0.01 <0.05 <0.01",
+     "read": "",
+     "doc": "2684908",
+     "page": 21
+    },
+    {
+     "truth": "Hawk (wozaakwidamoo) 2 Ceremony and Spiritual",
+     "read": "",
+     "doc": "3768464",
+     "page": 50
+    },
+    {
+     "truth": "5.2.1.2 Functional Habitat Restoration",
+     "read": "",
+     "doc": "4034412",
+     "page": 101
+    },
+    {
+     "truth": "TransCanada PipeLines Limited Suite 1100, 815 - 8th Avenue S.W. Calgary, Alberta T2P 3P2",
+     "read": "Do not guess or complete partial words.",
+     "doc": "634987",
+     "page": 7
+    },
+    {
+     "truth": "3.1.4 Dual Capacity ................................................................................................................ 11",
+     "read": "",
+     "doc": "777308",
+     "page": 2
+    },
+    {
+     "truth": "NOVA Gas Transmission Ltd. Attachment 5",
+     "read": "",
+     "doc": "4295926",
+     "page": 77
+    },
+    {
+     "truth": "2. Adopt a national action plan to implement the United Nations",
+     "read": "",
+     "doc": "3768464",
+     "page": 130
+    }
+   ]
+  }
+ }
+}

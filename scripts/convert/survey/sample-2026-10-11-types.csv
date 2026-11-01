@@ -1,0 +1,401 @@
+doc_id,year,document_type
+302990,2003,
+307499,2004,
+427854,2006,
+433373,2006,
+456805,2007,
+556364,2009,
+583575,2009,
+755786,2011,
+686059,2011,
+661561,2011,
+712869,2011,
+775887,2011,
+778552,2011,
+757676,2011,
+3815749,2019,
+3908605,2020,
+4032536,2021,
+4236840,2022,
+4397360,2023,
+4735626,2026,
+877502,2012,Affidavit
+830883,2012,Affidavit
+946936,2013,Affidavit
+917838,2013,Affidavit
+948238,2013,Affidavit
+2811080,2015,Affidavit
+2786414,2015,Affidavit
+2922581,2016,Affidavit
+3348935,2017,Affidavit
+3580844,2018,Affidavit
+3748272,2019,Affidavit
+3746911,2019,Affidavit
+3746664,2019,Affidavit
+3746902,2019,Affidavit
+3926322,2020,Affidavit
+4015807,2020,Affidavit
+3948188,2020,Affidavit
+3928390,2020,Affidavit
+4087443,2021,Affidavit
+4593970,2025,Affidavit
+895473,2012,Application
+801311,2012,Application
+891965,2012,Application
+848434,2012,Application
+936155,2013,Application
+2385519,2013,Application
+927516,2013,Application
+2526451,2014,Application
+2957413,2016,Application
+3063013,2016,Application
+3803027,2019,Application
+3813158,2019,Application
+4035214,2021,Application
+4034383,2021,Application
+4105291,2021,Application
+4257715,2022,Application
+4265250,2022,Application
+4458206,2024,Application
+4572117,2025,Application
+4610768,2025,Application
+2415559,2014,Application to Participate
+2415109,2014,Application to Participate
+2415940,2014,Application to Participate
+2858249,2015,Application to Participate
+2686788,2015,Application to Participate
+2694859,2015,Application to Participate
+2685816,2015,Application to Participate
+3013519,2016,Application to Participate
+3595426,2018,Application to Participate
+3612199,2018,Application to Participate
+3767573,2019,Application to Participate
+3767826,2019,Application to Participate
+3803081,2019,Application to Participate
+3802963,2019,Application to Participate
+3767850,2019,Application to Participate
+3902407,2020,Application to Participate
+3912118,2020,Application to Participate
+3910367,2020,Application to Participate
+4034302,2021,Application to Participate
+4194853,2022,Application to Participate
+960879,2013,Argument
+2413619,2014,Argument
+2931597,2016,Argument
+2905118,2016,Argument
+2905010,2016,Argument
+3298110,2017,Argument
+3268397,2017,Argument
+3253072,2017,Argument
+3353011,2017,Argument
+3461045,2018,Argument
+3767157,2019,Argument
+3884873,2019,Argument
+3767237,2019,Argument
+3884795,2019,Argument
+3747356,2019,Argument
+3954446,2020,Argument
+3923421,2020,Argument
+4038948,2021,Argument
+4599956,2025,Argument
+4596620,2025,Argument
+891805,2012,Compliance after a Board Order
+971883,2013,Compliance after a Board Order
+977226,2013,Compliance after a Board Order
+2584342,2014,Compliance after a Board Order
+2408055,2014,Compliance after a Board Order
+3081043,2016,Compliance after a Board Order
+3253327,2017,Compliance after a Board Order
+3296951,2017,Compliance after a Board Order
+3309245,2017,Compliance after a Board Order
+3322875,2017,Compliance after a Board Order
+3895092,2019,Compliance after a Board Order
+3761794,2019,Compliance after a Board Order
+3811837,2019,Compliance after a Board Order
+4099927,2021,Compliance after a Board Order
+4091644,2021,Compliance after a Board Order
+4245631,2022,Compliance after a Board Order
+4246553,2022,Compliance after a Board Order
+4367442,2023,Compliance after a Board Order
+4442634,2024,Compliance after a Board Order
+4567973,2025,Compliance after a Board Order
+891960,2012,Hearing Transcript
+832265,2012,Hearing Transcript
+781012,2012,Hearing Transcript
+936379,2013,Hearing Transcript
+915803,2013,Hearing Transcript
+2538805,2014,Hearing Transcript
+2538355,2014,Hearing Transcript
+2982001,2016,Hearing Transcript
+3557712,2018,Hearing Transcript
+3560601,2018,Hearing Transcript
+4165787,2021,Hearing Transcript
+4104933,2021,Hearing Transcript
+4165901,2021,Hearing Transcript
+4168230,2021,Hearing Transcript
+4274919,2022,Hearing Transcript
+4429779,2024,Hearing Transcript
+4571960,2025,Hearing Transcript
+4555824,2025,Hearing Transcript
+4582198,2025,Hearing Transcript
+4648101,2026,Hearing Transcript
+2384147,2013,Information Request
+1021774,2013,Information Request
+2453310,2014,Information Request
+2453556,2014,Information Request
+2586842,2015,Information Request
+2883249,2015,Information Request
+3013608,2016,Information Request
+3539919,2018,Information Request
+3537617,2018,Information Request
+3612682,2018,Information Request
+3871766,2019,Information Request
+3881379,2019,Information Request
+3962966,2020,Information Request
+3922977,2020,Information Request
+4111344,2021,Information Request
+4097688,2021,Information Request
+4371016,2023,Information Request
+4451566,2024,Information Request
+4639763,2025,Information Request
+4726764,2026,Information Request
+947537,2013,Information Request Response
+971068,2013,Information Request Response
+2481985,2014,Information Request Response
+2686263,2015,Information Request Response
+3323135,2017,Information Request Response
+3346397,2017,Information Request Response
+3307171,2017,Information Request Response
+3296595,2017,Information Request Response
+3408569,2018,Information Request Response
+3580215,2018,Information Request Response
+3803178,2019,Information Request Response
+4013132,2020,Information Request Response
+4275528,2022,Information Request Response
+4285201,2022,Information Request Response
+4349979,2023,Information Request Response
+4303501,2023,Information Request Response
+4370889,2023,Information Request Response
+4462625,2024,Information Request Response
+4467710,2024,Information Request Response
+4438425,2024,Information Request Response
+1038600,2013,Letter
+2487036,2014,Letter
+2480323,2014,Letter
+2451910,2014,Letter
+2529161,2014,Letter
+2397732,2014,Letter
+2790847,2015,Letter
+2887135,2015,Letter
+3267596,2017,Letter
+3334860,2017,Letter
+3805930,2019,Letter
+3783220,2019,Letter
+3783767,2019,Letter
+3748131,2019,Letter
+3933745,2020,Letter
+4510446,2024,Letter
+4506205,2024,Letter
+4460685,2024,Letter
+4452344,2024,Letter
+4594023,2025,Letter
+842044,2012,Letter of Comment
+831057,2012,Letter of Comment
+837477,2012,Letter of Comment
+857383,2012,Letter of Comment
+856744,2012,Letter of Comment
+851161,2012,Letter of Comment
+780933,2012,Letter of Comment
+784483,2012,Letter of Comment
+849256,2012,Letter of Comment
+3705892,2018,Letter of Comment
+3811959,2019,Letter of Comment
+3767749,2019,Letter of Comment
+3779701,2019,Letter of Comment
+3921493,2020,Letter of Comment
+3914164,2020,Letter of Comment
+3899967,2020,Letter of Comment
+4082442,2021,Letter of Comment
+4165519,2021,Letter of Comment
+4168775,2021,Letter of Comment
+4460066,2024,Letter of Comment
+897296,2012,Map
+785336,2012,Map
+897631,2012,Map
+871447,2012,Map
+897649,2012,Map
+927484,2013,Map
+2481981,2014,Map
+2408157,2014,Map
+2583949,2014,Map
+2680279,2015,Map
+3892437,2019,Map
+3804984,2019,Map
+3895448,2019,Map
+3774597,2019,Map
+3912833,2020,Map
+3951711,2020,Map
+4411265,2023,Map
+4334485,2023,Map
+4432470,2024,Map
+4429457,2024,Map
+795933,2012,Notification of Operation and Maintenance Activities
+862407,2012,Notification of Operation and Maintenance Activities
+1032248,2013,Notification of Operation and Maintenance Activities
+1022507,2013,Notification of Operation and Maintenance Activities
+2477912,2014,Notification of Operation and Maintenance Activities
+2486838,2014,Notification of Operation and Maintenance Activities
+2538912,2014,Notification of Operation and Maintenance Activities
+2404350,2014,Notification of Operation and Maintenance Activities
+2411901,2014,Notification of Operation and Maintenance Activities
+3612156,2018,Notification of Operation and Maintenance Activities
+3756529,2019,Notification of Operation and Maintenance Activities
+4142983,2021,Notification of Operation and Maintenance Activities
+4264796,2022,Notification of Operation and Maintenance Activities
+4246415,2022,Notification of Operation and Maintenance Activities
+4276502,2022,Notification of Operation and Maintenance Activities
+4440974,2024,Notification of Operation and Maintenance Activities
+4506940,2024,Notification of Operation and Maintenance Activities
+4479793,2024,Notification of Operation and Maintenance Activities
+4585217,2025,Notification of Operation and Maintenance Activities
+4611215,2025,Notification of Operation and Maintenance Activities
+890009,2012,Order
+822245,2012,Order
+2902948,2015,Order
+2858064,2015,Order
+3066533,2016,Order
+2939158,2016,Order
+3347944,2017,Order
+3331373,2017,Order
+3303517,2017,Order
+3336035,2017,Order
+3884303,2019,Order
+4012833,2020,Order
+4101857,2021,Order
+4257676,2022,Order
+4230357,2022,Order
+4406977,2023,Order
+4412849,2023,Order
+4424735,2023,Order
+4495412,2024,Order
+4507346,2024,Order
+979135,2013,Other
+2486790,2014,Other
+2524173,2014,Other
+2578945,2014,Other
+2462313,2014,Other
+2525873,2014,Other
+2839350,2015,Other
+3063253,2016,Other
+2905331,2016,Other
+3118225,2016,Other
+3819190,2019,Other
+3755030,2019,Other
+4102071,2021,Other
+4230293,2022,Other
+4305758,2023,Other
+4417911,2023,Other
+4493272,2024,Other
+4492782,2024,Other
+4519076,2025,Other
+4543260,2025,Other
+869276,2012,Procedural Update
+2526413,2014,Procedural Update
+2487841,2014,Procedural Update
+3354533,2017,Procedural Update
+3334476,2017,Procedural Update
+3305735,2017,Procedural Update
+3410678,2018,Procedural Update
+3464795,2018,Procedural Update
+3613444,2018,Procedural Update
+3591925,2018,Procedural Update
+3880506,2019,Procedural Update
+3785181,2019,Procedural Update
+3954470,2020,Procedural Update
+3951764,2020,Procedural Update
+3930175,2020,Procedural Update
+4277399,2022,Procedural Update
+4360659,2023,Procedural Update
+4510214,2025,Procedural Update
+4646033,2026,Procedural Update
+4665260,2026,Procedural Update
+779766,2012,Receipt
+875705,2012,Receipt
+858053,2012,Receipt
+801216,2012,Receipt
+2453753,2014,Receipt
+2784793,2015,Receipt
+2791145,2015,Receipt
+2786221,2015,Receipt
+2786119,2015,Receipt
+2784580,2015,Receipt
+4639867,2025,Receipt
+4592218,2025,Receipt
+4582594,2025,Receipt
+4597014,2025,Receipt
+4585044,2025,Receipt
+4603741,2025,Receipt
+4680790,2026,Receipt
+4659483,2026,Receipt
+4657387,2026,Receipt
+4681124,2026,Receipt
+925533,2013,Ruling
+2543351,2014,Ruling
+2490427,2014,Ruling
+2883319,2015,Ruling
+2787661,2015,Ruling
+2939164,2016,Ruling
+3285588,2017,Ruling
+3257614,2017,Ruling
+3330891,2017,Ruling
+3476985,2018,Ruling
+3923445,2020,Ruling
+3966643,2020,Ruling
+4081073,2021,Ruling
+4161930,2021,Ruling
+4274962,2022,Ruling
+4404290,2023,Ruling
+4474766,2024,Ruling
+4469697,2024,Ruling
+4632406,2025,Ruling
+4724741,2026,Ruling
+821512,2012,Supplemental Information
+939769,2013,Supplemental Information
+958142,2013,Supplemental Information
+2404611,2014,Supplemental Information
+2499074,2014,Supplemental Information
+3185849,2017,Supplemental Information
+3336132,2017,Supplemental Information
+3329152,2017,Supplemental Information
+3580789,2018,Supplemental Information
+3434491,2018,Supplemental Information
+3777854,2019,Supplemental Information
+3891803,2019,Supplemental Information
+3952135,2020,Supplemental Information
+4012382,2020,Supplemental Information
+4102484,2021,Supplemental Information
+4105762,2021,Supplemental Information
+4411277,2023,Supplemental Information
+4501904,2024,Supplemental Information
+4430118,2024,Supplemental Information
+4442500,2024,Supplemental Information
+861286,2012,Written Evidence
+867116,2012,Written Evidence
+780780,2012,Written Evidence
+2694191,2015,Written Evidence
+2871554,2015,Written Evidence
+2784970,2015,Written Evidence
+2997704,2016,Written Evidence
+3004705,2016,Written Evidence
+3559928,2018,Written Evidence
+3718947,2018,Written Evidence
+3934412,2020,Written Evidence
+3948262,2020,Written Evidence
+4015811,2020,Written Evidence
+4332076,2023,Written Evidence
+4332067,2023,Written Evidence
+4581759,2025,Written Evidence
+4553695,2025,Written Evidence
+4590991,2025,Written Evidence
+4585358,2025,Written Evidence
+4692449,2026,Written Evidence

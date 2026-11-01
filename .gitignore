@@ -1,0 +1,16 @@
+.claude/
+.venv/
+__pycache__/
+output/
+source/
+scripts/scout/scout-state/
+scripts/scout/.venv/
+scripts/convert/.venv/
+scripts/convert/models/
+*.log
+!scripts/convert/runs/**/*.log
+scripts/convert/runs/v2/logs/light-all.log
+
+# run logs stay local, never committed
+scripts/convert/runs/*/logs/full-main-*.log
+scripts/convert/runs/*/logs/full-main-*.log.gz

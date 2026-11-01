@@ -1,0 +1,26 @@
+<section id="choice" data-transition="fade" style="background:#EEF1F4;color:#14213D;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-family:'Libre Baskerville', Georgia, serif;font-size:72px;font-weight:700;line-height:1.15;color:#14213D">Three ways to make the data fit for AI</h2>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBFBF8;padding:40px;border-radius:16px;border:1px solid #D5DBE3">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6A7280">Option A</p>
+<h3 style="font-size:44px;font-weight:700;line-height:1.15;color:#14213D">Validate by hand</h3>
+<p style="font-size:28px;line-height:1.35;color:#4A5568">Check the 740,000 untrustworthy pages: about <b>23 person-years</b>. Every page, for AI-ready data: about <b>113</b>. New filings add 0.6–1.5 people a year.</p>
+<p style="font-size:24px;line-height:1.35;color:#6A7280">Assumes 3 minutes a page and 1,600 working hours a year.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBFBF8;padding:40px;border-radius:16px;border:1px solid #D5DBE3">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6A7280">Option B</p>
+<h3 style="font-size:44px;font-weight:700;line-height:1.15;color:#14213D">Automate, manage the risk</h3>
+<p style="font-size:28px;line-height:1.35;color:#4A5568">Machines read everything: about <b>$20,000</b> of cloud extraction, or days of a local GPU. Errors are flagged, not prevented, and no hand-checked ground truth exists yet.</p>
+<p style="font-size:24px;line-height:1.35;color:#6A7280">At $5.53 per 1,000 pages, measured on 90,484 pages in 2026.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#14213D;padding:40px;border-radius:16px">
+<p style="font-size:24px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#E8A65D">Option C</p>
+<h3 style="font-size:44px;font-weight:700;line-height:1.15;color:#FBFBF8">Digital first, at the source</h3>
+<p style="font-size:28px;line-height:1.35;color:#C9D3E3">Most of the 23% is a setting or a habit: export, don’t scan; sign digitally; file data as data. A check at upload names the failing page while the source still exists.</p>
+<p style="font-size:24px;line-height:1.35;color:#9FB0C8">Errors prevented, not found.</p>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.35;color:#14213D"><b>Recommended:</b> C for every new filing; B for the existing record, with A only on the pages B flags.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A7280">Page counts from the census; cloud cost from the cer-regdocs2 evaluation (Azure, August 2026). Person-years are an estimate from the stated assumptions.</p>
+<aside>Option A: people check the data. At an assumed three minutes to check a page against its image, the 740,000 pages without trustworthy text are about 23 person-years; checking every page so all data is AI-ready is over 100. New filings add less than two people a year - the backlog is the problem. Option B: let machines read everything and manage the risk. It is cheap - about twenty thousand dollars at a cloud service's rate, measured on 90,000 pages - but errors are only flagged, and we still have no hand-checked ground truth. Option C: fix it at the source. Most of the problem is how files are produced. A rule plus an automatic check at upload prevents the errors rather than finding them later. The recommendation is to combine them: digital first for everything new, automation for the existing record, and people only where the machine flags doubt.</aside>
+</section>

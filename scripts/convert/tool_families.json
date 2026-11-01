@@ -1,0 +1,583 @@
+{
+  "version": "tools-1",
+  "about": "Maps a PDF's producer, creator and XMP tool strings to a family and a kind. Ordered: the first pattern that matches wins, so specific patterns come before general ones. Patterns are case-insensitive regular expressions. The version is part of tier0's run signature; change it with the rules.",
+  "kinds": {
+    "ocr": "added a text layer by recognising a scanned image",
+    "scanner": "a scanner or multifunction printer, or its capture software",
+    "office": "an authoring application: word processor, spreadsheet, presentation, layout",
+    "office_addin": "an authoring application's PDF export add-in",
+    "reporting": "a report generator",
+    "cad_gis": "an engineering drawing or mapping application",
+    "printer_driver": "a virtual printer: the document was printed to PDF",
+    "postscript": "converted through PostScript",
+    "browser": "a web browser or its PDF engine",
+    "pdf_editor": "a PDF application that edits, combines or re-saves",
+    "pdf_library": "a programming library that writes PDFs",
+    "esign": "an electronic signature service",
+    "merger": "a tool that splits or combines PDFs",
+    "generated": "an AI assistant",
+    "unknown": "none of the above"
+  },
+  "rules": [
+    {
+      "family": "Adobe Acrobat Paper Capture",
+      "kind": "ocr",
+      "pattern": "Paper Capture"
+    },
+    {
+      "family": "OmniPage",
+      "kind": "ocr",
+      "pattern": "OmniPage"
+    },
+    {
+      "family": "ABBYY FineReader",
+      "kind": "ocr",
+      "pattern": "ABBYY|FineReader"
+    },
+    {
+      "family": "Readiris",
+      "kind": "ocr",
+      "pattern": "Readiris"
+    },
+    {
+      "family": "OCRmyPDF",
+      "kind": "ocr",
+      "pattern": "ocrmypdf"
+    },
+    {
+      "family": "Tesseract",
+      "kind": "ocr",
+      "pattern": "Tesseract"
+    },
+    {
+      "family": "Canon MFP",
+      "kind": "scanner",
+      "pattern": "Adobe PSL .*Canon|Canon iR|imageRUNNER|CanoScan|ScanGear|\\bCanon\\b"
+    },
+    {
+      "family": "RICOH MFP",
+      "kind": "scanner",
+      "pattern": "RICOH"
+    },
+    {
+      "family": "Xerox MFP",
+      "kind": "scanner",
+      "pattern": "Xerox"
+    },
+    {
+      "family": "HP MFP",
+      "kind": "scanner",
+      "pattern": "Hewlett[- ]Packard|HP Digital Sending|HP Scan|\\bHP MFP"
+    },
+    {
+      "family": "EPSON Scan",
+      "kind": "scanner",
+      "pattern": "EPSON"
+    },
+    {
+      "family": "Brother Scanner",
+      "kind": "scanner",
+      "pattern": "Brother"
+    },
+    {
+      "family": "Konica Minolta MFP",
+      "kind": "scanner",
+      "pattern": "KONICA|MINOLTA|^KM_"
+    },
+    {
+      "family": "Toshiba MFP",
+      "kind": "scanner",
+      "pattern": "TOSHIBA|e-STUDIO"
+    },
+    {
+      "family": "Sharp MFP",
+      "kind": "scanner",
+      "pattern": "\\bSHARP\\b|\\bMX-[0-9]"
+    },
+    {
+      "family": "Kyocera MFP",
+      "kind": "scanner",
+      "pattern": "KYOCERA|TASKalfa"
+    },
+    {
+      "family": "Lexmark MFP",
+      "kind": "scanner",
+      "pattern": "Lexmark"
+    },
+    {
+      "family": "Fujitsu Scanner",
+      "kind": "scanner",
+      "pattern": "Fujitsu|ScanSnap|PaperStream"
+    },
+    {
+      "family": "Kofax AutoStore",
+      "kind": "scanner",
+      "pattern": "AutoStore"
+    },
+    {
+      "family": "Copitrak",
+      "kind": "scanner",
+      "pattern": "Copitrak"
+    },
+    {
+      "family": "Xerox MFP",
+      "kind": "scanner",
+      "pattern": "VersaLink|PrimeLink|AltaLink|WorkCentre"
+    },
+    {
+      "family": "ROWE large-format scanner",
+      "kind": "scanner",
+      "pattern": "ROWE"
+    },
+    {
+      "family": "EQScan",
+      "kind": "scanner",
+      "pattern": "EQScan"
+    },
+    {
+      "family": "Scanner (generic)",
+      "kind": "scanner",
+      "pattern": "Image Conversion|\\bScanner\\b|\\bScan\\b"
+    },
+    {
+      "family": "Acrobat PDFMaker for Word",
+      "kind": "office_addin",
+      "pattern": "PDFMaker .*(Word)"
+    },
+    {
+      "family": "Acrobat PDFMaker for Excel",
+      "kind": "office_addin",
+      "pattern": "PDFMaker .*Excel"
+    },
+    {
+      "family": "Acrobat PDFMaker for PowerPoint",
+      "kind": "office_addin",
+      "pattern": "PDFMaker .*PowerPoint"
+    },
+    {
+      "family": "Acrobat PDFMaker for Outlook",
+      "kind": "office_addin",
+      "pattern": "PDFMaker .*Outlook"
+    },
+    {
+      "family": "Acrobat PDFMaker",
+      "kind": "office_addin",
+      "pattern": "PDFMaker"
+    },
+    {
+      "family": "Microsoft Word",
+      "kind": "office",
+      "pattern": "Microsoft.{0,3} ?(Office )?Word|^Word$"
+    },
+    {
+      "family": "Microsoft Excel",
+      "kind": "office",
+      "pattern": "Microsoft.{0,3} ?(Office )?Excel"
+    },
+    {
+      "family": "Microsoft PowerPoint",
+      "kind": "office",
+      "pattern": "Microsoft.{0,3} ?(Office )?PowerPoint"
+    },
+    {
+      "family": "Microsoft Visio",
+      "kind": "office",
+      "pattern": "Visio"
+    },
+    {
+      "family": "Microsoft Outlook",
+      "kind": "office",
+      "pattern": "Outlook"
+    },
+    {
+      "family": "Microsoft Publisher",
+      "kind": "office",
+      "pattern": "Publisher"
+    },
+    {
+      "family": "LibreOffice",
+      "kind": "office",
+      "pattern": "LibreOffice|OpenOffice"
+    },
+    {
+      "family": "Adobe InDesign",
+      "kind": "office",
+      "pattern": "InDesign"
+    },
+    {
+      "family": "Adobe Illustrator",
+      "kind": "office",
+      "pattern": "Illustrator"
+    },
+    {
+      "family": "Adobe Photoshop",
+      "kind": "office",
+      "pattern": "Photoshop"
+    },
+    {
+      "family": "Apple Pages",
+      "kind": "office",
+      "pattern": "^Pages$"
+    },
+    {
+      "family": "Google Docs",
+      "kind": "office",
+      "pattern": "Google Docs"
+    },
+    {
+      "family": "WPS Office",
+      "kind": "office",
+      "pattern": "WPS"
+    },
+    {
+      "family": "Crystal Reports",
+      "kind": "reporting",
+      "pattern": "Crystal"
+    },
+    {
+      "family": "Workiva",
+      "kind": "reporting",
+      "pattern": "Workiva|Wdesk"
+    },
+    {
+      "family": "SAP",
+      "kind": "reporting",
+      "pattern": "\\bSAP\\b"
+    },
+    {
+      "family": "SSRS",
+      "kind": "reporting",
+      "pattern": "Reporting Services"
+    },
+    {
+      "family": "Corporations Canada",
+      "kind": "reporting",
+      "pattern": "Corpcan|onbis-corporations"
+    },
+    {
+      "family": "EDGAR / WebFilings",
+      "kind": "reporting",
+      "pattern": "EDGAR|WebFilings"
+    },
+    {
+      "family": "Esri ArcGIS",
+      "kind": "cad_gis",
+      "pattern": "Esri|ArcGIS|ArcMap|ArcSOC"
+    },
+    {
+      "family": "Autodesk",
+      "kind": "cad_gis",
+      "pattern": "Autodesk|AutoCAD|Civil ?3D|Revit"
+    },
+    {
+      "family": "Bentley MicroStation",
+      "kind": "cad_gis",
+      "pattern": "MicroStation|pdfplot|Bentley"
+    },
+    {
+      "family": "BricsCAD",
+      "kind": "cad_gis",
+      "pattern": "BricsCAD"
+    },
+    {
+      "family": "VertiGIS",
+      "kind": "cad_gis",
+      "pattern": "VertiGIS"
+    },
+    {
+      "family": "QGIS",
+      "kind": "cad_gis",
+      "pattern": "QGIS"
+    },
+    {
+      "family": "Global Mapper",
+      "kind": "cad_gis",
+      "pattern": "Global Mapper"
+    },
+    {
+      "family": "Microsoft Print to PDF",
+      "kind": "printer_driver",
+      "pattern": "Microsoft: Print To PDF"
+    },
+    {
+      "family": "macOS Quartz",
+      "kind": "printer_driver",
+      "pattern": "Quartz PDFContext|Mac OS X .*Quartz"
+    },
+    {
+      "family": "Foxit PDF printer",
+      "kind": "printer_driver",
+      "pattern": "Foxit .*(Printer|Creator)"
+    },
+    {
+      "family": "Neevia docuPrinter",
+      "kind": "printer_driver",
+      "pattern": "docuPrinter|Neevia"
+    },
+    {
+      "family": "Amyuni PDF Converter",
+      "kind": "printer_driver",
+      "pattern": "Amyuni"
+    },
+    {
+      "family": "Win2PDF",
+      "kind": "printer_driver",
+      "pattern": "Win2PDF"
+    },
+    {
+      "family": "CutePDF",
+      "kind": "printer_driver",
+      "pattern": "CutePDF"
+    },
+    {
+      "family": "PrimoPDF",
+      "kind": "printer_driver",
+      "pattern": "Primo"
+    },
+    {
+      "family": "doPDF",
+      "kind": "printer_driver",
+      "pattern": "doPDF|novaPDF"
+    },
+    {
+      "family": "Bullzip",
+      "kind": "printer_driver",
+      "pattern": "Bullzip"
+    },
+    {
+      "family": "PDFCreator",
+      "kind": "printer_driver",
+      "pattern": "PDFCreator|PDF Creator"
+    },
+    {
+      "family": "Windows PostScript driver",
+      "kind": "printer_driver",
+      "pattern": "PScript"
+    },
+    {
+      "family": "Acrobat Distiller",
+      "kind": "postscript",
+      "pattern": "Distiller"
+    },
+    {
+      "family": "Ghostscript",
+      "kind": "postscript",
+      "pattern": "Ghostscript"
+    },
+    {
+      "family": "Chromium",
+      "kind": "browser",
+      "pattern": "Skia/PDF|HeadlessChrome|Chrome|Chromium|Edg/"
+    },
+    {
+      "family": "Firefox",
+      "kind": "browser",
+      "pattern": "Firefox|cairo"
+    },
+    {
+      "family": "wkhtmltopdf",
+      "kind": "browser",
+      "pattern": "wkhtmltopdf"
+    },
+    {
+      "family": "WeasyPrint",
+      "kind": "browser",
+      "pattern": "WeasyPrint"
+    },
+    {
+      "family": "DocuSign",
+      "kind": "esign",
+      "pattern": "Docusign"
+    },
+    {
+      "family": "Adobe Acrobat Sign",
+      "kind": "esign",
+      "pattern": "Acrobat Sign|Adobe Sign|EchoSign"
+    },
+    {
+      "family": "SignNow",
+      "kind": "esign",
+      "pattern": "SignNow|airSlate"
+    },
+    {
+      "family": "Kofax Power PDF",
+      "kind": "pdf_editor",
+      "pattern": "Power PDF|Kofax|Nuance"
+    },
+    {
+      "family": "Bluebeam",
+      "kind": "pdf_editor",
+      "pattern": "Bluebeam"
+    },
+    {
+      "family": "Nitro",
+      "kind": "pdf_editor",
+      "pattern": "Nitro"
+    },
+    {
+      "family": "PDF-XChange",
+      "kind": "pdf_editor",
+      "pattern": "PDF-XChange"
+    },
+    {
+      "family": "Foxit",
+      "kind": "pdf_editor",
+      "pattern": "Foxit"
+    },
+    {
+      "family": "Wondershare PDFelement",
+      "kind": "pdf_editor",
+      "pattern": "Wondershare|PDFelement"
+    },
+    {
+      "family": "Adobe Acrobat",
+      "kind": "pdf_editor",
+      "pattern": "Adobe Acrobat|^Acrobat"
+    },
+    {
+      "family": "iLovePDF",
+      "kind": "merger",
+      "pattern": "iLovePDF"
+    },
+    {
+      "family": "PDFsam",
+      "kind": "merger",
+      "pattern": "PDFsam|SAMBox|Sejda"
+    },
+    {
+      "family": "Smallpdf",
+      "kind": "merger",
+      "pattern": "Smallpdf"
+    },
+    {
+      "family": "Adobe PDF Library",
+      "kind": "pdf_library",
+      "pattern": "Adobe PDF Library|Adobe PDF Scan Library"
+    },
+    {
+      "family": "Aspose",
+      "kind": "pdf_library",
+      "pattern": "Aspose"
+    },
+    {
+      "family": "PDFsharp",
+      "kind": "pdf_library",
+      "pattern": "PDFsharp"
+    },
+    {
+      "family": "iText",
+      "kind": "pdf_library",
+      "pattern": "iText"
+    },
+    {
+      "family": "ReportLab",
+      "kind": "pdf_library",
+      "pattern": "ReportLab"
+    },
+    {
+      "family": "PDFKit.NET",
+      "kind": "pdf_library",
+      "pattern": "PDFKit"
+    },
+    {
+      "family": "PDFium",
+      "kind": "pdf_library",
+      "pattern": "PDFium"
+    },
+    {
+      "family": "Qt",
+      "kind": "pdf_library",
+      "pattern": "^Qt\\b"
+    },
+    {
+      "family": "Apache PDFBox",
+      "kind": "pdf_library",
+      "pattern": "PDFBox"
+    },
+    {
+      "family": "TCPDF",
+      "kind": "pdf_library",
+      "pattern": "TCPDF|FPDF"
+    },
+    {
+      "family": "pdfTeX / LaTeX",
+      "kind": "pdf_library",
+      "pattern": "pdfTeX|LaTeX|XeTeX|LuaTeX"
+    },
+    {
+      "family": "MuPDF",
+      "kind": "pdf_library",
+      "pattern": "MuPDF|PyMuPDF"
+    },
+    {
+      "family": "pypdf",
+      "kind": "pdf_library",
+      "pattern": "pypdf|PyPDF"
+    },
+    {
+      "family": "Adobe PDF Services",
+      "kind": "pdf_library",
+      "pattern": "Adobe PDF Services"
+    },
+    {
+      "family": "GdPicture",
+      "kind": "pdf_library",
+      "pattern": "GdPicture"
+    },
+    {
+      "family": "Haru",
+      "kind": "pdf_library",
+      "pattern": "Haru"
+    },
+    {
+      "family": "PDFlib",
+      "kind": "pdf_library",
+      "pattern": "PDFlib"
+    },
+    {
+      "family": "Debenu Quick PDF",
+      "kind": "pdf_library",
+      "pattern": "Debenu"
+    },
+    {
+      "family": "Apache FOP",
+      "kind": "pdf_library",
+      "pattern": "Apache FOP"
+    },
+    {
+      "family": "UniDoc",
+      "kind": "pdf_library",
+      "pattern": "UniDoc"
+    },
+    {
+      "family": "DynamicPDF",
+      "kind": "pdf_library",
+      "pattern": "DynamicPDF"
+    },
+    {
+      "family": "DevExpress",
+      "kind": "pdf_library",
+      "pattern": "Developer Express|DXperience"
+    },
+    {
+      "family": "Accusoft ImageGear",
+      "kind": "pdf_library",
+      "pattern": "Accusoft|ImageGear"
+    },
+    {
+      "family": "Oracle Outside In",
+      "kind": "pdf_library",
+      "pattern": "Outside In"
+    },
+    {
+      "family": "Corel",
+      "kind": "pdf_library",
+      "pattern": "Corel"
+    },
+    {
+      "family": "ChatGPT",
+      "kind": "generated",
+      "pattern": "ChatGPT|OpenAI"
+    }
+  ]
+}

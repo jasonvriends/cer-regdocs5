@@ -1,0 +1,173 @@
+== tagged-table reader test, 20 tagged sample documents Sun Oct 18 11:05:50 EDT 2026
+convert v2: 20 document(s); run identity /mnt/e/_REGDOCS_/scripts/convert/runs/v2/run.json; code d6cb6e8d1797 at 07874a4 + uncommitted changes
+Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:   0%|          | 0/770 [00:00<?, ?it/s]Loading weights:  40%|████      | 309/770 [00:00<00:00, 3088.17it/s]Loading weights:  40%|███▉      | 306/770 [00:00<00:00, 3041.32it/s]Loading weights:  42%|████▏     | 320/770 [00:00<00:00, 3187.34it/s]Loading weights:  41%|████▏     | 318/770 [00:00<00:00, 3156.84it/s]Loading weights:  82%|████████▏ | 634/770 [00:00<00:00, 2936.41it/s]Loading weights:  80%|████████  | 618/770 [00:00<00:00, 2734.01it/s]Loading weights:  83%|████████▎ | 639/770 [00:00<00:00, 2790.48it/s]Loading weights:  79%|███████▉  | 611/770 [00:00<00:00, 2572.53it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 3085.93it/s]
+Loading weights: 100%|██████████| 770/770 [00:00<00:00, 3072.42it/s]Loading weights: 100%|██████████| 770/770 [00:00<00:00, 3048.36it/s]
+
+Loading weights: 100%|██████████| 770/770 [00:00<00:00, 3041.54it/s]
+Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1025 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 347/1025 [00:00<00:00, 3467.47it/s]Loading weights:  34%|███▍      | 350/1025 [00:00<00:00, 3497.93it/s]Loading weights:  35%|███▍      | 357/1025 [00:00<00:00, 3562.00it/s]Loading weights:  37%|███▋      | 383/1025 [00:00<00:00, 3829.59it/s]Loading weights:  68%|██████▊   | 700/1025 [00:00<00:00, 2862.25it/s]Loading weights:  70%|██████▉   | 714/1025 [00:00<00:00, 2953.36it/s]Loading weights:  68%|██████▊   | 694/1025 [00:00<00:00, 2805.38it/s]Loading weights:  75%|███████▍  | 766/1025 [00:00<00:00, 2872.38it/s]Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 3214.67it/s]
+Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 3182.27it/s]Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 3171.34it/s]
+
+Loading weights: 100%|██████████| 1025/1025 [00:00<00:00, 3244.91it/s]
+Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1197 [00:00<?, ?it/s]Loading weights:  31%|███       | 367/1197 [00:00<00:00, 3662.68it/s]Loading weights:  31%|███       | 370/1197 [00:00<00:00, 3687.00it/s]Loading weights:  31%|███       | 372/1197 [00:00<00:00, 3714.18it/s]Loading weights:  35%|███▍      | 415/1197 [00:00<00:00, 4145.82it/s]Loading weights:  62%|██████▏   | 739/1197 [00:00<00:00, 2840.34it/s]Loading weights:  61%|██████▏   | 734/1197 [00:00<00:00, 2676.98it/s]Loading weights:  62%|██████▏   | 744/1197 [00:00<00:00, 2611.29it/s]Loading weights:  69%|██████▉   | 830/1197 [00:00<00:00, 3173.14it/s]Loading weights:  91%|█████████ | 1089/1197 [00:00<00:00, 3098.68it/s]Loading weights:  94%|█████████▎| 1121/1197 [00:00<00:00, 3128.62it/s]Loading weights:  94%|█████████▍| 1126/1197 [00:00<00:00, 3057.95it/s]Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3112.75it/s]Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3431.16it/s]Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3114.15it/s]
+
+
+Loading weights: 100%|██████████| 1197/1197 [00:00<00:00, 3119.21it/s]
+Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:   0%|          | 0/1465 [00:00<?, ?it/s]Loading weights:  24%|██▎       | 346/1465 [00:00<00:00, 3458.23it/s]Loading weights:  24%|██▍       | 354/1465 [00:00<00:00, 3534.84it/s]Loading weights:  24%|██▍       | 356/1465 [00:00<00:00, 3511.19it/s]Loading weights:  27%|██▋       | 390/1465 [00:00<00:00, 3839.30it/s]Loading weights:  47%|████▋     | 692/1465 [00:00<00:00, 3159.19it/s]Loading weights:  48%|████▊     | 708/1465 [00:00<00:00, 3115.51it/s]Loading weights:  48%|████▊     | 708/1465 [00:00<00:00, 3075.54it/s]Loading weights:  53%|█████▎    | 774/1465 [00:00<00:00, 2906.62it/s]Loading weights:  69%|██████▉   | 1010/1465 [00:00<00:00, 2677.07it/s]Loading weights:  74%|███████▎  | 1078/1465 [00:00<00:00, 2905.78it/s]Loading weights:  70%|██████▉   | 1020/1465 [00:00<00:00, 2519.10it/s]Loading weights:  70%|██████▉   | 1023/1465 [00:00<00:00, 2470.32it/s]Loading weights:  91%|█████████▏| 1340/1465 [00:00<00:00, 2890.44it/s]Loading weights:  96%|█████████▌| 1400/1465 [00:00<00:00, 3014.34it/s]Loading weights:  96%|█████████▋| 1413/1465 [00:00<00:00, 2979.55it/s]Loading weights:  96%|█████████▌| 1406/1465 [00:00<00:00, 2909.40it/s]Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 3055.61it/s]Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 2969.46it/s]
+Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 2955.86it/s]
+Loading weights: 100%|██████████| 1465/1465 [00:00<00:00, 2963.48it/s]
+
+Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights:   0%|          | 0/360 [00:00<?, ?it/s]Loading weights:  87%|████████▋ | 312/360 [00:00<00:00, 3100.14it/s]Loading weights:  91%|█████████ | 326/360 [00:00<00:00, 3254.68it/s]Loading weights:  91%|█████████▏| 329/360 [00:00<00:00, 3278.76it/s]Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3217.91it/s]
+Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3234.88it/s]Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3248.13it/s]
+
+Loading weights: 100%|██████████| 360/360 [00:00<00:00, 3802.27it/s]
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/torch/nn/modules/conv.py:560: UserWarning: Using padding='same' with even kernel lengths and odd dilation may require a zero-padded copy of the input be created (Triggered internally at /__w/pytorch/pytorch/aten/src/ATen/native/Convolution.cpp:1104.)
+  return F.conv2d(
+ok       2672093      59p   195.8s  words 8803 (pdf:59)  tables 285 pictures 402  docling 8803/8803 text 100.0%  md 100.0%  issues info:100
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/items/node.py:134: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:209: UserWarning: Pydantic serializer warnings:
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TitleItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `SectionHeaderItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `ListItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FloatingMeta` - serialized value may not be as expected [field_name='meta', input_value=BaseMeta(summary=None, la..., regdocs__reader='pdf'), input_type=BaseMeta])
+  PydanticSerializationUnexpectedValue(Expected `FormulaItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldHeadingItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `FieldValueItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  PydanticSerializationUnexpectedValue(Expected `TextItem` - serialized value may not be as expected [field_name='texts', input_value=CodeItem(self_ref='#/text...bel.UNKNOWN: 'unknown'>), input_type=CodeItem])
+  dumped = handler(self)
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 112 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 112 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 112 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 112 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 114 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 114 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 114 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 114 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 115 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 115 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 115 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 115 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 117 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 117 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 117 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 117 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 118 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 118 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 118 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 118 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 121 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 121 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 121 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 121 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 124 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 124 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 124 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 124 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate l on page 127 is outside page bounds: value=2147483500.0 > hi=841.9; clamping to 841.9
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate r on page 127 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate t on page 127 is outside page bounds: value=2147483500.0 > hi=1191.1; clamping to 1191.1
+  cell.bbox = self._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:326: UserWarning: Table cell bbox coordinate b on page 127 is outside page bounds: value=-2147483700.0 < lo=0.0; clamping to 0.0
+  cell.bbox = self._clamp_bbox_to_page(
+ok       4665382     160p   712.0s  words 35251 (pdf:148/ocr:12)  tables 220 pictures 211  docling 35251/35251 text 100.0%  md 100.0%  issues info:143 warning:71
+ok       552663      164p   659.7s  words 106954 (pdf:160/ocr:4)  tables 181 pictures 381  docling 106954/106954 text 100.0%  md 100.0%  issues info:98 warning:7
+ok       2392812      26p    87.8s  words 3903 (pdf:26)  tables 118 pictures 176  docling 3903/3903 text 100.0%  md 100.0%  issues info:44
+ok       812687      186p  1362.8s  words 64839 (pdf:186)  tables 448 pictures 3  docling 64839/64839 text 100.0%  md 100.0%  issues info:149
+ok       3935357     267p   687.5s  words 160416 (ocr:9/pdf:258)  tables 174 pictures 19  docling 160416/160416 text 100.0%  md 100.0%  issues info:68 warning:2
+ok       3338141     214p   538.4s  words 51951 (pdf:15/ocr:199)  tables 115 pictures 539  docling 51951/51951 text 100.0%  md 100.0%  issues info:97 warning:39
+ok       2908355     142p   234.0s  words 35490 (pdf:142)  tables 114 pictures 2  docling 35490/35490 text 100.0%  md 100.0%  issues info:25 warning:1
+ok       3611012     326p  1780.5s  words 127018 (pdf:321/ocr:5)  tables 268 pictures 434  docling 127018/127018 text 100.0%  md 100.0%  issues info:534
+ok       4554312     198p   393.9s  words 55866 (pdf:117/ocr:81)  tables 95 pictures 269  docling 55866/55866 text 100.0%  md 100.0%  issues info:94 warning:1
+ok       4247414     293p   479.1s  words 114094 (pdf:293)  tables 96 pictures 13  docling 114094/114094 text 100.0%  md 100.0%  issues info:31
+ok       3296431      61p   298.0s  words 16582 (ocr:57/pdf:4)  tables 89 pictures 228  docling 16582/16582 text 100.0%  md 100.0%  issues warning:65 info:68
+ok       522248       11p   109.8s  words 4677 (pdf:11)  tables 49 pictures 3  docling 4677/4677 text 100.0%  md 100.0%  issues info:8 warning:2
+ok       3464084     174p   237.1s  words 55283 (pdf:174)  tables 80 pictures 2  docling 55283/55283 text 100.0%  md 100.0%  issues info:110
+ok       2432140      52p    99.6s  words 14322 (pdf:52)  tables 35 pictures 109  docling 14322/14322 text 100.0%  md 100.0%  issues info:75
+ok       3768464     141p   309.0s  words 45914 (pdf:140/ocr:1)  tables 77 pictures 166  docling 45914/45914 text 100.0%  md 100.0%  issues info:99 warning:1
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 15 is outside page bounds: value=653.76 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 16 is outside page bounds: value=646.9200000000001 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 20 is outside page bounds: value=647.28 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+/home/jasonvriends/.venvs/regdocs-convert/lib/python3.12/site-packages/docling_core/types/doc/document.py:302: UserWarning: Provenance bbox coordinate r on page 21 is outside page bounds: value=648.0 > hi=612.0; clamping to 612.0
+  prov.bbox = cls._clamp_bbox_to_page(
+ok       4244189      61p   191.0s  words 36213 (pdf:3/ocr:58)  tables 43 pictures 578  docling 36213/36213 text 100.0%  md 100.0%  issues info:59 warning:60
+ok       600640        3p    23.4s  words 1721 (pdf:3)  tables 33 pictures 27  docling 1721/1721 text 100.0%  md 100.0%  issues info:6
+ok       4034412     148p   333.2s  words 56009 (pdf:148)  tables 60 pictures 176  docling 56009/56009 text 100.0%  md 100.0%  issues info:182 warning:1
+ok       4295926      81p   124.8s  words 32856 (pdf:81)  tables 33 pictures 90  docling 32856/32856 text 100.0%  md 100.0%  issues info:73
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+Consider using the pymupdf_layout package for a greatly improved page layout analysis.
+done: 20 converted, 0 failed, 2260s

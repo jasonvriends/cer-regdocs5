@@ -1,0 +1,15 @@
+pymupdf==1.28.2
+numpy==2.5.3
+pillow==12.3.0
+pyarrow==25.0.1
+torch==2.14.0
+torchvision==0.29.0
+transformers==5.17.0
+safetensors==0.8.0
+docling-core==2.99.0
+docling-ibm-models==4.0.3
+rapidocr==3.9.2
+opencv-python==5.0.0.93
+duckdb==1.5.6
+zxing-cpp==3.1.1
+pypdfium2==4.30.0
