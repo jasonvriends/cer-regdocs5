@@ -210,7 +210,7 @@
    "family": "B",
    "in_file": "partly",
    "remedy": "D4, D5",
-   "lesson": "Map Wingdings/Symbol characters by font name before export (þ→☑, ¨→☐, private-use bullets → •); write a check box's option once, with its state.",
+   "lesson": "Map Wingdings/Symbol characters by font name before export (þ→☑, ¨→☐, private-use bullets → •); write a check box's option once, with its state. Never drop a private-use code point silently: the degree sign stored as U+F0B0 is deleted today (4334400: '100 °F' becomes '100 F'); map Symbol's U+F0xx range to Unicode (U+F0B0 → °, U+F0B1 → ±, U+F0B7 → •).",
    "examples": [
     {
      "doc_id": "3768118",
@@ -243,6 +243,14 @@
      "output_says": "¡ ¤ þ ¨",
      "checked_image": false,
      "note": ""
+    },
+    {
+     "doc_id": "4334400",
+     "page": 6,
+     "page_shows": "Corrosion, Copper Strip at 100 °F (degree sign in a symbol font)",
+     "output_says": "Corrosion, Copper Strip at 100 F",
+     "checked_image": true,
+     "note": "unit symbol dropped"
     }
    ]
   },
@@ -539,6 +547,14 @@
      "output_says": "(A73728-2), written after its line",
      "checked_image": false,
      "note": ""
+    },
+    {
+     "doc_id": "3718215",
+     "page": 94,
+     "page_shows": "paragraph 7071 ending '...an entirely appropriate question given his discussion around Exhibit B25.'",
+     "output_says": "cell stops at 'given'; 'his discussion around Exhibit B25.' after paragraph 7079, then a stray 'a'",
+     "checked_image": true,
+     "note": "transcript table cell; exhibit reference detached from its turn"
     }
    ]
   },
@@ -1032,6 +1048,14 @@
      "output_says": "46053857114E 63307660815N; KP 16+49063 to 16+516490; September February 2022",
      "checked_image": true,
      "note": "wrong, valid-looking positions"
+    },
+    {
+     "doc_id": "2776896",
+     "page": 1,
+     "page_shows": "scanned line list with red strike-through on superseded values",
+     "output_says": "15996 15306 14996 (old and new values as live text)",
+     "checked_image": true,
+     "note": "drawn strike-through on a scan"
     }
    ]
   },
@@ -1199,6 +1223,14 @@
      "output_says": "the title only",
      "checked_image": true,
      "note": "the map is missing from the filed PDF"
+    },
+    {
+     "doc_id": "2790791",
+     "page": 1,
+     "page_shows": "a web-page print fragment starting mid-sentence; Print and Close / Cancel buttons",
+     "output_says": "the same fragment, buttons as text",
+     "checked_image": true,
+     "note": "the filed document is an orphan web print"
     }
    ]
   },
@@ -1328,7 +1360,7 @@
    ]
   },
   "J3": {
-   "name": "Icons and indentation carry the hierarchy",
+   "name": "Icons, indentation and braces carry the relationships (hierarchy, who represents whom)",
    "family": "J",
    "in_file": "partly",
    "remedy": "S (tags), T",
@@ -1341,6 +1373,14 @@
      "output_says": "囚 for PDF icons, *[icon]* for folders; hierarchy lost",
      "checked_image": false,
      "note": "not image-checked"
+    },
+    {
+     "doc_id": "2837588",
+     "page": 4,
+     "page_shows": "appearances: counsel names grouped by ')' braces against the party they represent",
+     "output_says": "all names first (stray ')' and '- ' bullets), the parties as a separate block",
+     "checked_image": true,
+     "note": "1998 scan; who appeared for whom lost"
     }
    ]
   },
@@ -1500,6 +1540,88 @@
      "output_says": "| uu-PCG-4559451-aa PCG | NOVA Gas Transmission Ltd. | (22 such ids in the file)",
      "checked_image": true,
      "note": "4 pt internal-link anchor text behind the label"
+    }
+   ]
+  },
+  "A8": {
+   "name": "OCR substitutes look-alike characters in codes, ratings and identifiers",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, D3: drawings and specifications exported as text",
+   "lesson": "Dictionary-free tokens (class ratings, material codes, datums, drawing numbers) get no help from language models: check them against known vocabularies (CL150/300/600, NAD83, A105N) and flag mismatches; report OCR confidence per token for codes.",
+   "examples": [
+    {
+     "doc_id": "3748169",
+     "page": 1,
+     "page_shows": "150LB FLANGE, RFWN, A105N, CL150 ... ENBRIDGE",
+     "output_says": "158LB FLANGE, RFWN, A185N, CL152 ... ENBRIOGE; GASKET → CASKET",
+     "checked_image": true,
+     "note": "material list on a drawing"
+    },
+    {
+     "doc_id": "2957277",
+     "page": 2,
+     "page_shows": "NEW BRUNSWICK ELECTRIC POWER COMMISSION; DATUM CGVD28; NAD1983",
+     "output_says": "NEW ARUNSWICK ELECTRIC POWER COMMISSICK; DATUV CGVC28; NAC1983",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4049861",
+     "page": 10,
+     "page_shows": "values and weights on a drawing",
+     "output_says": "114,S50KG; 5.3h17",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3293729",
+     "page": 9,
+     "page_shows": "Detail A overall width 45.0 m",
+     "output_says": "15.0 m",
+     "checked_image": true,
+     "note": "plan and profile; the text layer is shifted junk too (B1), so OCR was used"
+    }
+   ]
+  },
+  "E7": {
+   "name": "Transcript structure broken (line numbers, time codes, page numbers in the speech; speaker turns split)",
+   "family": "E",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Recognise transcript layouts (numbered lines, time codes, printed page numbers): move line numbers and time codes into structure (or drop them), keep speaker turns as units; export every page of one transcript the same way.",
+   "examples": [
+    {
+     "doc_id": "4305597",
+     "page": 84,
+     "page_shows": "numbered lines with time codes beside the speech",
+     "output_says": "1  04:01:00 questions. / 2  04:01:01 PRESIDING COMMISSIONER KATHY PENNEY: Thanks very / 3 04:01:04 much.",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4555824",
+     "page": 38,
+     "page_shows": "printed transcript page 34 on PDF page 38",
+     "output_says": "25  this area, we used to go over here ... / 34 (stray)",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3777308",
+     "page": 48,
+     "page_shows": "numbered transcript paragraphs (988. ELDER JOSEPHINE THOMAS BREMNER: ...)",
+     "output_says": "a table on this page, a list on page 46 of the same transcript",
+     "checked_image": true,
+     "note": "same structure exported differently page to page"
+    },
+    {
+     "doc_id": "3062862",
+     "page": 40,
+     "page_shows": "THE CHAIRMAN: Mr. Yates?",
+     "output_says": "'Mr. Yates?' inside Mr. Yates's own turn (speaker turn split)",
+     "checked_image": false,
+     "note": "speaker attribution wrong; not image-checked"
     }
    ]
   }

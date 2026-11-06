@@ -17,8 +17,10 @@ and **whether the information is in the file at all**:
 The remedy column points to the requirements in [digital-first-filing.md](digital-first-filing.md)
 (D = born digital, S = structure, T = data as data; see that document for the evidence behind each).
 
-Evidence: the full conversion pass (v2, 2026-10-19 to 11-05), 210 documents read by hand,
-2,000 read by agents against the page images (`scripts/convert/runs/v2/review/`), and signatures
+Evidence: the full conversion pass (v2, 2026-10-19 to 11-06), 210 documents read by hand and
+1,050 read by agents against their page images and text layers (`scripts/convert/runs/v2/review/`):
+random draws stratified by document type and producer, then targeted draws of schedules and tolls,
+transcripts, French filings, drawings, Indigenous engagement filings and 2015 scans. Signatures
 counted on every converted document (`scripts/convert/review_scan.py`). Rates are given only to
 show a pattern is real and common; they are not the point. Document ids are REGDOCS ids. The register behind this page (each pattern, up to five examples with
 page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/review/patterns.json`
@@ -35,6 +37,7 @@ page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/r
 | A4 | Graphic marks read as characters (logos, symbols, boxes as Chinese) | not in the file | invented words in English and French text | D1, D3 |
 | A5 | Handwritten corrections on typed text produce a plausible wrong value | not in the file | a different, valid-looking hearing number | D1 |
 | A7 | Indigenous-language text read as junk or stripped (syllabics, special letters) | not in the file | Inuktitut becomes "uUAda ⊃AD qb ⊂" | D1, D4 |
+| A8 | OCR substitutes look-alike characters in codes, ratings and identifiers | not in the file | "CL150" reads "CL152", "NAD1983" reads "NAC1983" | D1, D3 |
 | A6 | OCR drops small marks or digits that carry value | not in the file | zero and "not reported" look the same | D1, T |
 | **B** | **The text layer says something other than the page** | | | |
 | B1 | Wrong characters behind right-looking glyphs | not in the file | wrong numbers in tables, with nothing to show it | D4, D5 |
@@ -61,6 +64,7 @@ page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/r
 | E4 | Footnote markers fused to words; hyphens kept at line ends | partly | "process.22", "navi- gation": search and quotes break | D1, S |
 | E5 | Superscripts flattened into numbers, formulas and units | partly | 76 kPa with footnote 4 reads "764" | D4, S |
 | E6 | A wrapped line starting with a number taken for a list item | partly | plan numbers in a land description altered | S |
+| E7 | Transcript structure broken (numbers in the speech, turns split) | partly | quotations interrupted; a question attributed to the witness | S |
 | **F** | **Tables** | | | |
 | F1 | A table over several pages filed under its first page | in the file | "page 21" holds nothing; citations point to the wrong page | T, S |
 | F2 | A table's own row numbers taken for margin numbering | in the file | "Line 4 + Line 9" with the line numbers gone | T |
@@ -82,7 +86,7 @@ page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/r
 | **J** | **Marks that carry meaning** | | | |
 | J1 | Tracked changes flattened: deleted and inserted text read as one | partly | deleted clauses quoted as in force | file the clean final |
 | J2 | Colour or highlight carries the meaning | partly | which items apply is lost | T; never meaning by colour alone |
-| J3 | Icons and indentation carry the hierarchy | partly | exhibits and their attachments indistinguishable | S, T |
+| J3 | Icons, indentation and braces carry the relationships | partly | exhibits and attachments, counsel and client, indistinguishable | S, T |
 | **K** | **Redaction** | | | |
 | K1 | Redaction leaves a silent gap; exemption stamps read as numbers | not in the file | a sentence missing a name with nothing to say so | redaction rules |
 | K2 | Redacted text still in the file under the black box | in the file | withheld text can leak into search | real redaction |
@@ -147,6 +151,12 @@ OCR built for Latin script turns Inuktitut syllabics into Latin letters and symb
 tagline becomes "uUAda ⊃AD qb ⊂" (3096662, a letter to the NEB); a greeting in an Indigenous
 orthography loses its superscript letters (4667022). *For AI:* in filings about Indigenous
 engagement and rights, the Indigenous-language text is exactly what cannot be read.
+
+**A8. OCR substitutes look-alike characters in codes, ratings and identifiers.** *Not in the file.*
+Words survive OCR errors because readers and models correct them; codes do not. A drawing's
+material list "150LB FLANGE, RFWN, A105N, CL150" comes out "158LB FLANGE, RFWN, A185N, CL152"
+(3748169); "NAD1983" becomes "NAC1983" and "CGVD28" "CGVC28" (2957277). *For AI:* a pressure class or
+datum that is wrong but well-formed.
 
 ## B. The text layer says something other than the page
 
@@ -304,6 +314,13 @@ A legal description of lands wraps as "... PART / 1 25R6353, PART 1 ON 25R10709 
 EASEMENT AS L."; the machine makes the line starting "1" a bullet and swaps the last two lines
 (4680777). *For AI:* plan and part numbers in a legal description altered.
 
+**E7. Transcript furniture mixed into the speech.** *Partly in the file.*
+Numbered lines and time codes come out inside the speech: "1 04:01:00 questions. 2 04:01:01 PRESIDING
+COMMISSIONER KATHY PENNEY: Thanks very 3 04:01:04 much." (4305597); a printed page number left as a
+stray number (4555824); one transcript exported as a table on some pages and a list on others
+(3777308); a split turn puts the Chair's "Mr. Yates?" inside Mr. Yates's own answer (3062862). *For
+AI:* quotations interrupted by numbers; words attributed to the wrong speaker.
+
 ## F. Tables
 
 **F1. A table over several pages filed under its first page.** *In the file.*
@@ -406,7 +423,9 @@ no trace of it, so every item reads the same (3578263). *For AI:* which rows mat
 
 **J3. Icons and indentation carry the hierarchy.** *Partly in the file.*
 An exhibit list marks documents with a PDF icon and attachments with a folder icon, indented; the
-machine gets "囚" and `*[icon]*` (3898988). *For AI:* which item belongs to which is lost.
+machine gets "囚" and `*[icon]*` (3898988). A hearing's list of appearances groups counsel with
+braces against the party they act for; the machine gives the names, then the parties (2837588).
+*For AI:* which item belongs to which, and who represented whom, is lost.
 
 ## K. Redaction
 
@@ -427,13 +446,19 @@ not will index and quote what was meant to be withheld.
 
 - **Counting words does not catch any of this.** Every document above passed the converter's
   checks with 100% of its words. The patterns are about where words go and what marks mean.
-- **About half the patterns are not, or only partly, in the file.** Better software can fix the
-  "in the file" ones (E2, E3, F1, F2) once; the rest need inference from pixels or positions, and
-  inference makes errors that look like answers. Vision models add their own (section 7 of
+- **41 of the 50 patterns are not, or only partly, in the file.** Software can fix the 9 that are
+  (B5, B6, D6, E2, E3, F1, F2, I1, K2) once; the rest need inference from pixels or positions, and
+  inference makes errors that look like answers: a pressure class read CL152, a hearing number read
+  GH-003-2013, a vapour pressure read 764. Vision models add their own (section 7 of
   [filing-guidance.md](filing-guidance.md): they make up data).
 - **Each pattern has a filing-side cure**: born-digital export with real text (A, B), forms filed as
   data or as fillable fields (C), tagged PDF so reading order and structure travel with the
   document (D, E), tables and drawings filed as data beside the PDF (F, G).
 
-*Status:* the catalogue is open while reading continues; a pattern is added when a reader finds a
-failure that fits none of these and confirms it against the page.
+*Status (2026-11-06): complete for the document kinds in REGDOCS as read.* 50 patterns in 11 families:
+14 not in the file, 27 partly, 9 in the file (the converter's own). New patterns per
+round of 100 documents fell 4, 5, 6, 3, 2, 0, 2; the targeted rounds found two more (A8 codes, E7
+transcripts) and then none in four kinds read specifically. Not yet tested properly: filings
+written in Indigenous languages (A7 rests on two documents; selecting by title found none). A
+pattern is added when a reader finds a failure that fits none of these and confirms it against the
+page.

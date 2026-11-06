@@ -470,3 +470,28 @@ Launched round 7 (confirmation): 032-035.
 | 7 (partial) | 035 | none new (B1 example 3812355: Coptic digits in a chainage, 'ISSUED FOR 5(9,(:') |
 | 7 | 032-035 (100 docs) | A7 Indigenous-language syllabics as junk (3096662), B6 invisible text surfaces (4590652); B1 examples ('<' as 'o' 3718783, Coptic digits 3812355) |
 New per round: 4, 5, 6, 3, 2, 0, 2. New patterns are now rarer and narrower (one document each).
+
+### Targeted rounds (2026-11-06): kinds least read so far
+Committed the work so far on branch `review-patterns` (6fc15d2). Batches `batch-T01..T06.tsv`:
+T01 Excel schedules / tolls / tariffs / surveillance, T02 hearing transcripts, T03 French, T04 CAD and
+drawing sets (AutoCAD, MicroStation, Bluebeam, ArcGIS), T05 Indigenous engagement and TLU/TEK, T06 2015
+scans. 25 documents each, excluding everything already read.
+| targeted (partial) | T01, T02, T04 | A8 OCR look-alike substitutions in codes (3 drawings), E7 transcript furniture in speech (3 transcripts); B2 example: degree sign dropped |
+| targeted | T01 done | B2 lesson: degree sign U+F0B0 deleted by the converter; Excel toll worksheets: every value kept its row, sign and decimals (3348073 checked against the text layer) |
+| targeted | T02 done | widened D4 (cell tail spilled, 3718215), J3 (braces: who represents whom, 2837588), E7 (speaker turn split, 3062862) |
+| targeted | T03 done | none new. French characters intact (accents, ç, « », apostrophes, 1er, spacing before : ; ? !). Variants: elided lead-in split 'ATTENDU' / 'QU'Enbridge' (D1, 3777805, 4632349); URLs broken at line-end hyphens (E4, 3299262) |
+| targeted | T05 done | none new. Indigenous names in Latin script intact (Sexqeltqin, Dene Tha', Dene Tsaa Tse K'Nai, Maskwacis). Sample by title held no syllabics or orthography letters (ʷ ł ə ʔ): *open:* select by content (text layer or OCR holding U+1400-167F, ʷ, ł, ə, ʔ) to test A7 properly. H2 again: a letter citing attached maps with none filed (2839648) |
+| targeted | T04 done | none new; A8 example: dimension 45.0 m read 15.0 m (3293729); J1 on a scan: struck pipe sizes live (2776896); F4/F6 on hydrotech creek sheets (2995908) |
+| targeted | T06 done | none new; H2 example: an orphan web-print fragment filed as the document (2790791) |
+
+## Status 2026-11-06: catalogue complete for now
+
+50 patterns, 11 families (14 not in the file, 27 partly, 9 the converter's own), from 210 documents
+read by hand and 1,050 by agents against page images. New per round of 100: 4, 5, 6, 3, 2, 0, 2;
+targeted rounds: 2 then 0 across schedules, transcripts, French, drawings, Indigenous filings, 2015
+scans. Open: (1) filings written in Indigenous languages, selected by content (syllabics
+U+1400-167F, ʷ ł ə ʔ in the text layer or OCR), to test A7; (2) the converter fixes for the 9
+in-the-file patterns (LESSONS.md, "What the pattern register says"), then re-export and re-read
+their examples; (3) measure D6 (rotated pages) and B5 (hidden layers) page by page, not by sample.
+To add a pattern later: `scripts/convert/patterns.py new|add`, then the prose in
+docs/conversion-failure-patterns.md.

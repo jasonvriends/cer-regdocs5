@@ -16,6 +16,7 @@ patterns not yet in the catalogue matter a lot. The catalogue so far (full text 
 | A4 | Graphic marks read as characters (logos, symbols, boxes as Chinese) | not in the file | invented words in English and French text | D1, D3 |
 | A5 | Handwritten corrections on typed text produce a plausible wrong value | not in the file | a different, valid-looking hearing number | D1 |
 | A7 | Indigenous-language text read as junk or stripped (syllabics, special letters) | not in the file | Inuktitut becomes "uUAda ⊃AD qb ⊂" | D1, D4 |
+| A8 | OCR substitutes look-alike characters in codes, ratings and identifiers | not in the file | "CL150" reads "CL152", "NAD1983" reads "NAC1983" | D1, D3 |
 | A6 | OCR drops small marks or digits that carry value | not in the file | zero and "not reported" look the same | D1, T |
 | **B** | **The text layer says something other than the page** | | | |
 | B1 | Wrong characters behind right-looking glyphs | not in the file | wrong numbers in tables, with nothing to show it | D4, D5 |
@@ -42,6 +43,7 @@ patterns not yet in the catalogue matter a lot. The catalogue so far (full text 
 | E4 | Footnote markers fused to words; hyphens kept at line ends | partly | "process.22", "navi- gation": search and quotes break | D1, S |
 | E5 | Superscripts flattened into numbers, formulas and units | partly | 76 kPa with footnote 4 reads "764" | D4, S |
 | E6 | A wrapped line starting with a number taken for a list item | partly | plan numbers in a land description altered | S |
+| E7 | Transcript furniture mixed into the speech | partly | line numbers and time codes inside quotations | S |
 | **F** | **Tables** | | | |
 | F1 | A table over several pages filed under its first page | in the file | "page 21" holds nothing; citations point to the wrong page | T, S |
 | F2 | A table's own row numbers taken for margin numbering | in the file | "Line 4 + Line 9" with the line numbers gone | T |

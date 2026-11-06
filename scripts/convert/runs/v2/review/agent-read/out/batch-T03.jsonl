@@ -1,0 +1,25 @@
+{"doc_id":"4290627","pages_read":[1,2],"known":["C1","C2","D2"],"new":[],"note":"French form; accents fine; selected option only as a check glyph/icon"}
+{"doc_id":"4482030","pages_read":[1],"known":["D1"],"new":[],"note":"French order; lead-ins (RELATIVEMENT A, ATTENDU QUE) detached from text; accents and guillemets intact"}
+{"doc_id":"4479921","pages_read":[2,3],"known":["E4"],"new":[],"note":"French letter; clean; footnote marker fused (Otipemisiwak2)"}
+{"doc_id":"4155527","pages_read":[1,2],"known":["C1"],"new":[],"note":"French form; chosen options (checkbox/radio) not in text"}
+{"doc_id":"4417031","pages_read":[1],"known":["D2","A3"],"new":[],"note":"French letter; letterhead mixed into address block; signature read as '(s) PiéveChitd'"}
+{"doc_id":"4457847","pages_read":[1,3],"known":["D1"],"new":[],"note":"Checked image: French order and annex table faithful; lead-ins detached"}
+{"doc_id":"4408917","pages_read":[1,2],"known":["C1","C2"],"new":[],"note":"French form; chosen options (applicant type, renewal, period) absent from text"}
+{"doc_id":"3299262","pages_read":[4,6],"known":["E4","E3"],"new":[],"note":"French letter; hyphenated URLs broken at line ends (neb- one.gc.ca); accents fine; 'Page 2 of 4' in English on page itself"}
+{"doc_id":"4482616","pages_read":[1],"known":["D1","D4"],"new":[],"note":"Checked image: heading 'RELATIVEMENT A' split and its A moved ('RELATIVEMENT A / A une demande'); covered by D1/D4"}
+{"doc_id":"2871368","pages_read":[1,2],"known":["D1","E3"],"new":[],"note":"Checked image: lead-ins detached/reordered; French text itself faithful (1er superscript dropped on '1er janvier' kept ok)"}
+{"doc_id":"4411698","pages_read":[1],"known":["D1","D3"],"new":[],"note":"Checked image: French order faithful in wording; headings detached and last line of para 1 moved under next RELATIVEMENT A heading"}
+{"doc_id":"4596792","pages_read":[1,2],"known":["C1","C3"],"new":[],"note":"Checked image: three ticks (renewal, crude oil, period) -> only one tick glyph in text, attached to the question; the others lost"}
+{"doc_id":"3309392","pages_read":[1,2],"known":["C1","F4","H2"],"new":[],"note":"Checked image: green tick on 'personne morale' not in text; name split across table rows; label 'Date de depot de la dema' clipped in the source PDF itself (text layer too)"}
+{"doc_id":"3881155","pages_read":[1,2],"known":["C1","F4","H2"],"new":[],"note":"Same form as 3309392: clipped 'Date de depot de la dema' in source; ticks lost; 'M Jodoin | Olivier' table cells swapped/split"}
+{"doc_id":"3777805","pages_read":[2,3],"known":["D1","D4"],"new":[],"note":"Checked image: French elided lead-ins ('ATTENDU QU'Enbridge') split so heading is 'ATTENDU' and QU' falls into body; variant of D1/D4, wording intact"}
+{"doc_id":"4632349","pages_read":[1],"known":["D1","D4"],"new":[],"note":"French order; lead-in headings split mid-phrase (IL EST / ORDONNE QUE), A moved off RELATIVEMENT; accents intact"}
+{"doc_id":"4411610","pages_read":[1,2],"known":["C1","C2"],"new":[],"note":"French form; applicant/contact blocks reordered; chosen options absent"}
+{"doc_id":"4041473","pages_read":[3,5],"known":["D2","D3"],"new":[],"note":"Checked image: two-column address list read column by column; running header 'Piece jointe B ... Page 2 sur 2' lands mid-list; French accents and spacing fine"}
+{"doc_id":"3075067","pages_read":[1,2],"known":["C1","F4"],"new":[],"note":"French form 2016; ticks lost; name split across table rows"}
+{"doc_id":"4372740","pages_read":[2,3],"known":["F3","F4","F1","F7","B4","F5"],"new":[],"note":"Checked image: French Excel cost tables; rowspan group labels land at end of next row ('Purge et nettoyage du pipeline' after Petrole row), doubled digits ('2 2','0 0'), step 6 collapses to one cell, header of last table on p3 while rows on p2; English number format ($4,000, 0.483) is in the source itself"}
+{"doc_id":"4028311","pages_read":[1],"known":["D1"],"new":[],"note":"French order 2020; text order fine, accents and guillemets intact"}
+{"doc_id":"2897131","pages_read":[1],"known":["D1"],"new":[],"note":"French order 2015; typo 'fevrier' is in the source; apostrophes straight/curly mixed as on page"}
+{"doc_id":"4013349","pages_read":[1,2],"known":["H1","D2"],"new":[],"note":"French letter; bilingual letterhead address read across both languages ('517, Dixieme Avenue S.-O. Suite 210 bureau 210 517 Tenth Avenue SW')"}
+{"doc_id":"2854880","pages_read":[1,2],"known":["C1","F4","H2"],"new":[],"note":"French form 2015; 'Date de depot de la dema' clipped in source, date placed before label; ticks lost"}
+{"doc_id":"4155226","pages_read":[1],"known":["D1"],"new":[],"note":"French order; lead-ins detached; 'QUE' left stranded in text after heading IL EST ORDONNE"}
