@@ -1,0 +1,25 @@
+{"doc_id": "4692676", "pages_read": [3, 15], "known": ["F3", "F4", "G1", "C1", "B5"], "new": [], "note": "Pressure test form table columns detached; isometric drawing text jumbled"}
+{"doc_id": "2882983", "pages_read": [1], "known": ["E1", "E3", "A3"], "new": [], "note": "French order; headings split, list numbers as text"}
+{"doc_id": "2968329", "pages_read": [1, 2], "known": ["G1", "D3"], "new": [], "note": "Route map labels without relation"}
+{"doc_id": "4031590", "pages_read": [1, 2], "known": ["E3", "D2"], "new": [], "note": "French letter, ok mostly"}
+{"doc_id": "4020927", "pages_read": [1], "known": ["E3", "E1"], "new": [], "note": "Order, clean"}
+{"doc_id": "4041793", "pages_read": [1, 2], "known": ["D2", "E4"], "new": [], "note": "Letter; letterhead block mixed into address/subject; footnote markers fused"}
+{"doc_id": "3421931", "pages_read": [1], "known": ["G1", "D3"], "new": [], "note": "Alignment sheet map, labels scrambled"}
+{"doc_id": "4031485", "pages_read": [1], "known": ["D2"], "new": [], "note": "Letter clean apart from letterhead; table icon"}
+{"doc_id": "3705841", "pages_read": [1], "known": ["A3", "B3"], "new": [], "note": "Signature read as junk token 'Rgonzlz'"}
+{"doc_id": "4490465", "pages_read": [119, 235], "known": [], "new": [], "note": "Digital financial filing, clean"}
+{"doc_id": "3641544", "pages_read": [9, 44], "known": ["A3", "E2"], "new": [], "note": "Faxed letters; fax header stamps read as text"}
+{"doc_id": "3810113", "pages_read": [3, 5], "known": ["A1", "A3"], "new": [], "note": "Marsh letter; garbled line 'Rat n o e ut' and signature tokens"}
+{"doc_id": "4465292", "pages_read": [1, 2], "known": ["A2", "C2", "K1", "C1"], "new": [], "note": "No text layer (OCR); redaction labels PII/Confidential detached from fields; '$8oM' for '$80M'"}
+{"doc_id": "2786052", "pages_read": [2, 3], "known": ["G1", "A4"], "new": [], "note": "Maps with garbled OCR labels (Octopes, Sppd)"}
+{"doc_id": "3258274", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "Ruling, clean"}
+{"doc_id": "4049751", "pages_read": [1, 3], "known": ["C1", "C2"], "new": [], "note": "Green tick for chosen statement lost; empty attachments table"}
+{"doc_id": "4155005", "pages_read": [1, 2], "known": ["C1", "C2"], "new": [], "note": "Same form; tick lost, stray checkbox '\u2610 [Mr]'"}
+{"doc_id": "3280236", "pages_read": [1, 2], "known": ["G1"], "new": [], "note": "Access map labels"}
+{"doc_id": "4247461", "pages_read": [1], "known": ["A1", "A3", "B5"], "new": [], "note": "Scanned letter with correct text layer; OCR dropped a whole sentence ('He e t ...') and mangled phone line"}
+{"doc_id": "4244250", "pages_read": [1, 2], "known": ["B3", "D2"], "new": [], "note": "French letter; split words 'f acteurs'"}
+{"doc_id": "4158343", "pages_read": [1, 2], "known": ["C1", "C2", "H2"], "new": [], "note": "Form; green tick lost; 'Date de d\u00e9p\u00f4t de la dema' cut in PDF itself"}
+{"doc_id": "4364642", "pages_read": [2, 21], "known": ["F3", "F5"], "new": [], "note": "Financial table rows collapsed into single cells"}
+{"doc_id": "4469325", "pages_read": [44, 65], "known": ["G1", "E3"], "new": [], "note": "Map legend and disclaimer interleaved"}
+{"doc_id": "2855410", "pages_read": [2, 3], "known": ["C1", "C2", "F4"], "new": [], "note": "French form; address cells merged"}
+{"doc_id": "4098581", "pages_read": [2, 5], "known": ["E3"], "new": [], "note": "Letter/guidelines; clean (apparent cut at 'shall' was only excerpt truncation)"}

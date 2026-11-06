@@ -1,0 +1,25 @@
+{"doc_id": "4468271", "pages_read": [1, 4], "known": ["F3", "G1", "D3"], "new": [], "note": "Primavera Gantt page: bar labels merged into row text, bars/timeline lost."}
+{"doc_id": "3580883", "pages_read": [1], "known": ["E3"], "new": [], "note": "French notice, clean."}
+{"doc_id": "3911809", "pages_read": [2, 4], "known": ["E1", "E3"], "new": [], "note": "Unnumbered body paragraphs of project summary emitted as headings (E1 variant); clean otherwise."}
+{"doc_id": "4429404", "pages_read": [2, 4], "known": ["E3"], "new": [], "note": "Clean; numbered lists kept as text."}
+{"doc_id": "3710362", "pages_read": [1, 2], "known": ["D2", "E2"], "new": [], "note": "Letterhead logos, address block ordering mildly mixed."}
+{"doc_id": "2985786", "pages_read": [1, 2], "known": ["D2", "I1"], "new": [], "note": "Law firm letterhead block lands inside Re: block; cc table."}
+{"doc_id": "3408307", "pages_read": [1], "known": ["I1"], "new": [], "note": "Cover page of an image appendix; little text."}
+{"doc_id": "3391041", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order recitals as stacked headings."}
+{"doc_id": "3335809", "pages_read": [1, 3], "known": ["D3", "C2"], "new": [], "note": "Party list: titles and names split across lines (Mr. / Scott Stoness)."}
+{"doc_id": "3392207", "pages_read": [26, 83], "known": ["E2", "D2"], "new": [], "note": "Heading 'Chapitre 4' not on page 26 inserted; otherwise sound French text."}
+{"doc_id": "4012251", "pages_read": [1, 2], "known": ["D1", "E3", "B2"], "new": [], "note": "Order lead-ins split from recitals; bullets as text."}
+{"doc_id": "3200742", "pages_read": [1, 2], "known": ["A4", "F5", "I1"], "new": [], "note": "Logo read as 而; table footnote unit separate."}
+{"doc_id": "3408447", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order recitals as headings; lead-ins displaced."}
+{"doc_id": "4265317", "pages_read": [1, 2], "known": ["A3", "E3"], "new": [], "note": "Signatures read as 'L. / Nans'."}
+{"doc_id": "2883473", "pages_read": [1], "known": ["A3", "D2"], "new": [], "note": "Letterhead and signature noise; text sound."}
+{"doc_id": "2774821", "pages_read": [2, 13], "known": ["G1", "F3", "I1"], "new": [], "note": "Alignment sheet: bag of labels in a table region."}
+{"doc_id": "3349300", "pages_read": [1], "known": ["D2", "B3"], "new": [], "note": "Letterhead sidebar mixed into reference block."}
+{"doc_id": "4202048", "pages_read": [6, 10], "known": ["F6", "F4", "E3"], "new": [], "note": "Numbered clause items made a table; first line of each item sits in the previous row's cell, so numbers 5.1.1.4.2+ head text that starts mid-sentence."}
+{"doc_id": "4102356", "pages_read": [3, 16], "known": ["F1", "I1"], "new": [], "note": "Table continuing beyond page 16 text filed under it; repeated header rows."}
+{"doc_id": "3754011", "pages_read": [1], "known": ["G1"], "new": [], "note": "Gathering system map as a bag of labels."}
+{"doc_id": "2759427", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Letterhead sidebar interleaved with address/attention block."}
+{"doc_id": "4455674", "pages_read": [1], "known": ["E3", "D1"], "new": [], "note": "Clean."}
+{"doc_id": "4248055", "pages_read": [1, 5], "known": ["G1", "I1"], "new": [{"page": 1, "name": "Digital text lines dropped from a drawing sheet, leaving fragments", "page_shows": "Notes block with 'EXCAVATION NOTE: TRENCH SHORING WILL BE USED IF PROPER TRENCH EXCAVATION CAN NOT BE USED', 'VERTICAL DATUM: CANADIAN GEODETIC VERTICAL DATUM 1928 (78 ADJ).', distance-to-feet note, and the first 'THE UTILITY DATA ... ASCE STANDARD 38-02' lines; the PDF text layer holds all of them", "output_says": "EXCAVATION NOTE:\\nR SED\\nBOUNDARY NOTE: ... VER E\\nDI Y\\n0.3048.\\nUNDERGROUND UTILITY NOTES :\\nH IS", "why_it_matters": "safety and datum notes (trench shoring, vertical datum, utility quality level A) are silently gone, replaced by 2-4 letter fragments that look like text; word-count checks pass; search for 'shoring' finds nothing", "in_file": "yes", "lesson": "drawing sheets with small vector text: text-layer lines that overlap table/figure regions are being discarded by region assignment; fall back to the PDF text layer for any word not emitted, and flag fragments of fewer than 4 letters", "checked_image": true}], "note": "Whole note lines lost although present in the PDF text layer (not OCR, so not A1); converter-side loss."}
+{"doc_id": "4111710", "pages_read": [1], "known": ["D2", "I1"], "new": [], "note": "Bilingual letterhead interleaved."}
+{"doc_id": "4276899", "pages_read": [1, 2], "known": ["A3", "D2"], "new": [], "note": "Signatures read as 'MayaR'; letterhead before date."}

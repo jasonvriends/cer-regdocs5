@@ -1,0 +1,25 @@
+{"doc_id": "4467823", "pages_read": [2, 3], "known": ["A4", "A3", "A1", "I1"], "new": [], "note": "Work directive change order; logo as Chinese char, signature junk, dropped line 'nd ttur'"}
+{"doc_id": "4439620", "pages_read": [2, 3], "known": ["D1"], "new": [], "note": "French order; recitals fine, lead-in splits minor"}
+{"doc_id": "3947698", "pages_read": [3, 6], "known": ["G1", "A1", "D1"], "new": [], "note": "Konica scan; garbled line 'rb e b I u', drawing labels, request headings out of place"}
+{"doc_id": "2937899", "pages_read": [1, 2], "known": ["D2", "E4", "A3"], "new": [], "note": "Letter; footnote number separated, signature junk"}
+{"doc_id": "4205379", "pages_read": [4, 8], "known": ["G1", "F5", "F4", "A4"], "new": [], "note": "Chart axis as bag of words; table values lose $ and units; stray glyph under Figure 4"}
+{"doc_id": "4041893", "pages_read": [1], "known": ["D2", "I1"], "new": [], "note": "Letter with address block ahead of Dear; nothing else"}
+{"doc_id": "4657615", "pages_read": [1], "known": ["G1", "I1"], "new": [], "note": "Aerial map only"}
+{"doc_id": "4631843", "pages_read": [1, 2], "known": ["H1", "D2", "E3"], "new": [], "note": "Bilingual letterhead merged"}
+{"doc_id": "4245294", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Letter; letterhead block mixed"}
+{"doc_id": "3921611", "pages_read": [10, 12], "known": ["G1", "D1"], "new": [], "note": "Survey plan labels; defined terms split from headings"}
+{"doc_id": "3805433", "pages_read": [2, 3], "known": ["E3", "D2"], "new": [], "note": "Notice letter; fine"}
+{"doc_id": "4647199", "pages_read": [1, 2], "known": ["C2", "C1", "D3", "B2"], "new": [], "note": "Form: checkboxes listed apart from questions, title words interleaved with logo text"}
+{"doc_id": "4572273", "pages_read": [36, 42], "known": ["F4", "F5"], "new": [], "note": "Financial statements: fragments of labels moved ('Equity: Other 12)'), subtotal merged into row, collateral table labels split from values"}
+{"doc_id": "3281973", "pages_read": [1, 2], "known": [], "new": [], "note": "Tariff cover pages; clean"}
+{"doc_id": "4367098", "pages_read": [11, 12], "known": ["E3"], "new": [], "note": "Notes to financial statements; clean"}
+{"doc_id": "4684203", "pages_read": [1, 2], "known": ["H1", "B3", "D3"], "new": [], "note": "Receipt bilingual merged, spaced title"}
+{"doc_id": "3737761", "pages_read": [2, 23], "known": ["I1", "D1"], "new": [], "note": "Report cover/limitations page; heading order shuffled"}
+{"doc_id": "4334306", "pages_read": [1], "known": ["G1", "I1"], "new": [], "note": "Map labels as bag of words"}
+{"doc_id": "4468447", "pages_read": [2, 3], "known": ["A1", "F4", "A3"], "new": [], "note": "Work directive; clause 8.0 loses first two lines ('Éle t each of which'), signature block clipped 'TRANS MC'"}
+{"doc_id": "4085163", "pages_read": [11, 12], "known": ["E3", "D3"], "new": [], "note": "French order schedule; address lines reordered"}
+{"doc_id": "3309458", "pages_read": [36, 63], "known": ["F4", "J1", "E3"], "new": [{"page": 36, "name": "Rotated column headers read with words in scrambled order", "page_shows": "Vertical column headers 'Segment Unique ID', 'Wetland Unique ID', 'Distance of Wetland from Access Road (m)'", "output_says": "| Segment ID Unique | ... | ID Wetland Unique | ... | of from Road Distance Wetland Access (m) |", "why_it_matters": "Header labels become word salad, so a column cannot be matched to a field name; 'ID Wetland Unique' vs 'Unique ID' breaks field search and any schema inference over the table", "in_file": "partly", "lesson": "Detect rotated (90 degree) text and read each header cell as one line in its rotated direction; do not sort words by horizontal position", "checked_image": true}], "note": "Wetland table with rotated headers scrambled; running header 'JuneJuly 2017' flattened tracked change"}
+{"doc_id": "3613015", "pages_read": [5, 10], "known": ["C1", "A3", "A4"], "new": [], "note": "Checklist Y/N as icons; handwritten page notes read as junk; pressure chart blank"}
+{"doc_id": "3631182", "pages_read": [1, 3], "known": ["C1", "D2", "C2"], "new": [], "note": "Form: chosen option is a green check image; name split across lines"}
+{"doc_id": "4646063", "pages_read": [1], "known": [], "new": [], "note": "Clean"}
+{"doc_id": "3594348", "pages_read": [3, 7], "known": ["A4", "E3"], "new": [], "note": "Logo as Chinese char; otherwise clean"}

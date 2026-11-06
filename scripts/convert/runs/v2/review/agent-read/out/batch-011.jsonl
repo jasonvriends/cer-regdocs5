@@ -1,0 +1,25 @@
+{"doc_id": "4656905", "pages_read": [11, 57], "known": ["G1", "A4"], "new": [], "note": "engineering drawings as label soup"}
+{"doc_id": "4105355", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "order recitals split from lead-ins"}
+{"doc_id": "2785142", "pages_read": [1, 4], "known": ["B3", "D2", "C2"], "new": [], "note": "receipt, spaced title, address detached"}
+{"doc_id": "4465045", "pages_read": [3, 4], "known": ["C2", "A3", "B2"], "new": [], "note": "form checkboxes with PII labels detached"}
+{"doc_id": "3266377", "pages_read": [1, 5], "known": ["G1", "A4", "D3", "B3"], "new": [], "note": "maps and drawings; kerning splits"}
+{"doc_id": "3310277", "pages_read": [2, 4], "known": ["F1", "A4"], "new": [], "note": "table continued across pages"}
+{"doc_id": "4438140", "pages_read": [4, 9], "known": ["G1", "A4", "E3"], "new": [], "note": "chart axis labels unordered"}
+{"doc_id": "4422350", "pages_read": [1, 2], "known": ["D1", "F4"], "new": [], "note": "order lead-ins split; table header cells split"}
+{"doc_id": "4660247", "pages_read": [59, 250], "known": ["G1", "C2"], "new": [], "note": "flow chart fragments; blank form"}
+{"doc_id": "2985564", "pages_read": [2, 4], "known": ["F4", "E4"], "new": [], "note": "table with footnote markers"}
+{"doc_id": "2791639", "pages_read": [2, 3], "known": ["A1", "A2"], "new": [], "note": "scan text layer drops half-lines"}
+{"doc_id": "3951428", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "letterhead interleaved with address"}
+{"doc_id": "4664907", "pages_read": [126, 137], "known": ["A1", "A3", "G1", "A4"], "new": [], "note": "OCR junk on stamps and chart"}
+{"doc_id": "2811604", "pages_read": [1], "known": ["A3", "D3"], "new": [], "note": "affidavit, signatures as words"}
+{"doc_id": "3611316", "pages_read": [3, 4], "known": ["E3"], "new": [], "note": "plain letter"}
+{"doc_id": "3935185", "pages_read": [42, 77], "known": ["F1"], "new": [{"page": 77, "name": "Tracked changes (redline) text kept with both deleted and inserted wording", "page_shows": "A redlined revision: deleted words are struck through, inserted words are underlined, e.g. the header 'August 2018' struck and 'June 2020' underlined; 'rare element' struck and 'feature' inserted", "output_says": "687945/August 2018June 2020 ... potential rare elementfeature ... to a qualifiedTrans Mountain to provide to the a Vegetation Resource Specialist ... will be required to visitattend the site", "why_it_matters": "Strike-through and underline are drawn lines, not text, so deleted and inserted wording are fused into non-words ('elementfeature', 'visitattend') and whole deleted sentences read as current requirements; search and AI quote text that is not in force, and the revised wording cannot be told from the old", "in_file": "partly", "checked_image": true}], "note": "redline revision; deleted and inserted text fused"}
+{"doc_id": "4572575", "pages_read": [1, 2], "known": ["D2", "C2"], "new": [], "note": "receipt; French column cut by page edge in the source itself"}
+{"doc_id": "4585332", "pages_read": [1], "known": ["D2"], "new": [], "note": "letterhead interleaved"}
+{"doc_id": "4332180", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "letterhead blocks"}
+{"doc_id": "4451118", "pages_read": [1, 2], "known": ["E3"], "new": [], "note": "plain letter"}
+{"doc_id": "4027901", "pages_read": [2, 3], "known": ["C2", "B2"], "new": [], "note": "form labels and values interleaved"}
+{"doc_id": "3768566", "pages_read": [2, 3], "known": ["A4"], "new": [], "note": "plain letter"}
+{"doc_id": "4597063", "pages_read": [1, 2], "known": ["D2", "C2"], "new": [], "note": "receipt fields scattered"}
+{"doc_id": "3013129", "pages_read": [2, 3], "known": ["C1", "C2"], "new": [], "note": "form radio answers not in text"}
+{"doc_id": "2921930", "pages_read": [9, 13], "known": ["F4"], "new": [], "note": "table with empty cells; x marks detached"}

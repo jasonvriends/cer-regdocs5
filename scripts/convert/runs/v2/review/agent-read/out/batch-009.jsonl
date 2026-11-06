@@ -1,0 +1,25 @@
+{"doc_id": "3812530", "pages_read": [1], "known": ["A3", "D2"], "new": [], "note": ""}
+{"doc_id": "3409301", "pages_read": [4, 5], "known": ["E1", "E3"], "new": [], "note": ""}
+{"doc_id": "3717105", "pages_read": [2, 3], "known": ["E3", "E4"], "new": [], "note": ""}
+{"doc_id": "4199820", "pages_read": [16, 27], "known": ["G1", "B2"], "new": [], "note": ""}
+{"doc_id": "4724506", "pages_read": [5, 6], "known": ["E3"], "new": [], "note": ""}
+{"doc_id": "3895437", "pages_read": [24, 39], "known": ["F4", "E3"], "new": [{"page": 39, "name": "Tracked changes (blackline) flattened: deleted and inserted text merged as current text", "page_shows": "Redline: deleted text struck through in red, inserted text underlined in blue; e.g. 9.2 first sentence struck out, 'this capacity' struck and 'the Design Capacity' inserted; (a) in 9.1 struck out", "output_says": "Canadian Mainline - Transportation Services Agreement (Pro formaProforma Requirements Contract \u2013 Producer); 'may differ from this capacitythe Design Capacity'; '(a) If, in a Month ... in respect of a given Service Haul in such Month'", "why_it_matters": "Struck-out (deleted) clauses are presented as operative contract text and fused with the replacement words; an AI or reader cannot tell what v.1 vs v.2 says, so quotes of the new agreement can contain deleted terms", "in_file": "no", "checked_image": true}], "note": ""}
+{"doc_id": "2854983", "pages_read": [1, 9], "known": ["D1", "E1"], "new": [], "note": ""}
+{"doc_id": "4386288", "pages_read": [1], "known": ["D2"], "new": [], "note": ""}
+{"doc_id": "2909548", "pages_read": [2, 6], "known": ["F4", "B3"], "new": [], "note": ""}
+{"doc_id": "3299018", "pages_read": [2, 3], "known": ["E3"], "new": [], "note": ""}
+{"doc_id": "3298017", "pages_read": [2, 3], "known": ["E3", "D2"], "new": [], "note": ""}
+{"doc_id": "4488047", "pages_read": [1, 2], "known": ["C1", "C2"], "new": [], "note": ""}
+{"doc_id": "3646049", "pages_read": [1], "known": ["A3", "D2"], "new": [], "note": ""}
+{"doc_id": "3298030", "pages_read": [16, 17], "known": ["A1", "A2", "G1"], "new": [], "note": ""}
+{"doc_id": "2949392", "pages_read": [1, 3], "known": ["E3"], "new": [], "note": ""}
+{"doc_id": "2855027", "pages_read": [4, 9], "known": ["G1", "F1"], "new": [], "note": ""}
+{"doc_id": "4010594", "pages_read": [1, 2], "known": ["B2"], "new": [], "note": ""}
+{"doc_id": "4611019", "pages_read": [1, 2], "known": ["D1"], "new": [], "note": ""}
+{"doc_id": "4639857", "pages_read": [1, 2], "known": ["F2", "C2", "F5"], "new": [{"page": 2, "name": "Formula exponents and fraction layout flattened", "page_shows": "Formulas with superscript exponents ((1 + Line 9) to the power Line 10) and a fraction (Line 13 * Line 9) over [(1+Line 9)^Line 10 - 1]", "output_says": "= Line 11 * (1 + Line 9)Line 10 ; Annual Contribution Amount ... (Line 13 * Line 9) = [(1 + Line 9)Line 10 - 1]", "why_it_matters": "Exponents read as a trailing word and the fraction bar becomes '=', so the calculation is wrong or unreadable when an AI reproduces or applies it; page 1 also shows 'Line 1 * (1 + Line 2)Line 3 3' where the exponent and footnote mark 3 collide", "in_file": "no", "checked_image": true}], "note": ""}
+{"doc_id": "4297950", "pages_read": [1], "known": ["D2"], "new": [], "note": ""}
+{"doc_id": "3804872", "pages_read": [1, 5], "known": ["B2", "C1"], "new": [], "note": ""}
+{"doc_id": "3745502", "pages_read": [4, 8], "known": ["F5"], "new": [], "note": ""}
+{"doc_id": "2811517", "pages_read": [1, 2], "known": ["B3"], "new": [], "note": ""}
+{"doc_id": "3307578", "pages_read": [1], "known": ["D2"], "new": [], "note": ""}
+{"doc_id": "2926388", "pages_read": [2, 8], "known": ["H1", "E3"], "new": [], "note": ""}

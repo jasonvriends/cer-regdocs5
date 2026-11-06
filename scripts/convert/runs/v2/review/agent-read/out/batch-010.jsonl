@@ -1,0 +1,25 @@
+{"doc_id": "4506243", "pages_read": [4, 12], "known": ["E3", "E4"], "new": [], "note": "clean digital decision; footnote marker and bullet kept as text"}
+{"doc_id": "3391437", "pages_read": [4, 63], "known": ["G1"], "new": [], "note": "database dump page and chart; text matches page"}
+{"doc_id": "4692639", "pages_read": [1, 2], "known": [], "new": [], "note": "email printout; text matches"}
+{"doc_id": "3884322", "pages_read": [6, 29], "known": ["F4", "F1"], "new": [{"page": 29, "name": "Row-number column shifted one row against its data", "page_shows": "Line 1 = Suffield 2 / Union SWDA / 3.88543 / 0.1277 ... Line 67 = Tunis NDA / Union SSMDA / - / 0.0753; header at top", "output_says": "1  \n2  Suffield 2 Union SWDA 3.88543 0.1277 ... 67  Tunis NDA Energir NDA - 0.0113 Tunis NDA Union SSMDA - 0.0753", "why_it_matters": "every toll row carries the wrong line number (off by one) and two rows are fused, so citing 'Line 17' or looking up a path by line returns the neighbouring row; the column header falls at the end of the page", "in_file": "partly", "checked_image": true}], "note": "Toll table: line numbers offset by one from rows, last two rows merged, header at page foot"}
+{"doc_id": "3899379", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "letterhead/sidebar blocks interleaved with Re: block; signature as junk text"}
+{"doc_id": "2982286", "pages_read": [1, 2], "known": ["D1", "E3"], "new": [], "note": "licence recitals split from lead-ins"}
+{"doc_id": "2798212", "pages_read": [1, 4], "known": ["E3", "D1"], "new": [], "note": "run-in headings as headings; footnote kept"}
+{"doc_id": "3723526", "pages_read": [8, 11], "known": ["C1", "F4"], "new": [], "note": "form check icons lost, only *[icon]* remain"}
+{"doc_id": "3314611", "pages_read": [1, 2], "known": ["E3", "F4"], "new": [], "note": "table header split over two rows"}
+{"doc_id": "3957009", "pages_read": [1], "known": ["D2", "A3", "E4"], "new": [], "note": "letterhead tangled; footnotes ok"}
+{"doc_id": "4462939", "pages_read": [19, 26], "known": ["G1", "F3"], "new": [], "note": "photo page is empty frames; table collapsed to one cell"}
+{"doc_id": "4652224", "pages_read": [1, 2], "known": ["E3", "E4"], "new": [], "note": "'750 people/km2.2' fuses unit superscript with footnote marker (E4 variant)"}
+{"doc_id": "4466822", "pages_read": [1, 3], "known": ["F2", "A4"], "new": [], "note": "row numbers 1-36 collapsed into one line; logo read as Chinese character"}
+{"doc_id": "3578642", "pages_read": [1, 3], "known": ["G1"], "new": [], "note": "map labels as bag of words"}
+{"doc_id": "3719194", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "email header fields on separate lines; signature split to page 2"}
+{"doc_id": "4582623", "pages_read": [1, 2], "known": ["H1", "D2", "B3"], "new": [], "note": "bilingual receipt merged; spaced title"}
+{"doc_id": "3004648", "pages_read": [1], "known": ["A3", "A4", "B3"], "new": [], "note": "stamp and spaced letterhead read as text; signature junk 'Mown'"}
+{"doc_id": "3296504", "pages_read": [1], "known": ["D2"], "new": [], "note": "letterhead blocks interleaved"}
+{"doc_id": "4402097", "pages_read": [1, 4], "known": ["F4", "G1"], "new": [], "note": "table cell text spills out as stray lines; drawing labels bag of words/OCR garbage"}
+{"doc_id": "3594685", "pages_read": [1], "known": ["D2", "A3", "E2"], "new": [], "note": "'E-FILE' stamp as text; signature garbled 'MityArent'"}
+{"doc_id": "4699159", "pages_read": [1], "known": [], "new": [], "note": "placeholder page, text matches"}
+{"doc_id": "3644086", "pages_read": [1], "known": ["A3", "B2"], "new": [], "note": "signature as junk"}
+{"doc_id": "3336044", "pages_read": [14, 38], "known": ["G1", "F4"], "new": [{"page": 38, "name": "Sub-table header detached from its rows by another section", "page_shows": "Metro Vancouver sub-header sits directly above the Langley/Surrey/Coquitlam/Burnaby crime rows; Traffic and Communicable Diseases sections follow below", "output_says": "| Rate per | 1,000 population, | by Police Service Area | (Metro Vancouver | Region) | ... Traffic6 ... Communicable Diseases | Incident Category | | Langley Township RCMP, municipal | Surrey ... | Total violent Criminal Code 2015 Violations | | 7.6 | 15.1 ...", "why_it_matters": "Metro Vancouver crime rates are filed under the Communicable Diseases heading and far from their own header, so a reader or model reads crime rates as disease data", "in_file": "partly", "checked_image": true}], "note": "Table 9: second crime block moved below Traffic, under the Communicable Diseases heading"}
+{"doc_id": "3705528", "pages_read": [1], "known": ["A3", "A1", "E3"], "new": [], "note": "fax stamp lost; postal code T0K 0K0 reads 'TOK OKO' (on page too); signatures as icons"}
+{"doc_id": "3075223", "pages_read": [2, 4], "known": ["D1", "E3"], "new": [], "note": "AND WHEREAS lead-ins split from recitals"}

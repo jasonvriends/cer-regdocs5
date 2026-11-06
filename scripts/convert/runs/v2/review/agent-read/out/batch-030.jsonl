@@ -1,0 +1,25 @@
+{"doc_id": "2997267", "pages_read": [1, 2], "known": ["C3", "C2", "D3", "F4", "I1"], "new": [], "note": "Checklist boxes all read empty although the page shows X in many; the table is empty grid."}
+{"doc_id": "3970458", "pages_read": [2, 3], "known": ["C1", "C2", "C3", "I1"], "new": [], "note": "Export form: chosen options are icons; contact labels separated from values."}
+{"doc_id": "4479608", "pages_read": [1], "known": ["D2", "A3", "I1"], "new": [], "note": "Letterhead/addressee blocks tangled; signature read as 'Deen Bidgse'."}
+{"doc_id": "4490044", "pages_read": [1, 2], "known": ["C1", "C2", "H2", "I1"], "new": [], "note": "Green tick image lost; label 'Date de dépôt de la dema' is cut off in the PDF itself."}
+{"doc_id": "3460737", "pages_read": [2, 3], "known": ["C1", "C2", "I1"], "new": [], "note": "Export form; options chosen are icons, labels and values separated."}
+{"doc_id": "3819732", "pages_read": [9, 18], "known": ["G1", "A3", "B3"], "new": [], "note": "CAD sheet text layer is an unordered bag of words, bill of materials unreadable."}
+{"doc_id": "3348931", "pages_read": [2, 3], "known": ["G1"], "new": [], "note": "Maps: labels only."}
+{"doc_id": "2786698", "pages_read": [1, 3], "known": ["D2", "E3", "H1"], "new": [], "note": "French letter; letterhead and bilingual contact block mixed."}
+{"doc_id": "4158372", "pages_read": [1], "known": ["D1"], "new": [], "note": "Order recitals split from lead-ins; 'IL EST ORDONNÉ QUE' after its text."}
+{"doc_id": "3075490", "pages_read": [1], "known": ["A3"], "new": [], "note": "Clean letter; signature read as 'Murlh Fidul'."}
+{"doc_id": "4592364", "pages_read": [1], "known": ["D2", "I1"], "new": [], "note": "Letter; letterhead blocks fine except bilingual address merged."}
+{"doc_id": "4680860", "pages_read": [1, 3], "known": ["C1", "C2", "I1"], "new": [], "note": "Form: 'renewal?' label gets the company name as value; chosen option lost."}
+{"doc_id": "3179563", "pages_read": [2, 8], "known": ["F4", "H2", "F9"], "new": [{"page": 8, "name": "Form footer stamp spliced into a table cell", "page_shows": "A form's version stamp 'Form Date: Feb 27, 2013' printed in the page margin under the Date column of the June 8, 2015 row", "output_says": "| June 8, 2015 | Scotty Many Guns Feb 27, 2013 | Siksika First Nations is concerned ...", "why_it_matters": "A template's edition date becomes a second date inside a consultation record row, so the row reads as if Feb 27, 2013 were part of that meeting's attendee/date data", "in_file": "partly", "lesson": "Treat text outside the table body (margin form-version stamps, footers) as page furniture, not cell content", "checked_image": true}], "note": "Also 'March 16, 201' is cut off in the filed page (H2)."}
+{"doc_id": "3771074", "pages_read": [1, 2], "known": ["F5", "E5"], "new": [], "note": "Tariff; clean."}
+{"doc_id": "3254532", "pages_read": [1, 2], "known": ["C3", "D2"], "new": [], "note": "Form: X mark for option b is plain text, option a box ☐ read as bracketed label."}
+{"doc_id": "3559684", "pages_read": [1], "known": ["G1", "D3"], "new": [], "note": "Map sheet: bag of words."}
+{"doc_id": "3297323", "pages_read": [1, 2], "known": ["A4", "D2", "E3"], "new": [], "note": "Trans Mountain logo read as 而."}
+{"doc_id": "3166451", "pages_read": [1], "known": ["G1"], "new": [], "note": "Track chart legend: bag of words."}
+{"doc_id": "4230445", "pages_read": [1], "known": ["D1"], "new": [], "note": "Order recitals split from lead-ins."}
+{"doc_id": "2909666", "pages_read": [1], "known": ["A1", "A2", "A3"], "new": [], "note": "Scanned letter with fax header and mail-room stamp read as text."}
+{"doc_id": "4277416", "pages_read": [13, 80], "known": ["E3", "D1"], "new": [], "note": "Safety plan; clean aside from run-in heading."}
+{"doc_id": "3718208", "pages_read": [6, 8], "known": ["E4"], "new": [], "note": "Clean digital text."}
+{"doc_id": "4642632", "pages_read": [1], "known": ["D2"], "new": [], "note": "Second addressee and company land under the subject as headings."}
+{"doc_id": "2997810", "pages_read": [2, 3], "known": ["A1", "A2", "A3"], "new": [], "note": "Scan text; line 'after commencing the negotiation ... success or failure of the' reduced to 'e th'; page 3 is blank except title (page itself)."}
+{"doc_id": "4094640", "pages_read": [1, 2], "known": ["F4", "D2"], "new": [], "note": "Second schedule table: End Date merged into Activity Details cells."}

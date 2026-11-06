@@ -1,0 +1,1681 @@
+{
+ "patterns": {
+  "A1": {
+   "name": "OCR drops or mangles whole lines",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, D6",
+   "lesson": "Recall is measured against OCR itself, so lost lines are invisible. Add an independent check: text lines in the page image (ink rows) with no OCR words; a second OCR model on pages where the first leaves gaps; flag pages whose OCR word count is far below the page's ink.",
+   "examples": [
+    {
+     "doc_id": "2955501",
+     "page": 1,
+     "page_shows": "Rule 12, Liability of the Carrier, paragraph (b) has been updated to clarify the liability",
+     "output_says": "- Éule C lit of the carrier for indirect losses",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3117386",
+     "page": 156,
+     "page_shows": "L'entrepreneur qui est responsable de l'approvisionnement en eau...",
+     "output_says": "e a / o d (sentence gone)",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4735582",
+     "page": 12,
+     "page_shows": "from time to time ... permit all persons participating ... to communicate",
+     "output_says": "from im m e ... as er te with each other",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3710044",
+     "page": 75,
+     "page_shows": "unacceptable amount of stress to the already fragile population. A spill at the wrong",
+     "output_says": "(line missing; 'n on' left)",
+     "checked_image": true,
+     "note": "fax"
+    },
+    {
+     "doc_id": "3717098",
+     "page": 2,
+     "page_shows": "full sentences beside margin line numbers",
+     "output_says": "- 23 ts - - / - 24 -related that in",
+     "checked_image": true,
+     "note": "partial text layer (75 words) judged sound, OCR for the rest"
+    }
+   ]
+  },
+  "A2": {
+   "name": "A scanner's OCR layer passes for real text",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, D6",
+   "lesson": "A page under one full-page image is a scan whatever its layer says: route as scanner_ocr, compare with independent OCR, treat agreement < 0.9 as suspect (8,108 such pages classed digital; 2,350 with agreement < 0.9).",
+   "examples": [
+    {
+     "doc_id": "3746809",
+     "page": 2,
+     "page_shows": "The written evidence ... is accurate to the best of my knowledge",
+     "output_says": "wr~ttenevidence ... tt18 best; handwriting as #### ,1' AAA-Z",
+     "checked_image": true,
+     "note": "creator I.R.I.S."
+    }
+   ]
+  },
+  "A3": {
+   "name": "Handwriting, stamps and signatures read as words",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, digital signatures",
+   "lesson": "Keep OCR text from pictures classed signature/stamp and from handwriting out of the body (keep it in the evidence); never make it a heading.",
+   "examples": [
+    {
+     "doc_id": "2897620",
+     "page": 2,
+     "page_shows": "signatures of D. Hamilton, A. Scott",
+     "output_says": "Hamilm / Ahim Sos",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3718917",
+     "page": 1,
+     "page_shows": "exhibit stamp",
+     "output_says": "This is Exhibit / of Ronald Eric / before me at / this 7 / 739",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2998266",
+     "page": 1,
+     "page_shows": "mail-room stamp",
+     "output_says": "stamp written as a heading",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4257912",
+     "page": 2,
+     "page_shows": "handwritten inspection values",
+     "output_says": "junk tokens",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "A4": {
+   "name": "Graphic marks read as characters (logos, symbols, check marks)",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, D3",
+   "lesson": "Treat an OCR word that is a lone CJK character (or a lone mark) in a Latin-script page or inside a picture as a symbol, not text; keep runs of CJK (real Chinese exists: 4105885). Never let OCR-only words into text-layer sentences on digital pages.",
+   "examples": [
+    {
+     "doc_id": "4200288",
+     "page": 1,
+     "page_shows": "Trans Mountain logo",
+     "output_says": "而 TRANSMOUNTAIN",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3802842",
+     "page": 15,
+     "page_shows": "valve symbols on a schematic",
+     "output_says": "口 (every valve)",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2969783",
+     "page": 21,
+     "page_shows": "emergency response philosophy focuses",
+     "output_says": "philosophy 金 focuses",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3921545",
+     "page": 2,
+     "page_shows": "blank space between footnotes 2 and 3; no mark",
+     "output_says": "场 between the footnotes",
+     "checked_image": true,
+     "note": "OCR-only word from nothing; text layer has none"
+    },
+    {
+     "doc_id": "3930172",
+     "page": 3,
+     "page_shows": "à déposer un document (text layer correct)",
+     "output_says": "à d déposer un document",
+     "checked_image": true,
+     "note": "a stray letter in correct French on a digital page"
+    }
+   ]
+  },
+  "B1": {
+   "name": "Wrong characters behind right-looking glyphs",
+   "family": "B",
+   "in_file": "no",
+   "remedy": "D4, D5",
+   "lesson": "Compare digits and words with OCR on a sample of every digital document; a layer that disagrees is suspect even if it decodes to 'words'. Decode known offsets only where OCR agrees. Map known substitutions (U+0BD7 for U+202F in Justice Canada French; U+FFFD runs as leaders).",
+   "examples": [
+    {
+     "doc_id": "2967975",
+     "page": 0,
+     "page_shows": "(100)",
+     "output_says": "ϭϬϬͿ",
+     "checked_image": false,
+     "note": "table headers, 376 p"
+    },
+    {
+     "doc_id": "2957200",
+     "page": 0,
+     "page_shows": "3",
+     "output_says": "٣",
+     "checked_image": false,
+     "note": "table column"
+    },
+    {
+     "doc_id": "3718909",
+     "page": 0,
+     "page_shows": "suivantes :",
+     "output_says": "suivantesௗ:",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3718783",
+     "page": 5,
+     "page_shows": "Adjusted P-value <0.001, <0.05",
+     "output_says": "P-value o0.001, P-value o0.05 (in the text layer itself)",
+     "checked_image": true,
+     "note": "an operator, not a digit, replaced"
+    },
+    {
+     "doc_id": "3812355",
+     "page": 6,
+     "page_shows": "KP 1170+380 (digits); stamp ISSUED FOR REVIEW",
+     "output_says": "KP 1170+ϲϴϬ; ISSUED FOR 5(9,(:",
+     "checked_image": true,
+     "note": "drawing; whole word shifted by a fixed offset in the text layer"
+    }
+   ]
+  },
+  "B2": {
+   "name": "Symbol fonts: bullets and check boxes as letters",
+   "family": "B",
+   "in_file": "partly",
+   "remedy": "D4, D5",
+   "lesson": "Map Wingdings/Symbol characters by font name before export (þ→☑, ¨→☐, private-use bullets → •); write a check box's option once, with its state.",
+   "examples": [
+    {
+     "doc_id": "3768118",
+     "page": 4,
+     "page_shows": "☑ English ☐ French",
+     "output_says": "English þ French ¨",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2857182",
+     "page": 3,
+     "page_shows": "options with boxes",
+     "output_says": "~ Commenter { Intervenor",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4289041",
+     "page": 0,
+     "page_shows": "bullets",
+     "output_says": "U+F0B7 bullets",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3767926",
+     "page": 3,
+     "page_shows": "radio buttons",
+     "output_says": "¡ ¤ þ ¨",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "B3": {
+   "name": "Words broken or run together by spacing",
+   "family": "B",
+   "in_file": "partly",
+   "remedy": "D3, D4",
+   "lesson": "Join single letters spaced at a regular pitch into words; join split words using the dictionary and the gap size; never trust a space narrower than the font's word space.",
+   "examples": [
+    {
+     "doc_id": "2784712",
+     "page": 1,
+     "page_shows": "FILING RECEIPT",
+     "output_says": "F I L I N G R E C E I P T",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3335408",
+     "page": 7,
+     "page_shows": "THOMPSON-NICOLA REGIONAL DISTRICT, RECLAMATION",
+     "output_says": "T HOMPSON-NI COL A ... RECL AMAT ION",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4142797",
+     "page": 8,
+     "page_shows": "Withdrawal",
+     "output_says": "Withdraw al",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "B4": {
+   "name": "Text drawn two or three times for bold",
+   "family": "B",
+   "in_file": "partly",
+   "remedy": "D4",
+   "lesson": "Drop a glyph run that repeats the same text at (almost) the same position; keep one copy.",
+   "examples": [
+    {
+     "doc_id": "3096924",
+     "page": 2,
+     "page_shows": "MMTP Complex",
+     "output_says": "MMTP MMTP MMTP Complex Complex Complex",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4724669",
+     "page": 42,
+     "page_shows": "Dorsey Stn",
+     "output_says": "Dorsey Dorsey Dorsey Stn",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "C1": {
+   "name": "The answer is a picture or a widget, not text",
+   "family": "C",
+   "in_file": "no",
+   "remedy": "T (data as data), fillable fields",
+   "lesson": "Attach a small icon picture (check mark) to the text line it sits on and mark that option chosen, the others not; read AcroForm widget values (radio buttons) into the output.",
+   "examples": [
+    {
+     "doc_id": "3934254",
+     "page": 1,
+     "page_shows": "✔ The applicant is a corporation",
+     "output_says": "options as plain lines, then *[icon]*",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4496452",
+     "page": 1,
+     "page_shows": "✔ Corporation incorporated in Canada",
+     "output_says": "no mark",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4572357",
+     "page": 1,
+     "page_shows": "(•) No",
+     "output_says": "Yes No",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4257912",
+     "page": 2,
+     "page_shows": "ticks on AC, CONTINUOUS, WET ...",
+     "output_says": "☐ [DC] only",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3716451",
+     "page": 2,
+     "page_shows": "choix cochés",
+     "output_says": "four *[icon]* cut loose",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "C2": {
+   "name": "Labels and values come apart",
+   "family": "C",
+   "in_file": "partly",
+   "remedy": "T, S",
+   "lesson": "Read form pages as label boxes and value boxes by position (a form reader), not as running text.",
+   "examples": [
+    {
+     "doc_id": "3716451",
+     "page": 2,
+     "page_shows": "Nom : M Carl Hasselback   Téléphone: 716-684-5411",
+     "output_says": "Nom : M Carl Téléphone: 716-684-5411 / Hasselback Poste :",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4577847",
+     "page": 2,
+     "page_shows": "Application Submission Date: 27/06/2025",
+     "output_says": "date printed after the product list",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4572357",
+     "page": 1,
+     "page_shows": "two labels in neighbouring rows",
+     "output_says": "explain Exempt Confirm why pursuant exemption exemption to is MH‐001‐2013?",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3643115",
+     "page": 2,
+     "page_shows": "two near-identical contact blocks: 519-346-3298 (crude exports), 513-346-3298 (refined products)",
+     "output_says": "both headings stacked; one block as text with 513, as a table with 519",
+     "checked_image": true,
+     "note": "repeated form sections collapsed"
+    }
+   ]
+  },
+  "D1": {
+   "name": "Bold lead-ins split from their text (orders' recitals, run-in headings)",
+   "family": "D",
+   "in_file": "partly",
+   "remedy": "S (tags)",
+   "lesson": "A bold lead-in whose baseline equals the first line of the text beside it is part of that paragraph, read first; never a heading. Affects ~56% of 17,026 orders.",
+   "examples": [
+    {
+     "doc_id": "4265387",
+     "page": 1,
+     "page_shows": "AND WHEREAS on 23 July 2021 ...",
+     "output_says": "## AND WHEREAS after the paragraph it introduces",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4593518",
+     "page": 1,
+     "page_shows": "DEVANT / ATTENDU QUE at the start of their paragraphs",
+     "output_says": "after the text or stacked",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3321223",
+     "page": 1,
+     "page_shows": "IN THE MATTER OF the NEB Act and the regulations made thereunder; and",
+     "output_says": "(NEB Act) and / thereunder; and / the regulations made",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3900173",
+     "page": 8,
+     "page_shows": "Section 2 describes the importance ...",
+     "output_says": "## Section 2 / describes the importance",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4239846",
+     "page": 2,
+     "page_shows": "ATTENDU QU'au moyen de l'ordonnance",
+     "output_says": "moyen de l'ordonnance ... ## ATTENDU QU'au",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "D2": {
+   "name": "Letterhead and sidebar blocks land inside the address or subject",
+   "family": "D",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Detect the letterhead/sidebar column (narrow block at the top or side, repeated across letters of one filer) and emit it before the body, never between label and value.",
+   "examples": [
+    {
+     "doc_id": "4364682",
+     "page": 1,
+     "page_shows": "Attention: Ms. Ramona Sladic",
+     "output_says": "Attention: / ## Martha Peden ... / Ms. Ramona Sladic",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4403573",
+     "page": 1,
+     "page_shows": "Re: ...",
+     "output_says": "firm address inside the Re: block",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2955501",
+     "page": 1,
+     "page_shows": "Re: Enbridge Pipelines Inc. Tariff No. 391",
+     "output_says": "Re: / ## Peter Douvris",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "D3": {
+   "name": "Two columns or neighbouring lines interleaved",
+   "family": "D",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Detect columns before ordering lines; never merge two lines whose baselines differ by more than a fraction of the line height.",
+   "examples": [
+    {
+     "doc_id": "3117386",
+     "page": 118,
+     "page_shows": "two-column French text",
+     "output_says": "lines alternate between columns",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3348046",
+     "page": 7,
+     "page_shows": "clauses 7.5-7.10",
+     "output_says": "interleaved line by line",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4518996",
+     "page": 2,
+     "page_shows": "English | French columns",
+     "output_says": "paper document listed above. nécessaire de copies sur papier",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "D4": {
+   "name": "A word moved out of its sentence",
+   "family": "D",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Assign words to items by text-layer line first: a line's words stay in the item that holds most of them unless the line truly spans two columns.",
+   "examples": [
+    {
+     "doc_id": "4648280",
+     "page": 3,
+     "page_shows": "« peuples autochtones du Canada »",
+     "output_says": "« peuples du Canada » ... autochtones (end of footnote)",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4104450",
+     "page": 13,
+     "page_shows": "... MH-3-2007, p. ...",
+     "output_says": "MH-3-2007, written after its line",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3956607",
+     "page": 7,
+     "page_shows": "(A73728-2), qui",
+     "output_says": "(A73728-2), written after its line",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "E1": {
+   "name": "Numbered paragraphs become headings",
+   "family": "E",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "A bookmark or numbered line that is a sentence (over ~20 words, or ends with . ... ;) is a numbered paragraph; keep only short bookmarks as headings. 19.8% of Arguments, 8.5% of Written Evidence.",
+   "examples": [
+    {
+     "doc_id": "3954446",
+     "page": 6,
+     "page_shows": "20. As a result, and based on the Commission's established approach ...",
+     "output_says": "#### 20. As a result ... / - appropriate and should be approved",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2786260",
+     "page": 1,
+     "page_shows": "1 Scia'new First Nation ... has aboriginal rights",
+     "output_says": "## 1 Scia'new ... / - the Project will traverse.",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4039724",
+     "page": 3,
+     "page_shows": "7. Trans Mountain filed written evidence",
+     "output_says": "## 7. Trans Mountain filed ...",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3911809",
+     "page": 4,
+     "page_shows": "unnumbered body paragraphs",
+     "output_says": "whole paragraphs as headings",
+     "checked_image": true,
+     "note": "variant: no numbering"
+    },
+    {
+     "doc_id": "3298897",
+     "page": 4,
+     "page_shows": "plain unnumbered paragraphs",
+     "output_says": "## In its project application... / ## Based on the proposed design...",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "E2": {
+   "name": "Headings that are not on the page",
+   "family": "E",
+   "in_file": "yes",
+   "remedy": "S",
+   "lesson": "Never make a heading from a file name, a stamp, a signature rule (______) or an attachment label. A bookmark that matches no line on its page is not a heading: today it is anchored at the page's first element and written as one (merged PDFs point every sub-file's bookmarks at page 1). Take headings only from text drawn on the page.",
+   "examples": [
+    {
+     "doc_id": "3561254",
+     "page": 1,
+     "page_shows": "(map)",
+     "output_says": "## winter road map.vsd",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4142865",
+     "page": 1,
+     "page_shows": "cover page",
+     "output_says": "## C61 cover page ... #####",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4109467",
+     "page": 1,
+     "page_shows": "E-FILE stamp",
+     "output_says": "## E-FILE",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4724317",
+     "page": 2,
+     "page_shows": "signature rule",
+     "output_says": "## ______ ______",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2838739",
+     "page": 1,
+     "page_shows": "High Pine Expansion Project / Section 6 - Lands (nothing else)",
+     "output_says": "## sec_87(1)_crown_notification_pipeline_v2010.pdf / ### NOTICE PURSUANT TO SECTION 87(1) OF THE / #### TO: <ENTER LANDOWNER(S) NAME(S)>",
+     "checked_image": true,
+     "note": "bookmarks of a merged PDF, all pointing at page 1, written as headings"
+    }
+   ]
+  },
+  "E3": {
+   "name": "List numbers and bullets kept as text",
+   "family": "E",
+   "in_file": "yes",
+   "remedy": "S",
+   "lesson": "When a list item's text starts with its own marker (1., (a), •, -), drop the Markdown bullet and keep the marker (or emit an ordered list).",
+   "examples": [
+    {
+     "doc_id": "4411254",
+     "page": 1,
+     "page_shows": "1. The term of this Order ...",
+     "output_says": "- 1. The term of this Order ...",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4200288",
+     "page": 1,
+     "page_shows": "• Landowner requests",
+     "output_says": "- • Landowner requests",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "E4": {
+   "name": "Footnote markers fused to words; hyphens kept at line ends",
+   "family": "E",
+   "in_file": "partly",
+   "remedy": "D1, S",
+   "lesson": "Mark superscript footnote references ([^22]); join a lower-case word broken at a line-end hyphen (not digit groups, not real compounds).",
+   "examples": [
+    {
+     "doc_id": "3954446",
+     "page": 6,
+     "page_shows": "process.²²",
+     "output_says": "process.22",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2812079",
+     "page": 0,
+     "page_shows": "navigation, maritime",
+     "output_says": "navi- gation, mar- itime",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2955501",
+     "page": 1,
+     "page_shows": "10th Avenue, 1st Street",
+     "output_says": "10{th Avenue, 1$t Street",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "F1": {
+   "name": "A table over several pages filed under its first page",
+   "family": "F",
+   "in_file": "yes",
+   "remedy": "T, S",
+   "lesson": "Write each page's rows under that page's marker (repeat the header, mark it continued). 5.2% of substantial pages have most of their words under another page.",
+   "examples": [
+    {
+     "doc_id": "3306261",
+     "page": 2,
+     "page_shows": "rows of a 286-row table",
+     "output_says": "(under page 1)",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2969783",
+     "page": 21,
+     "page_shows": "table rows",
+     "output_says": "only the header",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3790697",
+     "page": 138,
+     "page_shows": "Peguis First Nation comment and response",
+     "output_says": "under page 137",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3543081",
+     "page": 7,
+     "page_shows": "item 11 cont'd and item 12",
+     "output_says": "under page 6",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2937461",
+     "page": 7,
+     "page_shows": "ESA matrix rows",
+     "output_says": "only the header",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "F2": {
+   "name": "A table's own row numbers taken for margin numbering",
+   "family": "F",
+   "in_file": "yes",
+   "remedy": "T",
+   "lesson": "Never take line numbers from words inside a table region or a ruled column; keep the margin rule for prose with numbers outside the text block.",
+   "examples": [
+    {
+     "doc_id": "4051056",
+     "page": 7,
+     "page_shows": "commitment numbers 147-162 in their rows",
+     "output_says": "*Lines 147 148 ... 162*",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4087662",
+     "page": 0,
+     "page_shows": "Line column of a schedule (rows cite Line 4 + Line 9)",
+     "output_says": "*Lines 1 2 ... 18*",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3063519",
+     "page": 0,
+     "page_shows": "line list numbers",
+     "output_says": "*Lines 108 109 ... 136*",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3797408",
+     "page": 0,
+     "page_shows": "numbered table of contents",
+     "output_says": "*Lines 1 2 ... 8*",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4088042",
+     "page": 4,
+     "page_shows": "table of contents with section numbers 1-9",
+     "output_says": "*Lines 1 2 3 4 5 6 7 8 9*; titles without numbers, 3.1 and 8.1 kept",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "F3": {
+   "name": "A dense numeric table collapses into a column in one cell",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "A cell whose words sit on several text-layer lines with one number each is several rows: rebuild the grid from the ruling lines there.",
+   "examples": [
+    {
+     "doc_id": "4166098",
+     "page": 20,
+     "page_shows": "~40 rows: path, average, highest, lowest ...",
+     "output_says": "one cell: (c) 0.1035 1.6473 0.5986 ...; paths as plain lines",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "F4": {
+   "name": "Cells shifted, split or merged",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Score grids against the ruling lines and the header count; reject grids with mostly empty columns.",
+   "examples": [
+    {
+     "doc_id": "4142865",
+     "page": 4,
+     "page_shows": "Spreads | Site Name ...",
+     "output_says": "values shifted one column left",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "2926972",
+     "page": 13,
+     "page_shows": "6-column cost grid",
+     "output_says": "14 columns, most empty",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4165029",
+     "page": 1,
+     "page_shows": "MACEWEN PETROLEUM INC.",
+     "output_says": "name scrambled over two rows",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4368547",
+     "page": 3,
+     "page_shows": "land-use table",
+     "output_says": "merged rows, shifted values",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3163471",
+     "page": 3,
+     "page_shows": "rotated scanned pressure table: 2:30 = 418 PSI",
+     "output_says": "a spurious blank column; 2:30 = 404; 2:00 loses 127",
+     "checked_image": false,
+     "note": "readings shifted one time-step; not image-checked"
+    }
+   ]
+  },
+  "F5": {
+   "name": "A table's units and notes not attached to its numbers",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Carry caption, units, notes, footnotes and the header path on every table and cell.",
+   "examples": []
+  },
+  "G1": {
+   "name": "Drawings, maps and charts: labels without order or relation",
+   "family": "G",
+   "in_file": "no",
+   "remedy": "T",
+   "lesson": "Do not attempt reading order; keep labels findable with their boxes; never present them as prose.",
+   "examples": [
+    {
+     "doc_id": "3306697",
+     "page": 1,
+     "page_shows": "map labels",
+     "output_says": "Fraser Kiver Coquitlam # # KP 1167",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3005387",
+     "page": 42,
+     "page_shows": "chart recorder",
+     "output_says": "numbers without meaning",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3718493",
+     "page": 18,
+     "page_shows": "population chart",
+     "output_says": "Population 09 size",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4495921",
+     "page": 5,
+     "page_shows": "NGTL system map",
+     "output_says": "Strome HolmbergiMS Killam PTI Lateral ...",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "H1": {
+   "name": "Bilingual side-by-side text read across both languages",
+   "family": "H",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Detect the two-language column layout and emit each column whole.",
+   "examples": [
+    {
+     "doc_id": "4518996",
+     "page": 2,
+     "page_shows": "English column | French column",
+     "output_says": "merged half-line by half-line",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "4657049",
+     "page": 3,
+     "page_shows": "EN | FR columns",
+     "output_says": "interleaved",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "I1": {
+   "name": "Pictures misclassified or repeated",
+   "family": "I",
+   "in_file": "yes",
+   "remedy": "-",
+   "lesson": "Merge overlapping picture regions before export (one logo was 4 regions); low-confidence classes should say 'picture'.",
+   "examples": [
+    {
+     "doc_id": "3337507",
+     "page": 1,
+     "page_shows": "aerial photo map",
+     "output_says": "*[screenshot_from_computer]*",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4427645",
+     "page": 1,
+     "page_shows": "Pembina logo",
+     "output_says": "*[bar_chart]*",
+     "checked_image": false,
+     "note": ""
+    },
+    {
+     "doc_id": "3934254",
+     "page": 1,
+     "page_shows": "one logo",
+     "output_says": "*[logo]* x3 + *[icon]*",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "E5": {
+   "name": "Superscripts and subscripts flattened into the text (footnote marks into numbers, exponents, units)",
+   "family": "E",
+   "in_file": "partly",
+   "remedy": "D4, S",
+   "lesson": "Emit superscript/subscript runs as such (^4, <sup>), and footnote references as references; never concatenate a raised digit to the number before it. Flag cells where a number ends in a raised digit.",
+   "examples": [
+    {
+     "doc_id": "4460101",
+     "page": 5,
+     "page_shows": "≤70 / 76 with superscript 4 (vapour pressure, kPa)",
+     "output_says": "≤70 / 764",
+     "checked_image": true,
+     "note": "Trans Mountain crude quality table; also 'Pacific Dilbit2'"
+    },
+    {
+     "doc_id": "4639857",
+     "page": 2,
+     "page_shows": "(1 + Line 9) raised to Line 10, a fraction",
+     "output_says": "= Line 11 * (1 + Line 9)Line 10",
+     "checked_image": true,
+     "note": "Annual Contribution Amount formula"
+    },
+    {
+     "doc_id": "4652224",
+     "page": 1,
+     "page_shows": "750 people/km² with footnote 2",
+     "output_says": "750 people/km2.2",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "J1": {
+   "name": "Tracked changes flattened: deleted and inserted text read as one",
+   "family": "J",
+   "in_file": "partly",
+   "remedy": "file the clean final; redlines as a separate comparison or DOCX with tracked changes",
+   "lesson": "Detect strike-through lines drawn through text and underlines in a second colour; mark deleted text (~~...~~) and inserted text, or flag the page as a blackline so its text is never quoted as in force.",
+   "examples": [
+    {
+     "doc_id": "3895437",
+     "page": 39,
+     "page_shows": "red struck-through deleted text, blue underlined inserted text (contract blackline v.1 to v.2)",
+     "output_says": "Pro formaProforma; this capacitythe Design Capacity; struck clause 9.1(a) as live text",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3935185",
+     "page": 77,
+     "page_shows": "struck-through words next to underlined replacements",
+     "output_says": "687945/August 2018June 2020; rare elementfeature; visitattend",
+     "checked_image": true,
+     "note": "TMEP condition compliance"
+    },
+    {
+     "doc_id": "4272854",
+     "page": 8,
+     "page_shows": "struck and underlined digits in UTM coordinates and chainages",
+     "output_says": "46053857114E 63307660815N; KP 16+49063 to 16+516490; September February 2022",
+     "checked_image": true,
+     "note": "wrong, valid-looking positions"
+    }
+   ]
+  },
+  "F6": {
+   "name": "Row numbers offset against their rows",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Align a numbered column to rows by baseline, not by order; check the first and last rows (an empty first row, two rows fused at the end are the sign).",
+   "examples": [
+    {
+     "doc_id": "3884322",
+     "page": 29,
+     "page_shows": "Line 1: Suffield 2 / Union SWDA / 3.88543 / 0.1277",
+     "output_says": "empty line 1; that row under 2; rows 66-67 fused",
+     "checked_image": true,
+     "note": "TransCanada abandonment surcharges"
+    },
+    {
+     "doc_id": "4202048",
+     "page": 10,
+     "page_shows": "numbered clauses 5.1.1.4.x",
+     "output_says": "made a table; each item's first line in the previous row",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "F7": {
+   "name": "A table's group header or category band separated from its rows",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T, S",
+   "lesson": "Keep a table's internal group headers with the rows that follow them; never emit a section heading between parts of one ruled table.",
+   "examples": [
+    {
+     "doc_id": "3336044",
+     "page": 38,
+     "page_shows": "Metro Vancouver Region header directly above Langley, Surrey, Coquitlam, Burnaby crime rates",
+     "output_says": "header alone, then Traffic rows, then 'Communicable Diseases', then the crime-rate rows",
+     "checked_image": true,
+     "note": "TMEP Socio-Economic Effects Monitoring Plan, Table 9"
+    },
+    {
+     "doc_id": "4543487",
+     "page": 2,
+     "page_shows": "category band 'Releases Not Meeting NT-NU Reporting Criteria' directly above four release rows",
+     "output_says": "the four rows after the 'previous reports / ongoing' band, in a headerless table",
+     "checked_image": true,
+     "note": "Imperial release table; category bands"
+    }
+   ]
+  },
+  "J2": {
+   "name": "Colour or highlight carries the meaning",
+   "family": "J",
+   "in_file": "partly",
+   "remedy": "T (data as data); never encode meaning in colour alone",
+   "lesson": "Record cell fill and text colour where a table uses them (a highlight column, red/green status), at least as a flag that colour carries meaning on the page; the text alone is incomplete there.",
+   "examples": [
+    {
+     "doc_id": "3578263",
+     "page": 1,
+     "page_shows": "highlighted cells mark which items apply (Excel grid)",
+     "output_says": "grid collapsed; highlight lost, every item reads the same",
+     "checked_image": true,
+     "note": "batch 013; also F3/F4"
+    }
+   ]
+  },
+  "K1": {
+   "name": "Redaction leaves a silent gap; exemption stamps read as numbers",
+   "family": "K",
+   "in_file": "no",
+   "remedy": "Redaction section 4: remove the text and say what was removed (ground, extent)",
+   "lesson": "Detect redaction boxes and exemption stamps (s.17, s.19(1), 'Pages withheld'); emit an explicit marker [redacted: s.19(1)] where text was withheld; never read the stamp as body text.",
+   "examples": [
+    {
+     "doc_id": "4574102",
+     "page": 20,
+     "page_shows": "stamps s.17 and s.19(1); a blanked-out name in 'We should involve [blank] as well'",
+     "output_says": "5.17 / 5.19(1); 'We should involvi as well in this, as he is the Project Engineer'",
+     "checked_image": true,
+     "note": "access-to-information release"
+    }
+   ]
+  },
+  "K2": {
+   "name": "Redacted text still in the file under the black box",
+   "family": "K",
+   "in_file": "yes",
+   "remedy": "Redaction section 4: use real redaction that removes the text",
+   "lesson": "Words under a redaction box are left out of every output (done: text_under_redaction, 1,110 pages in 231 documents); report them so the filer's failed redaction is known, never index them.",
+   "examples": [
+    {
+     "doc_id": "4493099",
+     "page": 1,
+     "page_shows": "",
+     "output_says": "59 text-layer words under a redaction box (left out of the output)",
+     "checked_image": false,
+     "note": "ledger issue text_under_redaction"
+    },
+    {
+     "doc_id": "4097987",
+     "page": 20,
+     "page_shows": "",
+     "output_says": "3 text-layer words under a redaction box",
+     "checked_image": false,
+     "note": ""
+    }
+   ]
+  },
+  "A5": {
+   "name": "Handwriting read as a plausible wrong value (corrections over typed text, handwritten dates)",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1: correct the document, re-export; never annotate a printout",
+   "lesson": "Where handwriting overlaps typed text, flag the line as amended rather than merging both readings; check identifiers (hearing numbers, file numbers) against other mentions in the same document.",
+   "examples": [
+    {
+     "doc_id": "3803169",
+     "page": 1,
+     "page_shows": "GH-003-2018 with a handwritten scribble over the last digits; a handwritten 3 over 'Round 3'",
+     "output_says": "GH-003-2013NOVA Gas Transmission Ltd.; submit Round Information Requests",
+     "checked_image": true,
+     "note": "the cc line on the same page still says GH-003-2018"
+    },
+    {
+     "doc_id": "3750376",
+     "page": 18,
+     "page_shows": "handwritten date 13-06-2016",
+     "output_says": "13-06.2026",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "H2": {
+   "name": "Content cut off or missing in the filed PDF itself",
+   "family": "H",
+   "in_file": "no",
+   "remedy": "D1: export at the page size the content needs; check before filing",
+   "lesson": "Not a converter fault: record it (words ending at the page or cell edge, a column clipped) so the gap is known; nothing can recover it.",
+   "examples": [
+    {
+     "doc_id": "2813818",
+     "page": 5,
+     "page_shows": "a table column cut at the page edge ('Dat / 20-Au')",
+     "output_says": "the same clipped text",
+     "checked_image": true,
+     "note": "source PDF clipped"
+    },
+    {
+     "doc_id": "4572575",
+     "page": 2,
+     "page_shows": "French half of the acceptance text running off the page edge",
+     "output_says": "the same truncated text",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2950002",
+     "page": 8,
+     "page_shows": "title 'Schedule A: Project Map' and no map",
+     "output_says": "the title only",
+     "checked_image": true,
+     "note": "the map is missing from the filed PDF"
+    }
+   ]
+  },
+  "F8": {
+   "name": "Neighbouring tables merged into one; the next table's title fused into the last row",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Split a detected table where a full-width title row or a gap in the ruling separates two grids; never append a table title to the previous table's last cell.",
+   "examples": [
+    {
+     "doc_id": "3084351",
+     "page": 1,
+     "page_shows": "three stacked tariff tables: Light, Medium, Heavy crude, each with its own title and header",
+     "output_says": "(6.2803) Uncommitted Line 9 IJT Joint Rate ... Medium Crude ... (one table, headers of the 2nd and 3rd lost)",
+     "checked_image": true,
+     "note": "Enbridge Line 9 tolls"
+    }
+   ]
+  },
+  "D5": {
+   "name": "Rotated text read with its words in scrambled order",
+   "family": "D",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Read rotated text (vertical table headers, side labels) as lines in its own direction, using the glyph rotation in the text layer; never sort rotated words by horizontal position.",
+   "examples": [
+    {
+     "doc_id": "3309458",
+     "page": 36,
+     "page_shows": "vertical headers: Segment Unique ID, Wetland Unique ID, Distance of Wetland from Access Road (m)",
+     "output_says": "Segment ID Unique, ID Wetland Unique, of from Road Distance Wetland Access (m)",
+     "checked_image": true,
+     "note": "Table 12 cont'd; data rows right"
+    },
+    {
+     "doc_id": "4584919",
+     "page": 417,
+     "page_shows": "rotated margin citation 2025 FC 319 (CanLII)",
+     "output_says": "(CanLII) 319 FC 2025, mid-sentence",
+     "checked_image": false,
+     "note": "court decision; not image-checked"
+    }
+   ]
+  },
+  "B5": {
+   "name": "A hidden text layer always replaced by the converter's own OCR, even where the layer was better",
+   "family": "B",
+   "in_file": "yes",
+   "remedy": "D3: text stays text (CAD text exported as text)",
+   "lesson": "Every page with a hidden text layer (107,588 pages) took its text from the converter's OCR alone. Keep the layer as a second reading and vote line by line (as ocr_vote does for two OCR readings): a line the layer has and OCR lost or mangled should come from the layer. With no page image under it (3,307 pages, CAD drawings), the hidden layer is the drawing tool's own text: use it as the text.",
+   "examples": [
+    {
+     "doc_id": "4248055",
+     "page": 1,
+     "page_shows": "notes: EXCAVATION NOTE: TRENCH SHORING WILL BE USED ...; VERTICAL DATUM: CANADIAN GEODETIC VERTICAL DATUM 1928",
+     "output_says": "R SED / VER E / DI Y / H IS (OCR used; the 863-word text layer had every line)",
+     "checked_image": true,
+     "note": "Trans-Northern drawing sheet; text_layer hidden_ocr, no page image"
+    },
+    {
+     "doc_id": "4247461",
+     "page": 1,
+     "page_shows": "The purpose of this letter is to notify interested parties ...",
+     "output_says": "He e t (OCR); the scanner's layer had the sentence right",
+     "checked_image": true,
+     "note": "scanner_ocr letter, layer 223 words, OCR 203"
+    },
+    {
+     "doc_id": "3003802",
+     "page": 0,
+     "page_shows": "scanner text layer with the full lines",
+     "output_says": "na ce (OCR)",
+     "checked_image": false,
+     "note": "checked against the text layer, not the image"
+    },
+    {
+     "doc_id": "4488050",
+     "page": 5,
+     "page_shows": "18.3 Suspension of Performance ... 75 (scanner layer has the full titles)",
+     "output_says": "18.3 Suspension of Perfo 75; 20.15 Waiver and A 84",
+     "checked_image": true,
+     "note": "TOC titles cut at dot leaders by OCR"
+    }
+   ]
+  },
+  "A6": {
+   "name": "OCR drops small marks or digits that carry value (zero dashes, repeated digits)",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, T",
+   "lesson": "Where a currency sign or a column of numbers has an empty slot, check the image for a dash or dot; report 'unread' rather than an empty cell.",
+   "examples": [
+    {
+     "doc_id": "3390240",
+     "page": 2,
+     "page_shows": "$ - (zero) for Materials & Supplies, Line Pack, Prepayments, Deferrals",
+     "output_says": "empty cells, or a bare $",
+     "checked_image": true,
+     "note": "scan; OCR read the $ but not the dash"
+    },
+    {
+     "doc_id": "4368429",
+     "page": 14,
+     "page_shows": "99.99°C for the 100.00 master reading",
+     "output_says": "| 100.00℃ | 99.9°C | 0.09 |",
+     "checked_image": true,
+     "note": "the same certificate reads 99.99 elsewhere"
+    }
+   ]
+  },
+  "G2": {
+   "name": "Chart labels read into the table beside it, with plausible wrong values",
+   "family": "G",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Keep text inside a chart region (Gantt bars, plotted labels) out of the adjacent table's cells; mark chart text as chart text.",
+   "examples": [
+    {
+     "doc_id": "4553651",
+     "page": 16,
+     "page_shows": "schedule table with a Gantt chart beside it; bar label 18-May-23 and a red data-date line",
+     "output_says": "11-May-23 | 18-May-21; 9-M3$a-23; 0 -nn-90 as table cells",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "J3": {
+   "name": "Icons and indentation carry the hierarchy",
+   "family": "J",
+   "in_file": "partly",
+   "remedy": "S (tags), T",
+   "lesson": "Keep indentation level and icon class with each row of an index; an exhibit list's PDF/folder icons say what is a document and what is an attachment.",
+   "examples": [
+    {
+     "doc_id": "3898988",
+     "page": 1,
+     "page_shows": "exhibit list: PDF icons and folder icons, indented",
+     "output_says": "囚 for PDF icons, *[icon]* for folders; hierarchy lost",
+     "checked_image": false,
+     "note": "not image-checked"
+    }
+   ]
+  },
+  "G3": {
+   "name": "Box-like marks read as form check boxes (chart legends, redaction boxes)",
+   "family": "G",
+   "in_file": "no",
+   "remedy": "T",
+   "lesson": "Run the checkbox detector only on form regions: a box-like symbol in a chart legend, or a redaction placeholder box ('PII'), is not an answer.",
+   "examples": [
+    {
+     "doc_id": "2958070",
+     "page": 17,
+     "page_shows": "borehole log legend: triangle, open square, filled square, X plot symbols",
+     "output_says": "☐ [Field Vane Test] / ☒ [Remoulded] / ☒ [Torvane]; plotted points missing",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "4464158",
+     "page": 5,
+     "page_shows": "dashed 'PII' redaction boxes beside each comment's date line",
+     "output_says": "☒ [PII 31-Jan-2022 12:31 (Mountain Time), rev 1] / ☐ [PII]",
+     "checked_image": true,
+     "note": "Trans Mountain MOC form; redaction box read as a ticked option"
+    }
+   ]
+  },
+  "F9": {
+   "name": "Text from outside a table (footnotes, margin stamps) spliced into a row",
+   "family": "F",
+   "in_file": "partly",
+   "remedy": "T",
+   "lesson": "Keep text below a table's last rule (notes, footnotes) out of the grid; attach a footnote to the cell that carries its marker.",
+   "examples": [
+    {
+     "doc_id": "2902086",
+     "page": 3,
+     "page_shows": "footnote 1 (to row 6.0, N/A¹): The hydro-testing contractor provided all hydro-test fluid and trucked it away",
+     "output_says": "row 10.0: Details including 1 The hydro-testing | regarding any unsuccessful pressure tests... contractor provided all hydro-test fluid",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "3179563",
+     "page": 8,
+     "page_shows": "margin stamp 'Form Date: Feb 27, 2013' below the Date column",
+     "output_says": "| June 8, 2015 | Scotty Many Guns Feb 27, 2013 | ...",
+     "checked_image": true,
+     "note": "page furniture, not a footnote"
+    }
+   ]
+  },
+  "C3": {
+   "name": "A check box read in the opposite state",
+   "family": "C",
+   "in_file": "partly",
+   "remedy": "T, fillable fields",
+   "lesson": "Where a form widget's value and a drawn tick disagree, report both or flag the field; never emit the widget's empty state over a visible tick.",
+   "examples": [
+    {
+     "doc_id": "2774076",
+     "page": 1,
+     "page_shows": "'The wetland is not fish bearing' ticked; 'No' ticked",
+     "output_says": "☐ [The wetland is not fish bearing...]; ☐ [☑ No]; options listed twice; '☐ [Creek 6 m]'",
+     "checked_image": true,
+     "note": ""
+    }
+   ]
+  },
+  "D6": {
+   "name": "A page stored rotated has its whole text read in reverse or scrambled order",
+   "family": "D",
+   "in_file": "yes",
+   "remedy": "converter; S",
+   "lesson": "Honour the page's /Rotate before ordering text: 179,146 pages in ~17,700 documents are stored at 90 or 270 degrees; in a sample of 40 rotated digital pages, 20 keep under half of the text layer's word pairs (an upper bound: tables lower it). Order words in the rotated reading direction, then compare with the text layer's own order.",
+   "examples": [
+    {
+     "doc_id": "2957894",
+     "page": 20,
+     "page_shows": "Transportation accounts for 23% of the total energy that Canadians consume — second only in consumption to Canada's industrial sector",
+     "output_says": "Canada's to consumption in only second — consume Canadians / gasoline of litres million 200 to translates That sector. industrial",
+     "checked_image": true,
+     "note": "/Rotate 270 infographic; p23 one word per line in reverse"
+    },
+    {
+     "doc_id": "3577544",
+     "page": 384,
+     "page_shows": "",
+     "output_says": "1% of the text layer's word pairs kept",
+     "checked_image": false,
+     "note": "sample measure, not image-checked"
+    },
+    {
+     "doc_id": "3790578",
+     "page": 96,
+     "page_shows": "",
+     "output_says": "2% of the text layer's word pairs kept",
+     "checked_image": false,
+     "note": "sample measure, not image-checked"
+    }
+   ]
+  },
+  "E6": {
+   "name": "A wrapped line starting with a number taken for a list item, and lines reordered",
+   "family": "E",
+   "in_file": "partly",
+   "remedy": "S",
+   "lesson": "Do not start a list item at a line that continues the previous line's sentence (lower-case or mid-phrase before it, no list marker spacing); keep wrapped lines in order.",
+   "examples": [
+    {
+     "doc_id": "4680777",
+     "page": 1,
+     "page_shows": "... PART / 1 25R6353, PART 1 ON 25R10709 SUBJECT TO AN / EASEMENT AS L.",
+     "output_says": "... PART 1 ON 25R7540, PART / EASEMENT AS L. / - 1 25R6353, PART 1 ON 25R10709 SUBJECT TO AN",
+     "checked_image": true,
+     "note": "legal description of lands: plan numbers altered"
+    }
+   ]
+  },
+  "A7": {
+   "name": "Indigenous-language text read as junk or stripped (syllabics, special letters)",
+   "family": "A",
+   "in_file": "no",
+   "remedy": "D1, D4: born-digital text with Unicode fonts (syllabics U+1400-167F, combining and superscript letters)",
+   "lesson": "OCR models trained on Latin script turn Canadian Aboriginal syllabics into Latin letters and math symbols and drop superscript letters (ʷ) in Salish and other orthographies. Detect syllabic-looking shapes and flag the line as unread; use a syllabics-capable model where available; never emit the junk as text.",
+   "examples": [
+    {
+     "doc_id": "3096662",
+     "page": 1,
+     "page_shows": "Inuktitut syllabics tagline in the letterhead",
+     "output_says": "uUAda ⊃AD qb ⊂",
+     "checked_image": true,
+     "note": "Tugliq letter to the NEB"
+    },
+    {
+     "doc_id": "4667022",
+     "page": 4,
+     "page_shows": "Indigenous-language greeting with superscript w letters",
+     "output_says": "greeting with the superscript letters lost",
+     "checked_image": false,
+     "note": "round 5 (batch 025); not image-checked separately"
+    }
+   ]
+  },
+  "B6": {
+   "name": "Invisible text that no reader sees surfaces as content (link anchors, hidden ids)",
+   "family": "B",
+   "in_file": "yes",
+   "remedy": "converter; D4",
+   "lesson": "Drop text a reader cannot see before building tables and paragraphs: tiny (< 5 pt) or covered text, white-on-white, text outside the crop box, link-anchor ids behind a visible label. Keep it in the evidence flagged hidden, never in the body.",
+   "examples": [
+    {
+     "doc_id": "4590652",
+     "page": 60,
+     "page_shows": "PCG, NEES (visible labels)",
+     "output_says": "| uu-PCG-4559451-aa PCG | NOVA Gas Transmission Ltd. | (22 such ids in the file)",
+     "checked_image": true,
+     "note": "4 pt internal-link anchor text behind the label"
+    }
+   ]
+  }
+ },
+ "candidates": [
+  {
+   "doc_id": "4460101",
+   "batch": "batch-008.jsonl",
+   "page": 5,
+   "name": "Footnote marker fused to a number changes its value",
+   "page_shows": "VPCR column: '≤70 / 76' with superscript 4 (footnote: ≤70 kPa May-Nov, ≤76 kPa Dec-Apr)",
+   "output_says": "≤70 / 764",
+   "why_it_matters": "a vapour-pressure limit of 76 kPa reads as 764; a quoted number is wrong and nothing signals the marker",
+   "in_file": "partly",
+   "checked_image": true,
+   "resolved": "E5"
+  },
+  {
+   "doc_id": "3895437",
+   "batch": "batch-009.jsonl",
+   "page": 39,
+   "name": "Tracked changes (blackline) flattened: deleted and inserted text merged as current text",
+   "page_shows": "Redline: deleted text struck through in red, inserted text underlined in blue; e.g. 9.2 first sentence struck out, 'this capacity' struck and 'the Design Capacity' inserted; (a) in 9.1 struck out",
+   "output_says": "Canadian Mainline - Transportation Services Agreement (Pro formaProforma Requirements Contract – Producer); 'may differ from this capacitythe Design Capacity'; '(a) If, in a Month ... in respect of a given Service Haul in such Month'",
+   "why_it_matters": "Struck-out (deleted) clauses are presented as operative contract text and fused with the replacement words; an AI or reader cannot tell what v.1 vs v.2 says, so quotes of the new agreement can contain deleted terms",
+   "in_file": "no",
+   "checked_image": true,
+   "resolved": "J1"
+  },
+  {
+   "doc_id": "4639857",
+   "batch": "batch-009.jsonl",
+   "page": 2,
+   "name": "Formula exponents and fraction layout flattened",
+   "page_shows": "Formulas with superscript exponents ((1 + Line 9) to the power Line 10) and a fraction (Line 13 * Line 9) over [(1+Line 9)^Line 10 - 1]",
+   "output_says": "= Line 11 * (1 + Line 9)Line 10 ; Annual Contribution Amount ... (Line 13 * Line 9) = [(1 + Line 9)Line 10 - 1]",
+   "why_it_matters": "Exponents read as a trailing word and the fraction bar becomes '=', so the calculation is wrong or unreadable when an AI reproduces or applies it; page 1 also shows 'Line 1 * (1 + Line 2)Line 3 3' where the exponent and footnote mark 3 collide",
+   "in_file": "no",
+   "checked_image": true,
+   "resolved": "E5"
+  },
+  {
+   "doc_id": "3884322",
+   "batch": "batch-010.jsonl",
+   "page": 29,
+   "name": "Row-number column shifted one row against its data",
+   "page_shows": "Line 1 = Suffield 2 / Union SWDA / 3.88543 / 0.1277 ... Line 67 = Tunis NDA / Union SSMDA / - / 0.0753; header at top",
+   "output_says": "1  \n2  Suffield 2 Union SWDA 3.88543 0.1277 ... 67  Tunis NDA Energir NDA - 0.0113 Tunis NDA Union SSMDA - 0.0753",
+   "why_it_matters": "every toll row carries the wrong line number (off by one) and two rows are fused, so citing 'Line 17' or looking up a path by line returns the neighbouring row; the column header falls at the end of the page",
+   "in_file": "partly",
+   "checked_image": true,
+   "resolved": "F6"
+  },
+  {
+   "doc_id": "3336044",
+   "batch": "batch-010.jsonl",
+   "page": 38,
+   "name": "Sub-table header detached from its rows by another section",
+   "page_shows": "Metro Vancouver sub-header sits directly above the Langley/Surrey/Coquitlam/Burnaby crime rows; Traffic and Communicable Diseases sections follow below",
+   "output_says": "| Rate per | 1,000 population, | by Police Service Area | (Metro Vancouver | Region) | ... Traffic6 ... Communicable Diseases | Incident Category | | Langley Township RCMP, municipal | Surrey ... | Total violent Criminal Code 2015 Violations | | 7.6 | 15.1 ...",
+   "why_it_matters": "Metro Vancouver crime rates are filed under the Communicable Diseases heading and far from their own header, so a reader or model reads crime rates as disease data",
+   "in_file": "partly",
+   "checked_image": true,
+   "resolved": "F7"
+  },
+  {
+   "doc_id": "3935185",
+   "batch": "batch-011.jsonl",
+   "page": 77,
+   "name": "Tracked changes (redline) text kept with both deleted and inserted wording",
+   "page_shows": "A redlined revision: deleted words are struck through, inserted words are underlined, e.g. the header 'August 2018' struck and 'June 2020' underlined; 'rare element' struck and 'feature' inserted",
+   "output_says": "687945/August 2018June 2020 ... potential rare elementfeature ... to a qualifiedTrans Mountain to provide to the a Vegetation Resource Specialist ... will be required to visitattend the site",
+   "why_it_matters": "Strike-through and underline are drawn lines, not text, so deleted and inserted wording are fused into non-words ('elementfeature', 'visitattend') and whole deleted sentences read as current requirements; search and AI quote text that is not in force, and the revised wording cannot be told from the old",
+   "in_file": "partly",
+   "checked_image": true,
+   "resolved": "J1"
+  },
+  {
+   "doc_id": "4574102",
+   "batch": "batch-014.jsonl",
+   "page": 20,
+   "name": "Access-to-information redaction marks read as numbers; redacted text left as a silent gap",
+   "page_shows": "Exemption stamps 's.17' and 's.19(1)' at top right, and a blanked-out name in 'We should involve [redacted] as well in this'",
+   "output_says": "5.17 / 5.19(1) ... We should involvi as well in this, as he is the Project Engineer",
+   "why_it_matters": "The stamps become bare numbers with no sign they are legal exemption marks; the sentence reads as complete though a name was withheld, and the output does not say anything was redacted or on what ground",
+   "in_file": "no",
+   "lesson": "Detect exemption stamps (s.NN) and blanked regions, emit an explicit [redacted: s.19(1)] marker so withheld text is not mistaken for missing or complete text",
+   "checked_image": true,
+   "resolved": "K1"
+  },
+  {
+   "doc_id": "3803169",
+   "batch": "batch-015.jsonl",
+   "page": 1,
+   "name": "Handwritten overwrite turns a typed identifier into a different valid-looking one",
+   "page_shows": "Typed 'GH-003-2018' with a handwritten scribble over the final digits, and 'Round 3' with a handwritten 3 written over the typed 3; the cc line below reads GH-003-2018",
+   "output_says": "Hearing Order GH-003-2013NOVA Gas Transmission Ltd. ... submit Round Information Requests",
+   "why_it_matters": "The hearing order number is the key a filing is indexed and cited by; it now reads as a different, real-looking hearing (2013), run into the next word, and the round number is gone. Nothing flags it, and the cc line contradicts it.",
+   "in_file": "no",
+   "lesson": "Cross-check identifiers inside a document (subject vs cc line vs metadata) and flag disagreements; filers should not overwrite typed text by hand.",
+   "checked_image": true,
+   "resolved": "A5"
+  },
+  {
+   "doc_id": "3309458",
+   "batch": "batch-016.jsonl",
+   "page": 36,
+   "name": "Rotated column headers read with words in scrambled order",
+   "page_shows": "Vertical column headers 'Segment Unique ID', 'Wetland Unique ID', 'Distance of Wetland from Access Road (m)'",
+   "output_says": "| Segment ID Unique | ... | ID Wetland Unique | ... | of from Road Distance Wetland Access (m) |",
+   "why_it_matters": "Header labels become word salad, so a column cannot be matched to a field name; 'ID Wetland Unique' vs 'Unique ID' breaks field search and any schema inference over the table",
+   "in_file": "partly",
+   "lesson": "Detect rotated (90 degree) text and read each header cell as one line in its rotated direction; do not sort words by horizontal position",
+   "checked_image": true,
+   "resolved": "D5"
+  },
+  {
+   "doc_id": "4248055",
+   "batch": "batch-018.jsonl",
+   "page": 1,
+   "name": "Digital text lines dropped from a drawing sheet, leaving fragments",
+   "page_shows": "Notes block with 'EXCAVATION NOTE: TRENCH SHORING WILL BE USED IF PROPER TRENCH EXCAVATION CAN NOT BE USED', 'VERTICAL DATUM: CANADIAN GEODETIC VERTICAL DATUM 1928 (78 ADJ).', distance-to-feet note, and the first 'THE UTILITY DATA ... ASCE STANDARD 38-02' lines; the PDF text layer holds all of them",
+   "output_says": "EXCAVATION NOTE:\\nR SED\\nBOUNDARY NOTE: ... VER E\\nDI Y\\n0.3048.\\nUNDERGROUND UTILITY NOTES :\\nH IS",
+   "why_it_matters": "safety and datum notes (trench shoring, vertical datum, utility quality level A) are silently gone, replaced by 2-4 letter fragments that look like text; word-count checks pass; search for 'shoring' finds nothing",
+   "in_file": "yes",
+   "lesson": "drawing sheets with small vector text: text-layer lines that overlap table/figure regions are being discarded by region assignment; fall back to the PDF text layer for any word not emitted, and flag fragments of fewer than 4 letters",
+   "checked_image": true,
+   "resolved": "B5"
+  },
+  {
+   "doc_id": "4553651",
+   "batch": "batch-019.jsonl",
+   "page": 16,
+   "name": "Gantt bar labels and overlay line merged into table rows as garbled dates",
+   "page_shows": "A schedule table on the left and a Gantt chart on the right; the bars carry date labels (e.g. 11-May-23 ... 18-May-23) and a red data-date line runs through them. Table Current Finish for the row is 18-May-23.",
+   "output_says": "| 11-May-23 | 18-May-21 | and | 29-May-23 | ... | 9-M3$a-23 | 05-Jun-2 |  and | 19-Jun-23 | 0 -nn-90 |",
+   "why_it_matters": "The chart's own labels are read as extra table columns, truncated at the chart edge, and the line through them changes digits: 18-May-23 becomes a valid-looking 18-May-21 (two years earlier), other dates become nonsense. A scheduling query over the table gets wrong dates with nothing to mark them as chart annotations.",
+   "in_file": "no",
+   "lesson": "Treat the Gantt area as a chart region: do not OCR it into table cells; keep only the table columns, or flag the chart as a picture with its labels unattached.",
+   "checked_image": true,
+   "resolved": "G2"
+  },
+  {
+   "doc_id": "3390240",
+   "batch": "batch-019.jsonl",
+   "page": 2,
+   "name": "Zero shown as a dash is dropped, leaving an empty cell",
+   "page_shows": "Rows such as Materials & Supplies, Transmission Line Pack, Prepayments, Other each show '$ -' (zero) in the Initial Annual Forecast column, and the Deferrals row '$ -'.",
+   "output_says": "| Materials & Supplies | Input |  |  |  |  and  | Deferrals (as Applicable) |  |  |  | $ |",
+   "why_it_matters": "A reported zero becomes an empty cell, indistinguishable from 'not reported'; the dollar sign alone survives on some rows and not others, so sums and checks (Total Working Capital = Sum L5 to L9) cannot be followed and zero vs missing is lost. The OCR keeps '$' but not the dash.",
+   "in_file": "no",
+   "lesson": "Keep dash placeholders as an explicit value (0 or '-') with its row; flag cells where only a currency sign was read.",
+   "checked_image": true,
+   "resolved": "A6"
+  }
+ ],
+ "merged_batches": [
+  "batch-000.jsonl",
+  "batch-001.jsonl",
+  "batch-002.jsonl",
+  "batch-003.jsonl",
+  "batch-004.jsonl",
+  "batch-005.jsonl",
+  "batch-006.jsonl",
+  "batch-007.jsonl",
+  "batch-008.jsonl",
+  "batch-009.jsonl",
+  "batch-010.jsonl",
+  "batch-011.jsonl",
+  "batch-012.jsonl",
+  "batch-013.jsonl",
+  "batch-014.jsonl",
+  "batch-015.jsonl",
+  "batch-016.jsonl",
+  "batch-017.jsonl",
+  "batch-018.jsonl",
+  "batch-019.jsonl"
+ ]
+}

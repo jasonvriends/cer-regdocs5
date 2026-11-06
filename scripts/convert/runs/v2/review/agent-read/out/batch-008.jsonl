@@ -1,0 +1,25 @@
+{"doc_id": "3327839", "pages_read": [2, 3], "known": ["B2", "C1"], "new": [], "note": "Wingdings ~ { ; for options plus checkbox lines"}
+{"doc_id": "3320014", "pages_read": [1], "known": ["A4", "G1"], "new": [], "note": "drawing labels unordered; logo as \u800c"}
+{"doc_id": "4366506", "pages_read": [1, 2], "known": [], "new": [], "note": "form table with empty padding rows; values intact"}
+{"doc_id": "4386275", "pages_read": [1, 2], "known": ["E3"], "new": [], "note": "list numbers kept as '- 1.'"}
+{"doc_id": "2868612", "pages_read": [7, 15], "known": [], "new": [], "note": "clean"}
+{"doc_id": "4105729", "pages_read": [4, 19], "known": ["G1", "A3"], "new": [], "note": "calibration cert and P&ID labels scrambled; signatures as tokens"}
+{"doc_id": "4460101", "pages_read": [3, 5], "known": ["F4", "E4"], "new": [{"page": 5, "name": "Footnote marker fused to a number changes its value", "page_shows": "VPCR column: '\u226470 / 76' with superscript 4 (footnote: \u226470 kPa May-Nov, \u226476 kPa Dec-Apr)", "output_says": "\u226470 / 764", "why_it_matters": "a vapour-pressure limit of 76 kPa reads as 764; a quoted number is wrong and nothing signals the marker", "in_file": "partly", "checked_image": true}], "note": "table cells shifted; footnote 4 fused to 76 giving 764"}
+{"doc_id": "3161295", "pages_read": [1, 3], "known": ["A1"], "new": [], "note": "minor spacing noise in fax-like header"}
+{"doc_id": "4482181", "pages_read": [105, 122], "known": ["F1"], "new": [], "note": "commitment table rows filed under other pages"}
+{"doc_id": "4479759", "pages_read": [1, 2], "known": ["G1", "A4"], "new": [], "note": "map/drawing labels without relation"}
+{"doc_id": "4659998", "pages_read": [1], "known": ["G1"], "new": [], "note": "map labels only"}
+{"doc_id": "4424174", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "recital lead-ins split as headings"}
+{"doc_id": "3072084", "pages_read": [11, 12], "known": ["A4"], "new": [], "note": "stray CJK glyph at page end"}
+{"doc_id": "3117766", "pages_read": [2, 3], "known": ["E3"], "new": [], "note": "clean"}
+{"doc_id": "3933581", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "letterhead blocks mixed with address"}
+{"doc_id": "3886182", "pages_read": [1, 2], "known": ["D1"], "new": [], "note": "recital lead-ins split"}
+{"doc_id": "2818646", "pages_read": [11, 15], "known": ["A1", "G1"], "new": [], "note": "OCR garbage in scanned drawings"}
+{"doc_id": "4576302", "pages_read": [1], "known": ["G1"], "new": [], "note": "map labels only"}
+{"doc_id": "3886201", "pages_read": [2, 3], "known": ["C1", "B3"], "new": [], "note": "form options as icons"}
+{"doc_id": "3916896", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "letterhead interleaved"}
+{"doc_id": "4581830", "pages_read": [1, 2], "known": [], "new": [], "note": "form answers as text; fine"}
+{"doc_id": "3298945", "pages_read": [2, 3], "known": [], "new": [], "note": "clean"}
+{"doc_id": "3745746", "pages_read": [3, 4], "known": ["E3"], "new": [], "note": "clean"}
+{"doc_id": "4639525", "pages_read": [1, 2], "known": [], "new": [], "note": "clean"}
+{"doc_id": "3252681", "pages_read": [1], "known": ["F4", "F5"], "new": [], "note": "header merged cells"}

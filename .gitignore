@@ -14,3 +14,7 @@ scripts/convert/runs/v2/logs/light-all.log
 # run logs stay local, never committed
 scripts/convert/runs/*/logs/full-main-*.log
 scripts/convert/runs/*/logs/full-main-*.log.gz
+# prepared API batch requests and raw results: large, rebuilt by read_batch.py prepare
+scripts/convert/runs/v2/review/read/*/shards/
+scripts/convert/runs/v2/review/read/*/results/
+scripts/convert/runs/v2/review/scan/

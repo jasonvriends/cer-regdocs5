@@ -1,0 +1,25 @@
+{"doc_id": "3391155", "pages_read": [1, 2], "known": ["A1", "G1", "B5"], "new": [], "note": "CAD drawing sheet; OCR of notes garbled (RODNCY, CCMPLETE)"}
+{"doc_id": "3306731", "pages_read": [1, 2], "known": ["D2", "A4"], "new": [], "note": "letter decision; letterhead/addressee mixed, logos"}
+{"doc_id": "4239988", "pages_read": [1, 2], "known": ["D2", "E3", "B3", "I1"], "new": [], "note": "notice; ligature '\u01b5' chars (comple\u019fon) and map labels"}
+{"doc_id": "2824898", "pages_read": [2, 4], "known": ["E3"], "new": [], "note": "letter; signature block as headings"}
+{"doc_id": "4593716", "pages_read": [1, 2], "known": ["C2", "F4", "I1"], "new": [], "note": "invoice; header values detached from labels"}
+{"doc_id": "4639752", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "French order; RELATIVEMENT/ATTENDU QUE lead-ins split"}
+{"doc_id": "4031774", "pages_read": [3, 4], "known": ["E4", "E3"], "new": [], "note": "letter; footnote markers fused"}
+{"doc_id": "4479745", "pages_read": [1, 2], "known": ["H2", "H1", "B3"], "new": [], "note": "filing receipt; French column cut off in filed PDF"}
+{"doc_id": "3619534", "pages_read": [3, 4], "known": [], "new": [], "note": "clean French ruling"}
+{"doc_id": "4327934", "pages_read": [1], "known": ["G1", "I1"], "new": [], "note": "screenshot of map; labels as bag of words"}
+{"doc_id": "2957894", "pages_read": [20, 23], "known": ["D5", "G1", "E2"], "new": [{"page": 20, "name": "Whole rotated page (/Rotate 270) reads body prose in scrambled word order", "page_shows": "A landscape infographic page stored with page rotation 270; body paragraphs read normally when the page is turned, e.g. 'Transportation accounts for 23% of the total energy that Canadians consume \u2014 second only in consumption to Canada's industrial sector. That translates to 200 million litres of gasoline and diesel pumped into fuel tanks...'", "output_says": "Canada's to consumption in only second \u2014 consume Canadians / gasoline of litres million 200 to translates That sector. industrial (and p23: 'monitors / (WBEA) / Association / Environmental / Buffalo / Wood / The' one word per line, reversed)", "why_it_matters": "Whole paragraphs, not just column headers, become word salad or one word per line in reverse; quotes, summaries and search phrases fail for the entire page, while the PDF's own text layer (pymupdf) is in correct order", "in_file": "yes", "lesson": "Honour the page /Rotate flag (rotate the page or the text coordinates) before laying out reading order; extract the text layer in stream order for rotated pages", "checked_image": true}], "note": "pages 20 and 23 both rotated; text layer is fine, converter reading order is the loss"}
+{"doc_id": "4167239", "pages_read": [1, 2], "known": ["D2", "E2", "E3"], "new": [], "note": "letter; sender block interleaved with Attention/addressee; E-FILE heading"}
+{"doc_id": "4050141", "pages_read": [1, 3], "known": ["D2"], "new": [], "note": "cover letter; letterhead before date"}
+{"doc_id": "2785128", "pages_read": [1, 2], "known": ["A3", "G1", "A1"], "new": [], "note": "exhibit stamp, signature as junk, chart OCR noise"}
+{"doc_id": "3767867", "pages_read": [2, 5], "known": ["I1", "A3"], "new": [], "note": "compliance letter; text complete (full .md checked), signature read as text"}
+{"doc_id": "3885067", "pages_read": [8, 16], "known": ["G1", "A1", "A3"], "new": [], "note": "calibration certificate and spool drawing; drawing text as bag of words"}
+{"doc_id": "4406630", "pages_read": [27, 35], "known": ["E3", "D1"], "new": [], "note": "procedure pages; bullets as glyphs, headings"}
+{"doc_id": "3685753", "pages_read": [1], "known": ["A4", "I1", "D3"], "new": [], "note": "certificate; bilingual lines interleaved, picture classes"}
+{"doc_id": "3885729", "pages_read": [1, 3], "known": ["C1", "C2"], "new": [], "note": "export form; green tick image not in text, labels/values by row"}
+{"doc_id": "2839997", "pages_read": [24, 26], "known": ["A4", "E3"], "new": [], "note": "IR response; logo read as \u800c"}
+{"doc_id": "4465291", "pages_read": [1, 2], "known": ["K1", "F3", "I1"], "new": [], "note": "PCN; redacted cost table shows only 'Confidential' and 'PII' box labels"}
+{"doc_id": "3910365", "pages_read": [1, 3], "known": ["E3"], "new": [], "note": "summary with bullet glyphs"}
+{"doc_id": "4464310", "pages_read": [1, 2], "known": ["F4", "D5", "G1"], "new": [], "note": "wide MOC table cells shifted/merged; pie chart labels"}
+{"doc_id": "4498442", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "English order; lead-ins split"}
+{"doc_id": "2785043", "pages_read": [18, 28], "known": ["A3", "G1"], "new": [], "note": "photographs; OCR yields '1', 'HO 0'"}

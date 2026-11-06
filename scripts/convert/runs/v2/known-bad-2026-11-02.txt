@@ -1,0 +1,53 @@
+# left out of the full pass until the MuPDF retry fix (see LESSONS.md)
+4458299
+4537539
+4642786
+4473998
+4449303
+3297497
+# added 2026-11-04 from full-main-2026-11-02-0840.log: retry later with --stall 1800 and fewer workers
+2968373  # slow first scan: no progress for 300s at start
+2968169  # slow first scan: no progress for 300s at start
+2967972  # slow first scan: no progress for 300s at start
+2967749  # slow first scan: no progress for 300s at start
+2967529  # slow first scan: no progress for 300s at start
+2957906  # slow first scan: no progress for 300s at start
+2957681  # slow first scan: no progress for 300s at start
+2957524  # slow first scan: no progress for 300s at start
+2957388  # slow first scan: no progress for 300s at start
+2955068  # UnicodeEncodeError writing the ledger
+2955254  # slow first scan: no progress for 300s at start
+2954703  # slow first scan: no progress for 300s at start
+2939292  # slow first scan: no progress for 300s at start
+2937778  # slow first scan: no progress for 300s at start
+2935556  # slow first scan: no progress for 300s at start
+2931412  # slow first scan: no progress for 300s at start
+2927275  # slow first scan: no progress for 300s at start
+2926369  # slow first scan: no progress for 300s at start
+2921932  # slow first scan: no progress for 300s at start
+2908729  # slow first scan: no progress for 300s at start
+2905440  # slow first scan: no progress for 300s at start
+2902628  # slow first scan: no progress for 300s at start
+2887539  # slow first scan: no progress for 300s at start
+2883423  # slow first scan: no progress for 300s at start
+2882744  # slow first scan: no progress for 300s at start
+2872237  # slow first scan: no progress for 300s at start
+2858102  # slow first scan: no progress for 300s at start
+2857537  # slow first scan: no progress for 300s at start
+2856691  # slow first scan: no progress for 300s at start
+2856164  # slow first scan: no progress for 300s at start
+2839597  # slow first scan: no progress for 300s at start
+2838231  # slow first scan: no progress for 300s at start
+2837585  # slow first scan: no progress for 300s at start
+2825802  # slow first scan: no progress for 300s at start
+2819100  # slow first scan: no progress for 300s at start
+2813706  # slow first scan: no progress for 300s at start
+2813334  # slow first scan: no progress for 300s at start
+2813145  # slow first scan: no progress for 300s at start
+2812425  # slow first scan: no progress for 300s at start
+2811950  # slow first scan: no progress for 300s at start
+2811371  # slow first scan: no progress for 300s at start
+2810597  # slow first scan: no progress for 300s at start
+2809909  # slow first scan: no progress for 300s at start
+2798431  # slow first scan: no progress for 300s at start
+2797403  # slow first scan: no progress for 300s at start

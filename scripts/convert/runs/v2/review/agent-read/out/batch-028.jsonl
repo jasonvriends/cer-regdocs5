@@ -1,0 +1,25 @@
+{"doc_id": "4503670", "pages_read": [1], "known": ["E3", "I1", "D1"], "new": [], "note": "clean Word order"}
+{"doc_id": "3966437", "pages_read": [12, 24], "known": ["E3", "D1", "F4"], "new": [], "note": "IR with margin sub-items as headings/lists, reference table ok"}
+{"doc_id": "2838739", "pages_read": [1, 5], "known": ["E2", "E3"], "new": [{"page": 1, "name": "PDF bookmark titles injected as headings on the page they point to", "page_shows": "A cover page with only 'High Pine Expansion Project / Section 6 - Lands'", "output_says": "## sec_87(1)_crown_notification_pipeline_v2010.pdf / ### NOTICE PURSUANT TO SECTION 87(1) OF THE / #### TO: <ENTER LANDOWNER(S) NAME(S)>", "why_it_matters": "Merged PDF has bookmarks (file name, form title, placeholder) all targeting page 1; the converter turns the outline into headings, so a cover page appears to hold a notice addressed to a landowner placeholder and the real form on page 5 is not the only one", "in_file": "yes", "lesson": "Do not emit outline/bookmark titles as page content; take headings only from text actually drawn on the page", "checked_image": true}], "note": "cover page gets bookmark text as headings; unfilled template placeholders on p5"}
+{"doc_id": "3330486", "pages_read": [1, 3], "known": ["B2", "C2", "C1"], "new": [], "note": "radio/check marks as { ~ ; characters plus duplicated check lines; Title/Address labels separate from values"}
+{"doc_id": "3338092", "pages_read": [1], "known": ["A1", "F4", "F5"], "new": [], "note": "lower half is a scanned image; line 'amount of the Non-Performance Penalty ... Rule 18(a) and the Shipper shall' dropped giving 'for the m a be obligated'; '$ $ 280,500' for '$ 280,500'"}
+{"doc_id": "3819789", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "letterhead and sidebar mixed; signature read as 'Jas Chh'"}
+{"doc_id": "4657264", "pages_read": [1, 2], "known": ["E5", "F3", "E3"], "new": [], "note": "p1 footnote markers fused ('Total Revenue 1 2', 'ROE 34 3 4'); p2 table collapsed into running text"}
+{"doc_id": "3643747", "pages_read": [38, 84], "known": ["G1", "I1", "E2"], "new": [], "note": "text pages fine; charts and logos as pictures, 'wood.' stray"}
+{"doc_id": "3750376", "pages_read": [16, 18], "known": ["A3", "A5", "G1", "A1"], "new": [], "note": "drawing a word soup; handwritten entries misread (13-06.2026 for 13-06.2016, 10123 for 10923 kPag), signatures as junk tokens"}
+{"doc_id": "2935642", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "letterhead block interleaved with addressee/Re; signature read as 'n bins'"}
+{"doc_id": "4593753", "pages_read": [11, 12], "known": ["E3"], "new": [], "note": "clean"}
+{"doc_id": "3750969", "pages_read": [1, 2], "known": ["A1", "A3", "A4"], "new": [], "note": "certificate: line '\"PARTNERS, LP\" FILED IN THIS OFFICE ON THE TWELFTH DAY OF' lost so the date reads 'OF \"HARTREE FEBRUARY'; seal/signature junk"}
+{"doc_id": "3767573", "pages_read": [1, 2], "known": ["B2", "C1", "C2"], "new": [], "note": "symbol-font radio buttons as ¡ ¤ þ ¨ with duplicated clean checkbox lines"}
+{"doc_id": "4462443", "pages_read": [1], "known": ["G1", "A4"], "new": [], "note": "typical drawing, labels without relation, stray CJK glyph"}
+{"doc_id": "4507319", "pages_read": [1], "known": ["D1"], "new": [], "note": "French order: ATTENDU QUE / IL EST ORDONNÉ lead-ins split from their clauses"}
+{"doc_id": "2789032", "pages_read": [2, 4], "known": ["D1", "D5", "F4"], "new": [], "note": "recital lead-ins split; schedule table headers/values swapped ('Sarnia Terminal, Ontario | Location (endpoints)')"}
+{"doc_id": "3539259", "pages_read": [2, 13], "known": ["E3", "D2"], "new": [], "note": "margin line numbers 1-4 become list items"}
+{"doc_id": "3913704", "pages_read": [1, 2], "known": ["E2"], "new": [], "note": "clean"}
+{"doc_id": "3579416", "pages_read": [1, 2], "known": ["D2", "E4"], "new": [], "note": "footnote markers fused; letterhead before addressee"}
+{"doc_id": "4082397", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "sidebar contact block at page foot, fine"}
+{"doc_id": "3709490", "pages_read": [1], "known": ["D2"], "new": [], "note": "letterhead interleaved with Re block"}
+{"doc_id": "3755483", "pages_read": [1], "known": ["F7", "F4"], "new": [], "note": "landscape table; sub-header rows inside table; the words LANDOWNER/OCCUPANT are on the page itself"}
+{"doc_id": "2839610", "pages_read": [15, 39], "known": ["E3", "E4"], "new": [], "note": "clean body text"}
+{"doc_id": "3355404", "pages_read": [1], "known": ["D1", "H1"], "new": [], "note": "French order lead-ins split ('RELATIVEMENT À' / 'DEVANT')"}
+{"doc_id": "4028187", "pages_read": [1, 2], "known": ["D2", "H1", "D3"], "new": [], "note": "bilingual letterhead interleaved ('Calgary (Alberta)' / 'Calgary, Alberta'), addressee blocks mixed"}

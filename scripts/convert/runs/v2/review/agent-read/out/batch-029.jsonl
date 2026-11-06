@@ -1,0 +1,25 @@
+{"doc_id":"3299805","pages_read":[1],"known":["A4","E2"],"new":[],"note":"placeholder page; logo read as EÉNBRIDGE, title lines as headings"}
+{"doc_id":"3612254","pages_read":[1,2],"known":["D2","A3","E3","E2"],"new":[],"note":"letter; letterhead block mixed in, signature read as 'Macer'"}
+{"doc_id":"3266228","pages_read":[1,2],"known":["D2"],"new":[],"note":"French ruling; footer address and bilingual footer blocks after body, otherwise sound"}
+{"doc_id":"4292008","pages_read":[1],"known":["A4"],"new":[],"note":"Trans Mountain logo as 而"}
+{"doc_id":"3775308","pages_read":[1,2],"known":["A1","A3"],"new":[],"note":"p2 logo and order numbers mangled by OCR ('ort r A E', '*G M 0 0 t5Y)')"}
+{"doc_id":"4642760","pages_read":[1,3],"known":["F4","F2","F5"],"new":[],"note":"tariff comparison table; p1 header row cells shifted/lost line numbers, p3 sound"}
+{"doc_id":"3490853","pages_read":[2,6],"known":["D1","E3"],"new":[],"note":"French attachment; sidebar lead-ins (Sources, Préambule) as headings, otherwise sound"}
+{"doc_id":"3718388","pages_read":[9,16],"known":["E3","E4"],"new":[],"note":"submission text sound; list numbers kept as text, footnote on p9"}
+{"doc_id":"3322862","pages_read":[14,53],"known":["G1","A4"],"new":[],"note":"chart recorder and CAD schematic as bags of words"}
+{"doc_id":"4648498","pages_read":[1],"known":["D2"],"new":[],"note":"letterhead bilingual blocks interleaved"}
+{"doc_id":"3006778","pages_read":[1],"known":["D1","E3","A4"],"new":[],"note":"French order with RELATIVEMENT À/ATTENDU lead-ins; logos as image tags"}
+{"doc_id":"4105304","pages_read":[1,3],"known":["F1","F4","A4"],"new":[],"note":"p3 holds only table header; its rows are filed under p2 (F1); TM logo as 而"}
+{"doc_id":"4584887","pages_read":[1,2],"known":["B3","E3"],"new":[],"note":"French claim letter; fi/ff ligature code points and modifier apostrophes kept (search for 'superficie' fails)"}
+{"doc_id":"2776541","pages_read":[6,7],"known":["A4","A3","E2"],"new":[],"note":"letter sound; signature read as 'Anoop kapoo~', Dear line as heading, logos as tags"}
+{"doc_id":"3346736","pages_read":[1],"known":["D2","A3","E2"],"new":[],"note":"sender block lands inside Re: block; signature as 'Adam Sue'"}
+{"doc_id":"4495501","pages_read":[7,15],"known":["F1","F3","F4"],"new":[],"note":"landscape motion chart; p7 holds only the header and one cell, the rows are filed under other pages"}
+{"doc_id":"4464158","pages_read":[1,5],"known":["C1","C3","A1","A3"],"new":[{"page":5,"name":"Redaction placeholder boxes read as form check boxes","page_shows":"dashed boxes labelled PII standing in for withheld names beside each comment's date line","output_says":"☒ [PII 31-Jan-2022 12:31 (Mountain Time), rev 1] / ☐ [PII]","why_it_matters":"a redacted name reads as a ticked or unticked form option; withheld-name markers become answers, some 'checked', and the date line is swallowed into the label","in_file":"no","lesson":"a dashed rectangle with text is not a check box; require a box glyph or a form field before emitting checkbox syntax, and treat PII placeholders as redaction marks","checked_image":true}],"note":"MOC form: p5 is an image page; OCR lost 'Target Close-Out Date ... changed FROM 03-Feb-2022 To 16-Feb-2022 by' ('Tar y PII Comment added after'), PII boxes as checkboxes"}
+{"doc_id":"4498208","pages_read":[1,2],"known":["C1","C2"],"new":[],"note":"export form: chosen legal status and renewal options not in text, labels and values interleaved"}
+{"doc_id":"4099524","pages_read":[1],"known":["A4","D2"],"new":[],"note":"stray 场 inserted between paragraphs; footer address block after signature"}
+{"doc_id":"4367369","pages_read":[2,4],"known":["F3","F4","F5","F9"],"new":[],"note":"p2 rate base table printed as plain lines, 'Working Capital $ -' and the 'Note:' footnote fused into rows; p4 table sound"}
+{"doc_id":"2995626","pages_read":[1],"known":["J1","F4"],"new":[],"note":"redline specification table: '60 56 m' reads struck 60 and inserted 56 together; change bars lost"}
+{"doc_id":"2813353","pages_read":[5,9],"known":["D2","E3"],"new":[],"note":"report pages sound; header logos and bullets as text"}
+{"doc_id":"4020238","pages_read":[1,2],"known":["D2"],"new":[],"note":"French letter; letterhead and footer address repeated on each page, body sound"}
+{"doc_id":"2931163","pages_read":[1,3],"known":["F4","E3"],"new":[],"note":"progress report; table cells shifted, header lines out of order on p3"}
+{"doc_id":"3632394","pages_read":[1],"known":["D2","A3"],"new":[],"note":"law-firm letterhead sidebar (Toronto, Montréal, Ottawa) interleaved with the address block; two signatures as tags"}

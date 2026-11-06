@@ -1,0 +1,25 @@
+{"doc_id": "2950002", "pages_read": [5, 8], "known": [], "new": [], "note": "Plain digital text; p8 is a divider page whose title is all it has."}
+{"doc_id": "4176822", "pages_read": [1], "known": ["E4", "I1"], "new": [], "note": "Corrections table converted cleanly; footnote markers fused to dates."}
+{"doc_id": "3753864", "pages_read": [1], "known": ["G1", "A1", "I1"], "new": [], "note": "CAD isometric: bill of materials and notes interleaved with drawing labels, OCR typos."}
+{"doc_id": "3767876", "pages_read": [4, 6], "known": ["E3", "E4"], "new": [], "note": "Constitution Act: list items as '- 27.', hyphens kept at line ends, footnote markers inline."}
+{"doc_id": "3224020", "pages_read": [24, 30], "known": ["G1", "A3", "A4", "I1"], "new": [], "note": "Core-sample photos: box labels read as junk ('RUNG120UBEI', '一')."}
+{"doc_id": "4265102", "pages_read": [10, 22], "known": ["F4", "A3", "A4", "G1", "B5"], "new": [], "note": "Scanned calibration sheet: values land under the wrong row/column; signature stamp read as 'STEU S S'; drawing text scrambled."}
+{"doc_id": "2949460", "pages_read": [1, 2], "known": ["D2", "H1"], "new": [], "note": "Letter; letterhead and bilingual address blocks after body."}
+{"doc_id": "3337406", "pages_read": [1], "known": ["D1"], "new": [], "note": "French order; recital lead-ins misordered ('IL EST ORDONNÉ QUE' after its sentence)."}
+{"doc_id": "2856809", "pages_read": [1], "known": ["D1", "D2"], "new": [], "note": "Order; lead-ins split from text."}
+{"doc_id": "3097087", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Sender block lands under 'Re:' as a heading; signature read as 'T. A. tauln'."}
+{"doc_id": "3347711", "pages_read": [2, 3], "known": ["C1", "E3", "F4"], "new": [], "note": "Site-visit form; tick boxes read as text."}
+{"doc_id": "3899359", "pages_read": [1], "known": ["A3"], "new": [], "note": "Letter; signature read as 'D e D'."}
+{"doc_id": "2957925", "pages_read": [3, 7], "known": ["G1", "D5", "B3"], "new": [], "note": "Terrain maps: title block, legend and chainage labels as an unordered word soup."}
+{"doc_id": "3753932", "pages_read": [1, 2], "known": ["E1", "E4", "A3"], "new": [], "note": "Numbered paragraphs as bullets '- (1)'; footnote markers fused."}
+{"doc_id": "3299136", "pages_read": [1], "known": ["D2", "H1"], "new": [], "note": "French letter; bilingual address footer mixed."}
+{"doc_id": "4020379", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order; lead-ins as text, numbered list as bullets."}
+{"doc_id": "3296368", "pages_read": [1], "known": ["D2", "H1"], "new": [], "note": "French letter; English 'National Energy Board' logo text lands inside the addressee block."}
+{"doc_id": "4582125", "pages_read": [1], "known": ["D2", "H1", "D3"], "new": [], "note": "Bilingual address columns merged: '517, Dixième Avenue S.-O. Suite 210 bureau 210 517 Tenth Avenue SW'."}
+{"doc_id": "3820161", "pages_read": [2, 3], "known": ["A1", "D1", "E3"], "new": [], "note": "Page 2 scan: the line 'or in the aggregate have the capacity to transport at least 50,000 but fewer than 250,000 barrels' is missing from the output (A1; the threshold values are lost)."}
+{"doc_id": "3768979", "pages_read": [1, 2], "known": ["A3", "F5"], "new": [], "note": "Letter and small table; signature read as 'meRy'."}
+{"doc_id": "2825851", "pages_read": [2, 3], "known": ["E3", "D1"], "new": [], "note": "Information request; clean apart from list bullets and a doubled title heading."}
+{"doc_id": "2785123", "pages_read": [3, 4], "known": [], "new": [], "note": "Clean digital text."}
+{"doc_id": "4166559", "pages_read": [1], "known": ["D1"], "new": [], "note": "French order; 'DEVANT' heading before its text, 'IL EST ORDONNÉ' split from 'QUE'."}
+{"doc_id": "4332307", "pages_read": [1], "known": ["G1", "B3", "I1"], "new": [], "note": "Hydro-Quebec bathymetry map: spaced-out words ('inte rc onne xion'), legend swatches and contour labels with no relation."}
+{"doc_id": "3612176", "pages_read": [105, 132], "known": ["F3", "G1", "A4"], "new": [], "note": "p105 table clean; p132 sonar-video screenshot overlays read as letter noise."}

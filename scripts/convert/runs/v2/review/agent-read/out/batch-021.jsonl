@@ -1,0 +1,25 @@
+{"doc_id": "4442517", "pages_read": [1], "known": [], "new": [], "note": "clean letter"}
+{"doc_id": "3885740", "pages_read": [1, 2], "known": ["C1", "C2"], "new": [], "note": ""}
+{"doc_id": "2809176", "pages_read": [1], "known": [], "new": [], "note": ""}
+{"doc_id": "3921545", "pages_read": [1, 2], "known": ["E5", "F4"], "new": [{"page": 2, "name": "Phantom character invented from blank space", "page_shows": "Footnote 2 then footnote 3 with no mark, symbol or logo between them; the page is plain digital text", "output_says": "- 2. Intercompany revolving credit facility ... liquidity.\n\n场\n\n- 3. EI and its affiliates", "why_it_matters": "A Chinese character appears in an English financial filing though nothing on the page or in the PDF text layer corresponds to it; it is searchable noise and shows the converter's image reader inventing content", "in_file": "no", "lesson": "Do not run an image reader on regions with no ink or when a digital text layer already covers the page; drop single stray non-Latin characters", "checked_image": true}], "note": "digital PDF; E5 is '$2002' for $200 with note 2"}
+{"doc_id": "4415511", "pages_read": [1], "known": ["A1", "A2", "G1"], "new": [], "note": ""}
+{"doc_id": "3027829", "pages_read": [1, 5], "known": ["G1", "A1"], "new": [], "note": ""}
+{"doc_id": "4264942", "pages_read": [2, 3], "known": ["E1", "E3"], "new": [], "note": ""}
+{"doc_id": "3028006", "pages_read": [5, 12], "known": [], "new": [], "note": ""}
+{"doc_id": "4743835", "pages_read": [1], "known": ["E3"], "new": [], "note": "clean"}
+{"doc_id": "4495499", "pages_read": [1], "known": ["D2"], "new": [], "note": ""}
+{"doc_id": "4582620", "pages_read": [12, 20], "known": ["F1", "F4", "E4"], "new": [], "note": ""}
+{"doc_id": "3558033", "pages_read": [15, 29], "known": ["A2"], "new": [], "note": ""}
+{"doc_id": "4467763", "pages_read": [1, 2], "known": ["B2", "C1"], "new": [], "note": ""}
+{"doc_id": "4468115", "pages_read": [3, 4], "known": ["G2", "F4"], "new": [], "note": ""}
+{"doc_id": "3297270", "pages_read": [2, 3], "known": ["H2", "B4", "G1"], "new": [], "note": "page 2 of 3 is blank in the source PDF (H2); page 3 is a map with label soup"}
+{"doc_id": "3895252", "pages_read": [1], "known": ["G1"], "new": [], "note": ""}
+{"doc_id": "4543487", "pages_read": [1, 2], "known": ["F7"], "new": [{"page": 2, "name": "Table category bands separated from their rows", "page_shows": "Releases Not Meeting NT-NU Reporting Criteria band directly above the four release rows; the band for previous reports (N/A) comes after them", "output_says": "| Releases from previous reports in which further corrective action or clean-up is required or is ongoing |...| • N/A | then a new header-less table: | 01/06/2025 | N/A | N/A | Piperack at E/W Building | Freshwater |", "why_it_matters": "The four January releases are read as belonging to the 'previous reports / ongoing' category, or to no category, and the column headers (volume released, contained, reaching environment) are not attached to them", "in_file": "no", "lesson": "Keep band rows and header with the rows they govern when splitting a table; emit one table", "checked_image": true}], "note": ""}
+{"doc_id": "3746870", "pages_read": [1], "known": ["F4"], "new": [], "note": ""}
+{"doc_id": "4275102", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": ""}
+{"doc_id": "3200512", "pages_read": [4, 7], "known": ["G1", "B3"], "new": [], "note": ""}
+{"doc_id": "3894912", "pages_read": [1], "known": ["G1", "A1"], "new": [], "note": ""}
+{"doc_id": "4699500", "pages_read": [1, 6], "known": ["D1", "H1"], "new": [], "note": ""}
+{"doc_id": "4463033", "pages_read": [45, 84], "known": ["A1", "F1", "F4"], "new": [], "note": "page 45 holds rows 7-17 from PDF page 46 (F1); intro and item 7 text garbled by OCR (page is a picture)"}
+{"doc_id": "3065256", "pages_read": [14, 68], "known": ["A1", "A3"], "new": [], "note": "certificate stamp text mangled, date and name of certification lost"}
+{"doc_id": "4748333", "pages_read": [3, 5], "known": ["F4", "E5"], "new": [], "note": ""}

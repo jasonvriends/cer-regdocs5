@@ -1,0 +1,25 @@
+{"doc_id":"3819473","pages_read":[2,3],"known":["A1","A3"],"new":[],"note":"Scan with no text layer; OCR dropped whole paragraphs and line ends on p2 (A1)."}
+{"doc_id":"4405649","pages_read":[1,2],"known":["D2"],"new":[],"note":"Addressee blocks interleaved with salutation and a heading (D2)."}
+{"doc_id":"3805105","pages_read":[1],"known":["A3"],"new":[],"note":"Handwritten stamp read as 'y 7 96'."}
+{"doc_id":"4506236","pages_read":[1,2],"known":["H2","D3","H1"],"new":[],"note":"French column cut off at page edge in filed PDF (H2); overlapping text lines in submitter block."}
+{"doc_id":"4726516","pages_read":[1,2],"known":["E2"],"new":[],"note":"Email-form printout; labels as headings; text intact (excerpt truncation only)."}
+{"doc_id":"4480908","pages_read":[1,3],"known":["B2","C1"],"new":[],"note":"Radio buttons as symbol-font glyphs plus duplicated bracketed list."}
+{"doc_id":"4683984","pages_read":[1,2],"known":["D2","E5","E2"],"new":[],"note":"Letterhead bilingual block interleaved; footnote marker fused to 'Indigenous1'."}
+{"doc_id":"4648758","pages_read":[1,2],"known":["D2","E5"],"new":[],"note":"Bilingual letterhead interleaved; footnote marker fused."}
+{"doc_id":"4457689","pages_read":[4,5],"known":["F1","F4","E3"],"new":[],"note":"Table split over pages; header row split into a phantom empty 'Method' row and loose header text on p5."}
+{"doc_id":"3572006","pages_read":[4,6],"known":["F1","E3"],"new":[],"note":"IR tables across pages; bullets flattened inline; 'Page X of X' is in the PDF itself."}
+{"doc_id":"4254869","pages_read":[1,3],"known":["D1","E3","E2"],"new":[],"note":"Order recitals split from lead-ins; bullets as '- •'."}
+{"doc_id":"3083794","pages_read":[1,2],"known":["D2","A3"],"new":[],"note":"Law-firm letterhead mixed into body; signature read as 'Patrick POTH Duffy'."}
+{"doc_id":"4734943","pages_read":[2,6],"known":["E3"],"new":[],"note":"Form instructions; bullets and numbers kept as text; text intact."}
+{"doc_id":"4575203","pages_read":[1,2],"known":["A1","D2"],"new":[],"note":"Scan: 'Enclosed for filing, pursuant to paragraph 229(1)(a)...' reduced to 'Énc'; sender block in sidebar mixed into addressee."}
+{"doc_id":"4102393","pages_read":[1,2],"known":["D1","E3","E2"],"new":[],"note":"Order recitals split from WHEREAS lead-ins."}
+{"doc_id":"4161158","pages_read":[1],"known":["A3","E3"],"new":[],"note":"Signature images; numbered list kept as '- 1.'."}
+{"doc_id":"4474031","pages_read":[1,3],"known":["A1","A3","E3"],"new":[],"note":"Scan: order title and addressee name lost ('T ER', 'ric'); handwritten margin note placed as signature; garbled fragments on p3."}
+{"doc_id":"2927120","pages_read":[4,5],"known":["G1","D3"],"new":[],"note":"Map labels unordered; terms-of-use text interleaved with legend."}
+{"doc_id":"4302762","pages_read":[3,13],"known":["A4","A3","B2","H1"],"new":[],"note":"Stray CJK mark '一' in copyright page; private-use bullet glyph; signatures as 'Mark Watter / Mark Watton'."}
+{"doc_id":"4572142","pages_read":[1,2],"known":["D1","E3"],"new":[],"note":"Order recitals split from ATTENDU/lead-ins."}
+{"doc_id":"3934651","pages_read":[1,3],"known":["D1","F4"],"new":[],"note":"Recitals split from lead-ins; schedule table cells with lists collapsed."}
+{"doc_id":"3083702","pages_read":[1],"known":["D2","A3"],"new":[],"note":"Letterhead sender block interleaved with addressee."}
+{"doc_id":"3723952","pages_read":[85,146],"known":["F1","F4"],"new":[],"note":"Multi-page IR table continued across pages; rows split with empty first cells."}
+{"doc_id":"4441388","pages_read":[4,5],"known":["D4","E3"],"new":[],"note":"'Table 1:' moved out of its sentence and left orphaned before 'Request:'; lists as '- a)'."}
+{"doc_id":"3812355","pages_read":[5,6],"known":["B1","F9"],"new":[],"note":"Text layer holds Coptic letters for digits (KP 1170+ϲϴϬ), 'ISSUED FOR 5(9,(:' for REVIEW, dates cut to '7/16'; confirmed in pymupdf layer so not a converter loss (B1)."}

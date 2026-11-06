@@ -1,0 +1,25 @@
+{"doc_id": "4010631", "pages_read": [1, 5], "known": ["F1", "F4", "D3"], "new": [], "note": "Wide landscape table filed under page 1; page 5 holds only the column numbers"}
+{"doc_id": "3751014", "pages_read": [1, 7], "known": ["F1", "E5", "E4", "F4"], "new": [], "note": "Table header on p7, rows under p8; footnote 1 fused to A94221 -> A942211"}
+{"doc_id": "4457585", "pages_read": [4, 6], "known": ["F1", "F4"], "new": [], "note": "Letter text in table cells; continuation row with empty label cell"}
+{"doc_id": "2936661", "pages_read": [4, 11], "known": ["F1", "E5"], "new": [], "note": "Table 1 header on p4, data rows on later page"}
+{"doc_id": "3785305", "pages_read": [2, 3], "known": ["D1"], "new": [], "note": "Request/Response labels placed after text"}
+{"doc_id": "4680777", "pages_read": [1, 4], "known": ["E3"], "new": [{"page": 1, "name": "Digit inside a land description taken for a list number, lines reordered", "page_shows": "Para 3 legal description wraps over five lines, the last two being '1 25R6353, PART 1 ON 25R10709 SUBJECT TO AN' then 'EASEMENT AS L.'", "output_says": "25R286, PART 1 ON 25R4621, PART 1 ON 25R7540, PART / EASEMENT AS L. / - 1 25R6353, PART 1 ON 25R10709 SUBJECT TO AN", "why_it_matters": "A legal land description (plan numbers, 'PART 1 25R6353') is altered: the line starting with a plan-part number becomes a bullet '- 1', and the line order is swapped so the easement clause precedes the plan reference. Search for the parcel or quoting it gives the wrong text.", "in_file": "partly", "lesson": "Do not treat a leading digit in an indented, unnumbered block as a list marker; keep lines of one paragraph in position order; tag legal descriptions as one block.", "checked_image": true}], "note": "Agreed statement of facts, Word-born; only legal description defective"}
+{"doc_id": "4449363", "pages_read": [2, 5], "known": ["C2", "A3"], "new": [], "note": "Insurance confirmation: X boxes detached from the coverage headings they mark; signature as image"}
+{"doc_id": "4205419", "pages_read": [1, 4], "known": ["I1", "E3"], "new": [], "note": "Alberta licence; logos and a bar_chart picture"}
+{"doc_id": "3225507", "pages_read": [1, 2], "known": ["E2", "I1"], "new": [], "note": "Body paragraphs rendered as headings; PDF itself says 'three listed' (no loss)"}
+{"doc_id": "3354199", "pages_read": [6, 8], "known": ["C1", "F4"], "new": [], "note": "Green check marks (answers) all lost as *[icon]*"}
+{"doc_id": "3560253", "pages_read": [2, 14], "known": ["E4", "A3"], "new": [], "note": "Footnote marker fused 'June 20141'; text in photograph read as junk words"}
+{"doc_id": "4604303", "pages_read": [35, 116], "known": ["G1", "A1"], "new": [], "note": "Map labels garbled (Narnows, Saskaloom farkion); aerial photo page"}
+{"doc_id": "3573882", "pages_read": [4, 7], "known": ["F1", "F4"], "new": [], "note": "Comment-table continuation rows; no loss seen"}
+{"doc_id": "3027567", "pages_read": [4, 7], "known": ["C1", "C3", "A3", "B2"], "new": [], "note": "Form with duplicated tick lines (plain 'x' line and ☒ line) and a signature read as 'SimPh R'"}
+{"doc_id": "4289398", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Letterhead sidebar (offices) interleaved in the address block"}
+{"doc_id": "3117697", "pages_read": [8, 13], "known": ["G1", "D3", "A1"], "new": [], "note": "Drawing page text soup; p8 footer dates detached"}
+{"doc_id": "2837001", "pages_read": [1, 2], "known": ["A3", "A1", "C1"], "new": [], "note": "Faxed handwritten form; handwriting read as junk, tick boxes partial"}
+{"doc_id": "4423020", "pages_read": [1, 2], "known": ["C1", "C2"], "new": [], "note": "Export form: option choices are icons, not text"}
+{"doc_id": "3578060", "pages_read": [1], "known": ["A4", "I1", "D2"], "new": [], "note": "Trans Mountain logo as 而"}
+{"doc_id": "4667022", "pages_read": [1, 4], "known": ["A1", "A3", "E4"], "new": [], "note": "Scan: p4 loses 'Coldwater's constitutional rights are at stake. This requires additional procedural protections –' leaving 'here o l s including'; Indigenous-language greeting loses its superscript w; signature read as a line_chart"}
+{"doc_id": "3768214", "pages_read": [1, 2], "known": ["D1"], "new": [], "note": "Request/Response labels after text"}
+{"doc_id": "3819507", "pages_read": [1, 4], "known": ["C2", "B2"], "new": [], "note": "Form: tick box moved after its sentence; signature block"}
+{"doc_id": "3579107", "pages_read": [2, 4], "known": ["D3", "G1"], "new": [], "note": "Address lines interleaved 'AB T2R 0A8 / Calgary,'; map labels without order"}
+{"doc_id": "3084261", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "Letterhead blocks around text; no loss"}
+{"doc_id": "4439826", "pages_read": [1, 2], "known": ["F3"], "new": [], "note": "Test-results table read cleanly; no new pattern"}

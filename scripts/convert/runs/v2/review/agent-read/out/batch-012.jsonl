@@ -1,0 +1,25 @@
+{"doc_id": "3559691", "pages_read": [1], "known": ["G1"], "new": [], "note": "Map only; labels as bag of words"}
+{"doc_id": "4726857", "pages_read": [1, 2], "known": ["C2", "D2", "H1", "D3"], "new": [], "note": "Bilingual receipt merged; time zone and project labels detached from values"}
+{"doc_id": "2905829", "pages_read": [1, 2], "known": ["D1", "D2"], "new": [], "note": "Order recitals lead-ins split from text; letterhead blocks after body"}
+{"doc_id": "3580857", "pages_read": [1, 2], "known": ["D2"], "new": [], "note": "Letterhead/address blocks at end; same email under two addressees as printed"}
+{"doc_id": "4605483", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "WHEREAS lead-in after its recital"}
+{"doc_id": "4405572", "pages_read": [1, 2], "known": ["A4", "A3", "D4"], "new": [], "note": "Trans Mountain logo as \u800c; signature as 'R B'; footnote numbers split from Filing IDs"}
+{"doc_id": "2797776", "pages_read": [1], "known": ["D2", "E2"], "new": [], "note": "Letterhead text after body"}
+{"doc_id": "3024875", "pages_read": [11, 12], "known": ["B2", "F4"], "new": [], "note": "Bullets in table cells as private-use chars; label/value columns shifted by empty cells"}
+{"doc_id": "4265141", "pages_read": [1], "known": ["E3", "D2"], "new": [], "note": "Browser-printed notice; bullets kept as text"}
+{"doc_id": "4152876", "pages_read": [33, 43], "known": ["D2", "E1"], "new": [], "note": "Page header 'F. LAND USE/ZONING' and effective-date stamp read after body; numbered paragraphs as list under headings"}
+{"doc_id": "4013107", "pages_read": [1, 3], "known": ["F3"], "new": [], "note": "Construction activities bullets collapse into one table cell"}
+{"doc_id": "4506145", "pages_read": [1], "known": ["A1", "A3", "A4"], "new": [], "note": "Re: line lost in OCR ('Westcoast ... Sunrise Expansion Program' absent from whole md); signature read as 'Seah stirmp'; banner as 'N AZI'"}
+{"doc_id": "4522746", "pages_read": [1, 2], "known": ["D2", "E3"], "new": [], "note": "Letterhead bilingual blocks merged"}
+{"doc_id": "3713877", "pages_read": [1], "known": ["D2"], "new": [], "note": "Email; logo at end"}
+{"doc_id": "3071253", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "French order recitals lead-ins misordered"}
+{"doc_id": "4134832", "pages_read": [1], "known": ["A4"], "new": [], "note": "Trans Mountain logo as \u800c"}
+{"doc_id": "3820168", "pages_read": [1, 2], "known": ["A2", "A3", "D2"], "new": [], "note": "Scanned form; mail-room stamp read as address lines; checked answers not shown on page either"}
+{"doc_id": "3353091", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "French order recitals misordered"}
+{"doc_id": "3893732", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order lead-ins misordered"}
+{"doc_id": "4015851", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order lead-ins misordered"}
+{"doc_id": "3779429", "pages_read": [1], "known": ["G1"], "new": [], "note": "Map with a few labels"}
+{"doc_id": "4449340", "pages_read": [2, 5], "known": [], "new": [], "note": "Clean digital text and table; only trailing page number/footer order"}
+{"doc_id": "2759173", "pages_read": [1], "known": ["G1", "I1"], "new": [], "note": "Histogram values as loose numbers; chart images repeated"}
+{"doc_id": "4081131", "pages_read": [1, 2], "known": ["F5", "B4", "F4"], "new": [], "note": "Table legend label 'Raison:' fused into last row ('EOP-011 Raison:'); '7 7' doubled version cell; legend 1/2/3 detached from codes"}
+{"doc_id": "4143027", "pages_read": [1, 2], "known": ["A1", "D2", "A3"], "new": [], "note": "Letter OCR: a whole line (Frank Slide/Lundbreck Falls ... maintained, significant) replaced by 'Era'; sender block after Re:"}

@@ -1,0 +1,25 @@
+{"doc_id": "3577514", "pages_read": [1], "known": ["G1", "G2", "I1"], "new": [], "note": "aerial map; street labels unordered"}
+{"doc_id": "4368429", "pages_read": [13, 14], "known": ["G1", "A1", "A4", "A3"], "new": [{"page": 14, "name": "OCR drops a repeated digit from a table value", "page_shows": "Instrument reading for master 100.00 C is 99.99 C (tolerance 0.09)", "output_says": "| 100.00\u2103 | 99.9\u00b0C | 0.09 |", "why_it_matters": "A calibration reading silently becomes a different, valid-looking number; the same certificate elsewhere in the file reads 99.99, so sources disagree and nothing flags it", "in_file": "no", "lesson": "numeric cells from OCR need a second check (second engine, digit-count against neighbours); calibration data should be filed as data", "checked_image": true}], "note": "cal cert: one digit dropped by OCR; also traceability sentences partly lost (ANSI/NCSL Z540-1 gone)"}
+{"doc_id": "3895094", "pages_read": [1], "known": ["D2"], "new": [], "note": "letterhead address split one token per line"}
+{"doc_id": "3257328", "pages_read": [1, 2], "known": ["C1", "A3", "A1", "G1"], "new": [], "note": "filled form with pictures for check boxes, handwriting; leaflet"}
+{"doc_id": "4710336", "pages_read": [1], "known": ["D1"], "new": [], "note": "French order; recital lead-ins split"}
+{"doc_id": "3118237", "pages_read": [2, 6], "known": ["F1", "F2", "J1"], "new": [], "note": "errata table filed under page 1; row ids as Lines note; tracked changes flattened"}
+{"doc_id": "4646334", "pages_read": [1, 2], "known": ["C2", "C3", "C1"], "new": [], "note": "form check boxes listed apart from their questions"}
+{"doc_id": "3972586", "pages_read": [1], "known": [], "new": [], "note": "clean letter"}
+{"doc_id": "4328609", "pages_read": [1], "known": ["I1"], "new": [], "note": "single photograph, no text at all"}
+{"doc_id": "4243092", "pages_read": [1, 3], "known": ["D1"], "new": [], "note": "French order recitals split"}
+{"doc_id": "2774824", "pages_read": [1, 2], "known": ["E2"], "new": [], "note": "file-name headings on cover page"}
+{"doc_id": "4594322", "pages_read": [4, 14], "known": ["D4", "E4", "F4"], "new": [], "note": "word 'ne' moved out of table sentence"}
+{"doc_id": "4699154", "pages_read": [9, 14], "known": ["G1"], "new": [], "note": "appendix divider pages; drawings are pictures"}
+{"doc_id": "4488050", "pages_read": [5, 40], "known": ["K1", "A1", "I1"], "new": [{"page": 5, "name": "OCR cuts words off at dot leaders in a table of contents", "page_shows": "18.3 Suspension of Performance ... 75; 18.6 NSP Termination Events; 20.14 Assignment; 20.15 Waiver and Amendment", "output_says": "18.3 Suspension of Perfo 75 / 18.6 NSP Termination Ever 76 / 20.15 Waiver and A 84", "why_it_matters": "headings and section names in the contents are truncated mid-word, so search and quotes of section titles fail; the scanner's own text layer has the full titles but was discarded", "in_file": "yes", "lesson": "keep or reconcile with the scanner text layer; do not let dot leaders end an OCR line; check TOC entries against the headings they point to", "checked_image": true}], "note": "scanned agreement; TOC titles truncated; redacted paragraphs silent"}
+{"doc_id": "3004827", "pages_read": [30, 76], "known": ["G1", "A4", "A3"], "new": [], "note": "borehole log; labels unordered, symbol read as Chinese"}
+{"doc_id": "4477265", "pages_read": [1], "known": ["I1", "D2"], "new": [], "note": "letter, logo called bar_chart"}
+{"doc_id": "4748985", "pages_read": [44, 59], "known": [], "new": [], "note": "clean"}
+{"doc_id": "3516230", "pages_read": [15, 17], "known": ["D3", "I1"], "new": [], "note": "brochure sidebars interleaved with list"}
+{"doc_id": "4365186", "pages_read": [1], "known": ["A4"], "new": [], "note": "logo read as Chinese character"}
+{"doc_id": "2938090", "pages_read": [1], "known": ["E5", "F4"], "new": [], "note": "wide table intact; footnote marks fused to titles"}
+{"doc_id": "3688600", "pages_read": [1, 2], "known": ["C2"], "new": [], "note": "form table; label/value pairs per cell"}
+{"doc_id": "3391556", "pages_read": [1], "known": ["G1", "A1"], "new": [], "note": "survey plan; labels unordered; O for 0 in factor"}
+{"doc_id": "4109733", "pages_read": [1, 5], "known": ["D1", "D2"], "new": [], "note": "order recitals split; addressee block scrambled"}
+{"doc_id": "4482402", "pages_read": [1], "known": ["G1"], "new": [], "note": "map labels only"}
+{"doc_id": "4366112", "pages_read": [14, 127], "known": ["A4", "E4"], "new": [], "note": "stray Chinese character in sentence"}

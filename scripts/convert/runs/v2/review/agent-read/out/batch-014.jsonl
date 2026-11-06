@@ -1,0 +1,25 @@
+{"doc_id": "4432692", "pages_read": [1, 2], "known": ["F4"], "new": [], "note": "Table 12-1 header cells blank-merged; otherwise clean."}
+{"doc_id": "4574102", "pages_read": [20, 37], "known": ["A3", "A4", "G1"], "new": [{"page": 20, "name": "Access-to-information redaction marks read as numbers; redacted text left as a silent gap", "page_shows": "Exemption stamps 's.17' and 's.19(1)' at top right, and a blanked-out name in 'We should involve [redacted] as well in this'", "output_says": "5.17 / 5.19(1) ... We should involvi as well in this, as he is the Project Engineer", "why_it_matters": "The stamps become bare numbers with no sign they are legal exemption marks; the sentence reads as complete though a name was withheld, and the output does not say anything was redacted or on what ground", "in_file": "no", "lesson": "Detect exemption stamps (s.NN) and blanked regions, emit an explicit [redacted: s.19(1)] marker so withheld text is not mistaken for missing or complete text", "checked_image": true}], "note": "Released-record email chain; ATIP redactions."}
+{"doc_id": "4515937", "pages_read": [1, 2], "known": ["D2", "H1"], "new": [], "note": "Bilingual letterhead interleaved; ruling otherwise sound."}
+{"doc_id": "4427412", "pages_read": [1], "known": ["A3", "D2"], "new": [], "note": "Signature read as 'Famonfacache'; letterhead lands in Objet block."}
+{"doc_id": "4041689", "pages_read": [2, 4], "known": ["A1", "A3", "C1", "C2"], "new": [], "note": "Form text partly lost ('e cn', 'o u o 一'); handwritten date read as '202'; checkbox answer detached from question."}
+{"doc_id": "4496016", "pages_read": [6, 22], "known": ["G1", "A1", "A4"], "new": [], "note": "Geotechnical log and drawing give a bag of labels."}
+{"doc_id": "2954676", "pages_read": [1, 3], "known": ["D2", "H1"], "new": [], "note": "Bilingual letter; address block fragments."}
+{"doc_id": "4748386", "pages_read": [1], "known": ["D1", "E3"], "new": [], "note": "Order recitals as expected; clean."}
+{"doc_id": "3899889", "pages_read": [4, 5], "known": ["E3", "A3"], "new": [], "note": "Letter; bullets kept as text, signature line as heading."}
+{"doc_id": "3558564", "pages_read": [1, 3], "known": ["D2", "I1"], "new": [], "note": "Letterhead fragments, flow chart picture."}
+{"doc_id": "3692261", "pages_read": [1, 2], "known": ["D2", "A3", "E3"], "new": [], "note": "Law firm sidebar (offices list) interleaved with address and date."}
+{"doc_id": "4646540", "pages_read": [48, 61], "known": ["F4", "F5", "E4"], "new": [], "note": "Merged table cells misplaced; table title lands after the table; reference lines cut."}
+{"doc_id": "3803448", "pages_read": [1, 2], "known": ["D2", "A3"], "new": [], "note": "Letterhead and address blocks scattered."}
+{"doc_id": "3579076", "pages_read": [1, 2], "known": ["G1", "A1"], "new": [], "note": "Map and alignment sheet as word bags."}
+{"doc_id": "4085166", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Letter; signature picture."}
+{"doc_id": "4285911", "pages_read": [1, 2], "known": ["C1", "C2"], "new": [], "note": "Form: check-box answers are icons, absent from text; labels and values interleaved."}
+{"doc_id": "3546911", "pages_read": [1], "known": ["G1", "A4"], "new": [], "note": "Map legend and notes as a bag of words; logo read as 而."}
+{"doc_id": "4710054", "pages_read": [1], "known": ["D2", "A3"], "new": [], "note": "Letter; clean."}
+{"doc_id": "4724552", "pages_read": [1, 2], "known": ["B3", "H1", "D3"], "new": [], "note": "Bilingual receipt merged; spaced title."}
+{"doc_id": "3356197", "pages_read": [1, 2], "known": ["D2", "A3"], "new": [], "note": "Letter; letterhead fragments."}
+{"doc_id": "4028548", "pages_read": [1, 2], "known": ["D1", "E3"], "new": [], "note": "French order: RELATIVEMENT À / ATTENDU QUE lead-ins separated from their text."}
+{"doc_id": "4306215", "pages_read": [1, 2], "known": ["D2", "A3", "F4"], "new": [], "note": "Letterhead scattered; signature read as 'towoad Masuod'."}
+{"doc_id": "4656973", "pages_read": [8, 28], "known": ["G1", "I1"], "new": [], "note": "Photo pages, captions only."}
+{"doc_id": "3258724", "pages_read": [1], "known": ["G1", "A4"], "new": [], "note": "Map labels without relations; 三 marks for lines."}
+{"doc_id": "3948078", "pages_read": [1, 2], "known": ["A3", "A1"], "new": [], "note": "Letter with signature noise; 'l00' for 100."}

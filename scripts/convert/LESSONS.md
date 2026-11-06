@@ -464,6 +464,130 @@ column's full header path to its cells, and docling's Markdown table export drop
 table and cell. Test it on two tables identical but for their unit headers, which must export as
 different values. Count how many CER tables state units only in a caption or a note.
 
+### Reading the output of 150,000 documents (2026-11-05)
+
+After 150,715 documents of the full pass, every ledger check was clean: export recall 1.0 and
+docling holding every evidence word in all of them, 4 errors in 2 documents. Then the output was
+read: 10 random documents, then 200 (8 from each of the 25 largest document types, one random
+page each, `runs/v2/review/read-200.tsv`), each fault sized on all 150,979 documents with
+`review_scan.py` or on 1,500 random ones. Notes per document: `runs/v2/review/PROGRESS.md`.
+
+- **Counting words proves nothing about where they go.** Of 210 documents read, no word was lost,
+  and about one in three had a fault that changes what the document says. The checks compare
+  readers with each other and the output with the readings; none compares the output with the
+  page's meaning. Each fault below needed a reader to see it first, then a signature to count it.
+- **Orders: the recitals sit under the wrong lead-in in ~56% of all 17,026 orders.** The bold
+  lead-ins (IN THE MATTER OF, BEFORE, WHEREAS, AND WHEREAS; RELATIVEMENT À, DEVANT, ATTENDU QUE) are
+  a column of their own beside the text; they become `##` headings written after the paragraph
+  they introduce, stacked, or cutting a sentence ("## ATTENDU QU'au" after "moyen de
+  l'ordonnance ...", 4239846). Adobe PDF Library 70%, Word 57%, Foxit 42%; every year 2015-2026.
+  Right only where the lead-in is inline (4361108, 4411254). A lead-in is not a heading: it
+  belongs to the paragraph sharing its first baseline, before it.
+- **Filled PDF forms lose their answers when the answer is an image or a radio widget.** The CER
+  export applications (Crystal Reports, ~10,000 documents 2015-2026, EN and FR) mark the chosen
+  option with a green check-mark image: it exports as a loose `*[icon]*` after the options
+  (3934254, 3716451, 4743077). The Acrobat reporting form's radio buttons export as "Yes No"
+  (4572357). Drawn check boxes are read (SSRS Applications to Participate: `☒ [English þ]`), and
+  the e-filing system's own PDFs print answers as text. The ledger already holds what is needed:
+  the icon's box on the chosen line (12 x 11 pt, conf 0.99).
+- **Numbered paragraphs become headings** (5.4% of documents have headings over 150 characters;
+  among Arguments 19.8% have three or more, Written Evidence 8.5%): law-firm templates bookmark
+  every numbered paragraph (3954446: 134 bookmarks, "20. As a result, and based on ..."), and
+  convert's heading-number rule takes "7. Trans Mountain filed ..." the same way. The paragraph's
+  first lines become `####`, the rest a `- ` item. A bookmark or numbered line that is a sentence
+  is a paragraph.
+- **Text layers can be wrong while looking sound.** 2967975 stores "(100)" as `ϭϬϬͿ` (a font's
+  ToUnicode off by a constant), 2957200 a 3 as `٣`; both pages `digital`, `sound`, table values
+  wrong. And 8,108 pages classed `digital` are one full-page image with a scanner's OCR layer
+  (2,099 documents); on 2,350 of them convert's OCR agrees with that layer on < 90% of words
+  (3746809, I.R.I.S.: "wr~ttenevidence", handwriting as headings). A page under one image is a
+  scan, whatever its layer claims.
+- **Tables: page markers and numbers.** A table over several pages is written once under its
+  first page (5.2% of pages with >= 100 words have < 25% of their words under their own marker;
+  3306261, 2969783), so "p. N" cannot be found in the .md. The transcript line-number rule takes
+  a table's row-number column for margin numbers (65 of 1,500 documents have `*Lines ...*`, none a
+  transcript): commitment numbers removed from a tracking table (4051056), and "Line" numbers
+  removed from a schedule whose rows say "Line 4 + Line 9 + Line 10" (4087662). A dense ruled
+  numeric table can come out as a header plus one cell holding a whole column (4166098, TC
+  Mainline tolls; 1.9% of documents with tables, a floor).
+- **OCR invents Chinese from marks.** PP-OCR's dictionary turns logos, valve symbols and check
+  boxes into CJK characters: 19.6% of documents, 554,068 characters (Trans Mountain's logo is 而 on
+  every TM filing; 口 are valves on a schematic, 3802842 p15), and OCR-only words enter text-layer
+  sentences ("philosophy 金 focuses", 2969783). But some filings are in Chinese (4105885, a mill
+  certificate, read correctly): drop isolated CJK in pictures and in Latin text, keep runs.
+- **A word can leave its sentence.** A small region across part of a line takes its words out and
+  writes them after: «peuples autochtones du Canada» became «peuples du Canada» with
+  "autochtones" at the end of the footnote (4648280). 5 of 200 documents (2.5%).
+- **Export noise worth one pass**: numbered items as `- 1.` (27.4% of documents), `- (a)` (19.1%),
+  doubled bullets `- •` (22.2%), private-use Symbol/Wingdings glyphs (9.0%, 759,847), hyphen
+  breaks kept with a space (13.5%), TOC leaders as U+FFFD (31 documents), U+202F stored as a Tamil
+  sign in Justice Canada's French Acts, words split by kerning ("RECL AMAT ION"), the letterhead's
+  logo repeated 3-4 times.
+- **What reads well**: letters, rulings, letter decisions, transcripts, information requests,
+  CER e-form outputs, French documents, most tables made by Word and Excel, scanned letters.
+  Maps and drawings give label soup by design: the words are findable, there is no order.
+- **The full pass's own lessons since 10-27**: 44 documents stalled "at start" only after ~12,000
+  documents in one run (11-02), then about one every 300, on files of any size: the run, not the
+  PDFs (retry them in a fresh run). One failed writing its ledger on a lone surrogate in the
+  metadata (2955068). The skip check now takes about a minute, not 40.
+
+### What the pattern register says the converter should do (2026-11-06)
+
+From `runs/v2/review/patterns.json` (one record per distinct failure, up to five examples each, read
+from 900+ documents against their page images; the prose catalogue is
+[docs/conversion-failure-patterns.md](../../docs/conversion-failure-patterns.md)). Ordered by whether
+the information is in the file: "in the file" faults are ours to fix; "partly" need better
+inference; "not in the file" can only be flagged, never recovered.
+
+- **B5 A hidden text layer always replaced by the converter's own OCR, even where the layer was better** (in the file; e.g. 4248055 p1, 4247461 p1): Every page with a hidden text layer (107,588 pages) took its text from the converter's OCR alone. Keep the layer as a second reading and vote line by line (as ocr_vote does for two OCR readings): a line the layer has and OCR lost or mangled should come from the layer. With no page image under it (3,307 pages, CAD drawings), the hidden layer is the drawing tool's own text: use it as the text.
+- **B6 Invisible text that no reader sees surfaces as content (link anchors, hidden ids)** (in the file; e.g. 4590652 p60): Drop text a reader cannot see before building tables and paragraphs: tiny (< 5 pt) or covered text, white-on-white, text outside the crop box, link-anchor ids behind a visible label. Keep it in the evidence flagged hidden, never in the body.
+- **D6 A page stored rotated has its whole text read in reverse or scrambled order** (in the file; e.g. 2957894 p20, 3577544 p384): Honour the page's /Rotate before ordering text: 179,146 pages in ~17,700 documents are stored at 90 or 270 degrees; in a sample of 40 rotated digital pages, 20 keep under half of the text layer's word pairs (an upper bound: tables lower it). Order words in the rotated reading direction, then compare with the text layer's own order.
+- **E2 Headings that are not on the page** (in the file; e.g. 3561254 p1, 4142865 p1): Never make a heading from a file name, a stamp, a signature rule (______) or an attachment label. A bookmark that matches no line on its page is not a heading: today it is anchored at the page's first element and written as one (merged PDFs point every sub-file's bookmarks at page 1). Take headings only from text drawn on the page.
+- **E3 List numbers and bullets kept as text** (in the file; e.g. 4411254 p1, 4200288 p1): When a list item's text starts with its own marker (1., (a), •, -), drop the Markdown bullet and keep the marker (or emit an ordered list).
+- **F1 A table over several pages filed under its first page** (in the file; e.g. 3306261 p2, 2969783 p21): Write each page's rows under that page's marker (repeat the header, mark it continued). 5.2% of substantial pages have most of their words under another page.
+- **F2 A table's own row numbers taken for margin numbering** (in the file; e.g. 4051056 p7, 4087662): Never take line numbers from words inside a table region or a ruled column; keep the margin rule for prose with numbers outside the text block.
+- **I1 Pictures misclassified or repeated** (in the file; e.g. 3337507 p1, 4427645 p1): Merge overlapping picture regions before export (one logo was 4 regions); low-confidence classes should say 'picture'.
+- **K2 Redacted text still in the file under the black box** (in the file; e.g. 4493099 p1, 4097987 p20): Words under a redaction box are left out of every output (done: text_under_redaction, 1,110 pages in 231 documents); report them so the filer's failed redaction is known, never index them.
+- **B2 Symbol fonts: bullets and check boxes as letters** (partly; e.g. 3768118 p4, 2857182 p3): Map Wingdings/Symbol characters by font name before export (þ→☑, ¨→☐, private-use bullets → •); write a check box's option once, with its state.
+- **B3 Words broken or run together by spacing** (partly; e.g. 2784712 p1, 3335408 p7): Join single letters spaced at a regular pitch into words; join split words using the dictionary and the gap size; never trust a space narrower than the font's word space.
+- **B4 Text drawn two or three times for bold** (partly; e.g. 3096924 p2, 4724669 p42): Drop a glyph run that repeats the same text at (almost) the same position; keep one copy.
+- **C2 Labels and values come apart** (partly; e.g. 3716451 p2, 4577847 p2): Read form pages as label boxes and value boxes by position (a form reader), not as running text.
+- **C3 A check box read in the opposite state** (partly; e.g. 2774076 p1): Where a form widget's value and a drawn tick disagree, report both or flag the field; never emit the widget's empty state over a visible tick.
+- **D1 Bold lead-ins split from their text (orders' recitals, run-in headings)** (partly; e.g. 4265387 p1, 4593518 p1): A bold lead-in whose baseline equals the first line of the text beside it is part of that paragraph, read first; never a heading. Affects ~56% of 17,026 orders.
+- **D2 Letterhead and sidebar blocks land inside the address or subject** (partly; e.g. 4364682 p1, 4403573 p1): Detect the letterhead/sidebar column (narrow block at the top or side, repeated across letters of one filer) and emit it before the body, never between label and value.
+- **D3 Two columns or neighbouring lines interleaved** (partly; e.g. 3117386 p118, 3348046 p7): Detect columns before ordering lines; never merge two lines whose baselines differ by more than a fraction of the line height.
+- **D4 A word moved out of its sentence** (partly; e.g. 4648280 p3, 4104450 p13): Assign words to items by text-layer line first: a line's words stay in the item that holds most of them unless the line truly spans two columns.
+- **D5 Rotated text read with its words in scrambled order** (partly; e.g. 3309458 p36, 4584919 p417): Read rotated text (vertical table headers, side labels) as lines in its own direction, using the glyph rotation in the text layer; never sort rotated words by horizontal position.
+- **E1 Numbered paragraphs become headings** (partly; e.g. 3954446 p6, 2786260 p1): A bookmark or numbered line that is a sentence (over ~20 words, or ends with . ... ;) is a numbered paragraph; keep only short bookmarks as headings. 19.8% of Arguments, 8.5% of Written Evidence.
+- **E4 Footnote markers fused to words; hyphens kept at line ends** (partly; e.g. 3954446 p6, 2812079): Mark superscript footnote references ([^22]); join a lower-case word broken at a line-end hyphen (not digit groups, not real compounds).
+- **E5 Superscripts and subscripts flattened into the text (footnote marks into numbers, exponents, units)** (partly; e.g. 4460101 p5, 4639857 p2): Emit superscript/subscript runs as such (^4, <sup>), and footnote references as references; never concatenate a raised digit to the number before it. Flag cells where a number ends in a raised digit.
+- **E6 A wrapped line starting with a number taken for a list item, and lines reordered** (partly; e.g. 4680777 p1): Do not start a list item at a line that continues the previous line's sentence (lower-case or mid-phrase before it, no list marker spacing); keep wrapped lines in order.
+- **F3 A dense numeric table collapses into a column in one cell** (partly; e.g. 4166098 p20): A cell whose words sit on several text-layer lines with one number each is several rows: rebuild the grid from the ruling lines there.
+- **F4 Cells shifted, split or merged** (partly; e.g. 4142865 p4, 2926972 p13): Score grids against the ruling lines and the header count; reject grids with mostly empty columns.
+- **F5 A table's units and notes not attached to its numbers** (partly; e.g. ): Carry caption, units, notes, footnotes and the header path on every table and cell.
+- **F6 Row numbers offset against their rows** (partly; e.g. 3884322 p29, 4202048 p10): Align a numbered column to rows by baseline, not by order; check the first and last rows (an empty first row, two rows fused at the end are the sign).
+- **F7 A table's group header or category band separated from its rows** (partly; e.g. 3336044 p38, 4543487 p2): Keep a table's internal group headers with the rows that follow them; never emit a section heading between parts of one ruled table.
+- **F8 Neighbouring tables merged into one; the next table's title fused into the last row** (partly; e.g. 3084351 p1): Split a detected table where a full-width title row or a gap in the ruling separates two grids; never append a table title to the previous table's last cell.
+- **F9 Text from outside a table (footnotes, margin stamps) spliced into a row** (partly; e.g. 2902086 p3, 3179563 p8): Keep text below a table's last rule (notes, footnotes) out of the grid; attach a footnote to the cell that carries its marker.
+- **G2 Chart labels read into the table beside it, with plausible wrong values** (partly; e.g. 4553651 p16): Keep text inside a chart region (Gantt bars, plotted labels) out of the adjacent table's cells; mark chart text as chart text.
+- **H1 Bilingual side-by-side text read across both languages** (partly; e.g. 4518996 p2, 4657049 p3): Detect the two-language column layout and emit each column whole.
+- **J1 Tracked changes flattened: deleted and inserted text read as one** (partly; e.g. 3895437 p39, 3935185 p77): Detect strike-through lines drawn through text and underlines in a second colour; mark deleted text (~~...~~) and inserted text, or flag the page as a blackline so its text is never quoted as in force.
+- **J2 Colour or highlight carries the meaning** (partly; e.g. 3578263 p1): Record cell fill and text colour where a table uses them (a highlight column, red/green status), at least as a flag that colour carries meaning on the page; the text alone is incomplete there.
+- **J3 Icons and indentation carry the hierarchy** (partly; e.g. 3898988 p1): Keep indentation level and icon class with each row of an index; an exhibit list's PDF/folder icons say what is a document and what is an attachment.
+- **A1 OCR drops or mangles whole lines** (not in the file; e.g. 2955501 p1, 3117386 p156): Recall is measured against OCR itself, so lost lines are invisible. Add an independent check: text lines in the page image (ink rows) with no OCR words; a second OCR model on pages where the first leaves gaps; flag pages whose OCR word count is far below the page's ink.
+- **A2 A scanner's OCR layer passes for real text** (not in the file; e.g. 3746809 p2): A page under one full-page image is a scan whatever its layer says: route as scanner_ocr, compare with independent OCR, treat agreement < 0.9 as suspect (8,108 such pages classed digital; 2,350 with agreement < 0.9).
+- **A3 Handwriting, stamps and signatures read as words** (not in the file; e.g. 2897620 p2, 3718917 p1): Keep OCR text from pictures classed signature/stamp and from handwriting out of the body (keep it in the evidence); never make it a heading.
+- **A4 Graphic marks read as characters (logos, symbols, check marks)** (not in the file; e.g. 4200288 p1, 3802842 p15): Treat an OCR word that is a lone CJK character (or a lone mark) in a Latin-script page or inside a picture as a symbol, not text; keep runs of CJK (real Chinese exists: 4105885). Never let OCR-only words into text-layer sentences on digital pages.
+- **A5 Handwriting read as a plausible wrong value (corrections over typed text, handwritten dates)** (not in the file; e.g. 3803169 p1, 3750376 p18): Where handwriting overlaps typed text, flag the line as amended rather than merging both readings; check identifiers (hearing numbers, file numbers) against other mentions in the same document.
+- **A6 OCR drops small marks or digits that carry value (zero dashes, repeated digits)** (not in the file; e.g. 3390240 p2, 4368429 p14): Where a currency sign or a column of numbers has an empty slot, check the image for a dash or dot; report 'unread' rather than an empty cell.
+- **A7 Indigenous-language text read as junk or stripped (syllabics, special letters)** (not in the file; e.g. 3096662 p1, 4667022 p4): OCR models trained on Latin script turn Canadian Aboriginal syllabics into Latin letters and math symbols and drop superscript letters (ʷ) in Salish and other orthographies. Detect syllabic-looking shapes and flag the line as unread; use a syllabics-capable model where available; never emit the junk as text.
+- **B1 Wrong characters behind right-looking glyphs** (not in the file; e.g. 2967975, 2957200): Compare digits and words with OCR on a sample of every digital document; a layer that disagrees is suspect even if it decodes to 'words'. Decode known offsets only where OCR agrees. Map known substitutions (U+0BD7 for U+202F in Justice Canada French; U+FFFD runs as leaders).
+- **C1 The answer is a picture or a widget, not text** (not in the file; e.g. 3934254 p1, 4496452 p1): Attach a small icon picture (check mark) to the text line it sits on and mark that option chosen, the others not; read AcroForm widget values (radio buttons) into the output.
+- **G1 Drawings, maps and charts: labels without order or relation** (not in the file; e.g. 3306697 p1, 3005387 p42): Do not attempt reading order; keep labels findable with their boxes; never present them as prose.
+- **G3 Box-like marks read as form check boxes (chart legends, redaction boxes)** (not in the file; e.g. 2958070 p17, 4464158 p5): Run the checkbox detector only on form regions: a box-like symbol in a chart legend, or a redaction placeholder box ('PII'), is not an answer.
+- **H2 Content cut off or missing in the filed PDF itself** (not in the file; e.g. 2813818 p5, 4572575 p2): Not a converter fault: record it (words ending at the page or cell edge, a column clipped) so the gap is known; nothing can recover it.
+- **K1 Redaction leaves a silent gap; exemption stamps read as numbers** (not in the file; e.g. 4574102 p20): Detect redaction boxes and exemption stamps (s.17, s.19(1), 'Pages withheld'); emit an explicit marker [redacted: s.19(1)] where text was withheld; never read the stamp as body text.
+
 ### Open
 
 - Lines the voters split on, or call "neither": 498 / 279 per voter; a third voter, or a human.
