@@ -496,3 +496,4 @@ their examples; (3) measure D6 (rotated pages) and B5 (hidden layers) page by pa
 To add a pattern later: `scripts/convert/patterns.py new|add`, then the prose in
 docs/conversion-failure-patterns.md.
 | targeted | T07 built | Indigenous-language text selected by content (702 documents hold syllabics or orthography letters; 21 syllabics): 25 documents, first pages with the text |
+| targeted | T07 done | Indigenous-language text, selected by content: exact in 18 of 25; B7 new (text layer lacks the letters, 2785525); A7 on scans (2784902, 2785452). Register 51 patterns; counts updated in catalogue, CEO report (repo and Claude Docs), deck slide 5, lessons |
