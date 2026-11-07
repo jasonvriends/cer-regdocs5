@@ -1231,6 +1231,14 @@
      "output_says": "the same fragment, buttons as text",
      "checked_image": true,
      "note": "the filed document is an orphan web print"
+    },
+    {
+     "doc_id": "489855",
+     "page": 35,
+     "page_shows": "Table 5.1.5 Residual Environmental Effects Summary Matrix: header and key, no rows",
+     "output_says": "the same empty matrix",
+     "checked_image": true,
+     "note": "BERDI problem project (Brunswick); a blank-cell test flags it, nothing was lost"
     }
    ]
   },

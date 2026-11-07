@@ -565,9 +565,16 @@ five examples; the prose is [docs/conversion-failure-patterns.md](../../docs/con
 - **The CER's BERDI hit the same walls.** Its table extraction (Camelot, text layer only) estimates
   88-94% of tables complete and withheld the tables of 30 PDFs; its four "problematic" tests are B1,
   F3, F4 and F8. Its garbled-text test looks for `(cid:NN)` only, so wrong-but-decodable characters
-  (2967975 "ϭϬϬͿ") pass it. On the documents of its five problem projects that we have converted
-  (mostly post-2015 compliance filings) our table fault rates were at or below the corpus baseline;
-  the assessment volumes themselves (pre-2015) are being converted to compare.
+  (2967975 "ϭϬϬͿ") pass it. On the documents of its five problem projects that we had converted
+  (mostly post-2015 compliance filings) our table fault rates were at or below the corpus baseline.
+  Three of their assessment volumes, converted for the purpose (408937 and 489855 Brunswick, 2006-07;
+  702963 Eastern Mainline, 2011; 425 tables), had 1.2-2.6x the baseline share of mostly-blank tables
+  (3.3-7.1% against 2.7%), no garbled cells (our converter falls back to OCR where a font has no
+  character map, which Camelot cannot), and 712 private-use glyphs in one (B2). The mostly-blank
+  table checked (489855 p35, a residual effects matrix) is empty in the filed PDF itself (H2):
+  **a blank-cell test, theirs or ours, cannot tell a table empty on the page from one the converter
+  emptied.** These projects' filings are harder; part of what both tests flag is the filing, not
+  the extraction.
 
 ### What the pattern register says the converter should do (2026-11-06)
 

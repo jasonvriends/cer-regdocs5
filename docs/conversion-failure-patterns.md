@@ -472,6 +472,12 @@ reports:
 - **Indigenous Knowledge:** a classifier removes culturally sensitive Indigenous Knowledge from results
   (false omission rate 0.67%, false discovery rate 13%).
 
+We converted three of the assessment volumes from BERDI's problem projects (Brunswick 2006-07,
+Eastern Mainline 2011; 425 tables): 1.2-2.6x the corpus share of mostly-blank tables, no garbled
+cells (this converter falls back to OCR where Camelot gets `(cid:NN)`), and one mostly-blank table
+that is empty in the filed PDF itself (489855 p35, H2) - a blank-cell test cannot tell an empty table
+from an emptied one, so part of what such tests flag is the filing, not the extraction.
+
 What this adds: the failures are not an artefact of one converter. A separate CER team with
 different tools found the same kinds, withheld a share of its output because of them, and could only
 measure presence, not correctness. Tables filed as data (requirement T) would have made BERDI's
