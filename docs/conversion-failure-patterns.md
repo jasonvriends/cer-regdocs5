@@ -440,6 +440,43 @@ A black box drawn over text that is still in the text layer: 59 words on one pag
 on 1,110 pages of 231 documents. The converter keeps them out of its output; any tool that does
 not will index and quote what was meant to be withheld.
 
+## The CER's own evidence: BERDI
+
+The CER met the same problems when it built BERDI (Biophysical, Socio-Economic, and Regional Data
+and Information, launched 2022): more than 14,000 tables, 1,800 figures and 4,000 maps extracted from
+the environmental and socio-economic assessments of 40 pipeline applications (1,902 PDFs chosen by
+hand from REGDOCS), with Tika for text, PyMuPDF for page features and Camelot for tables. Camelot
+reads only the text layer, so scanned tables (family A) are out of its reach. Its methods page
+([BERDI data extraction methods](https://apps2.cer-rec.gc.ca/berdi/?page=methods); code:
+[CER-REC/esa-data-bank_banque-donnees-ees](https://github.com/CER-REC/esa-data-bank_banque-donnees-ees))
+reports:
+
+- **94% to 98% of tables extracted, 88% to 94% with complete data** (a random sample of 384 tables):
+  6% to 12% of tables incomplete in a set of mostly digital assessments, measured by whether cells are
+  present, not whether their values are right (which would also count E5, F5, F6 and B1).
+- **30 PDFs account for 84% of the problematic table files**, concentrated in five projects
+  (Towerbirch, Brunswick, Eastern Mainline, Wolverine, Leismer to Kettle River Crossover); their tables
+  are indexed but withheld from download. BERDI's definitions of "problematic" are four of the
+  patterns above:
+
+  | BERDI: a table file is problematic when it has | pattern |
+  |---|---|
+  | more than 80% cells with non-identified characters | B1 wrong characters behind right-looking glyphs |
+  | only one column or one row | F3 a dense table collapses |
+  | more than 72% blank cells | F4 cells shifted, split or merged |
+  | the same title and page as another, different, file | F8 tables merged; F1 page attribution |
+
+- **Figures:** 92.1% with correct page numbers, 89.4% with correct titles; "figure titles that were
+  embedded as images were undetected with a text-based extraction approach" (family A); 0.95% of PDFs
+  gave corrupted images.
+- **Indigenous Knowledge:** a classifier removes culturally sensitive Indigenous Knowledge from results
+  (false omission rate 0.67%, false discovery rate 13%).
+
+What this adds: the failures are not an artefact of one converter. A separate CER team with
+different tools found the same kinds, withheld a share of its output because of them, and could only
+measure presence, not correctness. Tables filed as data (requirement T) would have made BERDI's
+extraction unnecessary.
+
 ---
 
 ## What this says about AI on REGDOCS
