@@ -1,11 +1,13 @@
 # CER REGDOCS document extraction: lessons learned
 
-> **A September 2026 snapshot.** This page is what the earlier pipelines (cer-regdocs1-4 and v1 of
-> this one) learned, from samples of about 8,000 documents, most of them filed in 2026. It is not
-> updated any more. What the whole corpus showed in October 2026 - all 269,025 documents, 2002 to
-> 2026 - is in [filing-guidance.md](filing-guidance.md) and [ceo-report.md](ceo-report.md); what
-> the current converter measured and fixed is in
-> [scripts/convert/LESSONS.md](../scripts/convert/LESSONS.md).
+> **The consolidated record, September to November 2026.** Sections 1-8 are what the earlier
+> pipelines (cer-regdocs1-4 and v1 of this one) learned from samples of about 8,000 documents.
+> Section 9 is the current converter's history, from its first version (2026-10-11) through the
+> corpus light pass and the full pass to reading its output against the page (2026-11-06); section 6
+> adds that reading, and key finding 12 its result. Corpus counts for all 269,025 documents are in
+> [filing-guidance.md](filing-guidance.md) and [ceo-report.md](ceo-report.md); the 50 failure
+> patterns in [conversion-failure-patterns.md](conversion-failure-patterns.md); the converter's
+> full detail and evidence in [scripts/convert/LESSONS.md](../scripts/convert/LESSONS.md).
 
 What has been learned about turning Canada Energy Regulator REGDOCS filings into
 trustworthy, machine-readable evidence. Lessons are grouped by pipeline stage:
@@ -20,6 +22,7 @@ trustworthy, machine-readable evidence. Lessons are grouped by pipeline stage:
 | [6. Quality checks and review](#6-quality-checks-and-review) | how do we know the conversion is right without ground truth? |
 | [7. Operations](#7-operations) | how do we keep long runs alive, fast and reproducible? |
 | [8. Search and analysis](#8-search-and-analysis) | how do we make the converted text useful? |
+| [9. The v2 converter and the full pass](#9-the-v2-converter-and-the-full-pass-history-2026-10-11-to-11-06) | what the current converter learned, in order, over 269,025 documents |
 
 Supporting sections: [key findings](#key-findings), [the corpus](#the-corpus),
 [recommendations for future filings](#recommendations-for-future-filings),
@@ -748,6 +751,139 @@ failure patterns in 11 families, recorded once each with up to five examples
 Classification and datasets (conditions, monitoring reports, schedule rows)
 never built on the best extraction; category consolidation beyond identical
 names never built.
+
+---
+
+## 9. The v2 converter and the full pass: history (2026-10-11 to 11-06)
+
+The converter in `scripts/convert/` (detail and evidence: [LESSONS.md](../scripts/convert/LESSONS.md))
+keeps every word every reader read, lays structure over it, and writes a per-page ledger. Its lessons,
+in the order they were learned.
+
+### Reading pages (v1 and v2, 2026-10-11 to -12)
+
+- **Route by what a page is, not fix what a reader got wrong.** Text layer, scanner layer, stub, scan,
+  text drawn as curves: each kind gets the readers that suit it, measured per page.
+- **Stub layers were called sound** until judged by how much of the page they cover; a layer of
+  one-character words is not text.
+- **On maps OCR misses what the layer holds, and that is not a bad layer**; OCR on clean French scans is
+  good, with small, typical errors; OCR at more rotations does not pay on drawings.
+- **Docling reads text MuPDF does not, and MuPDF text docling cannot parse**: keep both readings.
+- **`find_tables()` changes the page it reads**; a superscript digit once crashed the pages stage.
+- **Barcodes are read; blank backs of duplex scans are recorded as blank, not failed; numbered paper
+  (line-numbered pleadings) is recognised.**
+- **Checkbox states were lost, and values stacked in one cell**, until read explicitly.
+- **Vision models as voters** carry on after the answer, need their known tags stripped, and two of them
+  write text on blank crops: a voter may choose between readings, never supply one.
+- **A vote file lost its own provenance**: every derived reading names its inputs.
+
+### Structure (2026-10-13 to -18)
+
+- **Bookmarks are the filer's own tree and the cheapest, but not always the document's structure**: a
+  mail merge keeps every recipient's outline (4049986: 136 bookmarks on 2 pages), and law-firm templates
+  bookmark every numbered paragraph (found 2026-11, pattern E1). Unmatched bookmarks are kept only at 3
+  or fewer a page; sentence-length bookmarks are paragraphs.
+- **Heading numbers work when they must run in sequence.**
+- **Running headers and footers are found by repetition**; the layout models miss most of them. Tables
+  are stitched across pages, sentences joined across breaks.
+- **Tags are the author's own structure**: 46.2% of the corpus is tagged; in 20 tagged, table-heavy
+  documents tags gave a grid for 36% of tables, as good as the best model's on 86% of those. Tags are a
+  fifth table reader, compared like the others, never trusted blind.
+- **Evidence kept means assembly can be redone** without reading the PDF again.
+
+### Tables
+
+- **The line grid for ruled tables, TableFormer for the rest, Table Transformer where nothing else has
+  the grid**; TableFormer v1 accurate beats v1 fast by a fifth, and v2 as shipped was worse.
+- **Score a grid by words placed in the right cell**; a grid cut into slivers scores perfectly on words
+  unless the score penalises it. A score must not be able to see its own answer.
+- **"Has a digit" is not "is a value"; some ruled rows hold several records; spanning cells need
+  checking against the text.**
+- **A table's numbers need the table's context**: units, notes, footnotes and column dates are lost when
+  only cells are kept (found 2026-10-27; pattern F5).
+
+### docling's behaviour
+
+- `DoclingDocument.concatenate` renumbers pages; a copy of a page is not the page; some pages docling
+  cannot parse at all; its default Markdown export leaves out text its document holds (pictures'
+  text, furniture), and even the full export drops a table's footnotes; TableFormer logs outside
+  docling's logger tree.
+
+### The checker
+
+- **Profile before blaming the converter** (44% of one timeout was the checker's own loops); a fixed
+  margin fails on tiny text; a checker is code with bugs: test it on documents whose answer is known.
+
+### The corpus light pass (2026-10-12 to -17)
+
+267,495 documents, 3.59 M pages, 0 failed at the end, twelve relaunches.
+
+- **The conservation checks held on every document, and that proves less than it looks**: they show
+  no word is lost between readers and outputs, not that a word was read right.
+- **A measure never taken must not read as zero** (agreement stored as 0% where OCR never ran).
+- **A ledger that does not name its code cannot be compared**: every ledger now carries a hash of the
+  code, the commit and a dirty flag.
+- **MuPDF's messages are evidence and stderr loses them**: about 60,000 lines from eight workers naming
+  no document; they now go to the document's ledger.
+- **A page filed blacked out whole is a fact, not a failed reading.**
+- **Throughput follows the era**: 2.4 documents a second on 2025-2026 filings, about 1 a second in the
+  OCR-heavy middle years.
+- **"Converted" is not "done"**: four documents with failed pages had complete ledgers, so the skip
+  check never retried them; a ledger now states ok, partial or failed, and every run keeps a log.
+- **One worker made the pass take 9 days**: workers in parallel, the text layer read once.
+
+### Large documents (2026-10-18 to -19)
+
+- **The largest documents are printed spreadsheets**: six of the eight over 5,000 pages are one wind
+  dataset printed from Excel and filed twice (52,246 pages, 1.4% of the corpus).
+- **Memory follows words, not pages**: the 2,759-page document with 7.1 M words jumped from 12.7 to 34.2
+  GB at assembly; documents over 2 M words run last, alone.
+
+### Memory and time
+
+- **A worker's memory grows with what docling holds at once, and one page can be enough**; watch memory
+  during a document, not after it.
+- **A slow document is not a stuck one: limit time without progress**, not total time; a fixed limit
+  per document stops the long ones.
+- **Some pages never finish, and that costs the page, not the document** (stall limit 300 s per page,
+  the page then read by pdfium or left out and listed).
+- **A worker that crashed may still look alive, and a killed worker is not dead until it is reaped**:
+  replace on any failure, join killed workers, treat any pipe error as a crash.
+- **The GPU is shared with whatever else runs on Windows**: WSL's `nvidia-smi` shows only its own
+  processes; workers now check the card's memory before a page and wait while it is crowded.
+- **The hard documents are the same documents, whatever the tool**; the page a worker dies on is not
+  always the cause.
+
+### The full pass (2026-10-19 to 11-06)
+
+From 2026 back toward 2002, 5 workers, about 350 documents an hour; 150,979 documents and 2.1 M pages
+converted by 2026-11-05, every one with all its words in the output.
+
+- **MuPDF aborts on certain pages (double free), and the retry gave up too early**: 6 documents left out
+  until every crashing page can be probed in a throwaway process and sent to pdfium at once.
+- **Resuming lost nothing** after a power loss and several deliberate stops: a stop is `kill -INT` to
+  the run's process group, and the skip check reads each ledger's status.
+- **The skip check cost 40 minutes on a cold Windows drive**, then about a minute; **every relaunch
+  re-ran the known-bad documents** (about 2 worker-hours) until they were left out of the run list.
+- **A failed document leaves no trace in the output**: only the logs say why; a failure should write a
+  ledger of its own.
+- **Count failures by every spelling the log uses** (`FAILED`, `ok`, `partial`).
+- **Stalls "at start" appeared only after about 12,000 documents in one run**, then one in 300, on
+  files of any size: the long run, not the PDFs.
+- **A lone surrogate in metadata failed one ledger write** (2955068): escape before writing JSON.
+- **The serializer warned on every document** (`PydanticSerializationUnexpectedValue` for items
+  labelled code/unknown, about 56,000 lines × 8 per run): logs of about 95 MB; silence or fix it.
+- **Five code commits wrote ledgers over the pass**: compare like with like.
+- **Change code only between runs**: a worker replaced mid-run re-imports the file.
+
+### Reading the output (2026-11-05 to -06)
+
+See section 6, "Reading the output against the page", and
+[conversion-failure-patterns.md](conversion-failure-patterns.md): 50 failure patterns from 1,260
+documents read against their pages; nine of them the converter's own (page rotation, scanner layers
+replaced by OCR, invisible text, bookmarks as headings, table row numbers, multi-page table pages,
+list markers, redacted text, picture labels). The CER's BERDI met the same table failures; a
+blank-cell test cannot tell an empty table from an emptied one.
 
 ---
 
