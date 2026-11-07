@@ -145,6 +145,27 @@ async function icon(Comp, color, size = 256) {
   T(s, "In tests, even the best AI tool got about one number in twenty wrong when reading pictures of pages.", { x: 0.6, y: 5.25, w: 7.2, h: 0.8, fontSize: 16, color: C.text1, valign: "top" });
   s.addNotes("This is the risk that matters most for AI. When an AI tool has to read a picture of a page, it does not leave a blank where it is unsure - it writes something plausible. Reading a scanned contact list, one tool changed a street number, rewrote a postal code, replaced a real e-mail address with an invented one and added a recipient who does not exist. Nothing in its answer said it was guessing. In our tests even the best tool got about one number in twenty wrong. A missing value can be spotted; an invented one looks exactly like the real thing. (Real names withheld.)");
 
+  // 6b. Fifty-one ways a computer misreads a filing
+  s = pres.addSlide({ masterName: "Content", sectionTitle: "The problems" });
+  s.addText("Even files that look fine can be misread", { placeholder: "title" });
+  big(s, "15", "no software can fix: the file does not hold the answer", 0.6, 1.5, 3.8, C.accent1);
+  big(s, "27", "where the words are there but not how they fit together", 4.75, 1.5, 3.8, C.text2);
+  big(s, "9", "that better software can fix, once", 8.9, 1.5, 3.8, C.accent3);
+  T(s, "Errors that look right", { x: 0.6, y: 3.55, w: 7.6, h: 0.45, fontSize: 18, bold: true, color: C.accent1 });
+  const hdr2 = { bold: true, color: C.background1, fill: { color: C.text2 } };
+  s.addTable([
+    [{ text: "On the page", options: hdr2 }, { text: "What the computer read", options: hdr2 }],
+    ["A pressure limit of 76", "764"],
+    ["A pipe rating of CL150", "CL152"],
+    ["Hearing GH-003-2018, fixed by hand", "GH-003-2013"],
+    ["A tick beside “No”", "no tick at all"],
+  ], { x: 0.6, y: 4.05, w: 7.6, colW: [4.6, 3.0], fontSize: 16, color: C.text1, border: { type: "solid", pt: 0.75, color: HEX.accent5 }, rowH: 0.45, margin: 0.08 });
+  card(s, 8.6, 3.6, 4.1, 2.7, true);
+  T(s, "Better software fixes 9 of the 51", { x: 8.9, y: 3.85, w: 3.5, h: 0.9, fontSize: 22, bold: true, color: C.background1, valign: "top" });
+  T(s, "The other 42 need the information filed in a form a computer can read.", { x: 8.9, y: 4.8, w: 3.5, h: 1.3, fontSize: 16, color: C.background2, valign: "top" });
+  T(s, "The CER’s own data team met the same problems: its table search tool holds back the tables of 30 documents.", { x: 0.6, y: 6.5, w: 12.1, h: 0.4, fontSize: 15, italic: true, color: C.text2 });
+  s.addNotes("We then checked what a computer actually reads from these files, by comparing the converted text of 1,285 filings with the pages themselves. We found 51 different kinds of error. Fifteen cannot be fixed by any software, because the file does not hold the answer - a scanned line the reader drops, a form whose answer is a picture of a tick, Indigenous-language words stored without their letters. Twenty-seven are cases where the words are there but not how they fit together, such as the reasons in an order read under the wrong heading. Nine are faults in our own software, and we can fix those. The dangerous errors are the ones that look right: a pressure limit of 76 read as 764, a pipe rating changed, a hearing number changed by a handwritten correction, a tick beside No that disappears. Better software fixes nine of the fifty-one; the rest need the information filed in a form a computer can read. The CER's own data team, building its BERDI table search tool, met the same problems and holds back the tables of 30 documents.");
+
   // 7. Problems 4-5
   s = pres.addSlide({ masterName: "Content", sectionTitle: "The problems" });
   s.addText("Privacy and proof are at risk too", { placeholder: "title" });
