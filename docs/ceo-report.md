@@ -10,6 +10,8 @@ Filing for AI and automation at the Canada Energy Regulator · Oct 18, 2026 · @
 
 This matters because every AI or automation tool reads the file, not the page a person sees. Where the file holds no text, a machine guesses; where it holds the wrong text, a machine quotes it; where a vision model fills the gap, it can invent a value that looks right. The values that matter most to decisions - results in tables, limits, names, addresses - are where the errors are likeliest.
 
+Reading 1,260 converted filings against their page images found **50 distinct ways a machine misreads them; 41 cannot be fixed by better software**, because the file does not hold the information - and the worst errors look right: a limit of 76 read as 764, a pressure class CL150 read as CL152.
+
 The cause is how files are produced, not what they are about: scanners and copiers make non-digital documents 97-100% of the time, office and reporting software almost never. Printing documents to sign them and scanning them back is the largest single source. Integrity rests on paper: only 0.5% of documents are digitally signed, and REGDOCS publishes no fingerprint that would prove a copy is the one filed.
 
 **The choice:** check the data by hand (about 23 person-years for the backlog, at a stated assumption), automate and manage the risk (cheap, but errors are only flagged), or require digital-first filing so the data is right at the source. **We recommend digital first for every new filing, automation for the existing record, and people only where the machine flags doubt** - with an automatic check at upload that tells a filer which page failed, while the source still exists.
@@ -76,6 +78,26 @@ The CER's own outputs are digital. What is not is what gets signed: corresponden
 
 A missing value can be seen and checked; an invented one looks exactly like a real one. The values a model is likeliest to get wrong - results in tables, limits, names, addresses - are the ones decisions rest on. A model may help choose between two readings or flag doubt; it must never be the source of a value.
 
+## What a machine gets wrong: 50 patterns
+
+**Reading the converted text of 1,260 filings against their page images found 50 distinct ways a machine misreads a REGDOCS filing - and 41 of them cannot be fixed by better software, because the file does not hold the information.** Every one of these documents passed the converter's own checks with all of its words; the failures are about where words go and what marks mean. The full list, with an example of each that can be looked up again, is in [conversion-failure-patterns.md](conversion-failure-patterns.md).
+
+| | How many | Examples from real filings |
+| --- | --- | --- |
+| **Not in the file**: only the pixels hold it | 14 | OCR drops whole lines ("Rule 12, Liability of the Carrier" became "Éule C lit"); a form's answer is a green tick image, so which option was chosen is lost; Inuktitut syllabics read as "uUAda ⊃AD qb ⊂" |
+| **Partly in the file**: the words are there, not how they go together | 27 | an order's reasons read under the wrong "WHEREAS" (about 56% of 17,026 orders); every numbered paragraph of a final argument made a heading; a table's rows filed under the wrong page |
+| **In the file**: the converter's own faults, fixable once | 9 | rotated pages read backwards; a scanner's text layer thrown away for weaker OCR; invisible link anchors in tables |
+
+**The dangerous errors are the ones that look right.** A missing word can be noticed; these cannot:
+
+- a crude oil vapour pressure limit of "76" with footnote 4 read as **764** (a Trans Mountain specification table);
+- a flange pressure class "CL150" read as **CL152**, a datum "NAD1983" as **NAC1983** (drawing material lists);
+- a hearing number "GH-003-2018" read as **GH-003-2013** under a handwritten correction;
+- table headers "(100)" stored in the file itself as **"ϭϬϬͿ"**, on a page that looks perfect and passes every check;
+- a form's tick on "No" exported as **unchecked**; deleted clauses in a blackline read as **in force**.
+
+**The CER has met the same problems.** BERDI, its search tool for tables in environmental and socio-economic assessments, estimates that 88-94% of extracted tables have complete data, and withholds the tables of 30 PDFs (84% of its problem tables) from download. Its definitions of a problem table - garbled characters, a single column, mostly blank cells, duplicate titles - are four of the 50 patterns, found by a different team with different tools.
+
 ## Integrity
 
 **Nothing in the record lets anyone prove a file is the one filed: the signature of record is a paper receipt, and REGDOCS publishes no fingerprint of any file.**
@@ -96,7 +118,7 @@ For automated decisions, integrity has to be provable later without paper. A fin
 | What it means | people check extracted data against the page | machines read everything; doubtful pages are flagged | filers submit files a machine can read exactly; an automatic check at upload |
 | Existing record | about 23 person-years for the 740,000 doubtful pages; about 113 for every page | about $20,000 of cloud extraction, or days of a local GPU | does not reach the existing record |
 | New filings | 0.6-1.5 people a year | flagged, not prevented | errors prevented at the source |
-| Main risk | cost and time | errors flagged, not prevented; no hand-checked ground truth yet | filer adoption; a rule and a check are both needed |
+| Main risk | cost and time | errors flagged, not prevented; no hand-checked ground truth yet; 41 of 50 failure patterns are beyond better software | filer adoption; a rule and a check are both needed |
 
 Person-years assume 3 minutes to check a page against its image and 1,600 working hours a year; they are estimates, not measurements. Cloud cost is $5.53 per 1,000 pages, measured on 90,484 pages in an August 2026 cloud build. New-filing volume is 10,000-48,000 doubtful pages a year since 2020.
 
