@@ -497,3 +497,10 @@ To add a pattern later: `scripts/convert/patterns.py new|add`, then the prose in
 docs/conversion-failure-patterns.md.
 | targeted | T07 built | Indigenous-language text selected by content (702 documents hold syllabics or orthography letters; 21 syllabics): 25 documents, first pages with the text |
 | targeted | T07 done | Indigenous-language text, selected by content: exact in 18 of 25; B7 new (text layer lacks the letters, 2785525); A7 on scans (2784902, 2785452). Register 51 patterns; counts updated in catalogue, CEO report (repo and Claude Docs), deck slide 5, lessons |
+
+## Full pass: crash and relaunch (2026-11-07)
+
+GPU failure at ~04:12 (CUDA unknown error), 2,372 documents FAILED in ~1 s each (2462513 down to
+2432418), machine down at 05:09. Relaunched 05:32 with the same command, log
+`runs/v2/logs/full-main-2026-11-07-0532.log`: 167,850 skipped, 102,134 to convert; the failed ones
+converted ok. Open (between runs): stop after ~20 consecutive failures; log the exception, not None.

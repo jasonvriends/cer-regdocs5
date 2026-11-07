@@ -1195,6 +1195,13 @@ pages or more (`runs/v2/reports/boundaries-furniture.json`):
 
 ### Process
 
+- **When the GPU dies, the run does not stop: it fails every document in about a second.** At about
+  04:12 on 2026-11-07 the card failed (`AcceleratorError: CUDA error: unknown error`, first seen as
+  page_failed on 2462514); the run then marked 2,372 documents in a row FAILED with no reason, until
+  the machine went down at 05:09. Nothing was lost: failed documents write no finished ledger, and the
+  relaunch after the reboot reconverted them (2462513 and on, all ok). *Fix between runs:* stop the
+  run after about 20 consecutive failures, and carry the exception's text into the FAILED line
+  instead of `None`.
 - **Change code only between runs.** A worker replaced mid-run re-imports the file; an edit
   made during a run gave one worker different code than the run recorded, and that run was
   discarded.

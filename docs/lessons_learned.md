@@ -876,6 +876,10 @@ converted by 2026-11-05, every one with all its words in the output.
   labelled code/unknown, about 56,000 lines × 8 per run): logs of about 95 MB; silence or fix it.
 - **Five code commits wrote ledgers over the pass**: compare like with like.
 - **Change code only between runs**: a worker replaced mid-run re-imports the file.
+- **When the GPU dies, the run keeps going and fails everything**: a CUDA error at 04:12 on 2026-11-07
+  turned the next 2,372 documents into one-second failures before the machine went down; the relaunch
+  redid them all. Stop a run after a string of consecutive failures, and log the real reason, not
+  `None`.
 
 ### Reading the output (2026-11-05 to -06)
 
