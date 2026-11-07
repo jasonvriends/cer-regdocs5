@@ -59,6 +59,12 @@ reversed are recorded with their corrections.
 11. **Careful local extraction beat the cloud service** on 113 test documents
     (99.9% vs 84.2% of visible words), but the cloud service is still ahead on
     text inside drawings, checkboxes and barcodes.
+12. **Every word kept is not every word right.** Reading 1,260 converted filings against their page
+    images found 50 distinct ways a machine misreads them; 41 are not, or only partly, in the file,
+    so no software can be sure of them. The worst look right: a vapour pressure limit of 76 read as
+    764, a pressure class CL150 as CL152, an order's reasons under the wrong "WHEREAS" (about 56% of
+    orders). The CER's own BERDI extraction met the same failures. See
+    [conversion-failure-patterns.md](conversion-failure-patterns.md).
 
 ---
 
@@ -556,7 +562,11 @@ Text inside scanned drawings; checkboxes and barcodes; partly ruled lab tables;
 rows run together (invisible to fit); Table Transformer on crops and
 PP-StructureV3 never measured; reading order, paragraph roles and figures never
 compared between tools; numeric-mojibake detection not wired into a pipeline;
-the 0.2 control-character threshold tuned on one document.
+the 0.2 control-character threshold tuned on one document. From reading the full pass's output
+(2026-11): page rotation ignored (179,146 rotated pages), scanners' hidden layers always replaced by
+OCR (107,588 pages), invisible text kept, bookmarks of merged PDFs written as headings, table row
+numbers taken for line numbers, multi-page tables filed under their first page; filings written in
+Indigenous languages not yet tested (select by content).
 
 ---
 
@@ -613,6 +623,27 @@ disputed 528; text not character-like 283. **Only 1,704 pages actually lack
 text**: review pages, not documents. Orders are most reliable (92% good);
 "Other" and compliance-to-order filings are about half flagged. Keep triage a
 separate, versioned policy ranked by consequence.
+
+### Reading the output against the page (2026-11)
+
+After 150,000 documents of the full pass every automatic check was clean (export recall 1.0
+everywhere). Reading the output against the page images - 210 documents by hand, 1,050 by
+sub-agents, each claim confirmed on the rendered page and the PDF's text layer - found 50 distinct
+failure patterns in 11 families, recorded once each with up to five examples
+([conversion-failure-patterns.md](conversion-failure-patterns.md), register in
+`scripts/convert/runs/v2/review/patterns.json`).
+
+- **The checks counted words; the failures are where words go and what marks mean**: lead-ins
+  out of order, form answers that are pictures, paragraphs as headings, tables filed under the
+  wrong page, superscripts fused into numbers, deleted text in blacklines read as live.
+- **Completeness against OCR certifies nothing on a scan**: OCR drops lines and the check, measured
+  against OCR, cannot see it.
+- **Nine patterns were the converter's own** (page rotation ignored, scanner layers always replaced
+  by OCR, invisible text kept, bookmarks as headings, table row numbers taken for line numbers,
+  page attribution of multi-page tables, list markers, redacted text, picture labels): fixable once,
+  listed with their fixes in `scripts/convert/LESSONS.md`.
+- **Method:** read to find a pattern, write a signature to size it, then read only for what fits no
+  known pattern, at random and then where the corpus is rare, until rounds stop finding any.
 
 ### Metric traps (each happened)
 
@@ -825,6 +856,13 @@ Checked and found not to matter, so not worth the cost to filers or enforcement:
   failures in denominators; freeze validation sets before optimising.
 - Measure routing by **regret** (best-in-hindsight vs chosen-from-features).
 - Keep experiments apart from production; give a build a finite completion checklist.
+- **Read the output, not the checks.** 150,000 clean checks hid an order's reasons under the wrong
+  heading in about half the orders; it took reading to see it.
+- **Record patterns, not occurrences; stop when new rounds find none.**
+- **Before calling text missing, search the whole output**, and before blaming the converter, look
+  at the filed page: the loss may be another page's marker or the PDF itself.
+- **A reader's own tool can invent faults** (an excerpt cut at 400 characters looked like truncation).
+- **Selecting by title does not select by content.**
 - Not yet done: a stratified 1,000-page validation set; running the best
   pipeline beyond 113 documents; sampling older years.
 

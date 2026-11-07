@@ -472,10 +472,14 @@ read: 10 random documents, then 200 (8 from each of the 25 largest document type
 page each, `runs/v2/review/read-200.tsv`), each fault sized on all 150,979 documents with
 `review_scan.py` or on 1,500 random ones. Notes per document: `runs/v2/review/PROGRESS.md`.
 
-- **Counting words proves nothing about where they go.** Of 210 documents read, no word was lost,
-  and about one in three had a fault that changes what the document says. The checks compare
-  readers with each other and the output with the readings; none compares the output with the
-  page's meaning. Each fault below needed a reader to see it first, then a signature to count it.
+- **Counting words proves nothing about where they go, and on scans it does not even prove the
+  words are there.** Of the first 210 documents read, none had lost a word from its text layer, and
+  about one in three had a fault that changes what it says. The agents' reading of 1,050 more (below)
+  then found words lost after all: OCR drops whole lines on scans ("Rule 12, Liability of the
+  Carrier" came out "Éule C lit", 2955501), and the converter replaces a scanner's hidden layer,
+  even a better one, with its own OCR. The completeness check compares the output with the
+  readings, and OCR is the only reading of a scan: it cannot see what OCR never read. Each fault
+  below needed a reader to see it first, then a signature to count it.
 - **Orders: the recitals sit under the wrong lead-in in ~56% of all 17,026 orders.** The bold
   lead-ins (IN THE MATTER OF, BEFORE, WHEREAS, AND WHEREAS; RELATIVEMENT À, DEVANT, ATTENDU QUE) are
   a column of their own beside the text; they become `##` headings written after the paragraph
@@ -530,6 +534,40 @@ page each, `runs/v2/review/read-200.tsv`), each fault sized on all 150,979 docum
   documents in one run (11-02), then about one every 300, on files of any size: the run, not the
   PDFs (retry them in a fresh run). One failed writing its ledger on a lone surrogate in the
   metadata (2955068). The skip check now takes about a minute, not 40.
+
+### Reading at scale: how the 50 patterns were found (2026-11-05 to -06)
+
+210 documents read by hand, then 1,050 by sub-agents (Sonnet), 25 a batch, each checking a page's
+Markdown against its rendered image and the PDF's own text layer (`runs/v2/review/agent-read/`).
+The register (`runs/v2/review/patterns.json`, `patterns.py`) keeps one record per pattern with up to
+five examples; the prose is [docs/conversion-failure-patterns.md](../../docs/conversion-failure-patterns.md).
+
+- **Count patterns, not occurrences, and stop when they stop coming.** The first 200 agent reads
+  asked for every fault and produced counts; switching to "tag known patterns by id, report only
+  what fits none, confirmed on the image" turned 100 documents into a few minutes of new knowledge.
+  New patterns per 100 random documents: 4, 5, 6, 3, 2, 0, 2.
+- **Then read where the corpus is rare.** Targeted batches (schedules, transcripts, French, drawings,
+  Indigenous filings, 2015 scans) found A8 and E7 in under 40 documents, against about one new
+  pattern per 50 documents at random; then nothing more. French text, Excel toll worksheets and
+  Indigenous names in Latin script came out right.
+- **Selecting by title does not select by content.** "First Nation" in titles gave engagement letters,
+  none written in an Indigenous language; A7 (syllabics read as junk) still rests on two documents.
+  Select by what the text holds.
+- **Agents' false alarms have three causes, all avoidable:** text filed under another page's marker
+  read as lost (F1: grep the whole .md first), the excerpt tool's 400-character cut read as
+  truncation, and faults in the filed PDF itself read as conversion faults (H2: compare with the
+  image and the text layer). Their tags for known patterns, on pages they did not render, are
+  approximate; only image-checked examples went into the register.
+- **A verified claim is cheap; check the surprising ones.** Spot checks confirmed every "meaning"
+  claim tested (2955501 lost line, 4460101 "764", 3895437 blackline) and corrected one diagnosis:
+  the CAD drawing whose notes vanished (4248055) was not a dropped line but a correct hidden layer
+  discarded, which led to B5 (107,588 pages).
+- **The CER's BERDI hit the same walls.** Its table extraction (Camelot, text layer only) estimates
+  88-94% of tables complete and withheld the tables of 30 PDFs; its four "problematic" tests are B1,
+  F3, F4 and F8. Its garbled-text test looks for `(cid:NN)` only, so wrong-but-decodable characters
+  (2967975 "ϭϬϬͿ") pass it. On the documents of its five problem projects that we have converted
+  (mostly post-2015 compliance filings) our table fault rates were at or below the corpus baseline;
+  the assessment volumes themselves (pre-2015) are being converted to compare.
 
 ### What the pattern register says the converter should do (2026-11-06)
 
