@@ -1531,6 +1531,22 @@
      "output_says": "greeting with the superscript letters lost",
      "checked_image": false,
      "note": "round 5 (batch 025); not image-checked separately"
+    },
+    {
+     "doc_id": "2784902",
+     "page": 5,
+     "page_shows": "Salish words with ʔ, superscript ʷ, ç̣",
+     "output_says": "? for ʔ, full-size w for ʷ (çəxwte'n, šxwne'em), underdot dropped",
+     "checked_image": true,
+     "note": "scan; converter's OCR"
+    },
+    {
+     "doc_id": "2785452",
+     "page": 5,
+     "page_shows": "sweltən, kəstem, ʔ, ʷ, ejectives",
+     "output_says": "swelten, kestem; ? for ʔ; w for ʷ; ejectives dropped",
+     "checked_image": true,
+     "note": "scan"
     }
    ]
   },
@@ -1630,6 +1646,31 @@
      "output_says": "'Mr. Yates?' inside Mr. Yates's own turn (speaker turn split)",
      "checked_image": false,
      "note": "speaker attribution wrong; not image-checked"
+    }
+   ]
+  },
+  "B7": {
+   "name": "Indigenous letters missing from the PDF's own text layer (no Unicode for ʷ, ejectives)",
+   "family": "B",
+   "in_file": "no",
+   "remedy": "D4, D5: fonts with Unicode maps, PDF/A-u",
+   "lesson": "Flag control codes and glyphs without Unicode inside words (\\x06 for ʷ) and lines whose glyph count exceeds their characters; read those lines again from the image with a model that knows the orthography, and mark them as uncertain. Never strip the gap silently.",
+   "examples": [
+    {
+     "doc_id": "2785525",
+     "page": 33,
+     "page_shows": "Sqʷanəc̓, Sx̌eyəq̓s (Kwantlen table of contents)",
+     "output_says": "Sq anəc, Sxeyəqs (ʷ stored as control code \\x06, ejectives missing in the text layer)",
+     "checked_image": true,
+     "note": ""
+    },
+    {
+     "doc_id": "2785525",
+     "page": 32,
+     "page_shows": "hən̓q̓əmin̓əm̓",
+     "output_says": "hənqəminəm",
+     "checked_image": true,
+     "note": ""
     }
    ]
   }

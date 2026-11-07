@@ -495,3 +495,4 @@ in-the-file patterns (LESSONS.md, "What the pattern register says"), then re-exp
 their examples; (3) measure D6 (rotated pages) and B5 (hidden layers) page by page, not by sample.
 To add a pattern later: `scripts/convert/patterns.py new|add`, then the prose in
 docs/conversion-failure-patterns.md.
+| targeted | T07 built | Indigenous-language text selected by content (702 documents hold syllabics or orthography letters; 21 syllabics): 25 documents, first pages with the text |

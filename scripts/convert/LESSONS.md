@@ -535,7 +535,7 @@ page each, `runs/v2/review/read-200.tsv`), each fault sized on all 150,979 docum
   PDFs (retry them in a fresh run). One failed writing its ledger on a lone surrogate in the
   metadata (2955068). The skip check now takes about a minute, not 40.
 
-### Reading at scale: how the 50 patterns were found (2026-11-05 to -06)
+### Reading at scale: how the 51 patterns were found (2026-11-05 to -06)
 
 210 documents read by hand, then 1,050 by sub-agents (Sonnet), 25 a batch, each checking a page's
 Markdown against its rendered image and the PDF's own text layer (`runs/v2/review/agent-read/`).
@@ -551,8 +551,12 @@ five examples; the prose is [docs/conversion-failure-patterns.md](../../docs/con
   pattern per 50 documents at random; then nothing more. French text, Excel toll worksheets and
   Indigenous names in Latin script came out right.
 - **Selecting by title does not select by content.** "First Nation" in titles gave engagement letters,
-  none written in an Indigenous language; A7 (syllabics read as junk) still rests on two documents.
-  Select by what the text holds.
+  none written in an Indigenous language. Searching every document's text for syllabics and
+  orthography letters found 702; of 25 read character by character, 18 came through exactly
+  (Cree and Inuktitut syllabics, Heiltsuk, Salish, Kwikwetlem, Secwepemc). The losses were OCR on
+  scans (A7: ʔ as ?, ʷ as w, ə as e) and a filed text layer that already lacked the letters (B7,
+  2785525: ʷ stored as a control code, ejectives missing). One page printed empty boxes for Cree
+  syllabics its text layer held (4735593): the machine read better than the page.
 - **Agents' false alarms have three causes, all avoidable:** text filed under another page's marker
   read as lost (F1: grep the whole .md first), the excerpt tool's 400-character cut read as
   truncation, and faults in the filed PDF itself read as conversion faults (H2: compare with the
@@ -579,7 +583,7 @@ five examples; the prose is [docs/conversion-failure-patterns.md](../../docs/con
 ### What the pattern register says the converter should do (2026-11-06)
 
 From `runs/v2/review/patterns.json` (one record per distinct failure, up to five examples each, read
-from 1,260 documents against their page images; the prose catalogue is
+from 1,285 documents against their page images; the prose catalogue is
 [docs/conversion-failure-patterns.md](../../docs/conversion-failure-patterns.md)). Ordered by whether
 the information is in the file: "in the file" faults are ours to fix; "partly" need better
 inference; "not in the file" can only be flagged, never recovered.

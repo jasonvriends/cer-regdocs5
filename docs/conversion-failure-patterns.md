@@ -18,9 +18,10 @@ The remedy column points to the requirements in [digital-first-filing.md](digita
 (D = born digital, S = structure, T = data as data; see that document for the evidence behind each).
 
 Evidence: the full conversion pass (v2, 2026-10-19 to 11-06), 210 documents read by hand and
-1,050 read by agents against their page images and text layers (`scripts/convert/runs/v2/review/`):
+1,075 read by agents against their page images and text layers (`scripts/convert/runs/v2/review/`):
 random draws stratified by document type and producer, then targeted draws of schedules and tolls,
-transcripts, French filings, drawings, Indigenous engagement filings and 2015 scans. Signatures
+transcripts, French filings, drawings, Indigenous engagement filings, 2015 scans, and filings
+written in Indigenous languages selected by their content. Signatures
 counted on every converted document (`scripts/convert/review_scan.py`). Rates are given only to
 show a pattern is real and common; they are not the point. Document ids are REGDOCS ids. The register behind this page (each pattern, up to five examples with
 page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/review/patterns.json`
@@ -46,6 +47,7 @@ page and quotes, and the lesson for the converter) is `scripts/convert/runs/v2/r
 | B4 | Text drawn two or three times for bold | partly | "MMTP MMTP MMTP Complex Complex Complex" | D4 |
 | B5 | A hidden text layer always replaced by the converter's own OCR, even where it was better | in the file | lines the layer had are lost to OCR | converter |
 | B6 | Invisible text no reader sees surfaces as content | in the file | "uu-PCG-4559451-aa PCG" in a table | converter |
+| B7 | Indigenous letters missing from the PDF's own text layer | not in the file | place names altered: Sqʷanəc̓ reads "Sq anəc" | D4, D5 |
 | **C** | **Forms** | | | |
 | C1 | The answer is a picture or a widget, not text | not in the file | which option was chosen is lost | T (data as data) |
 | C2 | Labels and values come apart | partly | a value attached to the wrong field | T, S |
@@ -149,8 +151,13 @@ are the same, and the sum cannot be followed. A calibration certificate's "99.99
 **A7. Indigenous-language text read as junk or stripped.** *Not in the file.*
 OCR built for Latin script turns Inuktitut syllabics into Latin letters and symbols: a letterhead's
 tagline becomes "uUAda ⊃AD qb ⊂" (3096662, a letter to the NEB); a greeting in an Indigenous
-orthography loses its superscript letters (4667022). *For AI:* in filings about Indigenous
-engagement and rights, the Indigenous-language text is exactly what cannot be read.
+orthography loses its superscript letters (4667022); on scanned Salish texts ʔ becomes "?", ʷ a
+full-size "w", ə an "e" and ejective marks vanish (2784902, 2785452). *For AI:* in filings about
+Indigenous engagement and rights, the Indigenous-language text is exactly what cannot be read.
+Born-digital text is another matter: of 25 documents selected by their content, 18 came through
+exactly - Cree and Inuktitut syllabics, Heiltsuk with every underdot, Salish ʷ ʔ ə ɬ with combining
+marks, Kwikwetlem ƛ̓, Secwepemc names (4666748, 4397182, 3719093, 2887535, 4386965, 3896710). The
+loss is on scans (A7) and in broken source encodings (B7).
 
 **A8. OCR substitutes look-alike characters in codes, ratings and identifiers.** *Not in the file.*
 Words survive OCR errors because readers and models correct them; codes do not. A drawing's
@@ -203,6 +210,14 @@ the reason CAD text should be exported as text.
 A report's text layer hides internal-link anchor ids in 4-point text behind the visible labels; the
 page shows "PCG", the machine gets "uu-PCG-4559451-aa PCG", 22 times (4590652 p60). *For AI:* tokens
 no person ever saw, in tables and answers.
+
+**B7. Indigenous letters missing from the PDF's own text layer.** *Not in the file.*
+A Kwantlen report shows Sqʷanəc̓ and Sx̌eyəq̓s; its text layer stores the ʷ as a control code and has no
+ejective marks, so the machine gets "Sq anəc" and "Sxeyəqs", and "hən̓q̓əmin̓əm̓" becomes "hənqəminəm"
+(2785525 p32-33). The converter copies the loss faithfully. The reverse also happens: a page that
+prints empty boxes for a Cree name whose syllabics are in the text layer (4735593), so the machine
+reads better than the page. *For AI:* names of places and Nations altered, and searches for the
+right spelling fail.
 
 ## C. Forms
 
@@ -489,7 +504,7 @@ extraction unnecessary.
 
 - **Counting words does not catch any of this.** Every document above passed the converter's
   checks with 100% of its words. The patterns are about where words go and what marks mean.
-- **41 of the 50 patterns are not, or only partly, in the file.** Software can fix the 9 that are
+- **42 of the 51 patterns are not, or only partly, in the file.** Software can fix the 9 that are
   (B5, B6, D6, E2, E3, F1, F2, I1, K2) once; the rest need inference from pixels or positions, and
   inference makes errors that look like answers: a pressure class read CL152, a hearing number read
   GH-003-2013, a vapour pressure read 764. Vision models add their own (section 7 of
@@ -498,10 +513,12 @@ extraction unnecessary.
   data or as fillable fields (C), tagged PDF so reading order and structure travel with the
   document (D, E), tables and drawings filed as data beside the PDF (F, G).
 
-*Status (2026-11-06): complete for the document kinds in REGDOCS as read.* 50 patterns in 11 families:
-14 not in the file, 27 partly, 9 in the file (the converter's own). New patterns per
+*Status (2026-11-06): complete for the document kinds in REGDOCS as read.* 51 patterns in 11 families:
+15 not in the file, 27 partly, 9 in the file (the converter's own). New patterns per
 round of 100 documents fell 4, 5, 6, 3, 2, 0, 2; the targeted rounds found two more (A8 codes, E7
-transcripts) and then none in four kinds read specifically. Not yet tested properly: filings
-written in Indigenous languages (A7 rests on two documents; selecting by title found none). A
+transcripts) and then none in four kinds read specifically. Filings written in Indigenous languages were then
+selected by content (702 converted documents hold syllabics or orthography letters): born-digital
+text came through exactly in 18 of 25; the losses are OCR on scans (A7) and broken source encodings
+(B7). A
 pattern is added when a reader finds a failure that fits none of these and confirms it against the
 page.
