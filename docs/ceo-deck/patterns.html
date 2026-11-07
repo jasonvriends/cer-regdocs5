@@ -1,0 +1,24 @@
+<section id="patterns" data-transition="fade" style="background:#EEF1F4;color:#14213D;font-family:'Public Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<h2 style="font-family:'Libre Baskerville', Georgia, serif;font-size:72px;font-weight:700;line-height:1.15;color:#14213D">50 ways a machine misreads a filing</h2>
+<div style="display:flex;gap:56px">
+<div style="flex:2;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px;background:#FBFBF8;padding:24px 32px;border-radius:16px;border:1px solid #D5DBE3"><p style="font-size:52px;font-weight:700;color:#A8521A">14</p><p style="font-size:28px;line-height:1.3;color:#4A5568">not in the file at all: only the pixels hold it</p></div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FBFBF8;padding:24px 32px;border-radius:16px;border:1px solid #D5DBE3"><p style="font-size:52px;font-weight:700;color:#2F5F9E">27</p><p style="font-size:28px;line-height:1.3;color:#4A5568">partly: the words are there, not how they go together</p></div>
+<div style="display:flex;flex-direction:column;gap:4px;background:#FBFBF8;padding:24px 32px;border-radius:16px;border:1px solid #D5DBE3"><p style="font-size:52px;font-weight:700;color:#6A7280">9</p><p style="font-size:28px;line-height:1.3;color:#4A5568">the converter’s own faults, fixable once</p></div>
+</div>
+<div style="flex:3;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:700;color:#A8521A">The errors that look right</h3>
+<table style="font-size:28px;color:#14213D;font-family:'Public Sans', Arial, sans-serif">
+<tr><th style="width:58%;text-align:left">On the page</th><th style="width:42%;text-align:left">What the machine got</th></tr>
+<tr><td>Vapour pressure limit 76 kPa, footnote 4</td><td><b>764</b></td></tr>
+<tr><td>Flange class CL150, datum NAD1983</td><td><b>CL152, NAC1983</b></td></tr>
+<tr><td>Hearing GH-003-2018, corrected by hand</td><td><b>GH-003-2013</b></td></tr>
+<tr><td>Table header “(100)”</td><td><b>“ϭϬϬͿ”</b>, in the file itself</td></tr>
+<tr><td>A tick on “No”</td><td><b>unchecked</b></td></tr>
+</table>
+</div>
+</div>
+<p style="font-size:32px;line-height:1.35;color:#14213D"><b>41 of 50 are beyond better software.</b> The CER’s own BERDI withholds 30 PDFs’ tables for the same failures.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#6A7280">1,260 converted filings read against their page images, November 2026; BERDI data extraction methods (CER).</p>
+<aside>We read the converted text of 1,260 filings against their page images and found 50 distinct ways a machine misreads a REGDOCS filing. Every one of those documents passed the converter's own checks with all of its words: the failures are about where words go and what marks mean. Fourteen patterns are not in the file at all - OCR drops whole lines, a form's answer is a green tick image, Inuktitut syllabics come out as junk. Twenty-seven are partly in the file: the words are there but not how they go together, such as an order's reasons read under the wrong WHEREAS in about half of all orders. Nine are our converter's own faults and can be fixed once. The dangerous errors are the ones that look right: a vapour pressure limit of 76 read as 764, a pressure class CL150 read as CL152, a hearing number changed by a handwritten correction, table headers stored as garbage in the file itself on a page that looks perfect, a ticked No exported as unchecked. The CER met the same problems building BERDI, its search tool for assessment tables: it estimates 88 to 94 percent of tables complete and withholds the tables of 30 PDFs. Better software fixes nine of the fifty; the rest need the data captured digitally at filing.</aside>
+</section>
